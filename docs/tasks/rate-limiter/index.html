@@ -98,21 +98,76 @@ The code must be correct, readable, and suitable for use in a real API gateway.<
     
 
     
-    <details class="source-panel" open>
-      <summary>Generated python</summary>
-      <iframe class="source-iframe" src="/open-model-archive/runs/rate-limiter/google-gemini-3.1-pro/artifacts/main.py" title="Source code"></iframe>
-    </details>
-    
+    <div class="code-output">
+      <p class="code-label">Generated python</p>
+      <pre class="response-text code-block"><code>import time
+import threading
 
-    
+class TokenBucket:
+    def __init__(self, rate: float, capacity: float) -&gt; None:
+        if rate &lt;= 0 or capacity &lt;= 0:
+            raise ValueError(&#34;Rate and capacity must be greater than zero.&#34;)
+        self.rate: float = rate
+        self.capacity: float = capacity
+        self.tokens: float = capacity
+        self.last_refill: float = time.monotonic()
+        self.lock: threading.Lock = threading.Lock()
 
+    def _refill(self) -&gt; None:
+        now = time.monotonic()
+        elapsed = now - self.last_refill
+        self.tokens = min(self.capacity, self.tokens + elapsed * self.rate)
+        self.last_refill = now
+
+    def allow(self, amount: float = 1.0) -&gt; bool:
+        if amount &gt; self.capacity:
+            return False
+            
+        with self.lock:
+            self._refill()
+            if self.tokens &gt;= amount:
+                self.tokens -= amount
+                return True
+            return False
+
+    def retry_after(self, amount: float = 1.0) -&gt; float:
+        if amount &gt; self.capacity:
+            return float(&#39;inf&#39;)
+            
+        with self.lock:
+            self._refill()
+            if self.tokens &gt;= amount:
+                return 0.0
+            missing_tokens = amount - self.tokens
+            return missing_tokens / self.rate
+
+if __name__ == &#34;__main__&#34;:
+    bucket = TokenBucket(rate=2.0, capacity=5.0)
     
-    <div class="artifact-actions">
-      
-      <a class="btn" href="/open-model-archive/runs/rate-limiter/google-gemini-3.1-pro/artifacts/main.py" download>Download source</a>
-      
-      <a class="btn" href="/open-model-archive/runs/rate-limiter/google-gemini-3.1-pro/output.txt" download>Download raw output</a>
+    # Initial capacity is 5.0, should allow 3.0 + 2.0
+    assert bucket.allow(3.0) is True
+    assert bucket.allow(2.0) is True
+    
+    # Now it should be near empty, so 1.0 will fail
+    assert bucket.allow(1.0) is False
+    
+    # Needs 1 token, rate is 2/sec -&gt; approx 0.5 seconds wait
+    wait_time = bucket.retry_after(1.0)
+    assert 0.4 &lt; wait_time &lt;= 0.5
+    
+    # Sleep to let bucket refill
+    time.sleep(0.55)
+    
+    # Should now allow 1.0
+    assert bucket.allow(1.0) is True
+    
+    print(&#34;All tests passed.&#34;)</code></pre>
     </div>
+    
+
+    
+
+    
     
 
     <details class="source-panel">
@@ -218,21 +273,204 @@ if __name__ == &#34;__main__&#34;:
     
 
     
-    <details class="source-panel" open>
-      <summary>Generated python</summary>
-      <iframe class="source-iframe" src="/open-model-archive/runs/rate-limiter/ollama-gemma4/artifacts/main.py" title="Source code"></iframe>
-    </details>
-    
+    <div class="code-output">
+      <p class="code-label">Generated python</p>
+      <pre class="response-text code-block"><code>import time
+import threading
+from typing import ClassVar, Optional
 
-    
+class TokenBucket:
+    &#34;&#34;&#34;
+    A thread-safe implementation of a token bucket rate limiter.
+    &#34;&#34;&#34;
+    def __init__(self, rate: float, capacity: float):
+        &#34;&#34;&#34;
+        Initializes the token bucket.
 
+        Args:
+            rate (float): The refill rate in tokens per second.
+            capacity (float): The maximum number of tokens the bucket can hold.
+        &#34;&#34;&#34;
+        if rate &lt;= 0 or capacity &lt;= 0:
+            raise ValueError(&#34;Rate and Capacity must be positive.&#34;)
+
+        self._rate: ClassVar[float] = rate  # Tokens added per second
+        self._capacity: ClassVar[float] = capacity
+        
+        # Current number of tokens in the bucket
+        self._tokens: float = capacity
+        
+        # Time when the token count was last calculated/refilled (in seconds)
+        self._last_time: ClassVar[float] = time.monotonic()
+        
+        # Lock for thread safety
+        self._lock: threading.Lock = threading.Lock()
+
+    def _refill(self, now: float):
+        &#34;&#34;&#34;Internal method to update token count based on elapsed time.&#34;&#34;&#34;
+        elapsed_time = now - self._last_time
+        if elapsed_time &lt; 0:
+            # Should not happen if clock monotonic is used correctly, but good safeguard
+            return
+
+        tokens_to_add = elapsed_time * self._rate
+        self._tokens = min(self._capacity, self._tokens + tokens_to_add)
+        self._last_time = now
+
+    def allow(self, amount: float = 1.0) -&gt; bool:
+        &#34;&#34;&#34;
+        Attempts to consume tokens. Updates the token count if successful.
+
+        Args:
+            amount (float): The number of tokens required for this request.
+
+        Returns:
+            bool: True if enough tokens were available and consumed, False otherwise.
+        &#34;&#34;&#34;
+        if amount &lt;= 0:
+            return True # Edge case: zero requirement always succeeds
+        
+        with self._lock:
+            now = time.monotonic()
+            self._refill(now)
+
+            if self._tokens &gt;= amount:
+                self._tokens -= amount
+                # print(f&#34;  [SUCCESS] Tokens remaining: {self._tokens:.2f}&#34;) # Debugging helper
+                return True
+            else:
+                # print(f&#34;  [FAIL] Not enough tokens. Available: {self._tokens:.2f}, Required: {amount:.2f}&#34;) # Debugging helper
+                return False
+
+    def retry_after(self, amount: float = 1.0) -&gt; float:
+        &#34;&#34;&#34;
+        Calculates the time (in seconds) until &#39;amount&#39; tokens are expected to be available.
+
+        Args:
+            amount (float): The number of tokens required.
+
+        Returns:
+            float: Seconds to wait. Returns 0.0 if enough tokens are already available.
+        &#34;&#34;&#34;
+        if amount &lt;= 0:
+            return 0.0
+
+        with self._lock:
+            now = time.monotonic()
+            self._refill(now) # Ensure the current state is up-to-date
+
+            tokens_needed = amount - self._tokens
+            
+            if tokens_needed &lt;= 0:
+                return 0.0  # Already enough tokens
+            
+            # Time needed = Tokens needed / Rate (tokens/second)
+            time_needed = tokens_needed / self._rate
+            return time_needed
+
+def worker(limiter: TokenBucket, thread_id: int, attempts: list):
+    &#34;&#34;&#34;Worker function for testing thread safety.&#34;&#34;&#34;
+    print(f&#34;Thread {thread_id}: Starting burst.&#34;)
+    for i in range(10):
+        time.sleep(0.05) # Simulate network delay
+        if limiter.allow():
+            attempts[thread_id].append(&#34;Allowed&#34;)
+        else:
+            attempts[thread_id].append(&#34;Blocked&#34;)
+
+def main_demo():
+    &#34;&#34;&#34;Minimal demonstration and assertion checks.&#34;&#34;&#34;
+    print(&#34;\n--- TokenBucket Demonstration ---&#34;)
+
+    # Scenario 1: Basic test (High rate, high capacity)
+    RATE = 5.0  # 5 tokens/second
+    CAPACITY = 10.0
+    limiter_basic = TokenBucket(rate=RATE, capacity=CAPACITY)
+    print(f&#34;\n[Scenario 1] Rate={RATE}/s, Capacity={CAPACITY}. Testing burst.&#34;)
+
+    # Consume tokens until it fails (should fail around 10 attempts total)
+    allowed_count = 0
+    for i in range(15):
+        if limiter_basic.allow():
+            allowed_count += 1
+            print(f&#34;Request {i+1}: Allowed.&#34;)
+        else:
+            print(f&#34;Request {i+1}: Blocked.&#34;)
+
+    assert allowed_count &gt;= int(CAPACITY), &#34;Initial burst failure: Should allow at least CAPACITY requests.&#34;
+
+    # Scenario 2: Rate limiting test (Low rate, low capacity)
+    RATE_SLOW = 0.5 # 0.5 tokens/second (1 token every 2 seconds)
+    CAPACITY_SMALL = 2.0
+    limiter_slow = TokenBucket(rate=RATE_SLOW, capacity=CAPACITY_SMALL)
+    print(f&#34;\n[Scenario 2] Rate={RATE_SLOW}/s, Capacity={CAPACITY_SMALL}. Testing wait.&#34;)
+
+    # 1. Allow initial burst (2 tokens)
+    assert limiter_slow.allow() is True
+    allowed = 1
+    assert limiter_slow.allow() is True
+    allowed += 1
+    print(f&#34;Initial Burst: Allowed {allowed} requests.&#34;)
+
+    # 2. Check retry time for a single token (requires &gt; 0 tokens)
+    wait_time = limiter_slow.retry_after(amount=1.0)
+    print(f&#34;Waiting time needed for 1 token: {wait_time:.3f} seconds (Expected ~2.0s).&#34;)
+    # Allow a small tolerance due to system timing
+    assert wait_time &gt; 1.5 and wait_time &lt; 2.5, &#34;Retry after calculation incorrect.&#34;
+
+    # 3. Wait for refill and re-check allow status
+    print(&#34;Waiting 2.2 seconds...&#34;)
+    time.sleep(2.2) # Should be enough time to generate at least one token (0.5 * 2.2 = 1.1 tokens)
+
+    if limiter_slow.allow():
+        print(&#34;Request after waiting: Allowed.&#34;)
+        assert True
+    else:
+        raise AssertionError(&#34;Expected token refill, but request was blocked.&#34;)
+
+
+# --- Thread Safety Demo ---
+def main_thread_demo():
+    &#34;&#34;&#34;Demonstrates thread safety.&#34;&#34;&#34;
+    # Limiter configured to allow 10 tokens total over time at a rate of 2/s.
+    SHARED_LIMITER = TokenBucket(rate=2.0, capacity=10.0)
+    num_threads = 5
+    attempts: list[list[str]] = [[] for _ in range(num_threads)]
+
+    print(&#34;\n[Scenario 3] Thread Safety Test (Shared Resource)&#34;)
+    print(&#34;Running multiple threads concurrently accessing the same limiter...&#34;)
+
+    # Create and start threads
+    threads = []
+    for i in range(num_threads):
+        t = threading.Thread(target=worker, args=(SHARED_LIMITER, i, attempts))
+        threads.append(t)
+        t.start()
+
+    # Wait for all threads to complete
+    for t in threads:
+        t.join()
+
+    # Verification check
+    total_allowed = sum(1 for attempt in attempts for status in attempt if status == &#34;Allowed&#34;)
+    print(f&#34;\n--- Results ---&#34;)
+    print(f&#34;Total Requests Attempted per thread (approx): {num_threads * 10}&#34;)
+    print(f&#34;Total Allowed Requests across all threads: {total_allowed}&#34;)
     
-    <div class="artifact-actions">
-      
-      <a class="btn" href="/open-model-archive/runs/rate-limiter/ollama-gemma4/artifacts/main.py" download>Download source</a>
-      
-      <a class="btn" href="/open-model-archive/runs/rate-limiter/ollama-gemma4/output.txt" download>Download raw output</a>
+    # Since the capacity is only 10, even with refills, the burst capability should limit access greatly.
+    # We assert that a high number of requests were processed but that the mechanism didn&#39;t crash or allow unlimited access due to race conditions.
+    assert total_allowed &lt;= 30, &#34;The token counter seems corrupted (too many tokens allowed).&#34;
+
+
+if __name__ == &#34;__main__&#34;:
+    main_demo()
+    main_thread_demo()</code></pre>
     </div>
+    
+
+    
+
+    
     
 
     <details class="source-panel">
@@ -466,21 +704,97 @@ if __name__ == &#34;__main__&#34;:
     
 
     
-    <details class="source-panel" open>
-      <summary>Generated python</summary>
-      <iframe class="source-iframe" src="/open-model-archive/runs/rate-limiter/ollama-kimi-k2.7-code/artifacts/main.py" title="Source code"></iframe>
-    </details>
-    
+    <div class="code-output">
+      <p class="code-label">Generated python</p>
+      <pre class="response-text code-block"><code>import time
+import threading
 
-    
 
-    
-    <div class="artifact-actions">
-      
-      <a class="btn" href="/open-model-archive/runs/rate-limiter/ollama-kimi-k2.7-code/artifacts/main.py" download>Download source</a>
-      
-      <a class="btn" href="/open-model-archive/runs/rate-limiter/ollama-kimi-k2.7-code/output.txt" download>Download raw output</a>
+class TokenBucket:
+    &#34;&#34;&#34;
+    Thread-safe token bucket rate limiter.
+
+    Parameters
+    ----------
+    rate : float
+        Tokens added to the bucket per second.
+    capacity : float
+        Maximum number of tokens the bucket can hold.
+    &#34;&#34;&#34;
+
+    def __init__(self, rate: float, capacity: float) -&gt; None:
+        if rate &lt;= 0:
+            raise ValueError(&#34;rate must be positive&#34;)
+        if capacity &lt;= 0:
+            raise ValueError(&#34;capacity must be positive&#34;)
+
+        self.rate = float(rate)
+        self.capacity = float(capacity)
+        self._tokens = float(capacity)
+        self._last_update = time.monotonic()
+        self._lock = threading.Lock()
+
+    def _refill(self) -&gt; float:
+        now = time.monotonic()
+        elapsed = now - self._last_update
+        self._last_update = now
+        self._tokens = min(self.capacity, self._tokens + elapsed * self.rate)
+        return self._tokens
+
+    def allow(self, amount: float = 1.0) -&gt; bool:
+        &#34;&#34;&#34;
+        Attempt to consume ``amount`` tokens.
+
+        Returns True if the request is allowed, False otherwise.
+        &#34;&#34;&#34;
+        if amount &lt;= 0:
+            return True
+
+        with self._lock:
+            self._refill()
+            if self._tokens &gt;= amount:
+                self._tokens -= amount
+                return True
+            return False
+
+    def retry_after(self, amount: float = 1.0) -&gt; float:
+        &#34;&#34;&#34;
+        Return the number of seconds until ``amount`` tokens are available.
+        Returns 0.0 if the request can be allowed immediately.
+        &#34;&#34;&#34;
+        if amount &lt;= 0:
+            return 0.0
+
+        with self._lock:
+            self._refill()
+            if self._tokens &gt;= amount:
+                return 0.0
+            deficit = amount - self._tokens
+            return deficit / self.rate
+
+
+if __name__ == &#34;__main__&#34;:
+    import math
+
+    bucket = TokenBucket(rate=10.0, capacity=10.0)
+
+    assert bucket.allow(10.0) is True
+    assert bucket.allow(1.0) is False
+    assert math.isclose(bucket.retry_after(1.0), 0.1, rel_tol=1e-9)
+
+    time.sleep(0.15)
+    assert bucket.allow(1.0) is True
+
+    # Ensure retry_after drops to 0 when tokens are available.
+    full_bucket = TokenBucket(rate=100.0, capacity=100.0)
+    assert full_bucket.retry_after(50.0) == 0.0
+    assert full_bucket.allow(50.0) is True</code></pre>
     </div>
+    
+
+    
+
+    
     
 
     <details class="source-panel">

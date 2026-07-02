@@ -85,10 +85,10 @@
     {% endfor %}
 
     {% for artifact in run.artifacts if artifact.type == 'source' %}
-    <details class="source-panel" open>
-      <summary>Generated {{ artifact.language or 'code' }}</summary>
-      <iframe class="source-iframe" src="{{ site_root }}/runs/{{ model_path }}/{{ artifact.path }}" title="Source code"></iframe>
-    </details>
+    <div class="code-output">
+      <p class="code-label">Generated {{ artifact.language or 'code' }}</p>
+      <pre class="response-text code-block"><code>{{ run_sources[run.id][artifact.path] }}</code></pre>
+    </div>
     {% endfor %}
 
     {% if not html_artifact and not (run.artifacts | selectattr('type', 'equalto', 'svg') | list) and not (run.artifacts | selectattr('type', 'equalto', 'source') | list) %}
@@ -97,12 +97,12 @@
     </div>
     {% endif %}
 
-    {% if run.artifacts %}
+    {% set downloadable = run.artifacts | selectattr('type', 'in', ['html', 'svg']) | list %}
+    {% if downloadable %}
     <div class="artifact-actions">
-      {% for artifact in run.artifacts if artifact.type not in ['image'] %}
-      <a class="btn" href="{{ site_root }}/runs/{{ model_path }}/{{ artifact.path }}" download>Download {{ artifact.type }}</a>
+      {% for artifact in downloadable %}
+      <a class="btn" href="{{ site_root }}/runs/{{ model_path }}/{{ artifact.path }}" target="_blank" rel="noopener">Open {{ artifact.type }}</a>
       {% endfor %}
-      <a class="btn" href="{{ site_root }}/runs/{{ model_path }}/output.txt" download>Download raw output</a>
     </div>
     {% endif %}
 

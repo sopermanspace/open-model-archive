@@ -145,12 +145,21 @@ def generate_site() -> None:
                 prompt_body = ""
 
         run_outputs: dict[str, str] = {}
+        run_sources: dict[str, dict[str, str]] = {}
         for run in task_runs:
             safe_model = run.model.id.replace("/", "-")
-            output_path = RUNS_DIR / task.slug / safe_model / "output.txt"
+            run_dir = RUNS_DIR / task.slug / safe_model
+            output_path = run_dir / "output.txt"
             run_outputs[run.id] = (
                 output_path.read_text(encoding="utf-8") if output_path.exists() else ""
             )
+            sources: dict[str, str] = {}
+            for artifact in run.artifacts:
+                if artifact.type == "source":
+                    source_path = run_dir / artifact.path
+                    if source_path.exists():
+                        sources[artifact.path] = source_path.read_text(encoding="utf-8")
+            run_sources[run.id] = sources
 
         page = env.get_template("comparison.html").render(
             site_name="Open Model Archive",
@@ -160,6 +169,7 @@ def generate_site() -> None:
             runs=task_runs,
             prompt_body=prompt_body,
             run_outputs=run_outputs,
+            run_sources=run_sources,
             topic_labels=topic_labels,
         )
         out_dir = DOCS_DIR / "tasks" / task.slug
