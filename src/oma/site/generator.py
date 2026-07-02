@@ -1,4 +1,5 @@
 import json
+import re
 import shutil
 from pathlib import Path
 
@@ -16,6 +17,34 @@ from oma.storage.artifacts import copy_runs_to_docs
 
 def _load_run(path: Path) -> RunRecord:
     return RunRecord.model_validate(json.loads(path.read_text(encoding="utf-8")))
+
+
+def _extract_fenced_code(text: str, language: str = "python") -> str:
+    pattern = rf"```{re.escape(language)}\s*\n(.*?)```"
+    match = re.search(pattern, text, re.DOTALL | re.IGNORECASE)
+    if match:
+        return match.group(1).strip()
+    match = re.search(r"```[^\n]*\n(.*?)```", text, re.DOTALL)
+    return match.group(1).strip() if match else ""
+
+
+def _load_source_content(
+    run_dir: Path,
+    artifact_path: str,
+    raw_output: str,
+    language: str | None,
+) -> str:
+    source_path = run_dir / artifact_path
+    if source_path.exists():
+        return source_path.read_text(encoding="utf-8")
+
+    lang = language or "python"
+    extracted = _extract_fenced_code(raw_output, lang)
+    if extracted:
+        return extracted
+
+    # Last resort: show raw output stripped of fences
+    return raw_output.strip()
 
 
 def collect_runs() -> dict[str, list[RunRecord]]:
@@ -153,12 +182,18 @@ def generate_site() -> None:
             run_outputs[run.id] = (
                 output_path.read_text(encoding="utf-8") if output_path.exists() else ""
             )
+            raw_output = run_outputs[run.id]
             sources: dict[str, str] = {}
             for artifact in run.artifacts:
                 if artifact.type == "source":
-                    source_path = run_dir / artifact.path
-                    if source_path.exists():
-                        sources[artifact.path] = source_path.read_text(encoding="utf-8")
+                    content = _load_source_content(
+                        run_dir,
+                        artifact.path,
+                        raw_output,
+                        artifact.language,
+                    )
+                    if content:
+                        sources[artifact.path] = content
             run_sources[run.id] = sources
 
         page = env.get_template("comparison.html").render(

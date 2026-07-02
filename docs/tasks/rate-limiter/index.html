@@ -98,8 +98,10 @@ The code must be correct, readable, and suitable for use in a real API gateway.<
     
 
     
+    
     <div class="code-output">
       <p class="code-label">Generated python</p>
+      
       <pre class="response-text code-block"><code>import time
 import threading
 
@@ -162,6 +164,7 @@ if __name__ == &#34;__main__&#34;:
     assert bucket.allow(1.0) is True
     
     print(&#34;All tests passed.&#34;)</code></pre>
+      
     </div>
     
 
@@ -273,8 +276,10 @@ if __name__ == &#34;__main__&#34;:
     
 
     
+    
     <div class="code-output">
       <p class="code-label">Generated python</p>
+      
       <pre class="response-text code-block"><code>import time
 import threading
 from typing import ClassVar, Optional
@@ -465,6 +470,7 @@ def main_thread_demo():
 if __name__ == &#34;__main__&#34;:
     main_demo()
     main_thread_demo()</code></pre>
+      
     </div>
     
 
@@ -704,8 +710,10 @@ if __name__ == &#34;__main__&#34;:
     
 
     
+    
     <div class="code-output">
       <p class="code-label">Generated python</p>
+      
       <pre class="response-text code-block"><code>import time
 import threading
 
@@ -789,6 +797,7 @@ if __name__ == &#34;__main__&#34;:
     full_bucket = TokenBucket(rate=100.0, capacity=100.0)
     assert full_bucket.retry_after(50.0) == 0.0
     assert full_bucket.allow(50.0) is True</code></pre>
+      
     </div>
     
 

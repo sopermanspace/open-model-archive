@@ -85,9 +85,14 @@
     {% endfor %}
 
     {% for artifact in run.artifacts if artifact.type == 'source' %}
+    {% set source_code = run_sources.get(run.id, {}).get(artifact.path, '') %}
     <div class="code-output">
       <p class="code-label">Generated {{ artifact.language or 'code' }}</p>
-      <pre class="response-text code-block"><code>{{ run_sources[run.id][artifact.path] }}</code></pre>
+      {% if source_code %}
+      <pre class="response-text code-block"><code>{{ source_code }}</code></pre>
+      {% else %}
+      <p class="muted code-fallback">Could not extract source artifact. See raw model output below.</p>
+      {% endif %}
     </div>
     {% endfor %}
 

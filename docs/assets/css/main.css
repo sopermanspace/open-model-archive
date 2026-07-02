@@ -411,6 +411,17 @@ h3 { font-size: 1.2rem; }
   max-height: 480px;
 }
 
+.code-block code {
+  color: var(--text);
+  background: transparent;
+  padding: 0;
+}
+
+.code-fallback {
+  padding: 1rem 1.25rem 1.25rem;
+  font-size: 0.85rem;
+}
+
 .svg-preview {
   padding: 2rem;
   background: var(--surface-2);
