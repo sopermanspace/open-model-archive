@@ -1,0 +1,7 @@
+task=website-landing-page
+model=ollama/gemma4
+prompt=website-generation/landing-page@1.0.0
+adapter=ollama
+duration_ms=66024
+tokens=242->4262
+screenshot=/Users/himanshu/open-model-archive/runs/website-landing-page/ollama-gemma4/screenshots/desktop.png

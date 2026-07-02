@@ -1,0 +1,48 @@
+{
+  "id": "website-landing-page/ollama-kimi-k2.7-code/2026-07-02T12:53:45Z",
+  "task": {
+    "id": "website-landing-page",
+    "slug": "website-landing-page",
+    "category": "website-generation",
+    "title": "Developer Tool Landing Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "landing-page",
+    "version": "1.0.0",
+    "sha256": "1d1b0e80f7d9ef53967bfb6407ed7980ee130e0eb08b10658d49cc46ef2c7bde",
+    "title": "Developer Tool Landing Page"
+  },
+  "executed_at": "2026-07-02T12:53:45.242744Z",
+  "duration_ms": 76377,
+  "tokens": {
+    "input": 223,
+    "output": 7060,
+    "reasoning": 0
+  },
+  "cost_usd": null,
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "c3aec83d17d14b28e2b5c5c344b5c660a0ef6ac58633dd8ff0ea079951d40cc3",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "a24dbaa2631af532fe260b79a4b77dd9037a1389cfc981d11f33fd0e6d4b6f2a"
+    }
+  ],
+  "logs": "run.log"
+}

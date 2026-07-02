@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drift - Configuration Drift Detector | Know Before You Deploy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Global Variables & Reset --- */
+        :root {
+            --color-background: #0f172a; /* Slate 900/Dark Blue-Gray */
+            --color-text: #e2e8f0; /* Light Gray */
+            --color-primary: #6366f1; /* Indigo 500 */
+            --color-secondary: #475569; /* Slate 600 */
+            --color-card-bg: #1e293b; /* Slate 800 */
+            --color-border: #334155; /* Slate 700 */
+            --font-family: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Utility Classes --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 1.5rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        /* --- Buttons & CTAs --- */
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            text-align: center;
+            text-decoration: none; /* For anchor tags */
+        }
+
+        /* Primary Button (Hero CTA) */
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: #4f46e5; /* Indigo 600 */
+            transform: translateY(-1px);
+        }
+
+        /* Secondary Button (Pricing) */
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+
+        /* --- Header & Navigation --- */
+        header {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: rgba(15, 23, 42, 0.95); /* Slightly opaque background */
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            text-align: center;
+            padding: 8rem 0;
+        }
+
+        #hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+        }
+
+        #hero p {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: var(--color-secondary);
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        /* --- Features Section --- */
+        #features h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .card {
+            background-color: var(--color-card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            color: var(--color-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        /* --- Code Example Section --- */
+        #code-example h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        pre {
+            background-color: #0f172a; /* Same as body background for depth */
+            border: none;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: monospace;
+            white-space: pre-wrap; /* Ensures wrapping on small screens */
+        }
+
+        code {
+            display: block;
+            color: #c9d1d9; /* Code color */
+        }
+
+        .keyword { color: #6366f1; }
+        .string { color: #a8b4fe; }
+        .comment { color: #718096; font-style: italic; }
+
+
+        /* --- Testimonials Section --- */
+        #testimonials h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: var(--color-card-bg);
+            padding: 2rem;
+            border-left: 4px solid var(--color-primary);
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        .testimonial-card p {
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author strong {
+            display: block;
+            font-weight: 700;
+        }
+
+        .testimonial-author span {
+            font-size: 0.9rem;
+            color: var(--color-secondary);
+        }
+
+
+        /* --- Pricing Section --- */
+        #pricing h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap; /* Makes it responsive */
+        }
+
+        .price-card {
+            background-color: var(--color-card-bg);
+            padding: 3rem;
+            border-radius: 12px;
+            width: 300px; /* Fixed width for balance */
+            text-align: center;
+            border: 1px solid var(--color-border);
+        }
+
+        .price-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-primary);
+        }
+
+        .price-tag {
+            font-size: 4rem;
+            font-weight: 800;
+            margin: 1rem 0 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed var(--color-border);
+            display: flex;
+            align-items: center;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: var(--color-primary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.9rem;
+            color: var(--color-secondary);
+        }
+
+        /* --- Responsiveness Adjustments --- */
+        @media (max-width: 768px) {
+            #hero {
+                padding: 4rem 0;
+            }
+
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-cta {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            /* Pricing adjustments */
+            .pricing-grid {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+
+            .price-card {
+                width: 90%; /* Takes up most of the screen width on mobile */
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container">
+            <a href="#" style="font-size: 1.5rem; font-weight: 800; color: var(--color-text);">Drift</a>
+            <nav>
+                <a href="#features" style="margin-right: 1.5rem;">Features</a>
+                <a href="#pricing" style="margin-right: 1.5rem;">Pricing</a>
+                <button class="btn btn-secondary">Sign In</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <h1>Know Before You Deploy.</h1>
+            <p>Drift detects configuration drift between your development, staging, and production environments in real-time. Stop guessing and start trusting.</p>
+            <a href="#" class="btn btn-primary btn-cta">Start drift scan</a>
+        </div>
+    </section>
+
+    <!-- Feature Cards -->
+    <section id="features" class="container">
+        <h2>How Drift Works</h2>
+        <div class="feature-grid">
+            
+            <article class="card">
+                <h3>Real-Time Comparison</h3>
+                <p>Don't wait for manual audits. Our system constantly monitors resource definitions and environment states, alerting you the second a deviation occurs.</p>
+            </article>
+
+            <article class="card">
+                <h3>Comprehensive Coverage</h3>
+                <p>Support for AWS CloudFormation, Kubernetes manifests, Terraform state files, and custom configuration parameters—all under one dashboard.</p>
+            </article>
+
+            <article class="card">
+                <h3>Audit & Remediation Logs</h3>
+                <p>Detailed, tamper-proof logs showing *who*, *when*, and *how* a drift occurred. Includes one-click remediation suggestions to bring environments back into compliance.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Code Example Block -->
+    <section id="code-example">
+        <div class="container">
+            <h2>Example Detection Output</h2>
+            <pre><code class="language-bash">
+# Drift Scan Initiated: Staging vs Production
+$ drift detect --target=staging --source=production
+
+[INFO] Comparing core resources...
+[SUCCESS] Database endpoint: Matches (postgres://prod.db/v1)
+[SUCCESS] Load balancer IP: Matches (10.0.0.42)
+
+*** DRIFT DETECTED ***
+
+Resource Type: Namespace Policy
+Environment: Staging (Dev)
+Deviation: Production requires 'read-only' policy, but staging is set to 'full-access'.
+Recommended Action: <span style="color:#fff;">apply_policy(namespace, read-only)</span> 
+
+Drift Report ID: #49b3d1a2f
+Review required changes at: <span style="color:#ff6c6c;">drift.drifttool.com/report#49b3d1a2f</span>
+            </code></pre>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="container">
+        <h2>What Our Engineers Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>"Before Drift, we lost days debugging environment parity issues. The speed and accuracy of their detection saved us from a potential production outage."</p>
+                <div class="testimonial-author">
+                    <strong>Elara Vance</strong>
+                    <span>Lead DevOps Architect | Nexus Systems</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p>"The comprehensive coverage is unmatched. Pairing Drift with our existing Terraform stack made environment governance simple and proactive."</p>
+                <div class="testimonial-author">
+                    <strong>Kai Chen</strong>
+                    <span>CTO | Zenith Tech</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="container">
+        <h2>Simple, Predictable Pricing</h2>
+        <div class="pricing-grid">
+
+            <div class="price-card">
+                <h3>Community</h3>
+                <p style="color: var(--color-secondary); margin-bottom: 1.5rem;">For personal projects and learning.</p>
+                <div class="price-tag">$0</div>
+                <h4>/month</h4>
+                
+                <ul class="features-list">
+                    <li>Basic drift checks (limited scope)</li>
+                    <li>Single environment comparison</li>
+                    <li>Community support access</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%;">Get Started Free</button>
+            </div>
+
+            <div class="price-card" style="transform: scale(1.05); border-color: var(--color-primary);">
+                <h3>Professional</h3>
+                <p style="color: #34d399; margin-bottom: 1rem;">The perfect solution for small teams.</p>
+                <div class="price-tag">$29</div>
+                <h4>/month</h4>
+                
+                <ul class="features-list">
+                    <li>Unlimited resource type coverage</li>
+                    <li>Multi-environment comparison (Staging <> Prod)</li>
+                    <li>Detailed audit log access</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;">Start Trial</button>
+            </div>
+
+            <div class="price-card">
+                <h3>Enterprise</h3>
+                <p style="color: var(--color-secondary); margin-bottom: 1.5rem;">For compliance and large organizations.</p>
+                <div class="price-tag">Custom</div>
+                <h4>/month</h4>
+                
+                <ul class="features-list">
+                    <li>Dedicated Support & SLA</li>
+                    <li>On-Premise Deployment Options</li>
+                    <li>API Integration & SSO</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%;">Contact Sales</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            &copy; 2024 Drift CLI. All rights reserved. | Configuration Integrity Made Simple.
+        </div>
+    </footer>
+
+</body>
+</html>

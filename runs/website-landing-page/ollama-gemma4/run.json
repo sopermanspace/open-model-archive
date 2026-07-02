@@ -1,0 +1,48 @@
+{
+  "id": "website-landing-page/ollama-gemma4/2026-07-02T12:52:27Z",
+  "task": {
+    "id": "website-landing-page",
+    "slug": "website-landing-page",
+    "category": "website-generation",
+    "title": "Developer Tool Landing Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "landing-page",
+    "version": "1.0.0",
+    "sha256": "1d1b0e80f7d9ef53967bfb6407ed7980ee130e0eb08b10658d49cc46ef2c7bde",
+    "title": "Developer Tool Landing Page"
+  },
+  "executed_at": "2026-07-02T12:52:27.451054Z",
+  "duration_ms": 66024,
+  "tokens": {
+    "input": 242,
+    "output": 4262,
+    "reasoning": 0
+  },
+  "cost_usd": null,
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "1deeb0a031cd200fe16502cddd73cb3c82261adaf48484b8c024f2b1430de853",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "e912a0533ee435dd9013aa9aaf49c1eac60cab91b6dc7ad4bfb59a5161c2f3e0"
+    }
+  ],
+  "logs": "run.log"
+}

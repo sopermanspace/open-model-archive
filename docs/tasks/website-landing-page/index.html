@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Side-by-side comparison of AI model outputs for Developer Tool Landing Page">
+  <title>Developer Tool Landing Page — Open Model Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../../index.html">Open Model Archive</a>
+      <nav class="site-nav">
+        <a href="../../index.html">Archive</a>
+        <a href="../../about/index.html">About</a>
+        <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    
+<section class="container comparison-header">
+  <a class="back-link" href="../../index.html">← Archive</a>
+  <p class="eyebrow">website-generation</p>
+  <h1>Developer Tool Landing Page</h1>
+  <p class="lede">Generate a complete single-file HTML landing page for a fictional developer tool. Same prompt, different models — compare structure, design, and code quality.
+</p>
+</section>
+
+
+<section class="container prompt-panel">
+  <details>
+    <summary>Prompt v1.0.0</summary>
+    <div class="prompt-meta">
+      <span>ID: landing-page</span>
+      <span>SHA-256: <code>1d1b0e80f7d9ef53…</code></span>
+    </div>
+    <pre class="prompt-text">Create a complete, production-quality single-file HTML page for a fictional developer tool called **Drift**.
+
+## Product
+
+Drift is a CLI that detects configuration drift between environments (staging vs production). Tagline: &#34;Know before you deploy.&#34;
+
+## Requirements
+
+1. Output **only** a single fenced `html` code block containing the full page. No explanation outside the code block.
+2. The HTML must be self-contained: embedded CSS only, no external dependencies except Google Fonts (Inter or similar).
+3. Include these sections: navigation, hero with CTA, three feature cards, a code example block, testimonials (2), pricing (free + pro), footer.
+4. Dark theme. Minimal, elegant, content-first. No gradients, glass effects, or heavy animation.
+5. Semantic HTML5. Accessible contrast. Responsive layout.
+6. The hero CTA button text must be &#34;Start drift scan&#34;.
+7. Use realistic but fictional copy — do not reference real companies.
+
+The page should feel like a polished indie developer tool, not a generic AI template.</pre>
+  </details>
+</section>
+
+
+<section class="container comparison-grid" style="--cols: 2">
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemma 4</h2>
+      <p class="model-provider">Ollama · gemma4:latest</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>66.0s</dd></div>
+        <div><dt>Tokens</dt><dd>242 → 4.3k</dd></div>
+        <div><dt>Cost</dt><dd>—</dd></div>
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    <figure class="screenshot">
+      <img src="../../runs/website-landing-page/ollama-gemma4/screenshots/desktop.png" alt="Screenshot of Gemma 4 output" loading="lazy">
+    </figure>
+    
+
+    
+      
+      <div class="preview-frame">
+        <iframe src="../../runs/website-landing-page/ollama-gemma4/artifacts/index.html" title="Gemma 4 preview" loading="lazy"></iframe>
+      </div>
+      
+    
+
+    
+    <div class="artifact-actions">
+      
+      <a class="btn" href="../../runs/website-landing-page/ollama-gemma4/artifacts/index.html" download>Download html</a>
+      
+    </div>
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <iframe class="source-iframe" src="../../runs/website-landing-page/ollama-gemma4/output.txt" title="Raw output"></iframe>
+    </details>
+
+    
+      
+    <details class="source-panel">
+      <summary>Generated HTML</summary>
+      <iframe class="source-iframe" src="../../runs/website-landing-page/ollama-gemma4/artifacts/index.html" title="HTML source"></iframe>
+    </details>
+      
+    
+
+    
+  </article>
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Kimi K2.7 Code</h2>
+      <p class="model-provider">Ollama Cloud · kimi-k2.7-code</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>76.4s</dd></div>
+        <div><dt>Tokens</dt><dd>223 → 7.1k</dd></div>
+        <div><dt>Cost</dt><dd>—</dd></div>
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    <figure class="screenshot">
+      <img src="../../runs/website-landing-page/ollama-kimi-k2.7-code/screenshots/desktop.png" alt="Screenshot of Kimi K2.7 Code output" loading="lazy">
+    </figure>
+    
+
+    
+      
+      <div class="preview-frame">
+        <iframe src="../../runs/website-landing-page/ollama-kimi-k2.7-code/artifacts/index.html" title="Kimi K2.7 Code preview" loading="lazy"></iframe>
+      </div>
+      
+    
+
+    
+    <div class="artifact-actions">
+      
+      <a class="btn" href="../../runs/website-landing-page/ollama-kimi-k2.7-code/artifacts/index.html" download>Download html</a>
+      
+    </div>
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <iframe class="source-iframe" src="../../runs/website-landing-page/ollama-kimi-k2.7-code/output.txt" title="Raw output"></iframe>
+    </details>
+
+    
+      
+    <details class="source-panel">
+      <summary>Generated HTML</summary>
+      <iframe class="source-iframe" src="../../runs/website-landing-page/ollama-kimi-k2.7-code/artifacts/index.html" title="HTML source"></iframe>
+    </details>
+      
+    
+
+    
+  </article>
+  
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Open source. Every prompt versioned. Every artifact public.</p>
+    </div>
+  </footer>
+</body>
+</html>

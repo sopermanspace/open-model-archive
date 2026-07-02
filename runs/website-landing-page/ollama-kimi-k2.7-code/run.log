@@ -1,0 +1,7 @@
+task=website-landing-page
+model=ollama/kimi-k2.7-code
+prompt=website-generation/landing-page@1.0.0
+adapter=ollama
+duration_ms=76377
+tokens=223->7060
+screenshot=/Users/himanshu/open-model-archive/runs/website-landing-page/ollama-kimi-k2.7-code/screenshots/desktop.png
