@@ -22,10 +22,12 @@ Not a benchmark leaderboard. Every prompt is versioned. Every artifact is public
 **Prompt:** v1.0.0 — identical for all models  
 **Brief:** Generate a single-file HTML landing page for a fictional CLI called *Drift*
 
-| Model | Provider | Duration | Tokens (in → out) | Status |
-|-------|----------|----------|-------------------|--------|
-| Gemma 4 | Ollama | 66.0s | 242 → 4.3k | success |
-| Kimi K2.7 Code | Ollama Cloud | 76.4s | 223 → 7.1k | success |
+| Model | Provider | Duration | Tokens (in → out) | Est. cost | Status |
+|-------|----------|----------|-------------------|-----------|--------|
+| Gemma 4 | Ollama (local) | 66.0s | 242 → 4.3k | $0.00 | success |
+| Kimi K2.7 Code | Ollama Cloud | 76.4s | 223 → 7.1k | ~$0.014 | success |
+
+Costs are estimated from per-1k token rates in `models/*.yaml`. Local models are $0; cloud models use published API rates as a proxy.
 
 ### Side-by-side outputs
 

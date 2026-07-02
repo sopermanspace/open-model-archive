@@ -5,6 +5,7 @@ from oma.engine.executor import execute_run
 from oma.registry.models import resolve_task_models
 from oma.registry.tasks import list_tasks, load_task
 from oma.site.generator import generate_site
+from oma.metrics.recost import recost_all
 from oma.validate import validate_project
 
 app = typer.Typer(
@@ -66,6 +67,16 @@ def run(
         all_tasks=all_tasks,
         no_screenshot=no_screenshot,
     )
+
+
+@app.command()
+def recost() -> None:
+    """Recalculate cost estimates for existing runs from token usage."""
+    records = recost_all()
+    for record in records:
+        cost = f"${record.cost_usd:.4f}" if record.cost_usd is not None else "—"
+        console.print(f"[green]✓[/green] {record.task.slug} × {record.model.display_name}: {cost}")
+    console.print(f"[green]Updated {len(records)} run(s).[/green]")
 
 
 @app.command("generate")

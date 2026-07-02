@@ -9,6 +9,15 @@ class TokenUsage(BaseModel):
     reasoning: int = 0
 
 
+class CostBreakdown(BaseModel):
+    total_usd: float
+    input_usd: float
+    output_usd: float
+    reasoning_usd: float = 0.0
+    estimated: bool = True
+    pricing_source: str = ""
+
+
 class TaskRef(BaseModel):
     id: str
     slug: str
@@ -53,6 +62,7 @@ class RunRecord(BaseModel):
     duration_ms: int
     tokens: TokenUsage
     cost_usd: float | None = None
+    cost: CostBreakdown | None = None
     status: Literal["success", "error", "timeout"]
     error: str | None = None
     artifacts: list[Artifact] = Field(default_factory=list)

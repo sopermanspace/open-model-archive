@@ -49,4 +49,10 @@ Add a new adapter implementing `ModelAdapter.execute()` in `src/oma/adapters/`.
 
 ## Run record
 
-Each execution writes `runs/<task-slug>/<model-id>/run.json` with timing, tokens, cost, artifacts, and screenshots. This file is the canonical metadata source for the static site.
+Each execution writes `runs/<task-slug>/<model-id>/run.json` with timing, tokens, estimated cost (from per-1k rates in `models/*.yaml`), artifacts, and screenshots. This file is the canonical metadata source for the static site.
+
+Recalculate costs on existing runs without re-executing models:
+
+```bash
+uv run oma recost
+```

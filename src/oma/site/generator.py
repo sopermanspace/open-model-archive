@@ -46,12 +46,15 @@ def _format_tokens(count: int) -> str:
     return str(count)
 
 
-def _format_cost(cost: float | None) -> str:
+def _format_cost(cost: float | None, estimated: bool = False) -> str:
     if cost is None:
         return "—"
+    prefix = "~" if estimated else ""
     if cost == 0:
-        return "$0.00"
-    return f"${cost:.4f}"
+        return f"{prefix}$0.00"
+    if cost < 0.01:
+        return f"{prefix}${cost:.4f}"
+    return f"{prefix}${cost:.2f}"
 
 
 def generate_site() -> None:

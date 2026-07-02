@@ -4,8 +4,10 @@ provider: Ollama
 adapter: ollama
 model_ref: gemma4:latest
 api_base: http://127.0.0.1:11434
-cost_per_1k_input: null
-cost_per_1k_output: null
+cost_per_1k_input: 0.0
+cost_per_1k_output: 0.0
+pricing_source: Local inference on your hardware — no API token cost.
+cost_estimate: false
 notes: Local open-weight model served via Ollama.
 enabled: true
 timeout_seconds: 600

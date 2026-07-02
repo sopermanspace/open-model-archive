@@ -26,7 +26,15 @@
     "output": 4262,
     "reasoning": 0
   },
-  "cost_usd": null,
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
   "status": "success",
   "error": null,
   "artifacts": [

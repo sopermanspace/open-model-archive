@@ -2,7 +2,7 @@ from datetime import UTC, datetime
 
 from oma.adapters.base import AdapterResult
 from oma.models.prompt import Prompt
-from oma.models.run import ModelRef, PromptRef, RunRecord, TaskRef, TokenUsage
+from oma.models.run import CostBreakdown, ModelRef, PromptRef, RunRecord, TaskRef, TokenUsage
 from oma.models.task import TaskDefinition
 from oma.models.model_config import ModelConfig
 
@@ -48,6 +48,9 @@ def build_run_record(
             reasoning=result.reasoning_tokens,
         ),
         cost_usd=result.cost_usd,
+        cost=CostBreakdown.model_validate(result.cost_breakdown)
+        if result.cost_breakdown
+        else None,
         status=status,  # type: ignore[arg-type]
         error=error,
     )

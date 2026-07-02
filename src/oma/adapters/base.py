@@ -12,6 +12,7 @@ class AdapterResult:
     reasoning_tokens: int = 0
     model_version: str = ""
     cost_usd: float | None = None
+    cost_breakdown: dict | None = None
     raw_metadata: dict = field(default_factory=dict)
 
 

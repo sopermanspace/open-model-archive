@@ -3,6 +3,7 @@ import subprocess
 import time
 
 from oma.adapters.base import AdapterResult, ModelAdapter
+from oma.metrics.cost import estimate_from_model
 
 
 class AgyAdapter(ModelAdapter):
@@ -53,11 +54,11 @@ class AgyAdapter(ModelAdapter):
                 except json.JSONDecodeError:
                     continue
 
-        cost = None
-        if self.config.cost_per_1k_input is not None or self.config.cost_per_1k_output is not None:
-            cost_in = self.config.cost_per_1k_input or 0.0
-            cost_out = self.config.cost_per_1k_output or 0.0
-            cost = round((input_tokens / 1000) * cost_in + (output_tokens / 1000) * cost_out, 6)
+        breakdown = estimate_from_model(
+            self.config,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+        )
 
         return AdapterResult(
             response=response,
@@ -65,6 +66,7 @@ class AgyAdapter(ModelAdapter):
             input_tokens=input_tokens,
             output_tokens=output_tokens,
             model_version=self.config.cli_model,
-            cost_usd=cost,
+            cost_usd=breakdown.total_usd if breakdown else None,
+            cost_breakdown=breakdown.as_dict() if breakdown else None,
             raw_metadata=metadata,
         )

@@ -6,8 +6,11 @@ adapter: ollama  # ollama | agy
 model_ref: model-tag:latest  # for ollama adapter
 cli_model: ""  # for agy adapter, e.g. "Claude Sonnet 4.6 (Thinking)"
 api_base: http://127.0.0.1:11434
-cost_per_1k_input: null
-cost_per_1k_output: null
+cost_per_1k_input: null       # USD per 1,000 input tokens (0.0 for free local models)
+cost_per_1k_output: null      # USD per 1,000 output tokens
+cost_per_1k_reasoning: null   # defaults to output rate when null
+pricing_source: ""            # cite the rate source for transparency
+cost_estimate: true           # false when cost is exact (e.g. local $0)
 notes: Short description of the model source.
 enabled: true
 timeout_seconds: 600

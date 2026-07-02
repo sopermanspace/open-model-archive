@@ -3,6 +3,7 @@ import time
 import httpx
 
 from oma.adapters.base import AdapterResult, ModelAdapter
+from oma.metrics.cost import estimate_from_model
 from oma.models.model_config import ModelConfig
 
 
@@ -33,11 +34,10 @@ class OllamaAdapter(ModelAdapter):
         input_tokens = int(data.get("prompt_eval_count") or 0)
         output_tokens = int(data.get("eval_count") or 0)
 
-        cost = _estimate_cost(
-            input_tokens,
-            output_tokens,
-            self.config.cost_per_1k_input,
-            self.config.cost_per_1k_output,
+        breakdown = estimate_from_model(
+            self.config,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
         )
 
         return AdapterResult(
@@ -46,26 +46,11 @@ class OllamaAdapter(ModelAdapter):
             input_tokens=input_tokens,
             output_tokens=output_tokens,
             model_version=data.get("model") or self.config.model_ref,
-            cost_usd=cost,
+            cost_usd=breakdown.total_usd if breakdown else None,
+            cost_breakdown=breakdown.as_dict() if breakdown else None,
             raw_metadata={
                 "total_duration_ns": data.get("total_duration"),
                 "eval_duration_ns": data.get("eval_duration"),
                 "done_reason": data.get("done_reason"),
             },
         )
-
-
-def _estimate_cost(
-    input_tokens: int,
-    output_tokens: int,
-    cost_in: float | None,
-    cost_out: float | None,
-) -> float | None:
-    if cost_in is None and cost_out is None:
-        return None
-    total = 0.0
-    if cost_in is not None:
-        total += (input_tokens / 1000) * cost_in
-    if cost_out is not None:
-        total += (output_tokens / 1000) * cost_out
-    return round(total, 6)

@@ -26,7 +26,15 @@
     "output": 7060,
     "reasoning": 0
   },
-  "cost_usd": null,
+  "cost_usd": 0.01438,
+  "cost": {
+    "total_usd": 0.01438,
+    "input_usd": 8.4e-05,
+    "output_usd": 0.014296,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated \u2014 Ollama Cloud uses subscription usage, not per-token billing."
+  },
   "status": "success",
   "error": null,
   "artifacts": [
