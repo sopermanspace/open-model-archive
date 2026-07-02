@@ -2,5 +2,5 @@ task=rate-limiter
 model=ollama/kimi-k2.7-code
 prompt=code-generation/rate-limiter@1.0.0
 adapter=ollama
-duration_ms=13549
-tokens=205->1112
+duration_ms=49706
+tokens=205->3778

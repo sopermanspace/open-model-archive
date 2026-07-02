@@ -3,9 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Side-by-side comparison of AI model outputs for Grounded Product Q&amp;A">
-  <link rel="canonical" href="https://sopermanspace.github.io/open-model-archive/tasks/product-facts-grounding/">
   <title>Grounded Product Q&amp;A — Open Model Archive</title>
+  <meta name="description" content="Compare AI model outputs for Grounded Product Q&amp;A — Answer factual questions using only provided source excerpts — no outside knowledge. Artifacts, timing, tokens, and cost side by side.">
+  <meta name="keywords" content="AI model comparison, LLM outputs, model evaluation, prompt versioning, AI artifacts, side-by-side comparison, open source AI, Gemma, Gemini">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="sopermanspace">
+  <meta name="publisher" content="Open Model Archive">
+  <link rel="canonical" href="https://sopermanspace.github.io/open-model-archive/tasks/product-facts-grounding/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Grounded Product Q&amp;A — Open Model Archive">
+  <meta property="og:description" content="Compare AI model outputs for Grounded Product Q&amp;A — Answer factual questions using only provided source excerpts — no outside knowledge.">
+  <meta property="og:url" content="https://sopermanspace.github.io/open-model-archive/tasks/product-facts-grounding/">
+  <meta property="og:site_name" content="Open Model Archive">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Grounded Product Q&amp;A — Open Model Archive">
+  <meta name="twitter:description" content="Compare AI model outputs for Grounded Product Q&amp;A — Answer factual questions using only provided source excerpts — no outside knowledge.">
   <link rel="icon" href="/open-model-archive/assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -110,12 +122,22 @@ Respond in plain text with numbered answers. After each answer, cite the source 
     
 
     
-    <div class="text-output">
-      <pre class="response-text">1. Drift is a CLI that scans configuration files across environments, compares staging and production manifests, and reports drift before deploy. [A]
+    <div class="output-viewer" data-viewer="text">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">Output</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="text-output">
+        
+        <pre class="response-text">1. Drift is a CLI that scans configuration files across environments, compares staging and production manifests, and reports drift before deploy. [A]
 2. Pro costs $12/month per workspace and adds Slack alerts. [A]
 3. Drift supports Kubernetes manifests, Docker Compose, Terraform state snapshots, and `.env` files. [C]
 4. It modifies YAML formatting drift only and never modifies secret values. [B]
 5. No, it does not support iOS provisioning profiles. [C]</pre>
+        
+      </div>
     </div>
     
 
@@ -168,12 +190,22 @@ Respond in plain text with numbered answers. After each answer, cite the source 
     
 
     
-    <div class="text-output">
-      <pre class="response-text">1. Drift is a CLI that scans configuration files across environments by comparing staging and production manifests to report drift before deploy. [A]
+    <div class="output-viewer" data-viewer="text">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">Output</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="text-output">
+        
+        <pre class="response-text">1. Drift is a CLI that scans configuration files across environments by comparing staging and production manifests to report drift before deploy. [A]
 2. Pro costs $12/month per workspace and adds Slack alerts. [A]
 3. Drift supports Kubernetes manifests, Docker Compose, Terraform state snapshots, and .env files. [C]
 4. It modifies YAML formatting drift only and never modifies secret values. [B]
 5. No, it does not support iOS provisioning profiles. [C]</pre>
+        
+      </div>
     </div>
     
 
@@ -226,8 +258,16 @@ Respond in plain text with numbered answers. After each answer, cite the source 
     
 
     
-    <div class="text-output">
-      <pre class="response-text">1. Drift is a CLI that scans configuration files across environments, compares staging and production manifests, and reports drift before deploy. [A]
+    <div class="output-viewer" data-viewer="text">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">Output</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="text-output">
+        
+        <pre class="response-text">1. Drift is a CLI that scans configuration files across environments, compares staging and production manifests, and reports drift before deploy. [A]
 
 2. Pro costs $12 per month per workspace and adds Slack alerts. [A]
 
@@ -236,6 +276,8 @@ Respond in plain text with numbered answers. After each answer, cite the source 
 4. `drift scan --fix` modifies YAML formatting drift only and never modifies secret values. [B]
 
 5. No. [C]</pre>
+        
+      </div>
     </div>
     
 
@@ -256,13 +298,23 @@ Respond in plain text with numbered answers. After each answer, cite the source 
     </details>
 
     
-    <p class="cost-note">Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated — Ollama Cloud uses subscription usage, not per-token billing.</p>
+    <p class="cost-note">Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated.</p>
     
 
     
   </article>
   
 </section>
+
+<div id="fullscreen-overlay" class="fullscreen-overlay" hidden>
+  <header class="fullscreen-header">
+    <span class="fullscreen-title"></span>
+    <button type="button" class="btn-icon fullscreen-close" aria-label="Close fullscreen" title="Close (Esc)">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </header>
+  <div class="fullscreen-body"></div>
+</div>
 
   </main>
 
@@ -271,5 +323,140 @@ Respond in plain text with numbered answers. After each answer, cite the source 
       <p>Open source. Every prompt versioned. Every artifact public.</p>
     </div>
   </footer>
+  
+<script>
+(function () {
+  var overlay = document.getElementById('fullscreen-overlay');
+  if (!overlay) return;
+
+  var titleEl = overlay.querySelector('.fullscreen-title');
+  var bodyEl = overlay.querySelector('.fullscreen-body');
+  var closeBtn = overlay.querySelector('.fullscreen-close');
+
+  function closeFullscreen() {
+    overlay.hidden = true;
+    document.body.classList.remove('fullscreen-open');
+    bodyEl.innerHTML = '';
+  }
+
+  function openFullscreen(label, buildContent) {
+    titleEl.textContent = label;
+    bodyEl.innerHTML = '';
+    buildContent(bodyEl);
+    overlay.hidden = false;
+    document.body.classList.add('fullscreen-open');
+    closeBtn.focus();
+  }
+
+  function getActiveTabPanel(viewer) {
+    var tabs = viewer.querySelector('.preview-tabs');
+    if (!tabs) return null;
+    if (tabs.querySelector('input[id^="live-"]:checked')) {
+      return tabs.querySelector('.live-panel');
+    }
+    return tabs.querySelector('.snap-panel');
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.btn-fullscreen');
+    if (!btn) return;
+
+    var viewer = btn.closest('.output-viewer');
+    if (!viewer) return;
+
+    var label = viewer.querySelector('.output-viewer-label');
+    var labelText = label ? label.textContent : 'Output';
+    var viewerType = viewer.dataset.viewer;
+
+    if (viewerType === 'iframe') {
+      var src = btn.dataset.iframeSrc || viewer.querySelector('iframe')?.src;
+      if (!src) return;
+      openFullscreen(labelText, function (body) {
+        var iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.title = labelText;
+        iframe.setAttribute('loading', 'lazy');
+        body.appendChild(iframe);
+      });
+      return;
+    }
+
+    if (viewerType === 'tabs') {
+      var panel = getActiveTabPanel(viewer);
+      if (!panel) return;
+      var iframe = panel.querySelector('iframe');
+      var img = panel.querySelector('img');
+      if (iframe) {
+        openFullscreen(labelText + ' — Live preview', function (body) {
+          var frame = document.createElement('iframe');
+          frame.src = iframe.src;
+          frame.title = iframe.title || labelText;
+          body.appendChild(frame);
+        });
+      } else if (img) {
+        openFullscreen(labelText + ' — Snapshot', function (body) {
+          var fullImg = document.createElement('img');
+          fullImg.src = img.src;
+          fullImg.alt = img.alt;
+          body.classList.add('fullscreen-image');
+          body.appendChild(fullImg);
+        });
+      }
+      return;
+    }
+
+    if (viewerType === 'image') {
+      var imageSrc = btn.dataset.imageSrc || viewer.querySelector('img')?.src;
+      if (!imageSrc) return;
+      openFullscreen(labelText, function (body) {
+        var fullImg = document.createElement('img');
+        fullImg.src = imageSrc;
+        fullImg.alt = labelText;
+        body.classList.add('fullscreen-image');
+        body.appendChild(fullImg);
+      });
+      return;
+    }
+
+    if (viewerType === 'code') {
+      var codeBlock = viewer.querySelector('pre');
+      if (!codeBlock) return;
+      openFullscreen(labelText, function (body) {
+        body.classList.add('fullscreen-code');
+        body.appendChild(codeBlock.cloneNode(true));
+      });
+      return;
+    }
+
+    if (viewerType === 'prose') {
+      var prose = viewer.querySelector('.rendered-md');
+      if (!prose) return;
+      openFullscreen(labelText, function (body) {
+        body.classList.add('fullscreen-prose');
+        body.appendChild(prose.cloneNode(true));
+      });
+      return;
+    }
+
+    if (viewerType === 'text') {
+      var pre = viewer.querySelector('pre');
+      if (!pre) return;
+      openFullscreen(labelText, function (body) {
+        body.classList.add('fullscreen-code');
+        body.appendChild(pre.cloneNode(true));
+      });
+    }
+  });
+
+  closeBtn.addEventListener('click', closeFullscreen);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeFullscreen();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !overlay.hidden) closeFullscreen();
+  });
+})();
+</script>
+
 </body>
 </html>

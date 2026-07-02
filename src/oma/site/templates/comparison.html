@@ -2,7 +2,12 @@
 {% block canonical_path %}/tasks/{{ task.slug }}/{% endblock %}
 
 {% block title %}{{ task.title }} — {{ site_name }}{% endblock %}
-{% block meta_description %}Side-by-side comparison of AI model outputs for {{ task.title }}{% endblock %}
+{% block meta_description %}Compare AI model outputs for {{ task.title }} — {{ task.description }} Artifacts, timing, tokens, and cost side by side.{% endblock %}
+{% block og_title %}{{ task.title }} — {{ site_name }}{% endblock %}
+{% block og_description %}Compare AI model outputs for {{ task.title }} — {{ task.description }}{% endblock %}
+{% block twitter_title %}{{ task.title }} — {{ site_name }}{% endblock %}
+{% block twitter_description %}Compare AI model outputs for {{ task.title }} — {{ task.description }}{% endblock %}
+{% block og_path %}/tasks/{{ task.slug }}/{% endblock %}
 
 {% block content %}
 <section class="container comparison-header">
@@ -58,47 +63,92 @@
 
     {% set html_artifact = run.artifacts | selectattr('type', 'equalto', 'html') | first %}
     {% if html_artifact and run.screenshots %}
-    <div class="preview-tabs" data-tabs="{{ loop.index }}">
-      <input type="radio" name="tab-{{ loop.index }}" id="snap-{{ loop.index }}" checked>
-      <input type="radio" name="tab-{{ loop.index }}" id="live-{{ loop.index }}">
-      <div class="tab-labels">
-        <label for="snap-{{ loop.index }}">Snapshot</label>
-        <label for="live-{{ loop.index }}">Live preview</label>
+    <div class="output-viewer" data-viewer="tabs">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">Website preview</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
       </div>
-      <div class="tab-panel snap-panel">
-        <img src="{{ site_root }}/runs/{{ model_path }}/{{ run.screenshots[0].path }}" alt="Snapshot of {{ run.model.display_name }} output" loading="lazy">
-      </div>
-      <div class="tab-panel live-panel">
-        <iframe src="{{ site_root }}/runs/{{ model_path }}/{{ html_artifact.path }}" title="{{ run.model.display_name }} preview" loading="lazy"></iframe>
+      <div class="preview-tabs" data-tabs="{{ loop.index }}">
+        <input type="radio" name="tab-{{ loop.index }}" id="snap-{{ loop.index }}" checked>
+        <input type="radio" name="tab-{{ loop.index }}" id="live-{{ loop.index }}">
+        <div class="tab-labels">
+          <label for="snap-{{ loop.index }}">Snapshot</label>
+          <label for="live-{{ loop.index }}">Live preview</label>
+        </div>
+        <div class="tab-panel snap-panel">
+          <img src="{{ site_root }}/runs/{{ model_path }}/{{ run.screenshots[0].path }}" alt="Snapshot of {{ run.model.display_name }} output" loading="lazy">
+        </div>
+        <div class="tab-panel live-panel">
+          <iframe src="{{ site_root }}/runs/{{ model_path }}/{{ html_artifact.path }}" title="{{ run.model.display_name }} preview" loading="lazy"></iframe>
+        </div>
       </div>
     </div>
     {% elif html_artifact %}
-    <div class="preview-frame">
-      <iframe src="{{ site_root }}/runs/{{ model_path }}/{{ html_artifact.path }}" title="{{ run.model.display_name }} preview" loading="lazy"></iframe>
+    <div class="output-viewer" data-viewer="iframe">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">Website preview</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen"
+          data-iframe-src="{{ site_root }}/runs/{{ model_path }}/{{ html_artifact.path }}">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="preview-frame">
+        <iframe src="{{ site_root }}/runs/{{ model_path }}/{{ html_artifact.path }}" title="{{ run.model.display_name }} preview" loading="lazy"></iframe>
+      </div>
     </div>
     {% endif %}
 
     {% for artifact in run.artifacts if artifact.type == 'svg' %}
-    <div class="svg-preview">
-      <img src="{{ site_root }}/runs/{{ model_path }}/{{ artifact.path }}" alt="SVG output from {{ run.model.display_name }}">
+    <div class="output-viewer" data-viewer="image">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">SVG output</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen"
+          data-image-src="{{ site_root }}/runs/{{ model_path }}/{{ artifact.path }}">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="svg-preview">
+        <img src="{{ site_root }}/runs/{{ model_path }}/{{ artifact.path }}" alt="SVG output from {{ run.model.display_name }}">
+      </div>
     </div>
     {% endfor %}
 
     {% for artifact in run.artifacts if artifact.type == 'source' %}
     {% set source_code = run_sources.get(run.id, {}).get(artifact.path, '') %}
-    <div class="code-output">
-      <p class="code-label">Generated {{ artifact.language or 'code' }}</p>
-      {% if source_code %}
-      <pre class="response-text code-block"><code>{{ source_code }}</code></pre>
-      {% else %}
-      <p class="muted code-fallback">Could not extract source artifact. See raw model output below.</p>
-      {% endif %}
+    <div class="output-viewer" data-viewer="code">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">Generated {{ artifact.language or 'code' }}</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="code-output">
+        {% if source_code %}
+        <pre class="response-text code-block"><code>{{ source_code }}</code></pre>
+        {% else %}
+        <p class="muted code-fallback">Could not extract source artifact. See raw model output below.</p>
+        {% endif %}
+      </div>
     </div>
     {% endfor %}
 
     {% if not html_artifact and not (run.artifacts | selectattr('type', 'equalto', 'svg') | list) and not (run.artifacts | selectattr('type', 'equalto', 'source') | list) %}
-    <div class="text-output">
-      <pre class="response-text">{{ run_outputs[run.id] }}</pre>
+    <div class="output-viewer" data-viewer="{% if render_as_markdown %}prose{% else %}text{% endif %}">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">{% if render_as_markdown %}Article{% else %}Output{% endif %}</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="text-output">
+        {% if render_as_markdown %}
+        <div class="rendered-md">{{ run_rendered[run.id] | safe }}</div>
+        {% else %}
+        <pre class="response-text">{{ run_outputs[run.id] }}</pre>
+        {% endif %}
+      </div>
     </div>
     {% endif %}
 
@@ -124,4 +174,150 @@
   </article>
   {% endfor %}
 </section>
+
+<div id="fullscreen-overlay" class="fullscreen-overlay" hidden>
+  <header class="fullscreen-header">
+    <span class="fullscreen-title"></span>
+    <button type="button" class="btn-icon fullscreen-close" aria-label="Close fullscreen" title="Close (Esc)">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </header>
+  <div class="fullscreen-body"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  var overlay = document.getElementById('fullscreen-overlay');
+  if (!overlay) return;
+
+  var titleEl = overlay.querySelector('.fullscreen-title');
+  var bodyEl = overlay.querySelector('.fullscreen-body');
+  var closeBtn = overlay.querySelector('.fullscreen-close');
+
+  function closeFullscreen() {
+    overlay.hidden = true;
+    document.body.classList.remove('fullscreen-open');
+    bodyEl.innerHTML = '';
+  }
+
+  function openFullscreen(label, buildContent) {
+    titleEl.textContent = label;
+    bodyEl.innerHTML = '';
+    buildContent(bodyEl);
+    overlay.hidden = false;
+    document.body.classList.add('fullscreen-open');
+    closeBtn.focus();
+  }
+
+  function getActiveTabPanel(viewer) {
+    var tabs = viewer.querySelector('.preview-tabs');
+    if (!tabs) return null;
+    if (tabs.querySelector('input[id^="live-"]:checked')) {
+      return tabs.querySelector('.live-panel');
+    }
+    return tabs.querySelector('.snap-panel');
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.btn-fullscreen');
+    if (!btn) return;
+
+    var viewer = btn.closest('.output-viewer');
+    if (!viewer) return;
+
+    var label = viewer.querySelector('.output-viewer-label');
+    var labelText = label ? label.textContent : 'Output';
+    var viewerType = viewer.dataset.viewer;
+
+    if (viewerType === 'iframe') {
+      var src = btn.dataset.iframeSrc || viewer.querySelector('iframe')?.src;
+      if (!src) return;
+      openFullscreen(labelText, function (body) {
+        var iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.title = labelText;
+        iframe.setAttribute('loading', 'lazy');
+        body.appendChild(iframe);
+      });
+      return;
+    }
+
+    if (viewerType === 'tabs') {
+      var panel = getActiveTabPanel(viewer);
+      if (!panel) return;
+      var iframe = panel.querySelector('iframe');
+      var img = panel.querySelector('img');
+      if (iframe) {
+        openFullscreen(labelText + ' — Live preview', function (body) {
+          var frame = document.createElement('iframe');
+          frame.src = iframe.src;
+          frame.title = iframe.title || labelText;
+          body.appendChild(frame);
+        });
+      } else if (img) {
+        openFullscreen(labelText + ' — Snapshot', function (body) {
+          var fullImg = document.createElement('img');
+          fullImg.src = img.src;
+          fullImg.alt = img.alt;
+          body.classList.add('fullscreen-image');
+          body.appendChild(fullImg);
+        });
+      }
+      return;
+    }
+
+    if (viewerType === 'image') {
+      var imageSrc = btn.dataset.imageSrc || viewer.querySelector('img')?.src;
+      if (!imageSrc) return;
+      openFullscreen(labelText, function (body) {
+        var fullImg = document.createElement('img');
+        fullImg.src = imageSrc;
+        fullImg.alt = labelText;
+        body.classList.add('fullscreen-image');
+        body.appendChild(fullImg);
+      });
+      return;
+    }
+
+    if (viewerType === 'code') {
+      var codeBlock = viewer.querySelector('pre');
+      if (!codeBlock) return;
+      openFullscreen(labelText, function (body) {
+        body.classList.add('fullscreen-code');
+        body.appendChild(codeBlock.cloneNode(true));
+      });
+      return;
+    }
+
+    if (viewerType === 'prose') {
+      var prose = viewer.querySelector('.rendered-md');
+      if (!prose) return;
+      openFullscreen(labelText, function (body) {
+        body.classList.add('fullscreen-prose');
+        body.appendChild(prose.cloneNode(true));
+      });
+      return;
+    }
+
+    if (viewerType === 'text') {
+      var pre = viewer.querySelector('pre');
+      if (!pre) return;
+      openFullscreen(labelText, function (body) {
+        body.classList.add('fullscreen-code');
+        body.appendChild(pre.cloneNode(true));
+      });
+    }
+  });
+
+  closeBtn.addEventListener('click', closeFullscreen);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeFullscreen();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !overlay.hidden) closeFullscreen();
+  });
+})();
+</script>
 {% endblock %}

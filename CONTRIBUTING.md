@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for helping build the world's most transparent repository of AI model outputs on identical real-world tasks.
+Thank you for helping build the world's most transparent repository of AI model outputs on real-world tasks.
 
 ## Ways to contribute
 

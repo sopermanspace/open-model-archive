@@ -3,9 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="{% block meta_description %}Open Model Archive — transparent AI model output comparison{% endblock %}">
+  <title>{% block title %}{{ site.title }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ site.description }}{% endblock %}">
+  <meta name="keywords" content="{% block meta_keywords %}{{ site.keywords }}{% endblock %}">
+  <meta name="robots" content="{{ site.robots }}">
+  <meta name="author" content="{{ site.author }}">
+  <meta name="publisher" content="{{ site.publisher }}">
   <link rel="canonical" href="{{ canonical_url }}{% block canonical_path %}/{% endblock %}">
-  <title>{% block title %}{{ site_name }}{% endblock %}</title>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{% block og_title %}{{ site.title }}{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{{ site.description }}{% endblock %}">
+  <meta property="og:url" content="{{ canonical_url }}{% block og_path %}/{% endblock %}">
+  <meta property="og:site_name" content="{{ site_name }}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{% block twitter_title %}{{ site.title }}{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}{{ site.description }}{% endblock %}">
   <link rel="icon" href="{{ site_root }}/assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,5 +54,6 @@
       <p>Open source. Every prompt versioned. Every artifact public.</p>
     </div>
   </footer>
+  {% block scripts %}{% endblock %}
 </body>
 </html>

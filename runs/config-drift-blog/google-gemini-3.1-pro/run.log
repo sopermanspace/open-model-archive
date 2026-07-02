@@ -2,5 +2,5 @@ task=config-drift-blog
 model=google/gemini-3.1-pro
 prompt=blog-writing/config-drift-post@1.0.0
 adapter=cli
-duration_ms=33354
-tokens=142->1558
+duration_ms=51512
+tokens=125->1271

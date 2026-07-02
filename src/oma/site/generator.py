@@ -3,6 +3,7 @@ import re
 import shutil
 from pathlib import Path
 
+import markdown
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from oma.models.run import RunRecord
@@ -26,6 +27,15 @@ def _extract_fenced_code(text: str, language: str = "python") -> str:
         return match.group(1).strip()
     match = re.search(r"```[^\n]*\n(.*?)```", text, re.DOTALL)
     return match.group(1).strip() if match else ""
+
+
+def _render_markdown(text: str) -> str:
+    if not text.strip():
+        return ""
+    return markdown.markdown(
+        text,
+        extensions=["fenced_code", "tables", "sane_lists"],
+    )
 
 
 def _load_source_content(
@@ -140,9 +150,9 @@ def generate_site() -> None:
 
     index_html = env.get_template("index.html").render(
         site_name="Open Model Archive",
+        site=site,
         site_root=site_root,
         canonical_url=site.canonical_url,
-        tagline="Transparent AI model outputs for identical real-world tasks.",
         tasks=index_runs,
         categories=categories,
         topic_list=list_topics(),
@@ -153,6 +163,7 @@ def generate_site() -> None:
 
     about_html = env.get_template("about.html").render(
         site_name="Open Model Archive",
+        site=site,
         site_root=site_root,
         canonical_url=site.canonical_url,
     )
@@ -173,7 +184,9 @@ def generate_site() -> None:
             except Exception:
                 prompt_body = ""
 
+        render_as_markdown = task.category == "blog-writing"
         run_outputs: dict[str, str] = {}
+        run_rendered: dict[str, str] = {}
         run_sources: dict[str, dict[str, str]] = {}
         for run in task_runs:
             safe_model = run.model.id.replace("/", "-")
@@ -183,6 +196,8 @@ def generate_site() -> None:
                 output_path.read_text(encoding="utf-8") if output_path.exists() else ""
             )
             raw_output = run_outputs[run.id]
+            if render_as_markdown:
+                run_rendered[run.id] = _render_markdown(raw_output)
             sources: dict[str, str] = {}
             for artifact in run.artifacts:
                 if artifact.type == "source":
@@ -198,12 +213,15 @@ def generate_site() -> None:
 
         page = env.get_template("comparison.html").render(
             site_name="Open Model Archive",
+            site=site,
             site_root=site_root,
             canonical_url=site.canonical_url,
             task=task,
             runs=task_runs,
             prompt_body=prompt_body,
             run_outputs=run_outputs,
+            run_rendered=run_rendered,
+            render_as_markdown=render_as_markdown,
             run_sources=run_sources,
             topic_labels=topic_labels,
         )

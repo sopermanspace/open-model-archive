@@ -8,7 +8,7 @@ api_base: http://127.0.0.1:11434
 cost_per_1k_input: 0.000375
 cost_per_1k_output: 0.002025
 cost_per_1k_reasoning: 0.002025
-pricing_source: Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated — Ollama Cloud uses subscription usage, not per-token billing.
+pricing_source: Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated.
 cost_estimate: true
 notes: Moonshot Kimi K2.7 Code via Ollama cloud sync. Requires authenticated Ollama account.
 enabled: true

@@ -1,5 +1,5 @@
 {
-  "id": "rate-limiter/google-gemini-3.1-pro/2026-07-02T13:28:13Z",
+  "id": "rate-limiter/google-gemini-3.1-pro/2026-07-02T14:09:49Z",
   "task": {
     "id": "rate-limiter",
     "slug": "rate-limiter",
@@ -19,19 +19,19 @@
     "sha256": "0a6ce40606ffbca1faea7d87afba1e53bbd5a630843757ce849476e12d6d4c4c",
     "title": "Token Bucket Rate Limiter"
   },
-  "executed_at": "2026-07-02T13:28:13.128156Z",
-  "duration_ms": 22122,
+  "executed_at": "2026-07-02T14:09:49.541972Z",
+  "duration_ms": 22695,
   "tokens": {
     "input": 197,
-    "output": 485,
+    "output": 515,
     "reasoning": 0,
     "source": "estimated"
   },
-  "cost_usd": 0.002671,
+  "cost_usd": 0.002821,
   "cost": {
-    "total_usd": 0.002671,
+    "total_usd": 0.002821,
     "input_usd": 0.000246,
-    "output_usd": 0.002425,
+    "output_usd": 0.002575,
     "reasoning_usd": 0.0,
     "estimated": true,
     "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
@@ -42,7 +42,7 @@
     {
       "type": "source",
       "path": "artifacts/main.py",
-      "sha256": "2a11a0c24b41ab5404ef33966ff7243f94abef3bce2fce9cd765d5fb017fb708",
+      "sha256": "93da3ea002566cb63babfee5eb8f1375947e0b6b0f172dc62f67f6bdb2db3c77",
       "language": "python"
     }
   ],

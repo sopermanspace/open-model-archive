@@ -2,5 +2,5 @@ task=rate-limiter
 model=google/gemini-3.1-pro
 prompt=code-generation/rate-limiter@1.0.0
 adapter=cli
-duration_ms=22122
-tokens=196->482
+duration_ms=22695
+tokens=197->515

@@ -2,5 +2,5 @@ task=rate-limiter
 model=ollama/gemma4
 prompt=code-generation/rate-limiter@1.0.0
 adapter=ollama
-duration_ms=33833
-tokens=226->2229
+duration_ms=25866
+tokens=226->1712

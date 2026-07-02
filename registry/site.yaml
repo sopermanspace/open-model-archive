@@ -1,3 +1,16 @@
 # Static site configuration for GitHub Pages
 base_path: /open-model-archive
 canonical_url: https://sopermanspace.github.io/open-model-archive
+
+# SEO & social metadata
+title: Open Model Archive — Compare AI Model Outputs
+description: >-
+  Side-by-side AI model outputs on real-world tasks. Inspect artifacts,
+  screenshots, timing, tokens, and cost — with versioned prompts and full
+  reproducibility.
+keywords: >-
+  AI model comparison, LLM outputs, model evaluation, prompt versioning,
+  AI artifacts, side-by-side comparison, open source AI, Gemma, Gemini
+robots: index, follow
+author: sopermanspace
+publisher: Open Model Archive

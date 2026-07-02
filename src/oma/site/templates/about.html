@@ -1,12 +1,18 @@
 {% extends "base.html" %}
-{% block canonical_path %}/about/{% endblock %}
 
 {% block title %}About — {{ site_name }}{% endblock %}
+{% block meta_description %}About Open Model Archive — a public, reproducible record of AI model outputs on real-world tasks, with versioned prompts and side-by-side comparisons.{% endblock %}
+{% block og_title %}About — {{ site_name }}{% endblock %}
+{% block og_description %}About Open Model Archive — a public, reproducible record of AI model outputs on real-world tasks, with versioned prompts and side-by-side comparisons.{% endblock %}
+{% block twitter_title %}About — {{ site_name }}{% endblock %}
+{% block twitter_description %}About Open Model Archive — a public, reproducible record of AI model outputs on real-world tasks, with versioned prompts and side-by-side comparisons.{% endblock %}
+{% block canonical_path %}/about/{% endblock %}
+{% block og_path %}/about/{% endblock %}
 
 {% block content %}
 <section class="container prose">
   <h1>About</h1>
-  <p class="lede">Open Model Archive is a public, reproducible record of what AI models generate when given identical real-world tasks.</p>
+  <p class="lede">Open Model Archive is a public, reproducible record of what AI models generate when given the same real-world tasks.</p>
 
   <h2>What this is</h2>
   <p>Not a leaderboard. Not a single score. A transparent archive where developers can inspect exact outputs, artifacts, timing, and token usage side by side.</p>
