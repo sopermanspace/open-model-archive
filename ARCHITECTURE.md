@@ -43,6 +43,14 @@ docs/ (GitHub Pages)
 2. Set `adapter: cli` and `cli_model` to the provider's CLI model name
 3. The adapter captures stdout and archives it
 
+### API providers (OpenAI, Claude, OpenRouter, Together, Fireworks, Sarvam)
+
+1. Copy a disabled template from `models/` (e.g. `openai-gpt-5.5.yaml`)
+2. Set `api_key_env` to the environment variable name
+3. Set `enabled: true` locally, export the key, run tasks, commit `runs/`
+
+All API adapters read keys from the environment — never from the repository.
+
 ### Direct APIs (future)
 
 Add a new adapter implementing `ModelAdapter.execute()` in `src/oma/adapters/`.

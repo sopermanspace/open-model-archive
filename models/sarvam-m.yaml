@@ -1,0 +1,15 @@
+# Enable after setting SARVAM_API_KEY. Community contribution welcome.
+id: sarvam/sarvam-m
+display_name: Sarvam-M
+provider: Sarvam AI
+adapter: sarvam
+api_model: sarvam-m
+api_key_env: SARVAM_API_KEY
+api_base: https://api.sarvam.ai/v1
+cost_per_1k_input: null
+cost_per_1k_output: null
+pricing_source: Sarvam AI — set rates when publishing runs.
+cost_estimate: true
+notes: Sarvam OpenAI-compatible API. PRs welcome from Sarvam community.
+enabled: false
+timeout_seconds: 600

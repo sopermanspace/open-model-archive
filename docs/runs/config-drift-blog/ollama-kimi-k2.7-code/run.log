@@ -1,0 +1,6 @@
+task=config-drift-blog
+model=ollama/kimi-k2.7-code
+prompt=blog-writing/config-drift-post@1.0.0
+adapter=ollama
+duration_ms=23383
+tokens=133->2062

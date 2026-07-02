@@ -1,0 +1,6 @@
+task=startup-launch-fiction
+model=google/gemini-3.1-pro
+prompt=creative-fiction/startup-launch@1.0.0
+adapter=cli
+duration_ms=36114
+tokens=183->760

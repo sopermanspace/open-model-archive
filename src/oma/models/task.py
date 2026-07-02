@@ -5,6 +5,7 @@ class TaskDefinition(BaseModel):
     id: str
     slug: str
     category: str
+    topics: list[str] = Field(default_factory=list)
     title: str
     description: str
     prompt: str

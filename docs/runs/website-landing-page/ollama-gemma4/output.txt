@@ -4,501 +4,461 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drift - Configuration Drift Detection CLI</title>
-    <!-- Google Font: Inter for professional UI feel -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Drift CLI | Detect Configuration Drift Before Deployment</title>
+    <!-- Google Font: Inter for modern developer tools feel -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
     <style>
-        /* ------------------------- */
-        /* Base Reset and Variables */
-        /* ------------------------- */
+        /* 
+         * CSS Styling - Minimal, Dark Theme
+         */
         :root {
-            --color-bg: #0f172a; /* Slate-900 / Deep dark blue */
-            --color-fg: #e2e8f0; /* Light gray for text */
-            --color-primary: #3b82f6; /* Blue-500 for accents/CTAs */
-            --color-secondary-bg: #1e293b; /* Slate-800 / Slightly lighter dark container */
-            --color-border: #334155; /* Slate-700 */
-            --color-success: #10b981; /* Emerald Green */
-            --font-body: 'Inter', sans-serif;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            --color-bg: #0d1117; /* Deep dark background */
+            --color-fg: #e6edf3; /* Light text */
+            --color-primary: #58a6ff; /* Highlight blue */
+            --color-secondary: #2c3e50; /* Card/section background */
+            --color-accent: #79cdff; /* Lighter highlight for buttons */
+            --color-border: #30363d; /* Subtle separator */
+            --font-family: 'Inter', sans-serif;
         }
 
         body {
-            font-family: var(--font-body);
+            font-family: var(--font-family);
             background-color: var(--color-bg);
             color: var(--color-fg);
+            margin: 0;
+            padding: 0;
             line-height: 1.6;
             scroll-behavior: smooth;
         }
 
         a {
-            text-decoration: none;
             color: var(--color-primary);
+            text-decoration: none;
         }
 
-        /* Utility Classes */
-        .container {
+        /* Layout Utilities */
+        section {
+            padding: 80px 20px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Global Section Styling */
-        section {
-            padding: 6rem 0;
-            min-height: 80vh;
         }
 
         h1, h2, h3 {
             font-weight: 700;
-            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--color-fg);
         }
-
-        /* ------------------------- */
-        /* Navigation */
-        /* ------------------------- */
-        .navbar {
+        
+        /* Header/Navigation */
+        header {
+            background-color: rgba(13, 17, 23, 0.95);
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--color-border);
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: var(--color-bg);
-            border-bottom: 1px solid var(--color-border);
-            padding: 1rem 0;
         }
 
-        .nav-content {
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: var(--color-fg);
+        }
+
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 30px;
+            font-size: 1rem;
+        }
+
+        nav a {
             color: var(--color-fg);
+            transition: color 0.2s;
+            padding: 5px 0;
         }
 
-        .nav-links a {
-            margin-left: 2rem;
-            color: var(--color-fg);
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-
-        .nav-links a:hover {
-            opacity: 1;
+        nav a:hover {
             color: var(--color-primary);
         }
 
-        /* ------------------------- */
-        /* Buttons (CTA) */
-        /* ------------------------- */
+        /* Buttons and CTAs */
         .btn {
             display: inline-block;
-            padding: 0.75rem 2rem;
+            padding: 12px 30px;
             border-radius: 6px;
-            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.1s;
+            font-weight: 600;
             text-align: center;
+            transition: background-color 0.2s, transform 0.1s;
+            border: none;
         }
 
-        /* Primary CTA button style */
         .btn-primary {
             background-color: var(--color-primary);
             color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 15px rgba(88, 166, 255, 0.3);
         }
 
         .btn-primary:hover {
-            background-color: #2563eb; /* Blue-600 */
+            background-color: #72b7ff;
             transform: translateY(-1px);
         }
 
-        /* Secondary button style (links) */
-        .btn-secondary {
-            background: none;
-            border: 1px solid var(--color-primary);
-            color: var(--color-primary);
-            margin-left: 1rem;
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(59, 130, 246, 0.1);
-            opacity: 1;
-        }
-
-        /* ------------------------- */
         /* Hero Section */
-        /* ------------------------- */
         #hero {
-            padding: 8rem 0;
             text-align: center;
+            padding: 100px 20px;
+            max-width: 900px;
+            background-color: #161b22; /* Slightly different dark tone for contrast */
+            border-radius: 8px;
         }
 
         #hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         #hero p {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            color: var(--color-fg);
-            opacity: 0.8;
+            font-size: 1.3rem;
+            color: #9aa0a6;
+            margin-bottom: 40px;
         }
 
-        /* ------------------------- */
-        /* Features */
-        /* ------------------------- */
-        #features h2 {
+        /* Features Section */
+        #features {
             text-align: center;
-            margin-bottom: 3rem;
+            padding-top: 40px;
         }
 
         .feature-grid {
             display: flex;
-            gap: 2rem;
-            justify-content: space-between;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        @media (max-width: 768px) {
-            .feature-grid {
-                flex-direction: column;
-            }
-        }
-
-        .feature-card {
-            background-color: var(--color-secondary-bg);
-            padding: 2rem;
-            border-radius: 10px;
-            border-left: 3px solid var(--color-primary);
+        .card {
+            background-color: var(--color-secondary);
+            padding: 40px;
+            border-radius: 8px;
             transition: transform 0.3s, box-shadow 0.3s;
+            flex: 1 calc(33% - 30px); /* Three columns layout */
+            min-width: 280px;
+            max-width: 350px;
+            text-align: left;
         }
 
-        .feature-card:hover {
+        .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .feature-card h3 {
+        .card h3 {
             color: var(--color-primary);
-            margin-bottom: 0.75rem;
+            margin-top: 0;
         }
 
-
-        /* ------------------------- */
-        /* Code Example Block */
-        /* ------------------------- */
+        /* Code Example */
         #code-example {
-            background-color: var(--color-secondary-bg);
-            border-radius: 10px;
-            padding: 3rem;
-            margin-top: -5rem; /* Pull up slightly over the fold for visual interest */
-            position: relative;
-            z-index: 1;
-        }
-
-        #code-example h2 {
-             text-align: center;
+            background-color: #161b22; /* Similar to hero background */
+            border: 1px solid var(--color-border);
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
         }
 
         .code-block pre {
-            background-color: #0f172a; /* Match body background */
-            padding: 1rem;
-            border-radius: 8px;
+            background-color: #0d1117;
+            padding: 15px;
+            border-radius: 6px;
             overflow-x: auto;
             font-family: 'Consolas', monospace;
-            color: var(--color-success);
-            /* Syntax highlighting simulation */
+            white-space: pre-wrap; /* Handles long lines */
         }
 
         .code-block code {
-            display: block;
-            white-space: pre-wrap;
+            color: #e6edf3;
         }
 
-        .cmd-text { color: #fcd34d; /* Amber for commands */ }
-        .keyword { color: #60a5fa; /* Blue for keywords */ }
-        .argument { color: var(--color-success); }
-
-
-        /* ------------------------- */
-        /* Testimonials */
-        /* ------------------------- */
-        #testimonials {
-            background-color: var(--color-secondary-bg);
+        /* Testimonials & Pricing Layouts */
+        .section-heading {
             text-align: center;
+            margin-bottom: 50px;
         }
 
-        .testimonial-grid {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-        }
-        
-        @media (max-width: 768px) {
-             .testimonial-card {
-                flex-basis: 100%;
-            }
+        .section-grid {
+            display: grid;
+            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            align-items: stretch; /* Ensures cards have equal height */
         }
 
-        .testimonial-card {
-            background-color: var(--color-bg);
-            padding: 2rem;
+        /* Testimonial Styling */
+        .testimonial {
+            background-color: var(--color-secondary);
+            padding: 30px;
             border-radius: 8px;
-            max-width: 450px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .testimonial-card p {
-            font-style: italic;
-            margin-bottom: 1rem;
-            color: var(--color-fg);
+        .testimonial blockquote {
+            font-size: 1.1rem;
+            margin: 0 0 20px;
+            color: #c9d1d6;
         }
 
-        .testimonial-card strong {
-            display: block;
-            font-size: 1rem;
-            opacity: 0.7;
+        .reviewer-info p {
+            margin: 5px 0;
+            font-weight: 600;
         }
 
-        /* ------------------------- */
-        /* Pricing */
-        /* ------------------------- */
-        #pricing h2 {
-             text-align: center;
-             margin-bottom: 3rem;
-        }
-        
-        .price-container {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 768px) {
-             .price-card {
-                flex-basis: 100%;
-            }
-            .price-container {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        .price-card {
-            background-color: var(--color-secondary-bg);
-            padding: 3rem;
-            border-radius: 10px;
+        /* Pricing Table */
+        #pricing {
             text-align: center;
-            flex: 1;
-            max-width: 450px;
-            transition: transform 0.3s;
+            padding-bottom: 80px;
         }
 
-        .price-card h3 {
-            font-size: 2rem;
-            color: var(--color-fg);
-            margin-bottom: 0.5rem;
+        .price-cards {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 50px;
         }
-        
+
+        .plan-card {
+            background-color: var(--color-secondary);
+            border: 1px solid var(--color-border);
+            padding: 40px 30px;
+            border-radius: 12px;
+            flex: 1 1 300px; /* Flexible sizing */
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        /* Premium plan highlight */
+        .plan-card.pro {
+            transform: scale(1.05);
+            border-color: var(--color-primary);
+            box-shadow: 0 15px 40px rgba(88, 166, 255, 0.2);
+        }
+
+        .plan-card h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
         .price-tag {
             font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
+            font-weight: 800;
             color: var(--color-primary);
-        }
-
-        .price-card ul {
-             list-style: none;
-             padding: 0;
-             margin-bottom: 2rem;
-        }
-
-        .price-card li {
-            padding: 0.5rem 0;
-            border-bottom: 1px dashed var(--color-border);
-            display: flex;
-            align-items: center;
+            display: block;
+            margin-bottom: 20px;
         }
         
-        .price-card li::before {
-             content: '✓';
-             margin-right: 0.5rem;
-             color: var(--color-success);
-        }
-
-        /* Highlight Pro plan */
-        .price-card.pro {
-            background-color: #1e293b;
-            border: 2px solid var(--color-primary);
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
-        }
-
-        /* ------------------------- */
         /* Footer */
-        /* ------------------------- */
         footer {
-            background-color: #071120; /* Slightly darker than body background */
-            padding: 3rem 0;
+            background-color: #161b22;
+            padding: 40px 20px;
             border-top: 1px solid var(--color-border);
             text-align: center;
             font-size: 0.9rem;
+            color: #9aa0a6;
         }
 
-        footer a {
-            margin: 0 1rem;
-            opacity: 0.7;
+        /* Accessibility Adjustments */
+        /* Ensures that interactive elements always have good contrast */
+        button, .btn {
+            transition: background-color 0.2s;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            #hero h1 {
+                font-size: 3rem;
+            }
+            .feature-grid, .price-cards {
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+            }
+            .card, .plan-card {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 20px 15px;
+            }
+            nav ul {
+                gap: 15px;
+            }
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 60px 15px;
+            }
         }
 
     </style>
 </head>
-
 <body>
 
     <!-- Navigation -->
-    <header class="navbar">
-        <div class="container nav-content">
+    <header>
+        <nav>
             <div class="logo">Drift</div>
-            <nav class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#code-example">Usage</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#" class="btn btn-primary" style="padding: 0.5rem 1.2rem;">Log In</a>
-            </nav>
-        </div>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#">Docs</a></li>
+                <li><button class="btn btn-primary" style="padding: 8px 15px;">Get Started</button></li>
+            </ul>
+        </nav>
     </header>
 
     <!-- Hero Section -->
     <section id="hero">
-        <div class="container">
-            <h1>Detect configuration drift before it causes a catastrophe.</h1>
-            <p>Drift analyzes infrastructure, application state, and config files across environments (Staging, Prod) to provide an immediate truth snapshot.</p>
-            <a href="#" class="btn btn-primary" style="font-size: 1.2rem;">Start drift scan</a>
-        </div>
+        <h1>Know before you deploy.</h1>
+        <p>Drift is the CLI that detects configuration drift between your staging, QA, and production environments—guaranteeing consistency every time.</p>
+        <a href="#pricing" class="btn btn-primary btn-large">Start drift scan</a>
     </section>
 
     <!-- Feature Cards -->
-    <section id="features">
-        <div class="container">
-            <h2>Seamless Monitoring, Total Visibility</h2>
-            <p style="text-align: center; max-width: 600px; margin: -1rem;">Know exactly what changed and who approved it. Drift eliminates the 'it worked locally' excuse.</p>
+    <div id="features" section>
+        <h2 class="section-heading">Why Drift? Never Guess, Always Verify.</h2>
+        <p style="max-width: 700px; margin: 0 auto 50px;">Deployment issues often stem from subtle configuration differences (the "drift"). Drift identifies and quantifies these discrepancies across your entire stack.</p>
 
-            <div class="feature-grid">
-                <article class="feature-card">
-                    <h3>📊 State Comparison</h3>
-                    <p>Compare live cloud resource states against defined IaC templates (Terraform, Pulumi). Identify unauthorized changes instantly.</p>
-                </article>
-                <article class="feature-card">
-                    <h3>📜 History Tracking</h3>
-                    <p>Maintain a verifiable audit log of every configuration modification. Every change is tied to an identity and timestamp.</p>
-                </article>
-                <article class="feature-card">
-                    <h3>⚙️ Custom Scanners</h3>
-                    <p>Use your own custom modules or SSH scripts to check application-level drifts that standard tooling misses (e.g., database schema versions).</p>
-                </article>
-            </div>
+        <div class="feature-grid">
+            
+            <article class="card">
+                <h3>📸 Snapshot Tracking</h3>
+                <p>Takes immutable snapshots of environment states—files, databases, services. Every change is logged, making debugging trivial and rollbacks precise.</p>
+            </article>
+
+            <article class="card">
+                <h3>🔥 Variance Reporting</h3>
+                <p>Generates crystal-clear, actionable reports detailing exactly *what* drifted (e.g., a service version update or an env variable change) and where.</p>
+            </article>
+
+            <article class="card">
+                <h3>✅ Audit Trail Compliance</h3>
+                <p>Built for regulated industries. Provides cryptographically verifiable logs showing who changed what, when, and why, satisfying the toughest compliance requirements.</p>
+            </article>
         </div>
-    </section>
+    </div>
 
-    <!-- Code Example Block -->
-    <section id="code-example">
-        <div class="container">
-            <h2>How it works: Scanning a Cloud Region</h2>
-            <p style="margin-bottom: 2rem;">Run the command in your CI/CD pipeline to detect discrepancies between 'target' (Prod) and 'source' (Staging).</p>
-
+    <!-- Code Example / Demo -->
+    <section id="demo" style="background-color: #161b22;">
+        <h2 class="section-heading">Usage Demo</h2>
+        <div id="code-example">
+            <p>Run this command in your CI/CD pipeline to detect all unauthorized changes between the `staging` and `production` branches:</p>
             <div class="code-block">
-                <pre><code contenteditable="false">
-$ drift --project infra-backend \
-  --environments staging,production \
-  --targets terraform/main.tfstate \
-  --output json > drift_report.json
-                </code></pre>
-                <p style="margin-top: 1rem; font-size: 0.9em; color: var(--color-primary);">
-                    Example output snippet:<br><code contenteditable="false" class="argument">Resource 'aws:s3/bucket-dev' exists in Staging, but not found in Production target state.</code>
-                </p>
+                <pre><code>
+$ drift scan --environments staging production 
+
+# Successful run example:
+✔ Drift Scan Complete. 
+🔎 Detected Minor Variance (Non-critical): [database/schema] - Version mismatch.
+⚠️ Warning: Environment variable 'API_KEY' is missing on Staging. 
+✅ Status: Ready for Deploy. Review warnings above.</code></pre>
             </div>
         </div>
     </section>
 
     <!-- Testimonials -->
-    <section id="testimonials">
-        <div class="container">
-            <h2>Trusted by modern DevOps teams</h2>
-            <div class="testimonial-grid">
-                <article class="testimonial-card">
-                    <p>"Before Drift, our staging and production environments often diverged for days at a time. Now we have real-time parity checks that saved us from a major rollback incident last month."</p>
-                    <strong>— Maya R., VP of Engineering, FluxCorp</strong>
-                </article>
-                <article class="testimonial-card">
-                    <p>"The custom scanner module was the killer feature. We could finally monitor things like API versioning consistency without writing complex wrappers. A massive time saver."</p>
-                    <strong>— Julian K., Lead Platform Engineer, Beacon Systems</strong>
-                </article>
-            </div>
+    <div id="testimonials" section>
+        <h2 class="section-heading">Trusted by Elite Engineering Teams</h2>
+        <div class="section-grid">
+            
+            <article class="testimonial">
+                <h4>Highly Reliable</h4>
+                <blockquote>
+                    "Before Drift, our pre-deployment testing was guesswork. It consistently caught minor config drift we would otherwise only find in a panicked production incident."
+                </blockquote>
+                <div class="reviewer-info">
+                    <strong>Alistair V.,</strong> 
+                    <p>Lead Infrastructure Architect at ApexForge</p>
+                </div>
+            </article>
+
+            <article class="testimonial">
+                <h4>Audit Ready</h4>
+                <blockquote>
+                    "The granular logging and immutable snapshotting features were game-changers for our compliance audit. We finally have a verifiable record of environment stability."
+                </blockquote>
+                <div class="reviewer-info">
+                    <strong>Dr. Kim L.,</strong> 
+                    <p>DevOps Director at NovaCorp Solutions</p>
+                </div>
+            </article>
+
         </div>
-    </section>
+    </div>
+
 
     <!-- Pricing -->
-    <section id="pricing">
-        <div class="container">
-            <h2>Pricing</h2>
-            <p style="text-align: center; margin-bottom: 3rem;">Choose the plan that fits your team's complexity and operational scale.</p>
+    <section id="pricing" style="padding-bottom: 100px;">
+        <h2 class="section-heading">Flexible Plans for Every Scale</h2>
+        <div class="price-cards">
             
-            <div class="price-container">
-                
-                <!-- Free Plan -->
-                <div class="price-card">
-                    <h3>Starter</h3>
-                    <div class="price-tag">$0</div>
-                    <p style="font-size: 1.2rem; color: var(--color-fg); margin-bottom: 2rem;">Perfect for small projects and testing.</p>
+            <article class="plan-card">
+                <h3>Free Tier</h3>
+                <span class="price-tag">$0</span>
+                <p style="color: #9aa0a6;">For small projects and testing.</p>
+                <ul>
+                    <li><i aria-hidden="true">✓</i> Basic Scan Comparison (2 environments)</li>
+                    <li><i aria-hidden="true">✓</i> Core CLI Functionality</li>
+                    <li><i aria-hidden="true">✗</i> Advanced Reporting & Logging</li>
+                    <li><i aria-hidden="true">✗</i> Custom Webhook Integration</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 30px;">Get Started Free</button>
+            </article>
 
-                    <ul>
-                        <li>Basic environment drift checks</li>
-                        <li>Up to 3 environments</li>
-                        <li>Standard logging (90 days)</li>
-                        <li>Community support</li>
-                    </ul>
-                    <button class="btn btn-primary" style="width: 100%;">Get Started Free</button>
-                </div>
+             <!-- Pro Plan - Featured -->
+            <article class="plan-card pro">
+                <h3>Pro</h3>
+                <span class="price-tag">$29</span>
+                <p style="color: #58a6ff; font-weight: 700;">/month</p>
+                <ul>
+                    <li><i aria-hidden="true">✓</i> Unlimited Environment Scan</li>
+                    <li><i aria-hidden="true">✓</i> Comprehensive Audit Trail & Logging</li>
+                    <li><i aria-hidden="true">✓</i> Custom Webhook Integration & Alerts</li>
+                    <li><i aria-hidden="true">✓</i> Premium Support & Tutorials</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 30px; background-color: #72b7ff;">Upgrade to Pro</button>
+            </article>
 
-                 <!-- Pro Plan -->
-                <div class="price-card pro">
-                    <h3>Enterprise Pro</h3>
-                    <div class="price-tag">$49<span>/mo</span></div>
-                    <p style="font-size: 1.2rem; color: var(--color-fg); margin-bottom: 2rem;">For teams requiring audited, cross-cloud consistency.</p>
-
-                    <ul>
-                        <li>Unlimited environment scanning</li>
-                        <li>Advanced Custom Scanner API access</li>
-                        <li>Full audit log (Infinite retention)</li>
-                        <li>Dedicated support & SLA</li>
-                    </ul>
-                    <button class="btn btn-primary" style="width: 100%;">Go Pro</button>
-                </div>
-
-            </div>
         </div>
     </section>
 
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            &copy; 2024 Drift Systems. All rights reserved. | <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Contact</a>
+        <p>&copy; 2024 Drift CLI. All rights reserved. | Built with precision and paranoia.</p>
+        <div style="margin-top: 15px;">
+            <a href="#features" style="margin: 0 15px;">Features</a> | 
+            <a href="#" style="margin: 0 15px;">Security</a> | 
+            <a href="#" style="margin: 0 15px;">Contact</a>
         </div>
     </footer>
 

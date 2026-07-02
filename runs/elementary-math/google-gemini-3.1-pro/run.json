@@ -1,0 +1,43 @@
+{
+  "id": "elementary-math/google-gemini-3.1-pro/2026-07-02T13:47:04Z",
+  "task": {
+    "id": "elementary-math",
+    "slug": "elementary-math",
+    "category": "math",
+    "title": "Elementary Word Problems",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "elementary-word-problems",
+    "version": "1.0.0",
+    "sha256": "35fb6bf7da0c885ccd3a1c7ab2ab1f17e5f0e2b09846d1dfe65712a9845e23f3",
+    "title": "Elementary Word Problems"
+  },
+  "executed_at": "2026-07-02T13:47:04.565685Z",
+  "duration_ms": 19483,
+  "tokens": {
+    "input": 201,
+    "output": 330,
+    "reasoning": 0
+  },
+  "cost_usd": 0.001901,
+  "cost": {
+    "total_usd": 0.001901,
+    "input_usd": 0.000251,
+    "output_usd": 0.00165,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

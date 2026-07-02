@@ -1,0 +1,9 @@
+id: elementary-math
+slug: elementary-math
+category: math
+topics: [math, reasoning]
+title: Elementary Word Problems
+description: Five grade-school arithmetic problems with step-by-step solutions.
+prompt: math/elementary-word-problems@v1.0.0
+screenshot: false
+models: all

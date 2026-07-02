@@ -2,5 +2,5 @@ task=product-facts-grounding
 model=ollama/kimi-k2.7-code
 prompt=web-grounding/product-facts@1.0.0
 adapter=ollama
-duration_ms=13125
-tokens=315->460
+duration_ms=5082
+tokens=315->376

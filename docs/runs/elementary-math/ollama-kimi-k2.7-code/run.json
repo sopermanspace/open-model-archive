@@ -1,0 +1,43 @@
+{
+  "id": "elementary-math/ollama-kimi-k2.7-code/2026-07-02T13:47:35Z",
+  "task": {
+    "id": "elementary-math",
+    "slug": "elementary-math",
+    "category": "math",
+    "title": "Elementary Word Problems",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "elementary-word-problems",
+    "version": "1.0.0",
+    "sha256": "35fb6bf7da0c885ccd3a1c7ab2ab1f17e5f0e2b09846d1dfe65712a9845e23f3",
+    "title": "Elementary Word Problems"
+  },
+  "executed_at": "2026-07-02T13:47:35.775731Z",
+  "duration_ms": 7970,
+  "tokens": {
+    "input": 214,
+    "output": 553,
+    "reasoning": 0
+  },
+  "cost_usd": 0.0012,
+  "cost": {
+    "total_usd": 0.0012,
+    "input_usd": 8e-05,
+    "output_usd": 0.00112,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated \u2014 Ollama Cloud uses subscription usage, not per-token billing."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

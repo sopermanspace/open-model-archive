@@ -1,0 +1,6 @@
+task=config-drift-blog
+model=ollama/gemma4
+prompt=blog-writing/config-drift-post@1.0.0
+adapter=ollama
+duration_ms=20642
+tokens=148->1258

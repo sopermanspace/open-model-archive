@@ -1,5 +1,5 @@
 {
-  "id": "weather-icons/ollama-kimi-k2.7-code/2026-07-02T13:14:26Z",
+  "id": "weather-icons/ollama-kimi-k2.7-code/2026-07-02T13:38:43Z",
   "task": {
     "id": "weather-icons",
     "slug": "weather-icons",
@@ -19,18 +19,18 @@
     "sha256": "aafa78802c275f69d66d8339e6de97fa4129f1e305a9d74b1d22c6b749df45b6",
     "title": "Weather Icon Set"
   },
-  "executed_at": "2026-07-02T13:14:26.442210Z",
-  "duration_ms": 170539,
+  "executed_at": "2026-07-02T13:38:43.659389Z",
+  "duration_ms": 112468,
   "tokens": {
     "input": 152,
-    "output": 16491,
+    "output": 10983,
     "reasoning": 0
   },
-  "cost_usd": 0.033451,
+  "cost_usd": 0.022298,
   "cost": {
-    "total_usd": 0.033451,
+    "total_usd": 0.022298,
     "input_usd": 5.7e-05,
-    "output_usd": 0.033394,
+    "output_usd": 0.022241,
     "reasoning_usd": 0.0,
     "estimated": true,
     "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated \u2014 Ollama Cloud uses subscription usage, not per-token billing."
@@ -41,7 +41,7 @@
     {
       "type": "svg",
       "path": "artifacts/output.svg",
-      "sha256": "f81a806f268a1764e2a8e0b2aacefc9829b96158faac99dc00c95a8fe8f4daff",
+      "sha256": "fe641ee4912695e5680028335f8bf6c8ff7b8b5b21fd3ade9d4459f6b5bf2ba8",
       "language": "svg"
     }
   ],

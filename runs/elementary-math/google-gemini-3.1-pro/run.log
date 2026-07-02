@@ -1,0 +1,6 @@
+task=elementary-math
+model=google/gemini-3.1-pro
+prompt=math/elementary-word-problems@1.0.0
+adapter=cli
+duration_ms=19483
+tokens=201->330

@@ -2,5 +2,5 @@ task=weather-icons
 model=google/gemini-3.1-pro
 prompt=svg-generation/weather-icons@1.0.0
 adapter=cli
-duration_ms=115590
-tokens=0->0
+duration_ms=42869
+tokens=142->204

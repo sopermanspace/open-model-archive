@@ -18,6 +18,21 @@
   </div>
 </section>
 
+{% if topic_list %}
+<section class="container topics-section">
+  <h2>Topics</h2>
+  <div class="topic-grid">
+    {% for topic in topic_list %}
+    <div class="topic-card">
+      <h3>{{ topic.title }}</h3>
+      <p>{{ topic.description }}</p>
+      <span class="topic-count">{{ topic_counts.get(topic.id, 0) }} task{% if topic_counts.get(topic.id, 0) != 1 %}s{% endif %}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
 <section class="container archive-list">
   <h2>Tasks</h2>
   {% if tasks %}
@@ -25,8 +40,15 @@
   <h3 class="category-heading">{{ category }}</h3>
   <div class="task-grid">
     {% for entry in tasks if entry.task.category == category %}
-    <a class="task-card" href="tasks/{{ entry.task.slug }}/index.html">
+    <a class="task-card" href="tasks/{{ entry.task.slug }}/">
       <span class="task-category">{{ entry.task.category }}</span>
+      {% if entry.task.topics %}
+      <div class="topic-tags">
+        {% for topic_id in entry.task.topics %}
+        <span class="topic-tag">{{ topic_labels.get(topic_id, topic_id) }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
       <h3>{{ entry.task.title }}</h3>
       <p>{{ entry.task.description }}</p>
       <div class="task-meta">

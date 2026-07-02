@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Side-by-side comparison of AI model outputs for Weather Icon Set">
   <title>Weather Icon Set — Open Model Archive</title>
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,10 +15,10 @@
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="../../index.html">Open Model Archive</a>
+      <a class="logo" href="../../">Open Model Archive</a>
       <nav class="site-nav">
-        <a href="../../index.html">Archive</a>
-        <a href="../../about/index.html">About</a>
+        <a href="../../">Archive</a>
+        <a href="../../about/">About</a>
         <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
       </nav>
     </div>
@@ -26,8 +27,8 @@
   <main class="site-main">
     
 <section class="container comparison-header">
-  <a class="back-link" href="../../index.html">← Archive</a>
-  <p class="eyebrow">svg-generation</p>
+  <a class="back-link" href="../../">← Archive</a>
+  <p class="eyebrow">svg-generation · Design, Code</p>
   <h1>Weather Icon Set</h1>
   <p class="lede">Generate three minimal monochrome SVG weather icons in a single file.</p>
 </section>
@@ -64,12 +65,12 @@ No text labels. No explanation outside the SVG code block.</pre>
       <h2>Gemini 3.1 Pro</h2>
       <p class="model-provider">Google · Gemini 3.1 Pro (High)</p>
       <dl class="metrics">
-        <div><dt>Duration</dt><dd>115.6s</dd></div>
-        <div><dt>Tokens</dt><dd>256 → 152</dd></div>
-        <div><dt>Cost</dt><dd>~$0.0011</dd></div>
+        <div><dt>Duration</dt><dd>42.9s</dd></div>
+        <div><dt>Tokens</dt><dd>142 → 204</dd></div>
+        <div><dt>Cost</dt><dd>~$0.0012</dd></div>
         
-        <div><dt>Input cost</dt><dd>~$0.0003</dd></div>
-        <div><dt>Output cost</dt><dd>~$0.0008</dd></div>
+        <div><dt>Input cost</dt><dd>~$0.0002</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0010</dd></div>
         
         <div><dt>Status</dt><dd class="status-success">success</dd></div>
       </dl>
@@ -110,16 +111,25 @@ No text labels. No explanation outside the SVG code block.</pre>
       <summary>Raw model output</summary>
       <pre class="response-text compact">```svg
 &lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 72 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;
-  &lt;g&gt;
+  &lt;g transform=&#34;translate(0, 0)&#34;&gt;
     &lt;circle cx=&#34;12&#34; cy=&#34;12&#34; r=&#34;4&#34; /&gt;
-    &lt;path d=&#34;M12 3v2M12 19v2M3 12h2M19 12h2M7 7l-1.4-1.4M17 7l1.4-1.4M7 17l-1.4 1.4M17 17l1.4 1.4&#34; /&gt;
+    &lt;path d=&#34;M12 2v2&#34; /&gt;
+    &lt;path d=&#34;M12 20v2&#34; /&gt;
+    &lt;path d=&#34;m4.93 4.93 1.41 1.41&#34; /&gt;
+    &lt;path d=&#34;m17.66 17.66 1.41 1.41&#34; /&gt;
+    &lt;path d=&#34;M2 12h2&#34; /&gt;
+    &lt;path d=&#34;M20 12h2&#34; /&gt;
+    &lt;path d=&#34;m6.34 17.66-1.41 1.41&#34; /&gt;
+    &lt;path d=&#34;m19.07 4.93-1.41 1.41&#34; /&gt;
   &lt;/g&gt;
   &lt;g transform=&#34;translate(24, 0)&#34;&gt;
-    &lt;path d=&#34;M17.5 16H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z&#34; /&gt;
+    &lt;path d=&#34;M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z&#34; /&gt;
   &lt;/g&gt;
   &lt;g transform=&#34;translate(48, 0)&#34;&gt;
-    &lt;path d=&#34;M17.5 16H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z&#34; /&gt;
-    &lt;path d=&#34;M10 18l-1.5 3M13 18l-1.5 3M16 18l-1.5 3&#34; /&gt;
+    &lt;path d=&#34;M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242&#34; /&gt;
+    &lt;path d=&#34;M16 14v6&#34; /&gt;
+    &lt;path d=&#34;M8 14v6&#34; /&gt;
+    &lt;path d=&#34;M12 16v6&#34; /&gt;
   &lt;/g&gt;
 &lt;/svg&gt;
 ```</pre>
@@ -138,8 +148,8 @@ No text labels. No explanation outside the SVG code block.</pre>
       <h2>Gemma 4</h2>
       <p class="model-provider">Ollama · gemma4:latest</p>
       <dl class="metrics">
-        <div><dt>Duration</dt><dd>15.8s</dd></div>
-        <div><dt>Tokens</dt><dd>166 → 1.1k</dd></div>
+        <div><dt>Duration</dt><dd>24.2s</dd></div>
+        <div><dt>Tokens</dt><dd>166 → 944</dd></div>
         <div><dt>Cost</dt><dd>$0.00</dd></div>
         
         <div><dt>Input cost</dt><dd>$0.00</dd></div>
@@ -182,29 +192,28 @@ No text labels. No explanation outside the SVG code block.</pre>
 
     <details class="source-panel">
       <summary>Raw model output</summary>
-      <pre class="response-text compact">```svg
-&lt;svg width=&#34;72&#34; height=&#34;24&#34; viewBox=&#34;0 0 72 24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
-  &lt;!-- Sunny Icon (x=0 to x=24) --&gt;
+      <pre class="response-text compact">```xml
+&lt;svg width=&#34;72&#34; height=&#34;24&#34; viewBox=&#34;0 0 72 24&#34; preserveAspectRatio=&#34;none&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+  &lt;!-- Sunny Icon (ViewBox: 0 0 24 24) --&gt;
   &lt;g transform=&#34;translate(0, 0)&#34;&gt;
-    &lt;circle cx=&#34;16&#34; cy=&#34;12&#34; r=&#34;8&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
-    &lt;rect x=&#34;12&#34; y=&#34;7&#34; width=&#34;4&#34; height=&#34;10&#34; rx=&#34;2&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
-    &lt;rect x=&#34;20&#34; y=&#34;7&#34; width=&#34;4&#34; height=&#34;10&#34; rx=&#34;2&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
+    &lt;circle cx=&#34;12&#34; cy=&#34;6&#34; r=&#34;4&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
+    &lt;circle cx=&#34;20&#34; cy=&#34;12&#34; r=&#34;3&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
+    &lt;circle cx=&#34;4&#34; cy=&#34;12&#34; r=&#34;3&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
   &lt;/g&gt;
 
-  &lt;!-- Cloudy Icon (x=24 to x=48) --&gt;
+  &lt;!-- Cloudy Icon (ViewBox: 24 0 24 24) --&gt;
   &lt;g transform=&#34;translate(24, 0)&#34;&gt;
-    &lt;path d=&#34;M4 8c0-1.1 0-2 .6-3.5l3-2 c.3-.3.7-.5 1-1h14c.3 0 .7.2 1 1l3 2 c.3.3.3.7 0 1.1L18 16H20V8H4z&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
-    &lt;path d=&#34;M10 12c0-.9 1.2-1.4 1.8-1.4h6c.6 0 1 .3 1.6 1H10z&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
+    &lt;path d=&#34;M2 6c0-2.21-1.89-4-4 4s-4 2-4 4v3c0 2.21 1.89 4 4 4h16c2.21 0 4-1.89 4-4V6z&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
   &lt;/g&gt;
 
-  &lt;!-- Rainy Icon (x=48 to x=72) --&gt;
+  &lt;!-- Rainy Icon (ViewBox: 48 0 24 24) --&gt;
   &lt;g transform=&#34;translate(48, 0)&#34;&gt;
     &lt;!-- Cloud base --&gt;
-    &lt;path d=&#34;M3 10c0-1.1 0-2 .6-3.5l3-2 c.3-.3.7-.5 1-1h14c.3 0 .7.2 1 1l3 2 c.3.3.3.7 0 1.1L18 16H20V8H3z&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
-    &lt;!-- Raindrops --&gt;
-    &lt;line x1=&#34;6&#34; y1=&#34;14&#34; x2=&#34;6&#34; y2=&#34;20&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; opacity=&#34;.7&#34; /&gt;
-    &lt;line x1=&#34;10&#34; y1=&#34;13&#34; x2=&#34;10&#34; y2=&#34;19&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; opacity=&#34;.7&#34; transform=&#34;translate(0, -1)&#34; /&gt;
-    &lt;line x1=&#34;14&#34; y1=&#34;14.5&#34; x2=&#34;14&#34; y2=&#34;21&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; opacity=&#34;.7&#34; transform=&#34;translate(0, 0.5)&#34; /&gt;
+    &lt;path d=&#34;M3 6c0-2.21 1.89-4 4-4h14c2.21 0 4 1.89 4 4v3c0 2.21-1.89 4-4 4H7C5.89 18 4 16.11 4 14V6z&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
+    &lt;!-- Rain drops --&gt;
+    &lt;line x1=&#34;8&#34; y1=&#34;8&#34; x2=&#34;8&#34; y2=&#34;13&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
+    &lt;line x1=&#34;10&#34; y1=&#34;9&#34; x2=&#34;10&#34; y2=&#34;14&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
+    &lt;line x1=&#34;13&#34; y1=&#34;8&#34; x2=&#34;13&#34; y2=&#34;13&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
   &lt;/g&gt;
 &lt;/svg&gt;
 ```</pre>
@@ -223,12 +232,12 @@ No text labels. No explanation outside the SVG code block.</pre>
       <h2>Kimi K2.7 Code</h2>
       <p class="model-provider">Ollama Cloud · kimi-k2.7-code</p>
       <dl class="metrics">
-        <div><dt>Duration</dt><dd>170.5s</dd></div>
-        <div><dt>Tokens</dt><dd>152 → 16.5k</dd></div>
-        <div><dt>Cost</dt><dd>~$0.03</dd></div>
+        <div><dt>Duration</dt><dd>112.5s</dd></div>
+        <div><dt>Tokens</dt><dd>152 → 11.0k</dd></div>
+        <div><dt>Cost</dt><dd>~$0.02</dd></div>
         
         <div><dt>Input cost</dt><dd>~$0.0001</dd></div>
-        <div><dt>Output cost</dt><dd>~$0.03</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.02</dd></div>
         
         <div><dt>Status</dt><dd class="status-success">success</dd></div>
       </dl>
@@ -268,26 +277,17 @@ No text labels. No explanation outside the SVG code block.</pre>
     <details class="source-panel">
       <summary>Raw model output</summary>
       <pre class="response-text compact">```svg
-&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 72 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;
+&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 72 24&#34; stroke=&#34;currentColor&#34; fill=&#34;none&#34; stroke-width=&#34;1.5&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;
   &lt;g&gt;
     &lt;circle cx=&#34;12&#34; cy=&#34;12&#34; r=&#34;4.5&#34;/&gt;
-    &lt;line x1=&#34;12&#34; y1=&#34;6.5&#34; x2=&#34;12&#34; y2=&#34;2.5&#34;/&gt;
-    &lt;line x1=&#34;12&#34; y1=&#34;17.5&#34; x2=&#34;12&#34; y2=&#34;21.5&#34;/&gt;
-    &lt;line x1=&#34;6.5&#34; y1=&#34;12&#34; x2=&#34;2.5&#34; y2=&#34;12&#34;/&gt;
-    &lt;line x1=&#34;17.5&#34; y1=&#34;12&#34; x2=&#34;21.5&#34; y2=&#34;12&#34;/&gt;
-    &lt;line x1=&#34;7.4&#34; y1=&#34;7.4&#34; x2=&#34;5.3&#34; y2=&#34;5.3&#34;/&gt;
-    &lt;line x1=&#34;16.6&#34; y1=&#34;7.4&#34; x2=&#34;18.7&#34; y2=&#34;5.3&#34;/&gt;
-    &lt;line x1=&#34;7.4&#34; y1=&#34;16.6&#34; x2=&#34;5.3&#34; y2=&#34;18.7&#34;/&gt;
-    &lt;line x1=&#34;16.6&#34; y1=&#34;16.6&#34; x2=&#34;18.7&#34; y2=&#34;18.7&#34;/&gt;
+    &lt;path d=&#34;M12 3v3M12 18v3M3 12h3M18 12h3M5.5 5.5l2 2M16.5 16.5l2 2M5.5 18.5l2-2M16.5 7.5l2-2&#34;/&gt;
   &lt;/g&gt;
-  &lt;g transform=&#34;translate(24,0)&#34;&gt;
-    &lt;path d=&#34;M5,18 a3,3 0 0 1 0,-6 a7,7 0 0 1 14,0 a3,3 0 0 1 0,6 h-14 z&#34;/&gt;
+  &lt;g transform=&#34;translate(24 0)&#34;&gt;
+    &lt;path d=&#34;M6 16C6 12 9 10 12 11C13 7 18 7 20 10C23 10 24 13 23 16C24 18 22 20 20 20H9C7 20 6 18 6 16Z&#34;/&gt;
   &lt;/g&gt;
-  &lt;g transform=&#34;translate(48,0)&#34;&gt;
-    &lt;path d=&#34;M5,18 a3,3 0 0 1 0,-6 a7,7 0 0 1 14,0 a3,3 0 0 1 0,6 h-14 z&#34;/&gt;
-    &lt;line x1=&#34;9&#34; y1=&#34;20&#34; x2=&#34;9&#34; y2=&#34;22.5&#34;/&gt;
-    &lt;line x1=&#34;12&#34; y1=&#34;20.5&#34; x2=&#34;12&#34; y2=&#34;23&#34;/&gt;
-    &lt;line x1=&#34;15&#34; y1=&#34;20&#34; x2=&#34;15&#34; y2=&#34;22.5&#34;/&gt;
+  &lt;g transform=&#34;translate(48 0)&#34;&gt;
+    &lt;path d=&#34;M6 16C6 12 9 10 12 11C13 7 18 7 20 10C23 10 24 13 23 16C24 18 22 20 20 20H9C7 20 6 18 6 16Z&#34;/&gt;
+    &lt;path d=&#34;M10 20l-1 3M14 20l-1 3M18 20l-1 3&#34;/&gt;
   &lt;/g&gt;
 &lt;/svg&gt;
 ```</pre>

@@ -1,0 +1,6 @@
+task=kubernetes-golden-retriever
+model=google/gemini-3.1-pro
+prompt=humor-testing/kubernetes-golden-retriever@1.0.0
+adapter=cli
+duration_ms=51580
+tokens=102->486

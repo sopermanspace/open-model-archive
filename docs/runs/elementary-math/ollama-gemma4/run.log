@@ -1,0 +1,6 @@
+task=elementary-math
+model=ollama/gemma4
+prompt=math/elementary-word-problems@1.0.0
+adapter=ollama
+duration_ms=23233
+tokens=235->1561

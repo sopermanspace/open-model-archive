@@ -1,5 +1,5 @@
 {
-  "id": "website-landing-page/ollama-kimi-k2.7-code/2026-07-02T13:18:12Z",
+  "id": "website-landing-page/ollama-kimi-k2.7-code/2026-07-02T13:43:36Z",
   "task": {
     "id": "website-landing-page",
     "slug": "website-landing-page",
@@ -19,18 +19,18 @@
     "sha256": "1d1b0e80f7d9ef53967bfb6407ed7980ee130e0eb08b10658d49cc46ef2c7bde",
     "title": "Developer Tool Landing Page"
   },
-  "executed_at": "2026-07-02T13:18:12.704720Z",
-  "duration_ms": 73053,
+  "executed_at": "2026-07-02T13:43:36.281161Z",
+  "duration_ms": 73780,
   "tokens": {
     "input": 223,
-    "output": 7887,
+    "output": 7096,
     "reasoning": 0
   },
-  "cost_usd": 0.016055,
+  "cost_usd": 0.014453,
   "cost": {
-    "total_usd": 0.016055,
+    "total_usd": 0.014453,
     "input_usd": 8.4e-05,
-    "output_usd": 0.015971,
+    "output_usd": 0.014369,
     "reasoning_usd": 0.0,
     "estimated": true,
     "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated \u2014 Ollama Cloud uses subscription usage, not per-token billing."
@@ -41,7 +41,7 @@
     {
       "type": "html",
       "path": "artifacts/index.html",
-      "sha256": "f3d3afbfe6b8efcf89c872d03d5cc5df94f6cdf96c628479af9475ddcfd1a424",
+      "sha256": "edd3f360b3ab74f874548f7d44be32c6e93179013dfd2065253bf523d952cf36",
       "language": "html"
     }
   ],
@@ -49,7 +49,7 @@
     {
       "path": "screenshots/desktop.png",
       "viewport": "1280x800",
-      "sha256": "67c43a1acf49dd962468af9cfae81f2de26b0c099c12f994a8dea0dba5c7306a"
+      "sha256": "a6ee4d8c462b86752496bca654fda3585bf27e3f0a5dd145dac652dcc3fc58b7"
     }
   ],
   "logs": "run.log"

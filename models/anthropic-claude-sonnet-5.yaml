@@ -1,0 +1,15 @@
+# Enable after setting ANTHROPIC_API_KEY in your environment.
+id: anthropic/claude-sonnet-5
+display_name: Claude Sonnet 5
+provider: Anthropic
+adapter: anthropic
+api_model: claude-sonnet-5
+api_key_env: ANTHROPIC_API_KEY
+api_base: https://api.anthropic.com
+cost_per_1k_input: null
+cost_per_1k_output: null
+pricing_source: Set Anthropic Claude Sonnet 5 rates when publishing runs.
+cost_estimate: true
+notes: Latest Claude Sonnet tier. Enable locally — never commit API keys.
+enabled: false
+timeout_seconds: 600

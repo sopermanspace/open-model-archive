@@ -1,0 +1,6 @@
+task=college-math
+model=ollama/kimi-k2.7-code
+prompt=math/college-calculus@1.0.0
+adapter=ollama
+duration_ms=16035
+tokens=206->1245

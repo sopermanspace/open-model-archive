@@ -1,0 +1,6 @@
+task=elementary-math
+model=ollama/kimi-k2.7-code
+prompt=math/elementary-word-problems@1.0.0
+adapter=ollama
+duration_ms=7970
+tokens=214->553

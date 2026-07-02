@@ -1,6 +1,7 @@
 id: website-landing-page
 slug: website-landing-page
 category: website-generation
+topics: [design, code]
 title: Developer Tool Landing Page
 description: >
   Generate a complete single-file HTML landing page for a fictional developer

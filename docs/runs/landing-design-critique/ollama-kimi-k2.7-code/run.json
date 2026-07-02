@@ -1,5 +1,5 @@
 {
-  "id": "landing-design-critique/ollama-kimi-k2.7-code/2026-07-02T13:11:10Z",
+  "id": "landing-design-critique/ollama-kimi-k2.7-code/2026-07-02T13:32:00Z",
   "task": {
     "id": "landing-design-critique",
     "slug": "landing-design-critique",
@@ -19,18 +19,18 @@
     "sha256": "18fa1fc3267d4b430d0b5d1d2830bdad25025d096fa1f87d9677b9d3d456209b",
     "title": "Expert Designer Critique"
   },
-  "executed_at": "2026-07-02T13:11:10.520846Z",
-  "duration_ms": 43585,
+  "executed_at": "2026-07-02T13:32:00.536945Z",
+  "duration_ms": 34916,
   "tokens": {
     "input": 1200,
-    "output": 3601,
+    "output": 1767,
     "reasoning": 0
   },
-  "cost_usd": 0.007742,
+  "cost_usd": 0.004028,
   "cost": {
-    "total_usd": 0.007742,
+    "total_usd": 0.004028,
     "input_usd": 0.00045,
-    "output_usd": 0.007292,
+    "output_usd": 0.003578,
     "reasoning_usd": 0.0,
     "estimated": true,
     "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated \u2014 Ollama Cloud uses subscription usage, not per-token billing."

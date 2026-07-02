@@ -1,0 +1,15 @@
+# Enable after setting FIREWORKS_API_KEY. Community contribution welcome.
+id: fireworks/llama-3.3-70b
+display_name: Llama 3.3 70B (Fireworks)
+provider: Fireworks AI
+adapter: fireworks
+api_model: accounts/fireworks/models/llama-v3p3-70b-instruct
+api_key_env: FIREWORKS_API_KEY
+api_base: https://api.fireworks.ai/inference/v1
+cost_per_1k_input: 0.0009
+cost_per_1k_output: 0.0009
+pricing_source: Fireworks AI published rates (approx.).
+cost_estimate: true
+notes: Fireworks OpenAI-compatible API. PRs welcome to add more Fireworks models.
+enabled: false
+timeout_seconds: 600

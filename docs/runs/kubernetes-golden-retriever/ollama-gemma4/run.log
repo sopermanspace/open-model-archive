@@ -1,0 +1,6 @@
+task=kubernetes-golden-retriever
+model=ollama/gemma4
+prompt=humor-testing/kubernetes-golden-retriever@1.0.0
+adapter=ollama
+duration_ms=14238
+tokens=119->949

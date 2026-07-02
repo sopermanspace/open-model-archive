@@ -1,0 +1,43 @@
+{
+  "id": "college-math/ollama-kimi-k2.7-code/2026-07-02T13:49:06Z",
+  "task": {
+    "id": "college-math",
+    "slug": "college-math",
+    "category": "math",
+    "title": "College Calculus & Linear Algebra",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "college-calculus",
+    "version": "1.0.0",
+    "sha256": "7315912d4538f3ff49d4257772ec7bd64fdbe6d117e6d33f9fa2c42eca7a88ba",
+    "title": "College Calculus & Linear Algebra"
+  },
+  "executed_at": "2026-07-02T13:49:06.706200Z",
+  "duration_ms": 16035,
+  "tokens": {
+    "input": 206,
+    "output": 1245,
+    "reasoning": 0
+  },
+  "cost_usd": 0.002598,
+  "cost": {
+    "total_usd": 0.002598,
+    "input_usd": 7.7e-05,
+    "output_usd": 0.002521,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated \u2014 Ollama Cloud uses subscription usage, not per-token billing."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

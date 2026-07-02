@@ -1,0 +1,6 @@
+task=kubernetes-golden-retriever
+model=ollama/kimi-k2.7-code
+prompt=humor-testing/kubernetes-golden-retriever@1.0.0
+adapter=ollama
+duration_ms=36897
+tokens=110->2753

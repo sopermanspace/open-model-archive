@@ -8,6 +8,8 @@ class ModelConfig(BaseModel):
     adapter: str
     model_ref: str = ""
     cli_model: str = ""
+    api_model: str = ""
+    api_key_env: str = ""
     api_base: str = ""
     cost_per_1k_input: float | None = None
     cost_per_1k_output: float | None = None

@@ -6,8 +6,8 @@
 
 {% block content %}
 <section class="container comparison-header">
-  <a class="back-link" href="{{ root }}/index.html">← Archive</a>
-  <p class="eyebrow">{{ task.category }}</p>
+  <a class="back-link" href="{{ root }}/">← Archive</a>
+  <p class="eyebrow">{{ task.category }}{% if task.topics %} · {% for t in task.topics %}{{ topic_labels.get(t, t) }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</p>
   <h1>{{ task.title }}</h1>
   <p class="lede">{{ task.description }}</p>
 </section>

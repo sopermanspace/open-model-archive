@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Side-by-side comparison of AI model outputs for College Calculus &amp; Linear Algebra">
+  <title>College Calculus &amp; Linear Algebra — Open Model Archive</title>
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../../">Open Model Archive</a>
+      <nav class="site-nav">
+        <a href="../../">Archive</a>
+        <a href="../../about/">About</a>
+        <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    
+<section class="container comparison-header">
+  <a class="back-link" href="../../">← Archive</a>
+  <p class="eyebrow">math · Math, Reasoning</p>
+  <h1>College Calculus &amp; Linear Algebra</h1>
+  <p class="lede">College-level calculus, linear algebra, and probability with shown work.</p>
+</section>
+
+
+<section class="container prompt-panel">
+  <details>
+    <summary>Prompt v1.0.0</summary>
+    <div class="prompt-meta">
+      <span>ID: college-calculus</span>
+      <span>SHA-256: <code>7315912d4538f3ff…</code></span>
+    </div>
+    <pre class="prompt-text">Solve these **college-level math problems**. Show all work.
+
+## Problems
+
+1. **Calculus** — Find the derivative of `f(x) = x³ · ln(x)` for `x &gt; 0`.
+
+2. **Calculus** — Evaluate the definite integral `∫₀¹ (2x + 1) dx`.
+
+3. **Linear algebra** — Given matrix `A = [[2, 1], [1, 3]]`, compute `A⁻¹` if it exists.
+
+4. **Linear algebra** — Solve the system:
+   - `2x + y = 7`
+   - `x - 3y = -1`
+
+5. **Probability** — A fair coin is flipped 5 times. What is the probability of exactly 3 heads?
+
+## Output format
+
+Number each problem. Show steps. State final answers clearly.
+
+Use plain text. You may use Unicode math symbols (∫, ², etc.).</pre>
+  </details>
+</section>
+
+
+<section class="container comparison-grid" style="--cols: 3">
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemini 3.1 Pro</h2>
+      <p class="model-provider">Google · Gemini 3.1 Pro (High)</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>25.7s</dd></div>
+        <div><dt>Tokens</dt><dd>157 → 557</dd></div>
+        <div><dt>Cost</dt><dd>~$0.0030</dd></div>
+        
+        <div><dt>Input cost</dt><dd>~$0.0002</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0028</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <div class="text-output">
+      <pre class="response-text">Here are the step-by-step solutions to your math problems:
+
+**1. Calculus — Derivative of f(x) = x³ · ln(x)**
+
+To find the derivative, we use the product rule: (uv)&#39; = u&#39;v + uv&#39;
+Let u = x³ and v = ln(x).
+Their derivatives are: u&#39; = 3x² and v&#39; = 1/x
+
+f&#39;(x) = u&#39;v + uv&#39;
+f&#39;(x) = (3x²) · ln(x) + (x³) · (1/x)
+f&#39;(x) = 3x²ln(x) + x²
+Factoring out x², we get:
+f&#39;(x) = x²(3ln(x) + 1)
+
+**Final Answer:**
+f&#39;(x) = x²(3ln(x) + 1)
+
+
+**2. Calculus — Definite integral ∫₀¹ (2x + 1) dx**
+
+First, find the antiderivative of the integrand (2x + 1):
+The antiderivative of 2x is x².
+The antiderivative of 1 is x.
+So, the antiderivative is F(x) = x² + x.
+
+Next, evaluate this from x = 0 to x = 1 using the Fundamental Theorem of Calculus:
+F(1) = 1² + 1 = 2
+F(0) = 0² + 0 = 0
+∫₀¹ (2x + 1) dx = F(1) - F(0) = 2 - 0 = 2
+
+**Final Answer:**
+2
+
+
+**3. Linear algebra — Inverse of A = [[2, 1], [1, 3]]**
+
+For a 2x2 matrix A = [[a, b], [c, d]], the inverse is given by A⁻¹ = 1/det(A) · [[d, -b], [-c, a]].
+First, calculate the determinant (det(A)):
+det(A) = ad - bc
+det(A) = (2 · 3) - (1 · 1) = 6 - 1 = 5
+Since det(A) ≠ 0, the inverse exists.
+
+Now apply the formula:
+A⁻¹ = (1/5) · [[3, -1], [-1, 2]]
+
+**Final Answer:**
+A⁻¹ = [[3/5, -1/5],
+       [-1/5, 2/5]]
+
+
+**4. Linear algebra — Solve the system: 2x + y = 7 and x - 3y = -1**
+
+We can solve this using substitution or elimination. Let&#39;s use substitution.
+From the second equation (x - 3y = -1), isolate x:
+x = 3y - 1
+
+Substitute this expression for x into the first equation:
+2(3y - 1) + y = 7
+6y - 2 + y = 7
+7y - 2 = 7
+7y = 9
+y = 9/7
+
+Now substitute y back into our expression for x:
+x = 3(9/7) - 1
+x = 27/7 - 7/7
+x = 20/7
+
+**Final Answer:**
+x = 20/7, y = 9/7
+
+
+**5. Probability — Exactly 3 heads in 5 fair coin flips**
+
+This is a binomial probability problem. The formula is P(X = k) = (n choose k) · pᵏ · (1-p)ⁿ⁻ᵏ
+Where:
+n = 5 (number of trials)
+k = 3 (number of successful outcomes)
+p = 0.5 (probability of heads on a single flip)
+
+First, calculate &#34;5 choose 3&#34;:
+(5 choose 3) = 5! / (3!(5-3)!) = (5 · 4 · 3!) / (3! · 2 · 1) = 20 / 2 = 10
+
+Now calculate the probability:
+P(3 heads) = 10 · (0.5)³ · (0.5)²
+P(3 heads) = 10 · (0.5)⁵
+P(3 heads) = 10 · (1/32) = 10/32 = 5/16
+
+**Final Answer:**
+5/16 (or 0.3125)</pre>
+    </div>
+    
+
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">Here are the step-by-step solutions to your math problems:
+
+**1. Calculus — Derivative of f(x) = x³ · ln(x)**
+
+To find the derivative, we use the product rule: (uv)&#39; = u&#39;v + uv&#39;
+Let u = x³ and v = ln(x).
+Their derivatives are: u&#39; = 3x² and v&#39; = 1/x
+
+f&#39;(x) = u&#39;v + uv&#39;
+f&#39;(x) = (3x²) · ln(x) + (x³) · (1/x)
+f&#39;(x) = 3x²ln(x) + x²
+Factoring out x², we get:
+f&#39;(x) = x²(3ln(x) + 1)
+
+**Final Answer:**
+f&#39;(x) = x²(3ln(x) + 1)
+
+
+**2. Calculus — Definite integral ∫₀¹ (2x + 1) dx**
+
+First, find the antiderivative of the integrand (2x + 1):
+The antiderivative of 2x is x².
+The antiderivative of 1 is x.
+So, the antiderivative is F(x) = x² + x.
+
+Next, evaluate this from x = 0 to x = 1 using the Fundamental Theorem of Calculus:
+F(1) = 1² + 1 = 2
+F(0) = 0² + 0 = 0
+∫₀¹ (2x + 1) dx = F(1) - F(0) = 2 - 0 = 2
+
+**Final Answer:**
+2
+
+
+**3. Linear algebra — Inverse of A = [[2, 1], [1, 3]]**
+
+For a 2x2 matrix A = [[a, b], [c, d]], the inverse is given by A⁻¹ = 1/det(A) · [[d, -b], [-c, a]].
+First, calculate the determinant (det(A)):
+det(A) = ad - bc
+det(A) = (2 · 3) - (1 · 1) = 6 - 1 = 5
+Since det(A) ≠ 0, the inverse exists.
+
+Now apply the formula:
+A⁻¹ = (1/5) · [[3, -1], [-1, 2]]
+
+**Final Answer:**
+A⁻¹ = [[3/5, -1/5],
+       [-1/5, 2/5]]
+
+
+**4. Linear algebra — Solve the system: 2x + y = 7 and x - 3y = -1**
+
+We can solve this using substitution or elimination. Let&#39;s use substitution.
+From the second equation (x - 3y = -1), isolate x:
+x = 3y - 1
+
+Substitute this expression for x into the first equation:
+2(3y - 1) + y = 7
+6y - 2 + y = 7
+7y - 2 = 7
+7y = 9
+y = 9/7
+
+Now substitute y back into our expression for x:
+x = 3(9/7) - 1
+x = 27/7 - 7/7
+x = 20/7
+
+**Final Answer:**
+x = 20/7, y = 9/7
+
+
+**5. Probability — Exactly 3 heads in 5 fair coin flips**
+
+This is a binomial probability problem. The formula is P(X = k) = (n choose k) · pᵏ · (1-p)ⁿ⁻ᵏ
+Where:
+n = 5 (number of trials)
+k = 3 (number of successful outcomes)
+p = 0.5 (probability of heads on a single flip)
+
+First, calculate &#34;5 choose 3&#34;:
+(5 choose 3) = 5! / (3!(5-3)!) = (5 · 4 · 3!) / (3! · 2 · 1) = 20 / 2 = 10
+
+Now calculate the probability:
+P(3 heads) = 10 · (0.5)³ · (0.5)²
+P(3 heads) = 10 · (0.5)⁵
+P(3 heads) = 10 · (1/32) = 10/32 = 5/16
+
+**Final Answer:**
+5/16 (or 0.3125)</pre>
+    </details>
+
+    
+    <p class="cost-note">Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated.</p>
+    
+
+    
+  </article>
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemma 4</h2>
+      <p class="model-provider">Ollama · gemma4:latest</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>49.0s</dd></div>
+        <div><dt>Tokens</dt><dd>223 → 3.2k</dd></div>
+        <div><dt>Cost</dt><dd>$0.00</dd></div>
+        
+        <div><dt>Input cost</dt><dd>$0.00</dd></div>
+        <div><dt>Output cost</dt><dd>$0.00</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <div class="text-output">
+      <pre class="response-text">## Solution to College-Level Math Problems
+
+### 1. Calculus — Find the derivative of $f(x) = x^3 \cdot \ln(x)$ for $x &gt; 0$.
+
+We must use the Product Rule, which states that if $f(x) = u(x)v(x)$, then $f&#39;(x) = u&#39;(x)v(x) + u(x)v&#39;(x)$.
+
+Let:
+$u(x) = x^3$
+$v(x) = \ln(x)$
+
+Calculate the derivatives of $u$ and $v$:
+$u&#39;(x) = 3x^2$
+$v&#39;(x) = \frac{1}{x}$
+
+Apply the Product Rule:
+$$f&#39;(x) = u&#39;(x)v(x) + u(x)v&#39;(x)$$
+$$f&#39;(x) = (3x^2)(\ln(x)) + (x^3)\left(\frac{1}{x}\right)$$
+$$f&#39;(x) = 3x^2 \ln(x) + x^2$$
+
+**Final Answer:**
+The derivative is $f&#39;(x) = 3x^2 \ln(x) + x^2$.
+
+---
+
+### 2. Calculus — Evaluate the definite integral $\int_0^1 (2x + 1) dx$.
+
+We use the Fundamental Theorem of Calculus, finding the antiderivative $F(x)$ and evaluating $F(1) - F(0)$.
+
+**Step 1: Find the indefinite integral (Antiderivative).**
+$$\int (2x + 1) dx = \int 2x \, dx + \int 1 \, dx$$
+$$\int (2x + 1) dx = 2\left(\frac{x^2}{2}\right) + x + C$$
+$$F(x) = x^2 + x$$
+
+**Step 2: Evaluate the integral using the limits of integration.**
+$$\int_0^1 (2x + 1) dx = [x^2 + x]_0^1$$
+$$\text{Evaluation} = F(1) - F(0)$$
+$$\text{Evaluation} = ((1)^2 + 1) - ((0)^2 + 0)$$
+$$\text{Evaluation} = (1 + 1) - (0)$$
+$$\text{Evaluation} = 2$$
+
+**Final Answer:**
+The value of the definite integral is $2$.
+
+---
+
+### 3. Linear algebra — Given matrix $A = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 3 \end{pmatrix}$, compute $A^{-1}$ if it exists.
+
+For a $2 \times 2$ matrix $A = \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}$, the determinant is $\det(A) = ad - bc$. If $\det(A) \neq 0$, the inverse is:
+$$A^{-1} = \frac{1}{\det(A)} \begin{pmatrix} d &amp; -b \\ -c &amp; a \end{pmatrix}$$
+
+**Step 1: Compute the determinant.**
+$$\det(A) = (2)(3) - (1)(1)$$
+$$\det(A) = 6 - 1$$
+$$\det(A) = 5$$
+Since $\det(A) = 5 \neq 0$, the inverse exists.
+
+**Step 2: Compute the inverse matrix.**
+$$A^{-1} = \frac{1}{5} \begin{pmatrix} 3 &amp; -1 \\ -1 &amp; 2 \end{pmatrix}$$
+$$A^{-1} = \begin{pmatrix} 3/5 &amp; -1/5 \\ -1/5 &amp; 2/5 \end{pmatrix}$$
+
+**Final Answer:**
+The inverse matrix is $A^{-1} = \begin{pmatrix} 3/5 &amp; -1/5 \\ -1/5 &amp; 2/5 \end{pmatrix}$.
+
+---
+
+### 4. Linear algebra — Solve the system:
+$$2x + y = 7 \quad (Eq 1)$$
+$$x - 3y = -1 \quad (Eq 2)$$
+
+We will use the elimination method. Our goal is to eliminate one variable, $x$.
+
+**Step 1: Multiply Eq 2 by $-2$ and add it to Eq 1.**
+Multiply $(Eq 2)$ by $-2$:
+$$-2(x - 3y) = -2(-1)$$
+$$-2x + 6y = 2 \quad (Eq 3)$$
+
+Add $(Eq 1)$ and $(Eq 3)$:
+$$(2x + y) + (-2x + 6y) = 7 + 2$$
+$$7y = 9$$
+$$y = \frac{9}{7}$$
+
+**Step 2: Substitute the value of $y$ back into Eq 1 to find $x$.**
+$$2x + y = 7$$
+$$2x + \frac{9}{7} = 7$$
+
+Isolate $2x$:
+$$2x = 7 - \frac{9}{7}$$
+
+Find a common denominator for the right side ($7 = 49/7$):
+$$2x = \frac{49}{7} - \frac{9}{7}$$
+$$2x = \frac{40}{7}$$
+
+Solve for $x$:
+$$x = \frac{40}{14}$$
+$$x = \frac{20}{7}$$
+
+**Final Answer:**
+The solution to the system is $(x, y) = \left(\frac{20}{7}, \frac{9}{7}\right)$.
+
+---
+
+### 5. Probability — A fair coin is flipped 5 times. What is the probability of exactly 3 heads?
+
+This is a binomial probability problem.
+The formula is: $P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$
+
+Where:
+*   $n = 5$ (Number of trials/flips)
+*   $k = 3$ (Desired number of successes/heads)
+*   $p = 0.5$ (Probability of success, since the coin is fair)
+*   $(1-p) = 0.5$ (Probability of failure)
+
+**Step 1: Calculate the number of ways to get 3 heads in 5 flips ($\binom{5}{3}$).**
+$$\binom{5}{3} = \frac{5!}{3!(5-3)!} = \frac{5!}{3!2!} = \frac{5 \times 4}{2 \times 1} = 10$$
+
+**Step 2: Calculate the probability for this specific case.**
+The probability of getting $k$ successes and $(n-k)$ failures is $(0.5)^3 (0.5)^{5-3} = (0.5)^3 (0.5)^2$.
+Since the bases are the same, we add the exponents:
+$$(0.5)^{3+2} = (0.5)^5$$
+
+**Step 3: Calculate the final probability.**
+$$P(X=3) = \binom{5}{3} \cdot (0.5)^5$$
+$$P(X=3) = 10 \cdot \left(\frac{1}{2}\right)^5$$
+$$P(X=3) = 10 \cdot \frac{1}{32}$$
+$$P(X=3) = \frac{10}{32} = \frac{5}{16}$$
+
+**Final Answer:**
+The probability of exactly 3 heads is $\frac{5}{16}$ (or $0.3125$).</pre>
+    </div>
+    
+
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">## Solution to College-Level Math Problems
+
+### 1. Calculus — Find the derivative of $f(x) = x^3 \cdot \ln(x)$ for $x &gt; 0$.
+
+We must use the Product Rule, which states that if $f(x) = u(x)v(x)$, then $f&#39;(x) = u&#39;(x)v(x) + u(x)v&#39;(x)$.
+
+Let:
+$u(x) = x^3$
+$v(x) = \ln(x)$
+
+Calculate the derivatives of $u$ and $v$:
+$u&#39;(x) = 3x^2$
+$v&#39;(x) = \frac{1}{x}$
+
+Apply the Product Rule:
+$$f&#39;(x) = u&#39;(x)v(x) + u(x)v&#39;(x)$$
+$$f&#39;(x) = (3x^2)(\ln(x)) + (x^3)\left(\frac{1}{x}\right)$$
+$$f&#39;(x) = 3x^2 \ln(x) + x^2$$
+
+**Final Answer:**
+The derivative is $f&#39;(x) = 3x^2 \ln(x) + x^2$.
+
+---
+
+### 2. Calculus — Evaluate the definite integral $\int_0^1 (2x + 1) dx$.
+
+We use the Fundamental Theorem of Calculus, finding the antiderivative $F(x)$ and evaluating $F(1) - F(0)$.
+
+**Step 1: Find the indefinite integral (Antiderivative).**
+$$\int (2x + 1) dx = \int 2x \, dx + \int 1 \, dx$$
+$$\int (2x + 1) dx = 2\left(\frac{x^2}{2}\right) + x + C$$
+$$F(x) = x^2 + x$$
+
+**Step 2: Evaluate the integral using the limits of integration.**
+$$\int_0^1 (2x + 1) dx = [x^2 + x]_0^1$$
+$$\text{Evaluation} = F(1) - F(0)$$
+$$\text{Evaluation} = ((1)^2 + 1) - ((0)^2 + 0)$$
+$$\text{Evaluation} = (1 + 1) - (0)$$
+$$\text{Evaluation} = 2$$
+
+**Final Answer:**
+The value of the definite integral is $2$.
+
+---
+
+### 3. Linear algebra — Given matrix $A = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 3 \end{pmatrix}$, compute $A^{-1}$ if it exists.
+
+For a $2 \times 2$ matrix $A = \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}$, the determinant is $\det(A) = ad - bc$. If $\det(A) \neq 0$, the inverse is:
+$$A^{-1} = \frac{1}{\det(A)} \begin{pmatrix} d &amp; -b \\ -c &amp; a \end{pmatrix}$$
+
+**Step 1: Compute the determinant.**
+$$\det(A) = (2)(3) - (1)(1)$$
+$$\det(A) = 6 - 1$$
+$$\det(A) = 5$$
+Since $\det(A) = 5 \neq 0$, the inverse exists.
+
+**Step 2: Compute the inverse matrix.**
+$$A^{-1} = \frac{1}{5} \begin{pmatrix} 3 &amp; -1 \\ -1 &amp; 2 \end{pmatrix}$$
+$$A^{-1} = \begin{pmatrix} 3/5 &amp; -1/5 \\ -1/5 &amp; 2/5 \end{pmatrix}$$
+
+**Final Answer:**
+The inverse matrix is $A^{-1} = \begin{pmatrix} 3/5 &amp; -1/5 \\ -1/5 &amp; 2/5 \end{pmatrix}$.
+
+---
+
+### 4. Linear algebra — Solve the system:
+$$2x + y = 7 \quad (Eq 1)$$
+$$x - 3y = -1 \quad (Eq 2)$$
+
+We will use the elimination method. Our goal is to eliminate one variable, $x$.
+
+**Step 1: Multiply Eq 2 by $-2$ and add it to Eq 1.**
+Multiply $(Eq 2)$ by $-2$:
+$$-2(x - 3y) = -2(-1)$$
+$$-2x + 6y = 2 \quad (Eq 3)$$
+
+Add $(Eq 1)$ and $(Eq 3)$:
+$$(2x + y) + (-2x + 6y) = 7 + 2$$
+$$7y = 9$$
+$$y = \frac{9}{7}$$
+
+**Step 2: Substitute the value of $y$ back into Eq 1 to find $x$.**
+$$2x + y = 7$$
+$$2x + \frac{9}{7} = 7$$
+
+Isolate $2x$:
+$$2x = 7 - \frac{9}{7}$$
+
+Find a common denominator for the right side ($7 = 49/7$):
+$$2x = \frac{49}{7} - \frac{9}{7}$$
+$$2x = \frac{40}{7}$$
+
+Solve for $x$:
+$$x = \frac{40}{14}$$
+$$x = \frac{20}{7}$$
+
+**Final Answer:**
+The solution to the system is $(x, y) = \left(\frac{20}{7}, \frac{9}{7}\right)$.
+
+---
+
+### 5. Probability — A fair coin is flipped 5 times. What is the probability of exactly 3 heads?
+
+This is a binomial probability problem.
+The formula is: $P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$
+
+Where:
+*   $n = 5$ (Number of trials/flips)
+*   $k = 3$ (Desired number of successes/heads)
+*   $p = 0.5$ (Probability of success, since the coin is fair)
+*   $(1-p) = 0.5$ (Probability of failure)
+
+**Step 1: Calculate the number of ways to get 3 heads in 5 flips ($\binom{5}{3}$).**
+$$\binom{5}{3} = \frac{5!}{3!(5-3)!} = \frac{5!}{3!2!} = \frac{5 \times 4}{2 \times 1} = 10$$
+
+**Step 2: Calculate the probability for this specific case.**
+The probability of getting $k$ successes and $(n-k)$ failures is $(0.5)^3 (0.5)^{5-3} = (0.5)^3 (0.5)^2$.
+Since the bases are the same, we add the exponents:
+$$(0.5)^{3+2} = (0.5)^5$$
+
+**Step 3: Calculate the final probability.**
+$$P(X=3) = \binom{5}{3} \cdot (0.5)^5$$
+$$P(X=3) = 10 \cdot \left(\frac{1}{2}\right)^5$$
+$$P(X=3) = 10 \cdot \frac{1}{32}$$
+$$P(X=3) = \frac{10}{32} = \frac{5}{16}$$
+
+**Final Answer:**
+The probability of exactly 3 heads is $\frac{5}{16}$ (or $0.3125$).</pre>
+    </details>
+
+    
+    <p class="cost-note">Local inference on your hardware — no API token cost.</p>
+    
+
+    
+  </article>
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Kimi K2.7 Code</h2>
+      <p class="model-provider">Ollama Cloud · kimi-k2.7-code</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>16.0s</dd></div>
+        <div><dt>Tokens</dt><dd>206 → 1.2k</dd></div>
+        <div><dt>Cost</dt><dd>~$0.0026</dd></div>
+        
+        <div><dt>Input cost</dt><dd>~$0.0001</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0025</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <div class="text-output">
+      <pre class="response-text">1. **Calculus — Derivative of f(x) = x³ · ln(x)**
+
+Use the product rule:  
+(u·v)′ = u′·v + u·v′, where u = x³ and v = ln(x).
+
+u′ = 3x²  
+v′ = 1/x
+
+So:
+
+f′(x) = 3x²·ln(x) + x³·(1/x)  
+       = 3x²·ln(x) + x²  
+       = x²(3·ln(x) + 1)
+
+**Final answer:** f′(x) = x²(3 ln x + 1)
+
+---
+
+2. **Calculus — Evaluate ∫₀¹ (2x + 1) dx**
+
+Find the antiderivative:
+
+∫ (2x + 1) dx = x² + x
+
+Evaluate from 0 to 1:
+
+[x² + x]₀¹ = (1² + 1) − (0² + 0) = 2 − 0 = 2
+
+**Final answer:** 2
+
+---
+
+3. **Linear algebra — Inverse of A = [[2, 1], [1, 3]]**
+
+For a 2×2 matrix A = [[a, b], [c, d]],
+
+A⁻¹ = (1/det(A)) · [[d, −b], [−c, a]]
+
+det(A) = (2)(3) − (1)(1) = 6 − 1 = 5 ≠ 0, so the inverse exists.
+
+A⁻¹ = (1/5) · [[3, −1], [−1, 2]]
+
+        = [[3/5, −1/5],
+           [−1/5, 2/5]]
+
+**Final answer:** A⁻¹ = [[3/5, −1/5], [−1/5, 2/5]]
+
+---
+
+4. **Linear algebra — Solve the system**
+
+2x + y = 7  
+x − 3y = −1
+
+Solve the second equation for x:
+
+x = 3y − 1
+
+Substitute into the first equation:
+
+2(3y − 1) + y = 7  
+6y − 2 + y = 7  
+7y = 9  
+y = 9/7
+
+Now find x:
+
+x = 3(9/7) − 1 = 27/7 − 7/7 = 20/7
+
+**Final answer:** x = 20/7, y = 9/7
+
+---
+
+5. **Probability — Exactly 3 heads in 5 fair coin flips**
+
+This is a binomial probability:
+
+P(X = k) = C(n, k) · p^k · (1−p)^(n−k)
+
+Here n = 5, k = 3, p = 1/2.
+
+C(5, 3) = 5! / (3!·2!) = 10
+
+P = 10 · (1/2)³ · (1/2)²  
+  = 10 · (1/8) · (1/4)  
+  = 10/32  
+  = 5/16  
+  = 0.3125
+
+**Final answer:** 5/16 (or 0.3125)</pre>
+    </div>
+    
+
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">1. **Calculus — Derivative of f(x) = x³ · ln(x)**
+
+Use the product rule:  
+(u·v)′ = u′·v + u·v′, where u = x³ and v = ln(x).
+
+u′ = 3x²  
+v′ = 1/x
+
+So:
+
+f′(x) = 3x²·ln(x) + x³·(1/x)  
+       = 3x²·ln(x) + x²  
+       = x²(3·ln(x) + 1)
+
+**Final answer:** f′(x) = x²(3 ln x + 1)
+
+---
+
+2. **Calculus — Evaluate ∫₀¹ (2x + 1) dx**
+
+Find the antiderivative:
+
+∫ (2x + 1) dx = x² + x
+
+Evaluate from 0 to 1:
+
+[x² + x]₀¹ = (1² + 1) − (0² + 0) = 2 − 0 = 2
+
+**Final answer:** 2
+
+---
+
+3. **Linear algebra — Inverse of A = [[2, 1], [1, 3]]**
+
+For a 2×2 matrix A = [[a, b], [c, d]],
+
+A⁻¹ = (1/det(A)) · [[d, −b], [−c, a]]
+
+det(A) = (2)(3) − (1)(1) = 6 − 1 = 5 ≠ 0, so the inverse exists.
+
+A⁻¹ = (1/5) · [[3, −1], [−1, 2]]
+
+        = [[3/5, −1/5],
+           [−1/5, 2/5]]
+
+**Final answer:** A⁻¹ = [[3/5, −1/5], [−1/5, 2/5]]
+
+---
+
+4. **Linear algebra — Solve the system**
+
+2x + y = 7  
+x − 3y = −1
+
+Solve the second equation for x:
+
+x = 3y − 1
+
+Substitute into the first equation:
+
+2(3y − 1) + y = 7  
+6y − 2 + y = 7  
+7y = 9  
+y = 9/7
+
+Now find x:
+
+x = 3(9/7) − 1 = 27/7 − 7/7 = 20/7
+
+**Final answer:** x = 20/7, y = 9/7
+
+---
+
+5. **Probability — Exactly 3 heads in 5 fair coin flips**
+
+This is a binomial probability:
+
+P(X = k) = C(n, k) · p^k · (1−p)^(n−k)
+
+Here n = 5, k = 3, p = 1/2.
+
+C(5, 3) = 5! / (3!·2!) = 10
+
+P = 10 · (1/2)³ · (1/2)²  
+  = 10 · (1/8) · (1/4)  
+  = 10/32  
+  = 5/16  
+  = 0.3125
+
+**Final answer:** 5/16 (or 0.3125)</pre>
+    </details>
+
+    
+    <p class="cost-note">Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated — Ollama Cloud uses subscription usage, not per-token billing.</p>
+    
+
+    
+  </article>
+  
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Open source. Every prompt versioned. Every artifact public.</p>
+    </div>
+  </footer>
+</body>
+</html>

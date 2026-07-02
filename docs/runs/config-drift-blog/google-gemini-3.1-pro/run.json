@@ -1,0 +1,43 @@
+{
+  "id": "config-drift-blog/google-gemini-3.1-pro/2026-07-02T13:27:06Z",
+  "task": {
+    "id": "config-drift-blog",
+    "slug": "config-drift-blog",
+    "category": "blog-writing",
+    "title": "Technical Blog \u2014 Configuration Drift",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "config-drift-post",
+    "version": "1.0.0",
+    "sha256": "7ef3421e48ce98e900b585a483f147371d5794f8e1ad2f12adb552e43c53e718",
+    "title": "Technical Blog \u2014 Configuration Drift"
+  },
+  "executed_at": "2026-07-02T13:27:06.958985Z",
+  "duration_ms": 33354,
+  "tokens": {
+    "input": 142,
+    "output": 1558,
+    "reasoning": 0
+  },
+  "cost_usd": 0.007968,
+  "cost": {
+    "total_usd": 0.007968,
+    "input_usd": 0.000177,
+    "output_usd": 0.00779,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

@@ -1,1 +1,28 @@
-I am currently running on the **Gemini 3.5 Flash** model.
+## First impressions (both panels)
+**Left (Gemma 4):** Feels immediately unfinished and murky. The low-contrast color choices make the page feel heavy and dated, and it lacks the polish expected of a modern tool. 
+**Right (Kimi K2.7 Code):** Feels instantly cohesive, sleek, and professional. The stark black-and-white aesthetic immediately signals a modern, developer-focused product (reminiscent of Vercel or Linear).
+
+## Typography & hierarchy
+**Left:** The heading scale is acceptable, but the font weight feels a bit clunky. The subtext is far too dark against the deep background, severely harming readability. The Title Casing on "Know Before You Deploy." feels slightly rigid. 
+**Right:** Demonstrates excellent typographic hierarchy. The main heading uses sentence case ("Know before you deploy."), which feels contemporary and approachable. The subtext has the perfect shade of grey to remain highly legible while dropping back in priority.
+
+## Color & atmosphere
+**Left:** Poor palette discipline. The deep indigo background clashes with the unrefined, default-looking blue used for header links, and the bright purple/blue CTA feels disconnected. It lacks contrast and feels visually muddy.
+**Right:** Highly disciplined. It relies on a strong monochromatic foundation (black, white, varied greys) with very intentional, sparing use of blue for the feature icons. The high contrast creates a premium, confident atmosphere.
+
+## Layout & composition
+**Left:** Spacing feels cramped and arbitrary. The "How Drift Works" section feels squashed, and the empty dark boxes lack definition. The vertical rhythm is disjointed, making the page feel like a stack of disconnected blocks.
+**Right:** Features generous, deliberate whitespace. Elements have room to breathe, and the flow from the navigation down through the hero and into the feature cards feels natural and well-paced. 
+
+## Conversion design
+**Left:** The primary CTA ("Start drift scan") has some visibility due to its color, but the outlined "Sign In" button in the header competes too heavily for attention. The value proposition is present but undermined by the poor visual delivery.
+**Right:** Highly effective conversion design. The primary CTA is a high-contrast, solid white button that immediately draws the eye, while the secondary CTA ("Read the docs") is appropriately de-prioritized as an outlined ghost button. The value prop is front-and-center and impossible to miss.
+
+## Verdict
+**Right (Kimi K2.7 Code) is the clear winner.** It delivers a vastly superior, production-ready aesthetic that understands its target audience. It masters the basics of contrast, spacing, and typographic hierarchy, whereas the left panel struggles with fundamental visual design principles. 
+
+## Top 3 improvements
+Actionable changes to elevate the right panel:
+1. **Define the feature cards:** The icons are good, but the cards themselves float a bit too much. Adding a subtle 1px border (`rgba(255,255,255,0.1)`) or a very dark grey surface fill (e.g., `#111`) would ground them and make them feel interactive.
+2. **Resolve the repetitive layout:** The lower half of the design awkwardly repeats the navigation and hero section. This needs to be replaced with the actual next steps of a landing page narrative—such as a code snippet demo, social proof, or a deeper feature breakdown.
+3. **Refine the secondary CTA:** The "Read the docs" ghost button border is a bit too subtle against the black background. Slightly increasing the border brightness (e.g., to `#333` or `#444`) would ensure it remains visible without competing with the primary CTA.

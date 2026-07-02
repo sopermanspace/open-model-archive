@@ -1,0 +1,20 @@
+FICTION — ARCHIVE CREATIVE TASK
+
+**Nimbus Relay raises $12M, launches “latency insurance” that pays out when APIs miss the mark**
+
+SAN FRANCISCO — March 14, 2027 — Nimbus Relay, a startup selling latency insurance for API calls, today announced its platform is generally available and that it has raised a $12 million seed round led by Horizon Ventures, with participation from Y Combinator and several angel operators from Stripe, Datadog, and Cloudflare.
+
+Founded in 2025 by CEO Arjun Mehta and CTO Lena Okafor, Nimbus Relay lets developers attach financial coverage to service-level agreements: if a customer’s real-world p99 latency breaches an agreed threshold during a billing window, Nimbus Relay automatically issues credits. Policies are priced as low as $0.02 per 1,000 API calls and are underwritten by Nimbus’s own risk model.
+
+The company says its edge agents, deployed at more than 80 points of presence, use a proprietary “LatenSee” probabilistic p99 estimator that can flag SLA breaches up to 30 seconds faster than conventional percentile aggregation. The service integrates with AWS, GCP, Azure, and most API gateways, and payouts are settled within one business day.
+
+Mehta said latency spikes are the silent margin-killer for API-first businesses and that the company is trying to turn SLO conversations from post-mortem blame into self-healing contracts.
+
+Early customer Finstreak, a payments orchestration startup, said the product changed how it negotiates with infrastructure vendors. “Last quarter we got automatic credits during three separate regional degradations,” said Kara Voss, head of platform at Finstreak. “That recovered about $42,000 and gave us data we actually used in vendor renewals.”
+
+Not everyone is convinced. TracePace, an observability vendor that recently added SLO budgeting to its suite, called the insurance model “an interesting twist on reliability economics, but not a substitute for fixing the bottleneck,” according to CEO Derek Sulu.
+
+Nimbus Relay said it will use the funding to expand underwriting capacity, add support for GraphQL and gRPC latency contracts, and hire engineering and risk operations staff.
+
+**About Nimbus Relay**
+Nimbus Relay is a San Francisco-based insurtech infrastructure company that provides automated latency insurance for API calls. Founded in 2025, Nimbus Relay helps API-first businesses align engineering reliability with financial outcomes through real-time telemetry, probabilistic percentile estimation, and automatic SLA credits. For more information, visit www.nimbusrelay.com.

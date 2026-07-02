@@ -1,5 +1,5 @@
 {
-  "id": "weather-icons/google-gemini-3.1-pro/2026-07-02T13:21:47Z",
+  "id": "weather-icons/google-gemini-3.1-pro/2026-07-02T13:36:26Z",
   "task": {
     "id": "weather-icons",
     "slug": "weather-icons",
@@ -19,18 +19,18 @@
     "sha256": "aafa78802c275f69d66d8339e6de97fa4129f1e305a9d74b1d22c6b749df45b6",
     "title": "Weather Icon Set"
   },
-  "executed_at": "2026-07-02T13:21:47.354821Z",
-  "duration_ms": 115590,
+  "executed_at": "2026-07-02T13:36:26.964622Z",
+  "duration_ms": 42869,
   "tokens": {
-    "input": 256,
-    "output": 152,
+    "input": 142,
+    "output": 204,
     "reasoning": 0
   },
-  "cost_usd": 0.00108,
+  "cost_usd": 0.001197,
   "cost": {
-    "total_usd": 0.00108,
-    "input_usd": 0.00032,
-    "output_usd": 0.00076,
+    "total_usd": 0.001197,
+    "input_usd": 0.000177,
+    "output_usd": 0.00102,
     "reasoning_usd": 0.0,
     "estimated": true,
     "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
@@ -41,7 +41,7 @@
     {
       "type": "svg",
       "path": "artifacts/output.svg",
-      "sha256": "7af357084b6fc568f6fab90c940e5ac0f1921a0c9f585c6e2bc85a887870c658",
+      "sha256": "ca9958c9474e7205b24d6bf78b3ef7b6538ccfe59c042842b22198f7445afd00",
       "language": "svg"
     }
   ],

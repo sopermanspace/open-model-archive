@@ -3,5 +3,5 @@ model=google/gemini-3.1-pro
 prompt=design-critique/landing-review@1.0.0
 adapter=cli
 inputs=['comparison-screenshot.jpg']
-duration_ms=9201
-tokens=0->0
+duration_ms=34852
+tokens=291->902

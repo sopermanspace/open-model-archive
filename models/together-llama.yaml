@@ -1,0 +1,15 @@
+# Enable after setting TOGETHER_API_KEY. Community contribution welcome.
+id: together/llama-3.3-70b
+display_name: Llama 3.3 70B (Together AI)
+provider: Together AI
+adapter: together
+api_model: meta-llama/Llama-3.3-70B-Instruct-Turbo
+api_key_env: TOGETHER_API_KEY
+api_base: https://api.together.xyz/v1
+cost_per_1k_input: 0.00088
+cost_per_1k_output: 0.00088
+pricing_source: Together AI published rates (approx.).
+cost_estimate: true
+notes: Together AI OpenAI-compatible API. PRs welcome to add more Together models.
+enabled: false
+timeout_seconds: 600

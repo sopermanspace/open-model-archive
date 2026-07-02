@@ -14,14 +14,21 @@
 
 ## What you can compare today
 
-| Category | Task | Models |
+| Category | Task | Topics |
 |----------|------|--------|
-| Website generation | Developer Tool Landing Page | Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro |
-| Code generation | Token Bucket Rate Limiter | Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro |
-| SVG generation | Weather Icon Set | Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro |
-| Web grounding | Grounded Product Q&A | Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro |
-| Vision understanding | Landing Page Visual Analysis | Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro |
-| Design critique | Expert Designer Critique | Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro |
+| Website generation | Developer Tool Landing Page | design, code |
+| Code generation | Token Bucket Rate Limiter | code |
+| SVG generation | Weather Icon Set | design, code |
+| Web grounding | Grounded Product Q&A | reasoning |
+| Vision understanding | Landing Page Visual Analysis | vision, design |
+| Design critique | Expert Designer Critique | vision, design |
+| Blog writing | Configuration Drift Blog | writing, reasoning |
+| Humor testing | Kubernetes Golden Retriever | humor, writing |
+| Creative fiction | Startup Launch Fiction | creative, writing |
+| Math | Elementary Word Problems | math, reasoning |
+| Math | College Calculus & Linear Algebra | math, reasoning |
+
+All tasks run against **Gemma 4**, **Kimi K2.7 Code**, and **Gemini 3.1 Pro** unless noted.
 
 Every task uses **prompt v1.0.0** — immutable, SHA-256 hashed, committed to Git.
 
@@ -55,7 +62,12 @@ Open Model Archive stores the full output in Git. The website is a read-only len
 |------|-------------|----------|
 | Open-source / Ollama cloud | Ollama HTTP API | Gemma 4, Kimi K2.7 Code |
 | Frontier models | Provider CLI | Gemini 3.1 Pro |
-| Direct APIs | planned | Providers without CLI tooling |
+| OpenAI | API adapter | GPT-5.5, GPT-5.4, GPT-5.5 Instant (templates) |
+| Anthropic | API adapter | Claude Sonnet 5, Fable 5, Mythos 5 (templates) |
+| OpenRouter | API adapter | Llama 3.3 70B (template) |
+| Together / Fireworks / Sarvam | API adapter | Community templates |
+
+**Contributors welcome** — add models from any provider. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Costs are estimated from per-1k token rates in `models/*.yaml`. Run `oma recost` to recalculate without re-executing.
 

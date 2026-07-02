@@ -1,0 +1,6 @@
+task=startup-launch-fiction
+model=ollama/gemma4
+prompt=creative-fiction/startup-launch@1.0.0
+adapter=ollama
+duration_ms=12222
+tokens=189->812

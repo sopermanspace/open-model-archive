@@ -23,7 +23,14 @@ def _execute_runs(
     all_tasks: bool = False,
     no_screenshot: bool = False,
 ) -> None:
-    tasks = list_tasks() if all_tasks or not task else [load_task(task)]
+    if all_tasks and not task:
+        tasks = list_tasks()
+    elif task:
+        tasks = [load_task(task)]
+    elif all_tasks:
+        tasks = list_tasks()
+    else:
+        raise typer.BadParameter("Specify --task <id> or --all")
     for task_def in tasks:
         models = resolve_task_models(task_def.models)
         if model:
@@ -56,7 +63,7 @@ def validate() -> None:
 def run(
     task: str = typer.Option(None, "--task", "-t", help="Task ID or slug"),
     model: str = typer.Option(None, "--model", "-m", help="Model ID"),
-    all_tasks: bool = typer.Option(False, "--all", help="Run all tasks"),
+    all_tasks: bool = typer.Option(False, "--all", help="Run all tasks (or all models when combined with --task)"),
     no_screenshot: bool = typer.Option(False, "--no-screenshot", help="Skip screenshots"),
 ) -> None:
     """Execute tasks against models and store run artifacts."""

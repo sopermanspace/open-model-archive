@@ -2,15 +2,17 @@
 id: provider/model-name
 display_name: Model Display Name
 provider: Provider Name
-adapter: ollama  # ollama | cli
-model_ref: model-tag:latest  # for ollama adapter
-cli_model: ""  # for cli adapter, e.g. "Gemini 3.1 Pro (High)"
-api_base: http://127.0.0.1:11434
-cost_per_1k_input: null       # USD per 1,000 input tokens (0.0 for free local models)
-cost_per_1k_output: null      # USD per 1,000 output tokens
-cost_per_1k_reasoning: null   # defaults to output rate when null
-pricing_source: ""            # cite the rate source for transparency
-cost_estimate: true           # false when cost is exact (e.g. local $0)
-notes: Short description of the model source.
-enabled: true
+adapter: ollama  # ollama | cli | openai | anthropic | openrouter | together | fireworks | sarvam | codex
+model_ref: model-tag:latest       # ollama only
+cli_model: ""                     # cli adapter only
+api_model: ""                     # API adapters
+api_key_env: ""                   # e.g. OPENAI_API_KEY
+api_base: ""                      # optional API base URL override
+cost_per_1k_input: null
+cost_per_1k_output: null
+cost_per_1k_reasoning: null
+pricing_source: ""
+cost_estimate: true
+notes: Short description.
+enabled: false
 timeout_seconds: 600

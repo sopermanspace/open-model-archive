@@ -1,0 +1,15 @@
+# Enable after setting OPENROUTER_API_KEY in your environment.
+id: openrouter/llama-3.3-70b
+display_name: Llama 3.3 70B (OpenRouter)
+provider: OpenRouter
+adapter: openrouter
+api_model: meta-llama/llama-3.3-70b-instruct
+api_key_env: OPENROUTER_API_KEY
+api_base: https://openrouter.ai/api/v1
+cost_per_1k_input: 0.00012
+cost_per_1k_output: 0.0003
+pricing_source: OpenRouter Llama 3.3 70B rates (approx.).
+cost_estimate: true
+notes: OpenRouter unified API. Enable locally — never commit API keys.
+enabled: false
+timeout_seconds: 600

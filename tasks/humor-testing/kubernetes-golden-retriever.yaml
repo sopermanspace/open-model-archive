@@ -1,0 +1,9 @@
+id: kubernetes-golden-retriever
+slug: kubernetes-golden-retriever
+category: humor-testing
+topics: [humor, writing]
+title: Explain Kubernetes to a Golden Retriever
+description: Humor test — technically accurate Kubernetes explained with dog metaphors.
+prompt: humor-testing/kubernetes-golden-retriever@v1.0.0
+screenshot: false
+models: all

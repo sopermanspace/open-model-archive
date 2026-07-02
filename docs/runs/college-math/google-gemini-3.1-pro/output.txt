@@ -1,0 +1,90 @@
+Here are the step-by-step solutions to your math problems:
+
+**1. Calculus — Derivative of f(x) = x³ · ln(x)**
+
+To find the derivative, we use the product rule: (uv)' = u'v + uv'
+Let u = x³ and v = ln(x).
+Their derivatives are: u' = 3x² and v' = 1/x
+
+f'(x) = u'v + uv'
+f'(x) = (3x²) · ln(x) + (x³) · (1/x)
+f'(x) = 3x²ln(x) + x²
+Factoring out x², we get:
+f'(x) = x²(3ln(x) + 1)
+
+**Final Answer:**
+f'(x) = x²(3ln(x) + 1)
+
+
+**2. Calculus — Definite integral ∫₀¹ (2x + 1) dx**
+
+First, find the antiderivative of the integrand (2x + 1):
+The antiderivative of 2x is x².
+The antiderivative of 1 is x.
+So, the antiderivative is F(x) = x² + x.
+
+Next, evaluate this from x = 0 to x = 1 using the Fundamental Theorem of Calculus:
+F(1) = 1² + 1 = 2
+F(0) = 0² + 0 = 0
+∫₀¹ (2x + 1) dx = F(1) - F(0) = 2 - 0 = 2
+
+**Final Answer:**
+2
+
+
+**3. Linear algebra — Inverse of A = [[2, 1], [1, 3]]**
+
+For a 2x2 matrix A = [[a, b], [c, d]], the inverse is given by A⁻¹ = 1/det(A) · [[d, -b], [-c, a]].
+First, calculate the determinant (det(A)):
+det(A) = ad - bc
+det(A) = (2 · 3) - (1 · 1) = 6 - 1 = 5
+Since det(A) ≠ 0, the inverse exists.
+
+Now apply the formula:
+A⁻¹ = (1/5) · [[3, -1], [-1, 2]]
+
+**Final Answer:**
+A⁻¹ = [[3/5, -1/5],
+       [-1/5, 2/5]]
+
+
+**4. Linear algebra — Solve the system: 2x + y = 7 and x - 3y = -1**
+
+We can solve this using substitution or elimination. Let's use substitution.
+From the second equation (x - 3y = -1), isolate x:
+x = 3y - 1
+
+Substitute this expression for x into the first equation:
+2(3y - 1) + y = 7
+6y - 2 + y = 7
+7y - 2 = 7
+7y = 9
+y = 9/7
+
+Now substitute y back into our expression for x:
+x = 3(9/7) - 1
+x = 27/7 - 7/7
+x = 20/7
+
+**Final Answer:**
+x = 20/7, y = 9/7
+
+
+**5. Probability — Exactly 3 heads in 5 fair coin flips**
+
+This is a binomial probability problem. The formula is P(X = k) = (n choose k) · pᵏ · (1-p)ⁿ⁻ᵏ
+Where:
+n = 5 (number of trials)
+k = 3 (number of successful outcomes)
+p = 0.5 (probability of heads on a single flip)
+
+First, calculate "5 choose 3":
+(5 choose 3) = 5! / (3!(5-3)!) = (5 · 4 · 3!) / (3! · 2 · 1) = 20 / 2 = 10
+
+Now calculate the probability:
+P(3 heads) = 10 · (0.5)³ · (0.5)²
+P(3 heads) = 10 · (0.5)⁵
+P(3 heads) = 10 · (1/32) = 10/32 = 5/16
+
+**Final Answer:**
+5/16 (or 0.3125)

@@ -1,0 +1,43 @@
+{
+  "id": "college-math/google-gemini-3.1-pro/2026-07-02T13:48:01Z",
+  "task": {
+    "id": "college-math",
+    "slug": "college-math",
+    "category": "math",
+    "title": "College Calculus & Linear Algebra",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "college-calculus",
+    "version": "1.0.0",
+    "sha256": "7315912d4538f3ff49d4257772ec7bd64fdbe6d117e6d33f9fa2c42eca7a88ba",
+    "title": "College Calculus & Linear Algebra"
+  },
+  "executed_at": "2026-07-02T13:48:01.622519Z",
+  "duration_ms": 25665,
+  "tokens": {
+    "input": 157,
+    "output": 557,
+    "reasoning": 0
+  },
+  "cost_usd": 0.002981,
+  "cost": {
+    "total_usd": 0.002981,
+    "input_usd": 0.000196,
+    "output_usd": 0.002785,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

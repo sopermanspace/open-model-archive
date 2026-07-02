@@ -1,3 +1,21 @@
-I am running on **Gemini 3.5 Flash**. 
+## Layout map
+The page begins with a top navigation bar featuring the logo on the far left and navigation links followed by a button on the far right. Below this is a centrally-aligned hero section containing a large primary headline, a supporting subheadline, and two side-by-side call-to-action buttons. Following the hero is a features introduction section, also centrally aligned, which includes a secondary headline, a subheadline, and the top visible edges of three feature cards arranged horizontally.
 
-Please let me know how I can help you with your coding task today!
+## Visual hierarchy
+The eye is first drawn to the massive, bold white hero headline ("Know before you deploy.") due to its dominant scale and stark contrast against the dark background. The secondary focal point is the solid white primary CTA button ("Start drift scan"), which pops brightly. The typographic scale is dramatic, with a huge jump in size from the main headlines to the supporting body text. The design relies heavily on generous vertical spacing and ample negative space to isolate the central text blocks and force focus.
+
+## Content inventory
+Navigation links: Features, Docs, Pricing
+Navigation button: GitHub
+Major headline: Know before you deploy.
+Subheadline: Drift is a lightweight CLI that catches configuration drift between staging and production—before it becomes an outage.
+Hero CTA 1: Start drift scan
+Hero CTA 2: Read the docs
+Secondary headline: Find the gaps between environments
+Secondary subheadline: Compare configs, flags, and schema differences across any two environments. No dashboards required.
+
+## Accessibility observations
+The primary white text offers high, excellent contrast against the dark background. However, the muted grey text used for subheadlines and navigation links has noticeably lower contrast, which could pose a readability issue for some users. Additionally, the secondary buttons ("GitHub" and "Read the docs") have very subtle, low-contrast borders that blend into the dark background, making their boundaries hard to distinguish. The tap targets for the main hero buttons appear large and adequately sized for touch interactions.
+
+## One-sentence summary
+Drift is a lightweight CLI tool designed to help developers prevent outages by easily identifying configuration differences between staging and production environments before deploying.

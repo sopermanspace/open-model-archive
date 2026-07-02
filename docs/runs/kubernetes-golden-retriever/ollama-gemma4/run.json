@@ -1,0 +1,43 @@
+{
+  "id": "kubernetes-golden-retriever/ollama-gemma4/2026-07-02T13:44:43Z",
+  "task": {
+    "id": "kubernetes-golden-retriever",
+    "slug": "kubernetes-golden-retriever",
+    "category": "humor-testing",
+    "title": "Explain Kubernetes to a Golden Retriever",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "kubernetes-golden-retriever",
+    "version": "1.0.0",
+    "sha256": "fed58e7dbad1d651e815263f74ad4164918e68af7fd41103942a0b5f714251ea",
+    "title": "Explain Kubernetes to a Golden Retriever"
+  },
+  "executed_at": "2026-07-02T13:44:43.416989Z",
+  "duration_ms": 14238,
+  "tokens": {
+    "input": 119,
+    "output": 949,
+    "reasoning": 0
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

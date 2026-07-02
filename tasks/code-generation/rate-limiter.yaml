@@ -1,6 +1,7 @@
 id: rate-limiter
 slug: rate-limiter
 category: code-generation
+topics: [code]
 title: Token Bucket Rate Limiter
 description: Implement a thread-safe token bucket rate limiter in Python from a fixed specification.
 prompt: code-generation/rate-limiter@v1.0.0

@@ -1,0 +1,43 @@
+{
+  "id": "config-drift-blog/ollama-kimi-k2.7-code/2026-07-02T13:27:50Z",
+  "task": {
+    "id": "config-drift-blog",
+    "slug": "config-drift-blog",
+    "category": "blog-writing",
+    "title": "Technical Blog \u2014 Configuration Drift",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "config-drift-post",
+    "version": "1.0.0",
+    "sha256": "7ef3421e48ce98e900b585a483f147371d5794f8e1ad2f12adb552e43c53e718",
+    "title": "Technical Blog \u2014 Configuration Drift"
+  },
+  "executed_at": "2026-07-02T13:27:50.990850Z",
+  "duration_ms": 23383,
+  "tokens": {
+    "input": 133,
+    "output": 2062,
+    "reasoning": 0
+  },
+  "cost_usd": 0.004225,
+  "cost": {
+    "total_usd": 0.004225,
+    "input_usd": 5e-05,
+    "output_usd": 0.004176,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated \u2014 Ollama Cloud uses subscription usage, not per-token billing."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

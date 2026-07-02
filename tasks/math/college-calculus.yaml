@@ -1,0 +1,9 @@
+id: college-math
+slug: college-math
+category: math
+topics: [math, reasoning]
+title: College Calculus & Linear Algebra
+description: College-level calculus, linear algebra, and probability with shown work.
+prompt: math/college-calculus@v1.0.0
+screenshot: false
+models: all

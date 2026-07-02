@@ -1,0 +1,6 @@
+task=college-math
+model=ollama/gemma4
+prompt=math/college-calculus@1.0.0
+adapter=ollama
+duration_ms=49041
+tokens=223->3250

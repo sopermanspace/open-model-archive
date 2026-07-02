@@ -1,5 +1,5 @@
 {
-  "id": "website-landing-page/google-gemini-3.1-pro/2026-07-02T13:22:44Z",
+  "id": "website-landing-page/google-gemini-3.1-pro/2026-07-02T13:41:13Z",
   "task": {
     "id": "website-landing-page",
     "slug": "website-landing-page",
@@ -19,18 +19,18 @@
     "sha256": "1d1b0e80f7d9ef53967bfb6407ed7980ee130e0eb08b10658d49cc46ef2c7bde",
     "title": "Developer Tool Landing Page"
   },
-  "executed_at": "2026-07-02T13:22:44.919956Z",
-  "duration_ms": 57411,
+  "executed_at": "2026-07-02T13:41:13.240416Z",
+  "duration_ms": 69095,
   "tokens": {
-    "input": 256,
-    "output": 5361,
+    "input": 255,
+    "output": 2892,
     "reasoning": 0
   },
-  "cost_usd": 0.027125,
+  "cost_usd": 0.014779,
   "cost": {
-    "total_usd": 0.027125,
-    "input_usd": 0.00032,
-    "output_usd": 0.026805,
+    "total_usd": 0.014779,
+    "input_usd": 0.000319,
+    "output_usd": 0.01446,
     "reasoning_usd": 0.0,
     "estimated": true,
     "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
@@ -41,7 +41,7 @@
     {
       "type": "html",
       "path": "artifacts/index.html",
-      "sha256": "e214c123657006ad4d5be432a1161726484c4ebe2cd9e315bc41f817cc9e688b",
+      "sha256": "6ddbf1a06ebfd19d53530c17fe1f88748c65f999688c756323bed8b19d09fa04",
       "language": "html"
     }
   ],
@@ -49,7 +49,7 @@
     {
       "path": "screenshots/desktop.png",
       "viewport": "1280x800",
-      "sha256": "fbb7e184913f42f4faa48e192ad75ad0bf86fe4261c6355e1c73246a8cc6dd13"
+      "sha256": "0d8ff18842517c0ae3f6df3b620d4a7a182f81e059b82ae5c7d8fdd6c2e2dc6a"
     }
   ],
   "logs": "run.log"

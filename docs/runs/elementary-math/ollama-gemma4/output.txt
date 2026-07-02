@@ -1,0 +1,52 @@
+## 1. Maya has 24 stickers. She gives 7 to her brother and buys a pack of 15 more. How many stickers does she have now?
+
+**Step-by-step reasoning:**
+1. Calculate the remaining stickers after giving some away: $24 - 7 = 17$ stickers.
+2. Add the new stickers she purchased: $17 + 15 = 32$ stickers.
+
+**Final Answer:** She has 32 stickers.
+
+***
+
+## 2. A rectangular garden is 12 meters long and 5 meters wide. What is its perimeter?
+
+**Step-by-step reasoning:**
+The formula for the perimeter ($P$) of a rectangle is $P = 2 \times (\text{Length} + \text{Width})$.
+1. Add the length and width: $12 \text{ m} + 5 \text{ m} = 17 \text{ m}$.
+2. Multiply this sum by 2 (since there are two lengths and two widths): $2 \times 17 \text{ m} = 34 \text{ meters}$.
+
+**Final Answer:** The perimeter is 34 meters.
+
+***
+
+## 3. Four friends share 3 pizzas equally. Each pizza is cut into 8 slices. How many slices does each friend get?
+
+**Step-by-step reasoning:**
+1. Find the total number of slices: $3 \text{ pizzas} \times 8 \text{ slices/pizza} = 24$ total slices.
+2. Divide the total slices equally among the four friends: $24 \div 4 = 6$ slices per friend.
+
+**Final Answer:** Each friend gets 6 slices.
+
+***
+
+## 4. A store sells notebooks for $2 each and pens for $1 each. Leo buys 4 notebooks and 6 pens. He pays with a $20 bill. How much change does he receive?
+
+**Step-by-step reasoning:**
+1. Calculate the cost of the notebooks: $4 \text{ notebooks} \times \$2/\text{notebook} = \$8$.
+2. Calculate the cost of the pens: $6 \text{ pens} \times \$1/\text{pen} = \$6$.
+3. Find the total cost: $\$8 + \$6 = \$14$.
+4. Calculate the change received: $\$20 - \$14 = \$6$.
+
+**Final Answer:** He receives $6 in change.
+
+***
+
+## 5. A train travels 60 miles in 1.5 hours. At the same speed, how far will it travel in 4 hours?
+
+**Step-by-step reasoning:**
+1. Calculate the constant speed (rate) of the train using the formula: $\text{Speed} = \text{Distance} / \text{Time}$.
+   $\text{Speed} = 60 \text{ miles} / 1.5 \text{ hours} = 40$ miles per hour ($\text{mph}$).
+2. Calculate the distance traveled in 4 hours using the formula: $\text{Distance} = \text{Speed} \times \text{Time}$.
+   $\text{Distance} = 40 \text{ mph} \times 4 \text{ hours} = 160$ miles.
+
+**Final Answer:** The train will travel 160 miles.

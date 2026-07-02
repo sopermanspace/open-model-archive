@@ -1,0 +1,49 @@
+Problem 1  
+Maya starts with 24 stickers.  
+She gives away 7:  
+24 − 7 = 17 stickers  
+She buys 15 more:  
+17 + 15 = 32 stickers  
+
+Final answer: 32 stickers
+
+---
+
+Problem 2  
+Perimeter of a rectangle = 2 × (length + width)  
+Length = 12 meters, width = 5 meters  
+12 + 5 = 17 meters  
+2 × 17 = 34 meters  
+
+Final answer: 34 meters
+
+---
+
+Problem 3  
+Total slices = 3 pizzas × 8 slices per pizza  
+3 × 8 = 24 slices  
+Shared equally among 4 friends:  
+24 ÷ 4 = 6 slices  
+
+Final answer: 6 slices per friend
+
+---
+
+Problem 4  
+Cost of notebooks: 4 × $2 = $8  
+Cost of pens: 6 × $1 = $6  
+Total cost: $8 + $6 = $14  
+Leo pays with $20, so his change is:  
+$20 − $14 = $6  
+
+Final answer: $6 change
+
+---
+
+Problem 5  
+Speed = distance ÷ time  
+Speed = 60 miles ÷ 1.5 hours = 40 miles per hour  
+Distance in 4 hours = speed × time  
+40 × 4 = 160 miles  
+
+Final answer: 160 miles

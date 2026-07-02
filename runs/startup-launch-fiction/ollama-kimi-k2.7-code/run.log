@@ -1,0 +1,6 @@
+task=startup-launch-fiction
+model=ollama/kimi-k2.7-code
+prompt=creative-fiction/startup-launch@1.0.0
+adapter=ollama
+duration_ms=36082
+tokens=174->2972

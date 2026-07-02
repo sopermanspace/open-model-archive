@@ -1,1 +1,5 @@
-I am currently running on Gemini 3.5 Flash (Medium). How can I help you today?
+1. Drift is a CLI that scans configuration files across environments, compares staging and production manifests, and reports drift before deploy. [A]
+2. Pro costs $12/month per workspace and adds Slack alerts. [A]
+3. Drift supports Kubernetes manifests, Docker Compose, Terraform state snapshots, and `.env` files. [C]
+4. It modifies YAML formatting drift only and never modifies secret values. [B]
+5. No, it does not support iOS provisioning profiles. [C]

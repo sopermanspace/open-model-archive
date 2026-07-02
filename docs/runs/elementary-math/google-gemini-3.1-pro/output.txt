@@ -1,0 +1,30 @@
+Here are the solutions to the math problems, with step-by-step reasoning for each:
+
+**Problem 1**
+*   Maya starts with 24 stickers.
+*   She gives 7 away: 24 - 7 = 17 stickers.
+*   She buys 15 more: 17 + 15 = 32 stickers.
+*   **Final answer:** 32 stickers
+
+**Problem 2**
+*   The formula for the perimeter of a rectangle is 2 × (length + width).
+*   Add the length and width: 12 + 5 = 17 meters.
+*   Multiply by 2: 2 × 17 = 34 meters.
+*   **Final answer:** 34 meters
+
+**Problem 3**
+*   First, find the total number of slices by multiplying the number of pizzas by the slices per pizza: 3 pizzas × 8 slices/pizza = 24 total slices.
+*   Next, divide the total slices by the number of friends: 24 slices ÷ 4 friends = 6 slices per friend.
+*   **Final answer:** 6 slices
+
+**Problem 4**
+*   Calculate the cost of the notebooks: 4 notebooks × $2 = $8.
+*   Calculate the cost of the pens: 6 pens × $1 = $6.
+*   Find the total cost: $8 + $6 = $14.
+*   Subtract the total cost from the amount paid to find the change: $20 - $14 = $6.
+*   **Final answer:** $6
+
+**Problem 5**
+*   First, calculate the train's speed by dividing the distance by the time: 60 miles ÷ 1.5 hours = 40 miles per hour.
+*   Next, multiply this speed by the new time to find the new distance: 40 miles/hour × 4 hours = 160 miles.
+*   **Final answer:** 160 miles

@@ -1,5 +1,5 @@
 {
-  "id": "landing-design-critique/google-gemini-3.1-pro/2026-07-02T13:10:11Z",
+  "id": "landing-design-critique/google-gemini-3.1-pro/2026-07-02T13:31:07Z",
   "task": {
     "id": "landing-design-critique",
     "slug": "landing-design-critique",
@@ -19,18 +19,18 @@
     "sha256": "18fa1fc3267d4b430d0b5d1d2830bdad25025d096fa1f87d9677b9d3d456209b",
     "title": "Expert Designer Critique"
   },
-  "executed_at": "2026-07-02T13:10:11.352304Z",
-  "duration_ms": 9201,
+  "executed_at": "2026-07-02T13:31:07.474868Z",
+  "duration_ms": 34852,
   "tokens": {
-    "input": 256,
-    "output": 14,
+    "input": 291,
+    "output": 902,
     "reasoning": 0
   },
-  "cost_usd": 0.00039,
+  "cost_usd": 0.004874,
   "cost": {
-    "total_usd": 0.00039,
-    "input_usd": 0.00032,
-    "output_usd": 7e-05,
+    "total_usd": 0.004874,
+    "input_usd": 0.000364,
+    "output_usd": 0.00451,
     "reasoning_usd": 0.0,
     "estimated": true,
     "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."

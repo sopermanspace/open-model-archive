@@ -1,0 +1,43 @@
+{
+  "id": "kubernetes-golden-retriever/google-gemini-3.1-pro/2026-07-02T13:44:29Z",
+  "task": {
+    "id": "kubernetes-golden-retriever",
+    "slug": "kubernetes-golden-retriever",
+    "category": "humor-testing",
+    "title": "Explain Kubernetes to a Golden Retriever",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "kubernetes-golden-retriever",
+    "version": "1.0.0",
+    "sha256": "fed58e7dbad1d651e815263f74ad4164918e68af7fd41103942a0b5f714251ea",
+    "title": "Explain Kubernetes to a Golden Retriever"
+  },
+  "executed_at": "2026-07-02T13:44:29.176481Z",
+  "duration_ms": 51580,
+  "tokens": {
+    "input": 102,
+    "output": 486,
+    "reasoning": 0
+  },
+  "cost_usd": 0.002557,
+  "cost": {
+    "total_usd": 0.002557,
+    "input_usd": 0.000127,
+    "output_usd": 0.00243,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

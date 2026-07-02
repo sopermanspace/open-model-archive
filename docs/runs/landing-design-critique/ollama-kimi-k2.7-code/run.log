@@ -3,5 +3,5 @@ model=ollama/kimi-k2.7-code
 prompt=design-critique/landing-review@1.0.0
 adapter=ollama
 inputs=['comparison-screenshot.jpg']
-duration_ms=43585
-tokens=1200->3601
+duration_ms=34916
+tokens=1200->1767

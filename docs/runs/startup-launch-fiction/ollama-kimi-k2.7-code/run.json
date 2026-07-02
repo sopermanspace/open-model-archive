@@ -1,0 +1,43 @@
+{
+  "id": "startup-launch-fiction/ollama-kimi-k2.7-code/2026-07-02T13:46:44Z",
+  "task": {
+    "id": "startup-launch-fiction",
+    "slug": "startup-launch-fiction",
+    "category": "creative-fiction",
+    "title": "Plausible Startup Launch Fiction",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "startup-launch",
+    "version": "1.0.0",
+    "sha256": "643002d20ab0142a9dc833aaa031e3bc010b16338b4cecc02ab90d1cf5363678",
+    "title": "Plausible Startup Launch Fiction"
+  },
+  "executed_at": "2026-07-02T13:46:44.925814Z",
+  "duration_ms": 36082,
+  "tokens": {
+    "input": 174,
+    "output": 2972,
+    "reasoning": 0
+  },
+  "cost_usd": 0.006084,
+  "cost": {
+    "total_usd": 0.006084,
+    "input_usd": 6.5e-05,
+    "output_usd": 0.006018,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated \u2014 Ollama Cloud uses subscription usage, not per-token billing."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

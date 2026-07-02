@@ -1,0 +1,9 @@
+id: config-drift-blog
+slug: config-drift-blog
+category: blog-writing
+topics: [writing, reasoning]
+title: Technical Blog — Configuration Drift
+description: Write a publish-ready 800–1000 word technical blog post on configuration drift.
+prompt: blog-writing/config-drift-post@v1.0.0
+screenshot: false
+models: all

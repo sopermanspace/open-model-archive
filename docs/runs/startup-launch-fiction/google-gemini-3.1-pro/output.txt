@@ -1,0 +1,18 @@
+FICTION — ARCHIVE CREATIVE TASK
+
+**Nimbus Relay Secures $24M Series A to Pioneer "Latency Insurance" for API-Driven Enterprises**
+
+**SEATTLE, WA — March 14, 2027** — Nimbus Relay, the startup providing guaranteed performance SLAs for third-party API dependencies, today announced a $24 million Series A funding round led by Greylock Partners, with participation from Baseline Ventures. The new capital will accelerate the deployment of their proprietary "latency insurance" protocol, which automatically issues financial credits to customers when critical API calls exceed predefined p99 latency thresholds. 
+
+As modern software architectures become increasingly reliant on external microservices, unpredictable response times can severely impact user experience and revenue. Nimbus Relay solves this by proxying API traffic through its globally distributed Edge-Tether network. This novel technical architecture reduces jitter by dynamically routing requests via prioritized BGP handoffs, actively bypassing congested internet exchange points before the request reaches the destination server. 
+
+If a customer's designated API request—such as a payment gateway authorization or a generative AI inference call—takes longer than the agreed SLA, Nimbus Relay’s telemetry engine automatically processes a micropayment credit back to the customer's account in real-time. 
+
+“We used to spend hours every month arguing with API vendors over SLA breaches and degraded performance,” said Sarah Jenkins, CTO of fintech startup LedgerPay, an early Nimbus Relay customer. “Now, we don't even have to file a support ticket. When the authorization gateway we rely on spikes above a 120ms p99, Nimbus Relay detects it and automatically credits our account. It transforms infrastructure risk from a frustrating engineering headache into a highly predictable financial model.”
+
+The concept of financially backed, real-time API performance guarantees is already causing ripples across the cloud infrastructure market. In a statement released yesterday, Fastly’s VP of Edge Strategy, Marcus Vance, reacted to the emerging trend: "While the idea of automated micro-SLA credits is an interesting marketing hook for niche use cases, we believe enterprise customers ultimately value underlying network reliability over retroactive fractional payouts." 
+
+Founded by former AWS engineers Elena Rostova and David Chen, Nimbus Relay currently supports over 50 major API providers, including Stripe, Twilio, and OpenAI. The company plans to use the new funding to expand its coverage to 200 services by Q3 2027 and double its engineering team.
+
+**About Nimbus Relay**
+Founded in 2025, Nimbus Relay provides guaranteed performance monitoring and financial assurance for API dependencies. By combining advanced Edge-Tether routing with automated SLA enforcement, Nimbus Relay ensures that unpredictable third-party latency never silently impacts a company's bottom line. The company is headquartered in Seattle, Washington. For more information, visit www.nimbusrelay.dev.

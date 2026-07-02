@@ -1,0 +1,9 @@
+id: startup-launch-fiction
+slug: startup-launch-fiction
+category: creative-fiction
+topics: [creative, writing]
+title: Plausible Startup Launch Fiction
+description: Invent a credible fictional press release — tests creative hallucination of real-world detail.
+prompt: creative-fiction/startup-launch@v1.0.0
+screenshot: false
+models: all

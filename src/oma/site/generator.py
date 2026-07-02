@@ -9,6 +9,7 @@ from oma.models.task import TaskDefinition
 from oma.paths import DOCS_DIR, ROOT, RUNS_DIR, SITE_STATIC
 from oma.registry.prompts import load_prompt
 from oma.registry.tasks import list_tasks
+from oma.registry.topics import list_topics, topics_by_id
 from oma.storage.artifacts import copy_runs_to_docs
 
 
@@ -65,6 +66,9 @@ def generate_site() -> None:
     assets_dir = DOCS_DIR / "assets"
     assets_dir.mkdir()
     shutil.copytree(SITE_STATIC, assets_dir, dirs_exist_ok=True)
+    favicon = SITE_STATIC / "favicon.svg"
+    if favicon.exists():
+        shutil.copy2(favicon, assets_dir / "favicon.svg")
 
     copy_runs_to_docs()
 
@@ -75,6 +79,8 @@ def generate_site() -> None:
 
     tasks = list_tasks()
     runs_by_task = collect_runs()
+    topic_catalog = topics_by_id()
+    topic_labels = {tid: topic_catalog[tid].title for tid in topic_catalog}
 
     # Index page
     index_runs: list[dict] = []
@@ -90,16 +96,22 @@ def generate_site() -> None:
         )
 
     categories: list[str] = []
+    topic_counts: dict[str, int] = {}
     for entry in index_runs:
         cat = entry["task"].category
         if cat not in categories:
             categories.append(cat)
+        for topic_id in entry["task"].topics:
+            topic_counts[topic_id] = topic_counts.get(topic_id, 0) + 1
 
     index_html = env.get_template("index.html").render(
         site_name="Open Model Archive",
         tagline="Transparent AI model outputs for identical real-world tasks.",
         tasks=index_runs,
         categories=categories,
+        topic_list=list_topics(),
+        topic_counts=topic_counts,
+        topic_labels=topic_labels,
     )
     (DOCS_DIR / "index.html").write_text(index_html, encoding="utf-8")
 
@@ -135,6 +147,7 @@ def generate_site() -> None:
             runs=task_runs,
             prompt_body=prompt_body,
             run_outputs=run_outputs,
+            topic_labels=topic_labels,
         )
         out_dir = DOCS_DIR / "tasks" / task.slug
         out_dir.mkdir(parents=True, exist_ok=True)

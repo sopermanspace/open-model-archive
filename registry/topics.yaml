@@ -1,0 +1,26 @@
+# Archive topics — referenced by tasks and displayed on the index page.
+topics:
+  - id: code
+    title: Code
+    description: Source generation and engineering tasks.
+  - id: design
+    title: Design
+    description: Visual output, critique, and UI generation.
+  - id: writing
+    title: Writing
+    description: Long-form content, blogs, and copy.
+  - id: humor
+    title: Humor
+    description: Comedy, tone, and wit under constraints.
+  - id: creative
+    title: Creative
+    description: Imaginative fiction grounded in plausible detail.
+  - id: math
+    title: Math
+    description: Arithmetic through college-level problem solving.
+  - id: reasoning
+    title: Reasoning
+    description: Logic, grounding, and factual discipline.
+  - id: vision
+    title: Vision
+    description: Image understanding and multimodal analysis.

@@ -3,5 +3,5 @@ model=google/gemini-3.1-pro
 prompt=vision-understanding/landing-analysis@1.0.0
 adapter=cli
 inputs=['drift-landing-reference.png']
-duration_ms=12316
-tokens=0->0
+duration_ms=28725
+tokens=227->578

@@ -1,5 +1,5 @@
 {
-  "id": "product-facts-grounding/ollama-gemma4/2026-07-02T13:15:25Z",
+  "id": "product-facts-grounding/ollama-gemma4/2026-07-02T13:39:59Z",
   "task": {
     "id": "product-facts-grounding",
     "slug": "product-facts-grounding",
@@ -19,11 +19,11 @@
     "sha256": "d8eb23b5e597321f5f605eedde6b301c15653d35019c954a627b06f9a4aac5c4",
     "title": "Grounded Product Q&A"
   },
-  "executed_at": "2026-07-02T13:15:25.177643Z",
-  "duration_ms": 12443,
+  "executed_at": "2026-07-02T13:39:59.054180Z",
+  "duration_ms": 10260,
   "tokens": {
     "input": 334,
-    "output": 801,
+    "output": 671,
     "reasoning": 0
   },
   "cost_usd": 0.0,
