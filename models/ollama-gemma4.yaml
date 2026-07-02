@@ -1,0 +1,11 @@
+id: ollama/gemma4
+display_name: Gemma 4
+provider: Ollama
+adapter: ollama
+model_ref: gemma4:latest
+api_base: http://127.0.0.1:11434
+cost_per_1k_input: null
+cost_per_1k_output: null
+notes: Local open-weight model served via Ollama.
+enabled: true
+timeout_seconds: 600

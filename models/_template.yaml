@@ -1,0 +1,13 @@
+# Copy this file to add a new model. Do not commit secrets.
+id: provider/model-name
+display_name: Model Display Name
+provider: Provider Name
+adapter: ollama  # ollama | agy
+model_ref: model-tag:latest  # for ollama adapter
+cli_model: ""  # for agy adapter, e.g. "Claude Sonnet 4.6 (Thinking)"
+api_base: http://127.0.0.1:11434
+cost_per_1k_input: null
+cost_per_1k_output: null
+notes: Short description of the model source.
+enabled: true
+timeout_seconds: 600

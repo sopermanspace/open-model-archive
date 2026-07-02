@@ -1,0 +1,11 @@
+id: website-landing-page
+slug: website-landing-page
+category: website-generation
+title: Developer Tool Landing Page
+description: >
+  Generate a complete single-file HTML landing page for a fictional developer
+  tool. Same prompt, different models — compare structure, design, and code quality.
+prompt: website-generation/landing-page@v1.0.0
+post_process:
+  - extract_html
+models: all

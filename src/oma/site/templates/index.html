@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% set root = "." %}
+
+{% block title %}{{ site_name }} — Archive{% endblock %}
+
+{% block content %}
+<section class="hero container">
+  <p class="eyebrow">Public archive</p>
+  <h1>Compare what models actually generate</h1>
+  <p class="lede">{{ tagline }}</p>
+</section>
+
+<section class="container archive-list">
+  <h2>Tasks</h2>
+  {% if tasks %}
+  <div class="task-grid">
+    {% for entry in tasks %}
+    <a class="task-card" href="tasks/{{ entry.task.slug }}/index.html">
+      <span class="task-category">{{ entry.task.category }}</span>
+      <h3>{{ entry.task.title }}</h3>
+      <p>{{ entry.task.description }}</p>
+      <div class="task-meta">
+        <span>{{ entry.model_count }} model{% if entry.model_count != 1 %}s{% endif %}</span>
+        {% if entry.models %}
+        <span>{{ entry.models | join(', ') }}</span>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="muted">No runs published yet. Run <code>oma build</code> to generate the archive.</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,11 @@
+id: ollama/kimi-k2.7-code
+display_name: Kimi K2.7 Code
+provider: Ollama Cloud
+adapter: ollama
+model_ref: kimi-k2.7-code:cloud
+api_base: http://127.0.0.1:11434
+cost_per_1k_input: null
+cost_per_1k_output: null
+notes: Moonshot Kimi K2.7 Code via Ollama cloud sync. Requires authenticated Ollama account.
+enabled: true
+timeout_seconds: 600

@@ -1,0 +1,39 @@
+# Secrets and local config
+.env
+.env.*
+*.env
+
+# Internal planning and scratch files
+plan.md
+goal.md
+notes.md
+thinking.md
+brainstorm.md
+research.md
+scratch.md
+private/
+temp/
+
+# Build and cache
+.cache/
+node_modules/
+dist/
+coverage/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Playwright
+playwright-report/
+test-results/
