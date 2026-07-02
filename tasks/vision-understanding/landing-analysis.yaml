@@ -1,0 +1,10 @@
+id: landing-visual-analysis
+slug: landing-visual-analysis
+category: vision-understanding
+title: Landing Page Visual Analysis
+description: Analyze a landing page screenshot — layout, hierarchy, content, and accessibility.
+prompt: vision-understanding/landing-analysis@v1.0.0
+inputs:
+  - assets/task-inputs/drift-landing-reference.png
+screenshot: false
+models: all

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Side-by-side comparison of AI model outputs for Expert Designer Critique">
+  <title>Expert Designer Critique — Open Model Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../../index.html">Open Model Archive</a>
+      <nav class="site-nav">
+        <a href="../../index.html">Archive</a>
+        <a href="../../about/index.html">About</a>
+        <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    
+<section class="container comparison-header">
+  <a class="back-link" href="../../index.html">← Archive</a>
+  <p class="eyebrow">design-critique</p>
+  <h1>Expert Designer Critique</h1>
+  <p class="lede">Senior designer critique of a side-by-side AI landing page comparison.</p>
+</section>
+
+
+<section class="container prompt-panel">
+  <details>
+    <summary>Prompt v1.0.0</summary>
+    <div class="prompt-meta">
+      <span>ID: landing-review</span>
+      <span>SHA-256: <code>18fa1fc3267d4b43…</code></span>
+    </div>
+    <pre class="prompt-text">You are a **senior product designer** reviewing a side-by-side comparison of two AI-generated landing pages for the same brief.
+
+Critique the image as an expert. Respond in plain text with:
+
+## First impressions (both panels)
+What feels strong or weak within 3 seconds of viewing?
+
+## Typography &amp; hierarchy
+Compare heading scale, readability, and information density between the two.
+
+## Color &amp; atmosphere
+Evaluate palette discipline, contrast, and whether either feels generic or distinctive.
+
+## Layout &amp; composition
+Which panel has better spacing, alignment, and section rhythm?
+
+## Conversion design
+Which CTA is more compelling? Is the value proposition clear?
+
+## Verdict
+Award a winner (left, right, or tie) with 2–3 sentences of rationale.
+
+## Top 3 improvements
+Actionable changes that would elevate the stronger design to production quality.
+
+Be direct and opinionated. Reference specific elements you see in the image.</pre>
+  </details>
+</section>
+
+
+<section class="container comparison-grid" style="--cols: 3">
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemini 3.1 Pro</h2>
+      <p class="model-provider">Google · Gemini 3.1 Pro (High)</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>9.2s</dd></div>
+        <div><dt>Tokens</dt><dd>256 → 14</dd></div>
+        <div><dt>Cost</dt><dd>~$0.0004</dd></div>
+        
+        <div><dt>Input cost</dt><dd>~$0.0003</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0001</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    
+    <figure class="input-image">
+      <figcaption>Task input</figcaption>
+      <img src="../../runs/landing-design-critique/google-gemini-3.1-pro/inputs/comparison-screenshot.jpg" alt="Task input image" loading="lazy">
+    </figure>
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <div class="text-output">
+      <pre class="response-text">I am currently running on the **Gemini 3.5 Flash** model.</pre>
+    </div>
+    
+
+    
+    <div class="artifact-actions">
+      
+      <a class="btn" href="../../runs/landing-design-critique/google-gemini-3.1-pro/output.txt" download>Download raw output</a>
+    </div>
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">I am currently running on the **Gemini 3.5 Flash** model.</pre>
+    </details>
+
+    
+    <p class="cost-note">Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated.</p>
+    
+
+    
+  </article>
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemma 4</h2>
+      <p class="model-provider">Ollama · gemma4:latest</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>15.6s</dd></div>
+        <div><dt>Tokens</dt><dd>482 → 978</dd></div>
+        <div><dt>Cost</dt><dd>$0.00</dd></div>
+        
+        <div><dt>Input cost</dt><dd>$0.00</dd></div>
+        <div><dt>Output cost</dt><dd>$0.00</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    
+    <figure class="input-image">
+      <figcaption>Task input</figcaption>
+      <img src="../../runs/landing-design-critique/ollama-gemma4/inputs/comparison-screenshot.jpg" alt="Task input image" loading="lazy">
+    </figure>
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <div class="text-output">
+      <pre class="response-text">## First impressions (both panels)
+The left panel feels overly dense with data blocks—the code snippets take up too much visual real estate, making it feel like documentation rather than a marketing page. The right panel immediately feels cleaner and more approachable; the large header section and substantial negative space draw the eye naturally to the value proposition before showing technical details.
+
+## Typography &amp; hierarchy
+The left panel uses a slightly inconsistent heading scale (e.g., &#34;Gemma 4&#34; vs. &#34;Know Before You Deploy.&#34;) which muddles the hierarchy, making the page feel like it has multiple topics rather than one core message. The right panel does a much better job; the use of large, punchy headlines (&#34;Kimi K2.7 Code,&#34; followed by &#34;Know before you deploy.&#34;) establishes a clear visual flow and superior informational grouping.
+
+## Color &amp; atmosphere
+Both panels rely on dark mode backgrounds (or strong contrast blocks), which is standard for developer tools but can quickly become tiring. The right panel&#39;s overall palette feels more restrained and professional; it uses white space effectively to break up the tech blacks and grays, giving it an elevated, polished feel. The left panel feels slightly harsher due to its heavy reliance on distinct, rectangular background blocks for every piece of content.
+
+## Layout &amp; composition
+The right panel is superior in composition. Its use of asymmetrical grid elements (e.g., mixing image/code block size with text) creates visual interest and rhythm, preventing the page from feeling like a spreadsheet. The spacing around section dividers and CTAs in the right panel are impeccable; they breathe and guide the user&#39;s eye smoothly down the page. The left panel suffers from boxy, overly structured layout that feels restrictive.
+
+## Conversion design
+The CTA on the right side (&#34;Start drift scan&#34; paired with &#34;Read the docs&#34;) is more compelling because it balances immediate action (the scanner) with educational support (the docs). It anticipates user friction by offering both paths immediately. The left panel&#39;s CTAs are too isolated; they lack context or a clear progression path for a new visitor.
+
+## Verdict
+**Winner: Right Panel.** Its thoughtful utilization of white space, superior section rhythm, and refined visual hierarchy elevate it significantly. It successfully transitions from establishing technical credibility (the code blocks) to articulating the value proposition (&#34;Know before you deploy.&#34;) without feeling overwhelming or cluttered.
+
+***
+
+## Top 3 improvements
+1. **Abstract the Code Examples:** Instead of showing full, verbose code snippets in both panels, use simplified &#34;concept illustrations&#34; or stylized UI elements that demonstrate the *result* of the tool (e.g., a dashboard graph showing &#34;Drift Detected: API Key Mismatch&#34;) rather than just the input code. This makes the benefit tangible and universal.
+2. **Introduce Micro-Interactivity:** On the main landing page, add subtle hover states or a small animated state to the key technical components. For instance, make the sample YAML/JSON config block slightly expand or illuminate when hovered over, signaling that it&#39;s interactive data, not just text. This adds polish and modern appeal.
+3. **Refine the Value Block Hierarchy:** In the &#34;Know before you deploy&#34; section (the core value prop), use a three-column layout for bulleted benefits *instead* of plain paragraph blocks. Give each benefit its own icon/small heading, making the features easily scannable and digestible on mobile viewports.</pre>
+    </div>
+    
+
+    
+    <div class="artifact-actions">
+      
+      <a class="btn" href="../../runs/landing-design-critique/ollama-gemma4/output.txt" download>Download raw output</a>
+    </div>
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">## First impressions (both panels)
+The left panel feels overly dense with data blocks—the code snippets take up too much visual real estate, making it feel like documentation rather than a marketing page. The right panel immediately feels cleaner and more approachable; the large header section and substantial negative space draw the eye naturally to the value proposition before showing technical details.
+
+## Typography &amp; hierarchy
+The left panel uses a slightly inconsistent heading scale (e.g., &#34;Gemma 4&#34; vs. &#34;Know Before You Deploy.&#34;) which muddles the hierarchy, making the page feel like it has multiple topics rather than one core message. The right panel does a much better job; the use of large, punchy headlines (&#34;Kimi K2.7 Code,&#34; followed by &#34;Know before you deploy.&#34;) establishes a clear visual flow and superior informational grouping.
+
+## Color &amp; atmosphere
+Both panels rely on dark mode backgrounds (or strong contrast blocks), which is standard for developer tools but can quickly become tiring. The right panel&#39;s overall palette feels more restrained and professional; it uses white space effectively to break up the tech blacks and grays, giving it an elevated, polished feel. The left panel feels slightly harsher due to its heavy reliance on distinct, rectangular background blocks for every piece of content.
+
+## Layout &amp; composition
+The right panel is superior in composition. Its use of asymmetrical grid elements (e.g., mixing image/code block size with text) creates visual interest and rhythm, preventing the page from feeling like a spreadsheet. The spacing around section dividers and CTAs in the right panel are impeccable; they breathe and guide the user&#39;s eye smoothly down the page. The left panel suffers from boxy, overly structured layout that feels restrictive.
+
+## Conversion design
+The CTA on the right side (&#34;Start drift scan&#34; paired with &#34;Read the docs&#34;) is more compelling because it balances immediate action (the scanner) with educational support (the docs). It anticipates user friction by offering both paths immediately. The left panel&#39;s CTAs are too isolated; they lack context or a clear progression path for a new visitor.
+
+## Verdict
+**Winner: Right Panel.** Its thoughtful utilization of white space, superior section rhythm, and refined visual hierarchy elevate it significantly. It successfully transitions from establishing technical credibility (the code blocks) to articulating the value proposition (&#34;Know before you deploy.&#34;) without feeling overwhelming or cluttered.
+
+***
+
+## Top 3 improvements
+1. **Abstract the Code Examples:** Instead of showing full, verbose code snippets in both panels, use simplified &#34;concept illustrations&#34; or stylized UI elements that demonstrate the *result* of the tool (e.g., a dashboard graph showing &#34;Drift Detected: API Key Mismatch&#34;) rather than just the input code. This makes the benefit tangible and universal.
+2. **Introduce Micro-Interactivity:** On the main landing page, add subtle hover states or a small animated state to the key technical components. For instance, make the sample YAML/JSON config block slightly expand or illuminate when hovered over, signaling that it&#39;s interactive data, not just text. This adds polish and modern appeal.
+3. **Refine the Value Block Hierarchy:** In the &#34;Know before you deploy&#34; section (the core value prop), use a three-column layout for bulleted benefits *instead* of plain paragraph blocks. Give each benefit its own icon/small heading, making the features easily scannable and digestible on mobile viewports.</pre>
+    </details>
+
+    
+    <p class="cost-note">Local inference on your hardware — no API token cost.</p>
+    
+
+    
+  </article>
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Kimi K2.7 Code</h2>
+      <p class="model-provider">Ollama Cloud · kimi-k2.7-code</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>43.6s</dd></div>
+        <div><dt>Tokens</dt><dd>1.2k → 3.6k</dd></div>
+        <div><dt>Cost</dt><dd>~$0.0077</dd></div>
+        
+        <div><dt>Input cost</dt><dd>~$0.0004</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0073</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    
+    <figure class="input-image">
+      <figcaption>Task input</figcaption>
+      <img src="../../runs/landing-design-critique/ollama-kimi-k2.7-code/inputs/comparison-screenshot.jpg" alt="Task input image" loading="lazy">
+    </figure>
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <div class="text-output">
+      <pre class="response-text">## First impressions (both panels)
+
+**Left (Gemma 4):** The deep navy background and purple “Start drift scan” button grab attention immediately, but the blue “Features” / “Docs” links are nearly invisible against the dark background. Within seconds it also feels broken: the same hero and navbar repeat lower down, and the “How Drift Works” section is just three empty bars with no labels.
+
+**Right (Kimi K2.7 Code):** The black canvas and bold white headline feel cleaner and more production-ready. The two-button CTA is obvious, and the value proposition reads fast. It still has a weird duplicated hero at the bottom, but the top half is far more convincing at a glance.
+
+## Typography &amp; hierarchy
+
+- **Left** uses a heavier, title-case headline (“Know Before You Deploy.”). The body copy is wider and lower-contrast, making it harder to scan.
+- **Right** uses sentence case (“Know before you deploy.”), which feels more modern and conversational for a developer tool. The body text is narrower, lighter, and easier to read. The section header “Find the gaps between environments” gives a clear next beat in the hierarchy.
+- **Winner here:** Right. It has calmer scale contrast and better rhythm between headline, subhead, and section.
+
+## Color &amp; atmosphere
+
+- **Left** has a more distinctive palette—navy plus a violet CTA—but undermines it with dark-blue links that fail contrast. It feels like a generic dark SaaS template with a color layer thrown on top.
+- **Right** is almost purely black and white. That’s disciplined and high-contrast, but also anonymous. It could be any dev-tool landing page.
+
+Neither is brand-distinctive, but **Right is safer and more legible**; Left has more personality but poor execution.
+
+## Layout &amp; composition
+
+- **Left** is cramped. The navbar sits tight against the hero, the feature bars lack labels, and the repeated navbar/hero lower down breaks any sense of section rhythm.
+- **Right** has clearer spacing: generous padding around the hero, a clean three-column feature row, and better alignment overall.
+
+**Winner:** Right, by a wide margin.
+
+## Conversion design
+
+- **Left** offers a single “Start drift scan” button. The value prop is okay but long, and there’s no obvious path for someone who wants to learn more first.
+- **Right** pairs a high-contrast primary CTA with a secondary “Read the docs” button—perfect for a CLI tool. The value prop is tighter and concrete: “catches configuration drift between staging and production—before it becomes an outage.”
+
+**Right wins conversion design.**
+
+## Verdict
+
+**Winner: Right (Kimi K2.7 Code).** It’s cleaner, better spaced, has a clearer value proposition, and offers a more appropriate CTA pairing for a developer tool. The left version has a more interesting color direction, but its low-contrast links, empty feature bars, and duplicated hero make it feel unfinished.
+
+## Top 3 improvements
+
+1. **Remove the duplicated hero/nav block** at the bottom and replace it with a real footer, a code snippet, or a final conversion section. Repetition makes the page look like AI slop, not product design.
+2. **Add one brand accent color and consistent iconography.** The right panel is too monochrome to be memorable; a single accent for links, icons, and the CTA focus state would give it identity without breaking contrast.
+3. **Flesh out the feature section with real content.** “Find the gaps between environments” needs labeled cards, a CLI example, or a short workflow diagram to prove credibility for a dev tool. Empty icons won’t convert skeptical engineers.</pre>
+    </div>
+    
+
+    
+    <div class="artifact-actions">
+      
+      <a class="btn" href="../../runs/landing-design-critique/ollama-kimi-k2.7-code/output.txt" download>Download raw output</a>
+    </div>
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">## First impressions (both panels)
+
+**Left (Gemma 4):** The deep navy background and purple “Start drift scan” button grab attention immediately, but the blue “Features” / “Docs” links are nearly invisible against the dark background. Within seconds it also feels broken: the same hero and navbar repeat lower down, and the “How Drift Works” section is just three empty bars with no labels.
+
+**Right (Kimi K2.7 Code):** The black canvas and bold white headline feel cleaner and more production-ready. The two-button CTA is obvious, and the value proposition reads fast. It still has a weird duplicated hero at the bottom, but the top half is far more convincing at a glance.
+
+## Typography &amp; hierarchy
+
+- **Left** uses a heavier, title-case headline (“Know Before You Deploy.”). The body copy is wider and lower-contrast, making it harder to scan.
+- **Right** uses sentence case (“Know before you deploy.”), which feels more modern and conversational for a developer tool. The body text is narrower, lighter, and easier to read. The section header “Find the gaps between environments” gives a clear next beat in the hierarchy.
+- **Winner here:** Right. It has calmer scale contrast and better rhythm between headline, subhead, and section.
+
+## Color &amp; atmosphere
+
+- **Left** has a more distinctive palette—navy plus a violet CTA—but undermines it with dark-blue links that fail contrast. It feels like a generic dark SaaS template with a color layer thrown on top.
+- **Right** is almost purely black and white. That’s disciplined and high-contrast, but also anonymous. It could be any dev-tool landing page.
+
+Neither is brand-distinctive, but **Right is safer and more legible**; Left has more personality but poor execution.
+
+## Layout &amp; composition
+
+- **Left** is cramped. The navbar sits tight against the hero, the feature bars lack labels, and the repeated navbar/hero lower down breaks any sense of section rhythm.
+- **Right** has clearer spacing: generous padding around the hero, a clean three-column feature row, and better alignment overall.
+
+**Winner:** Right, by a wide margin.
+
+## Conversion design
+
+- **Left** offers a single “Start drift scan” button. The value prop is okay but long, and there’s no obvious path for someone who wants to learn more first.
+- **Right** pairs a high-contrast primary CTA with a secondary “Read the docs” button—perfect for a CLI tool. The value prop is tighter and concrete: “catches configuration drift between staging and production—before it becomes an outage.”
+
+**Right wins conversion design.**
+
+## Verdict
+
+**Winner: Right (Kimi K2.7 Code).** It’s cleaner, better spaced, has a clearer value proposition, and offers a more appropriate CTA pairing for a developer tool. The left version has a more interesting color direction, but its low-contrast links, empty feature bars, and duplicated hero make it feel unfinished.
+
+## Top 3 improvements
+
+1. **Remove the duplicated hero/nav block** at the bottom and replace it with a real footer, a code snippet, or a final conversion section. Repetition makes the page look like AI slop, not product design.
+2. **Add one brand accent color and consistent iconography.** The right panel is too monochrome to be memorable; a single accent for links, icons, and the CTA focus state would give it identity without breaking contrast.
+3. **Flesh out the feature section with real content.** “Find the gaps between environments” needs labeled cards, a CLI example, or a short workflow diagram to prove credibility for a dev tool. Empty icons won’t convert skeptical engineers.</pre>
+    </details>
+
+    
+    <p class="cost-note">Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated — Ollama Cloud uses subscription usage, not per-token billing.</p>
+    
+
+    
+  </article>
+  
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Open source. Every prompt versioned. Every artifact public.</p>
+    </div>
+  </footer>
+</body>
+</html>

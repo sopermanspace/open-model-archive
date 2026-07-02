@@ -1,4 +1,6 @@
+import base64
 import time
+from pathlib import Path
 
 import httpx
 
@@ -14,16 +16,26 @@ class OllamaAdapter(ModelAdapter):
         super().__init__(config)
         self.base_url = config.api_base or base_url
 
-    def execute(self, prompt: str) -> AdapterResult:
+    def execute(self, prompt: str, *, images: list[Path] | None = None) -> AdapterResult:
         started = time.perf_counter()
-        payload = {
-            "model": self.config.model_ref,
-            "prompt": prompt,
-            "stream": False,
-        }
 
         with httpx.Client(timeout=self.config.timeout_seconds) as client:
-            response = client.post(f"{self.base_url}/api/generate", json=payload)
+            if images:
+                encoded = [_encode_image(path) for path in images]
+                payload = {
+                    "model": self.config.model_ref,
+                    "messages": [{"role": "user", "content": prompt, "images": encoded}],
+                    "stream": False,
+                }
+                response = client.post(f"{self.base_url}/api/chat", json=payload)
+            else:
+                payload = {
+                    "model": self.config.model_ref,
+                    "prompt": prompt,
+                    "stream": False,
+                }
+                response = client.post(f"{self.base_url}/api/generate", json=payload)
+
             response.raise_for_status()
             data = response.json()
 
@@ -31,8 +43,14 @@ class OllamaAdapter(ModelAdapter):
             raise RuntimeError(data["error"])
 
         duration_ms = int((time.perf_counter() - started) * 1000)
-        input_tokens = int(data.get("prompt_eval_count") or 0)
-        output_tokens = int(data.get("eval_count") or 0)
+        if images:
+            text = data.get("message", {}).get("content", "")
+            input_tokens = int(data.get("prompt_eval_count") or 0)
+            output_tokens = int(data.get("eval_count") or 0)
+        else:
+            text = data.get("response", "")
+            input_tokens = int(data.get("prompt_eval_count") or 0)
+            output_tokens = int(data.get("eval_count") or 0)
 
         breakdown = estimate_from_model(
             self.config,
@@ -41,7 +59,7 @@ class OllamaAdapter(ModelAdapter):
         )
 
         return AdapterResult(
-            response=data.get("response", ""),
+            response=text,
             duration_ms=duration_ms,
             input_tokens=input_tokens,
             output_tokens=output_tokens,
@@ -52,5 +70,10 @@ class OllamaAdapter(ModelAdapter):
                 "total_duration_ns": data.get("total_duration"),
                 "eval_duration_ns": data.get("eval_duration"),
                 "done_reason": data.get("done_reason"),
+                "multimodal": bool(images),
             },
         )
+
+
+def _encode_image(path: Path) -> str:
+    return base64.b64encode(path.read_bytes()).decode("ascii")

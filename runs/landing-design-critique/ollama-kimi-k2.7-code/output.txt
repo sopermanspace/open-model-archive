@@ -1,0 +1,42 @@
+## First impressions (both panels)
+
+**Left (Gemma 4):** The deep navy background and purple “Start drift scan” button grab attention immediately, but the blue “Features” / “Docs” links are nearly invisible against the dark background. Within seconds it also feels broken: the same hero and navbar repeat lower down, and the “How Drift Works” section is just three empty bars with no labels.
+
+**Right (Kimi K2.7 Code):** The black canvas and bold white headline feel cleaner and more production-ready. The two-button CTA is obvious, and the value proposition reads fast. It still has a weird duplicated hero at the bottom, but the top half is far more convincing at a glance.
+
+## Typography & hierarchy
+
+- **Left** uses a heavier, title-case headline (“Know Before You Deploy.”). The body copy is wider and lower-contrast, making it harder to scan.
+- **Right** uses sentence case (“Know before you deploy.”), which feels more modern and conversational for a developer tool. The body text is narrower, lighter, and easier to read. The section header “Find the gaps between environments” gives a clear next beat in the hierarchy.
+- **Winner here:** Right. It has calmer scale contrast and better rhythm between headline, subhead, and section.
+
+## Color & atmosphere
+
+- **Left** has a more distinctive palette—navy plus a violet CTA—but undermines it with dark-blue links that fail contrast. It feels like a generic dark SaaS template with a color layer thrown on top.
+- **Right** is almost purely black and white. That’s disciplined and high-contrast, but also anonymous. It could be any dev-tool landing page.
+
+Neither is brand-distinctive, but **Right is safer and more legible**; Left has more personality but poor execution.
+
+## Layout & composition
+
+- **Left** is cramped. The navbar sits tight against the hero, the feature bars lack labels, and the repeated navbar/hero lower down breaks any sense of section rhythm.
+- **Right** has clearer spacing: generous padding around the hero, a clean three-column feature row, and better alignment overall.
+
+**Winner:** Right, by a wide margin.
+
+## Conversion design
+
+- **Left** offers a single “Start drift scan” button. The value prop is okay but long, and there’s no obvious path for someone who wants to learn more first.
+- **Right** pairs a high-contrast primary CTA with a secondary “Read the docs” button—perfect for a CLI tool. The value prop is tighter and concrete: “catches configuration drift between staging and production—before it becomes an outage.”
+
+**Right wins conversion design.**
+
+## Verdict
+
+**Winner: Right (Kimi K2.7 Code).** It’s cleaner, better spaced, has a clearer value proposition, and offers a more appropriate CTA pairing for a developer tool. The left version has a more interesting color direction, but its low-contrast links, empty feature bars, and duplicated hero make it feel unfinished.
+
+## Top 3 improvements
+
+1. **Remove the duplicated hero/nav block** at the bottom and replace it with a real footer, a code snippet, or a final conversion section. Repetition makes the page look like AI slop, not product design.
+2. **Add one brand accent color and consistent iconography.** The right panel is too monochrome to be memorable; a single accent for links, icons, and the CTA focus state would give it identity without breaking contrast.
+3. **Flesh out the feature section with real content.** “Find the gaps between environments” needs labeled cards, a CLI example, or a short workflow diagram to prove credibility for a dev tool. Empty icons won’t convert skeptical engineers.

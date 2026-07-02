@@ -1,0 +1,10 @@
+id: landing-design-critique
+slug: landing-design-critique
+category: design-critique
+title: Expert Designer Critique
+description: Senior designer critique of a side-by-side AI landing page comparison.
+prompt: design-critique/landing-review@v1.0.0
+inputs:
+  - assets/task-inputs/comparison-screenshot.jpg
+screenshot: false
+models: all

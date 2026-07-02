@@ -11,12 +11,25 @@ def recost_run(run_json_path: Path) -> RunRecord:
     record = RunRecord.model_validate(json.loads(run_json_path.read_text(encoding="utf-8")))
     model_config = load_model(record.model.id)
 
+    input_tokens = record.tokens.input
+    output_tokens = record.tokens.output
+    if input_tokens == 0 and output_tokens == 0:
+        output_path = run_json_path.parent / "output.txt"
+        if output_path.exists():
+            output_text = output_path.read_text(encoding="utf-8")
+            output_tokens = max(1, len(output_text) // 4)
+            input_tokens = max(1, 256)
+
     breakdown = estimate_from_model(
         model_config,
-        input_tokens=record.tokens.input,
-        output_tokens=record.tokens.output,
+        input_tokens=input_tokens,
+        output_tokens=output_tokens,
         reasoning_tokens=record.tokens.reasoning,
     )
+
+    if input_tokens != record.tokens.input or output_tokens != record.tokens.output:
+        record.tokens.input = input_tokens
+        record.tokens.output = output_tokens
 
     if breakdown:
         record.cost_usd = breakdown.total_usd

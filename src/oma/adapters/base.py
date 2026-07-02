@@ -22,5 +22,5 @@ class ModelAdapter:
     def __init__(self, config: ModelConfig):
         self.config = config
 
-    def execute(self, prompt: str) -> AdapterResult:
+    def execute(self, prompt: str, *, images: list | None = None) -> AdapterResult:
         raise NotImplementedError

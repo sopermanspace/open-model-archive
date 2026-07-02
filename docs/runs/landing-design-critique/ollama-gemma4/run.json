@@ -1,0 +1,50 @@
+{
+  "id": "landing-design-critique/ollama-gemma4/2026-07-02T13:10:26Z",
+  "task": {
+    "id": "landing-design-critique",
+    "slug": "landing-design-critique",
+    "category": "design-critique",
+    "title": "Expert Designer Critique",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "landing-review",
+    "version": "1.0.0",
+    "sha256": "18fa1fc3267d4b430d0b5d1d2830bdad25025d096fa1f87d9677b9d3d456209b",
+    "title": "Expert Designer Critique"
+  },
+  "executed_at": "2026-07-02T13:10:26.931430Z",
+  "duration_ms": 15574,
+  "tokens": {
+    "input": 482,
+    "output": 978,
+    "reasoning": 0
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "image",
+      "path": "inputs/comparison-screenshot.jpg",
+      "sha256": "62d9cbc42a91fa4897b08fcce3c5fea09318090ad2dde2cf91b259e6403ceb2c",
+      "language": null
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

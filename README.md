@@ -1,80 +1,63 @@
 # Open Model Archive
 
 [![MIT License](https://img.shields.io/badge/License-MIT-c4a882.svg)](LICENSE)
-[![GitHub Pages](https://img.shields.io/badge/Pages-static-161616.svg)](https://sopermanspace.github.io/open-model-archive/)
+[![GitHub Pages](https://img.shields.io/badge/Pages-live-161616.svg)](https://sopermanspace.github.io/open-model-archive/)
 [![Python 3.12+](https://img.shields.io/badge/Python-3.12+-0d0d0d.svg)](pyproject.toml)
 
-**A transparent public archive comparing AI model outputs on identical real-world tasks.**
+## The world's most transparent repository of AI model outputs on identical real-world tasks
 
-Not a benchmark leaderboard. Every prompt is versioned. Every artifact is public. Every execution records timing, tokens, and cost when available.
+**Not another benchmark.** No hidden prompts. No aggregated scores. A public archive where developers inspect exactly what each model generated — source files, screenshots, timing, tokens, and estimated cost — for the same versioned prompt.
 
----
-
-## Live archive
-
-**[View the comparison site →](https://sopermanspace.github.io/open-model-archive/)**
+**[Explore the live archive →](https://sopermanspace.github.io/open-model-archive/)**
 
 ---
 
-## First published run
+## What you can compare today
 
-**Task:** Developer Tool Landing Page (`website-generation`)  
-**Prompt:** v1.0.0 — identical for all models  
-**Brief:** Generate a single-file HTML landing page for a fictional CLI called *Drift*
+| Category | Task | Models |
+|----------|------|--------|
+| Website generation | Developer Tool Landing Page | Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro |
+| Code generation | Token Bucket Rate Limiter | Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro |
+| SVG generation | Weather Icon Set | Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro |
+| Web grounding | Grounded Product Q&A | Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro |
+| Vision understanding | Landing Page Visual Analysis | Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro |
+| Design critique | Expert Designer Critique | Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro |
 
-| Model | Provider | Duration | Tokens (in → out) | Est. cost | Status |
-|-------|----------|----------|-------------------|-----------|--------|
-| Gemma 4 | Ollama (local) | 66.0s | 242 → 4.3k | $0.00 | success |
-| Kimi K2.7 Code | Ollama Cloud | 76.4s | 223 → 7.1k | ~$0.014 | success |
+Every task uses **prompt v1.0.0** — immutable, SHA-256 hashed, committed to Git.
 
-Costs are estimated from per-1k token rates in `models/*.yaml`. Local models are $0; cloud models use published API rates as a proxy.
+---
 
-### Side-by-side outputs
+## Side-by-side preview
 
 <p align="center">
-  <img src="assets/readme/gemma4.png" alt="Gemma 4 landing page output" width="48%" />
-  <img src="assets/readme/kimi-k2.7-code.png" alt="Kimi K2.7 Code landing page output" width="48%" />
+  <a href="https://sopermanspace.github.io/open-model-archive/tasks/website-landing-page/">
+    <img src="assets/readme/comparison-hero.jpg" alt="Side-by-side comparison of Gemma 4 and Kimi K2.7 Code landing page outputs" width="90%">
+  </a>
 </p>
 
-<p align="center"><em>Same prompt. Same task. Inspect the full HTML, screenshots, and raw output on the comparison page.</em></p>
+<p align="center"><em>Same prompt. Three models. <a href="https://sopermanspace.github.io/open-model-archive/tasks/website-landing-page/">Open the full comparison</a> — snapshot and live preview are separated, not stacked.</em></p>
 
 ---
 
 ## Why this exists
 
-Most model evaluations reduce to a single score. Developers need something else: **the actual output** — source files, screenshots, latency, token usage — for the same prompt.
+Leaderboards answer: *"Which model scores higher?"*
 
-Open Model Archive stores all of it in Git. The website is a static view over committed artifacts.
+Developers need: *"What did it actually write?"*
 
----
-
-## How it works
-
-```mermaid
-flowchart LR
-  A[Versioned Prompts] --> B[Execution Engine]
-  C[Model Adapters] --> B
-  B --> D[runs/ artifacts + run.json]
-  D --> E[Static Site Generator]
-  E --> F[GitHub Pages]
-```
-
-1. **Prompts** live as versioned Markdown in `prompts/`
-2. **`oma build`** executes tasks through model adapters
-3. **Runs** are stored under `runs/` with structured metadata
-4. **Static HTML** is generated into `docs/` for GitHub Pages
+Open Model Archive stores the full output in Git. The website is a read-only lens over committed artifacts.
 
 ---
 
 ## Model providers
 
-| Type | Adapter | Examples |
-|------|---------|----------|
-| Open-source / Ollama cloud | `ollama` | Gemma 4, Kimi K2.7 Code |
-| Frontier CLIs | `agy` | Claude Sonnet, Gemini (via `agy --print`) |
-| Direct APIs | planned | Providers without local CLI tooling |
+| Type | Integration | Examples |
+|------|-------------|----------|
+| Open-source / Ollama cloud | Ollama HTTP API | Gemma 4, Kimi K2.7 Code |
+| Frontier models | Provider CLI | Gemini 3.1 Pro |
+| Direct APIs | planned | Providers without CLI tooling |
 
-Add a model by copying [`models/_template.yaml`](models/_template.yaml). No code changes required for Ollama models.
+Costs are estimated from per-1k token rates in `models/*.yaml`. Run `oma recost` to recalculate without re-executing.
 
 ---
 
@@ -87,58 +70,45 @@ cd open-model-archive
 uv sync
 npm install && npx playwright install chromium
 
-# Pull models (Ollama)
 ollama pull gemma4:latest
 ollama pull kimi-k2.7-code:cloud
 
-# Execute tasks + build site
 uv run oma build
-
-# Preview locally
 python -m http.server 8080 --directory docs
 ```
 
-### CLI commands
-
 | Command | Description |
 |---------|-------------|
-| `oma validate` | Check tasks, prompts, and model configs |
-| `oma run --all` | Execute all tasks against enabled models |
-| `oma generate` | Build static site from committed runs |
-| `oma build` | Validate → run → generate |
+| `oma validate` | Check tasks, prompts, models |
+| `oma run --all` | Execute all tasks |
+| `oma recost` | Recalculate cost from tokens |
+| `oma generate` | Build static site |
+| `oma build` | Full pipeline |
 
 ---
 
 ## Repository layout
 
 ```
-prompts/          Versioned prompts (immutable by version)
-tasks/            Task definitions (YAML)
-models/           Model adapter configuration
-runs/             Public execution archive (run.json + artifacts)
-src/oma/          Python build pipeline
-docs/             Generated static site (GitHub Pages)
+prompts/     Versioned prompts (immutable)
+tasks/       Task definitions
+models/      Provider + pricing config
+runs/        Public execution archive
+docs/        Generated GitHub Pages site
+src/oma/     Build pipeline
 ```
 
 ---
 
 ## Documentation
 
-- [Architecture](ARCHITECTURE.md) — module design and extension points
-- [Setup](SETUP.md) — local development and provider configuration
-- [Deployment](DEPLOYMENT.md) — GitHub Pages publishing
-- [Contributing](CONTRIBUTING.md) — add tasks, models, and runs
-
----
-
-## Contributing
-
-Contributions welcome. Add a versioned prompt, define a task, run `oma build`, and commit the resulting `runs/` artifacts.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+- [Architecture](ARCHITECTURE.md)
+- [Setup](SETUP.md)
+- [Deployment](DEPLOYMENT.md)
+- [Contributing](CONTRIBUTING.md)
 
 ---
 
 ## License
 
-[MIT](LICENSE) — open source, fully reproducible, no hidden prompts or credentials in the repository.
+[MIT](LICENSE)

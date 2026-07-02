@@ -27,6 +27,7 @@
 
 <section class="container comparison-grid" style="--cols: {{ runs|length }}">
   {% for run in runs %}
+  {% set model_path = run.task.slug ~ '/' ~ (run.model.id | replace('/', '-')) %}
   <article class="model-column">
     <header class="model-header">
       <h2>{{ run.model.display_name }}</h2>
@@ -47,45 +48,72 @@
     <div class="error-box">{{ run.error or 'Execution failed' }}</div>
     {% else %}
 
-    {% if run.screenshots %}
-    <figure class="screenshot">
-      <img src="{{ root }}/runs/{{ run.task.slug }}/{{ run.model.id | replace('/', '-') }}/{{ run.screenshots[0].path }}" alt="Screenshot of {{ run.model.display_name }} output" loading="lazy">
+    {# Input images for vision / design tasks #}
+    {% for artifact in run.artifacts if artifact.type == 'image' %}
+    <figure class="input-image">
+      <figcaption>Task input</figcaption>
+      <img src="{{ root }}/runs/{{ model_path }}/{{ artifact.path }}" alt="Task input image" loading="lazy">
     </figure>
+    {% endfor %}
+
+    {# HTML: tabbed snapshot vs live preview #}
+    {% set html_artifact = run.artifacts | selectattr('type', 'equalto', 'html') | first %}
+    {% if html_artifact and run.screenshots %}
+    <div class="preview-tabs" data-tabs="{{ loop.index }}">
+      <input type="radio" name="tab-{{ loop.index }}" id="snap-{{ loop.index }}" checked>
+      <input type="radio" name="tab-{{ loop.index }}" id="live-{{ loop.index }}">
+      <div class="tab-labels">
+        <label for="snap-{{ loop.index }}">Snapshot</label>
+        <label for="live-{{ loop.index }}">Live preview</label>
+      </div>
+      <div class="tab-panel snap-panel">
+        <img src="{{ root }}/runs/{{ model_path }}/{{ run.screenshots[0].path }}" alt="Snapshot of {{ run.model.display_name }} output" loading="lazy">
+      </div>
+      <div class="tab-panel live-panel">
+        <iframe src="{{ root }}/runs/{{ model_path }}/{{ html_artifact.path }}" title="{{ run.model.display_name }} preview" loading="lazy"></iframe>
+      </div>
+    </div>
+    {% elif html_artifact %}
+    <div class="preview-frame">
+      <iframe src="{{ root }}/runs/{{ model_path }}/{{ html_artifact.path }}" title="{{ run.model.display_name }} preview" loading="lazy"></iframe>
+    </div>
     {% endif %}
 
-    {% for artifact in run.artifacts %}
-      {% if artifact.type == 'html' %}
-      <div class="preview-frame">
-        <iframe src="{{ root }}/runs/{{ run.task.slug }}/{{ run.model.id | replace('/', '-') }}/{{ artifact.path }}" title="{{ run.model.display_name }} preview" loading="lazy"></iframe>
-      </div>
-      {% elif artifact.type == 'svg' %}
-      <div class="svg-preview">
-        <img src="{{ root }}/runs/{{ run.task.slug }}/{{ run.model.id | replace('/', '-') }}/{{ artifact.path }}" alt="SVG output">
-      </div>
-      {% endif %}
+    {# SVG output #}
+    {% for artifact in run.artifacts if artifact.type == 'svg' %}
+    <div class="svg-preview">
+      <img src="{{ root }}/runs/{{ model_path }}/{{ artifact.path }}" alt="SVG output from {{ run.model.display_name }}">
+    </div>
     {% endfor %}
+
+    {# Source code #}
+    {% for artifact in run.artifacts if artifact.type == 'source' %}
+    <details class="source-panel" open>
+      <summary>Generated {{ artifact.language or 'code' }}</summary>
+      <iframe class="source-iframe" src="{{ root }}/runs/{{ model_path }}/{{ artifact.path }}" title="Source code"></iframe>
+    </details>
+    {% endfor %}
+
+    {# Text responses (grounding, vision, design critique) #}
+    {% if not html_artifact and not (run.artifacts | selectattr('type', 'equalto', 'svg') | list) and not (run.artifacts | selectattr('type', 'equalto', 'source') | list) %}
+    <div class="text-output">
+      <pre class="response-text">{{ run_outputs[run.id] }}</pre>
+    </div>
+    {% endif %}
 
     {% if run.artifacts %}
     <div class="artifact-actions">
-      {% for artifact in run.artifacts %}
-      <a class="btn" href="{{ root }}/runs/{{ run.task.slug }}/{{ run.model.id | replace('/', '-') }}/{{ artifact.path }}" download>Download {{ artifact.type }}</a>
+      {% for artifact in run.artifacts if artifact.type not in ['image'] %}
+      <a class="btn" href="{{ root }}/runs/{{ model_path }}/{{ artifact.path }}" download>Download {{ artifact.type }}</a>
       {% endfor %}
+      <a class="btn" href="{{ root }}/runs/{{ model_path }}/output.txt" download>Download raw output</a>
     </div>
     {% endif %}
 
     <details class="source-panel">
       <summary>Raw model output</summary>
-      <iframe class="source-iframe" src="{{ root }}/runs/{{ run.task.slug }}/{{ run.model.id | replace('/', '-') }}/output.txt" title="Raw output"></iframe>
+      <pre class="response-text compact">{{ run_outputs[run.id] }}</pre>
     </details>
-
-    {% for artifact in run.artifacts %}
-      {% if artifact.type == 'html' %}
-    <details class="source-panel">
-      <summary>Generated HTML</summary>
-      <iframe class="source-iframe" src="{{ root }}/runs/{{ run.task.slug }}/{{ run.model.id | replace('/', '-') }}/{{ artifact.path }}" title="HTML source"></iframe>
-    </details>
-      {% endif %}
-    {% endfor %}
 
     {% if run.cost and run.cost.pricing_source %}
     <p class="cost-note">{{ run.cost.pricing_source }}</p>

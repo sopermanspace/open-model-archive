@@ -1,0 +1,50 @@
+{
+  "id": "landing-visual-analysis/ollama-gemma4/2026-07-02T13:14:50Z",
+  "task": {
+    "id": "landing-visual-analysis",
+    "slug": "landing-visual-analysis",
+    "category": "vision-understanding",
+    "title": "Landing Page Visual Analysis",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "landing-analysis",
+    "version": "1.0.0",
+    "sha256": "a2189592b7d54212efacd3b3bc1a01b9e6d33c95e670e9bb36c88a4f92598276",
+    "title": "Landing Page Visual Analysis"
+  },
+  "executed_at": "2026-07-02T13:14:50.234923Z",
+  "duration_ms": 11468,
+  "tokens": {
+    "input": 432,
+    "output": 719,
+    "reasoning": 0
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "image",
+      "path": "inputs/drift-landing-reference.png",
+      "sha256": "a24dbaa2631af532fe260b79a4b77dd9037a1389cfc981d11f33fd0e6d4b6f2a",
+      "language": null
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

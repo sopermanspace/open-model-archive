@@ -1,0 +1,32 @@
+## Layout map
+
+1. **Top navigation** — fixed header with the Drift logo on the left and four nav links plus a GitHub button on the right.
+2. **Hero** — centered block containing the main headline, a one-sentence description, and two call-to-action buttons.
+3. **Features section** — centered section heading and subheading, followed by a row of three feature cards that are only partially visible at the bottom edge of the screenshot.
+
+## Visual hierarchy
+
+The eye is drawn immediately to the hero headline "Know before you deploy." because it is the largest element on the page, set in bold white type against a near-black background. Below it, the description text is smaller and rendered in a muted gray, which creates clear typographic separation. The two CTA buttons sit directly under the description, balanced in the center. Further down, the "Find the gaps between environments" heading is smaller than the hero headline but still prominent, establishing a second level of hierarchy. Overall spacing is generous, with ample negative space between the nav, hero, and features sections.
+
+## Content inventory
+
+- **Logo:** "Drift"
+- **Navigation items:** Features, Docs, Pricing, GitHub
+- **Hero headline:** "Know before you deploy."
+- **Hero description:** "Drift is a lightweight CLI that catches configuration drift between staging and production—before it becomes an outage."
+- **CTA buttons:** "Start drift scan", "Read the docs"
+- **Features headline:** "Find the gaps between environments"
+- **Features description:** "Compare configs, flags, and schema differences across any two environments. No dashboards required."
+- **Feature card icons (partially visible):** shield, lightning bolt, document/file icons (text not shown)
+
+## Accessibility observations
+
+- **Contrast:** White hero text on a very dark background provides strong contrast. The gray description text also appears readable, though its exact ratio cannot be confirmed without color values.
+- **Tap targets:** The two CTA buttons are large and well-spaced, making them easy targets. Navigation links are smaller but appear adequately spaced.
+- **Button differentiation:** "Start drift scan" uses a solid light background while "Read the docs" uses a dark bordered style; the distinction is visible, but the dark ghost button could be slightly less immediately actionable at a glance.
+- **Icons:** The blue feature icons on dark cards are visible, but no accompanying labels or text are shown in the cropped cards, so their meaning is not yet conveyed by text alone.
+- **No obvious issues** such as missing alt text indicators, overlapping text, or extremely low contrast are visible in the provided portion of the page.
+
+## One-sentence summary
+
+This page introduces Drift as a lightweight CLI that spots configuration drift between staging and production environments before it causes an outage, while inviting users to run a scan or read the documentation.

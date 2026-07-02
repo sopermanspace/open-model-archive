@@ -1,0 +1,43 @@
+{
+  "id": "product-facts-grounding/ollama-gemma4/2026-07-02T13:15:25Z",
+  "task": {
+    "id": "product-facts-grounding",
+    "slug": "product-facts-grounding",
+    "category": "web-grounding",
+    "title": "Grounded Product Q&A",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "product-facts",
+    "version": "1.0.0",
+    "sha256": "d8eb23b5e597321f5f605eedde6b301c15653d35019c954a627b06f9a4aac5c4",
+    "title": "Grounded Product Q&A"
+  },
+  "executed_at": "2026-07-02T13:15:25.177643Z",
+  "duration_ms": 12443,
+  "tokens": {
+    "input": 334,
+    "output": 801,
+    "reasoning": 0
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

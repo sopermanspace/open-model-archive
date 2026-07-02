@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Side-by-side comparison of AI model outputs for Weather Icon Set">
+  <title>Weather Icon Set — Open Model Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../../index.html">Open Model Archive</a>
+      <nav class="site-nav">
+        <a href="../../index.html">Archive</a>
+        <a href="../../about/index.html">About</a>
+        <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    
+<section class="container comparison-header">
+  <a class="back-link" href="../../index.html">← Archive</a>
+  <p class="eyebrow">svg-generation</p>
+  <h1>Weather Icon Set</h1>
+  <p class="lede">Generate three minimal monochrome SVG weather icons in a single file.</p>
+</section>
+
+
+<section class="container prompt-panel">
+  <details>
+    <summary>Prompt v1.0.0</summary>
+    <div class="prompt-meta">
+      <span>ID: weather-icons</span>
+      <span>SHA-256: <code>aafa78802c275f69…</code></span>
+    </div>
+    <pre class="prompt-text">Create **three minimal weather icons** as inline SVG.
+
+## Requirements
+
+1. Output **only** a single fenced `svg` code block containing all three icons.
+2. Icons required: **sunny**, **cloudy**, **rainy**
+3. Style: monochrome, 24×24 viewBox each, arranged horizontally in one `&lt;svg&gt;` canvas (72×24 total viewBox)
+4. Stroke-based design (no gradients, no filters, no raster images)
+5. `stroke=&#34;currentColor&#34;` and `fill=&#34;none&#34;` with 1.5px stroke width
+6. Clean geometric shapes — suitable for a developer tool UI
+
+No text labels. No explanation outside the SVG code block.</pre>
+  </details>
+</section>
+
+
+<section class="container comparison-grid" style="--cols: 3">
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemini 3.1 Pro</h2>
+      <p class="model-provider">Google · Gemini 3.1 Pro (High)</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>115.6s</dd></div>
+        <div><dt>Tokens</dt><dd>256 → 152</dd></div>
+        <div><dt>Cost</dt><dd>~$0.0011</dd></div>
+        
+        <div><dt>Input cost</dt><dd>~$0.0003</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0008</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <div class="svg-preview">
+      <img src="../../runs/weather-icons/google-gemini-3.1-pro/artifacts/output.svg" alt="SVG output from Gemini 3.1 Pro">
+    </div>
+    
+
+    
+    
+
+    
+    
+
+    
+    <div class="artifact-actions">
+      
+      <a class="btn" href="../../runs/weather-icons/google-gemini-3.1-pro/artifacts/output.svg" download>Download svg</a>
+      
+      <a class="btn" href="../../runs/weather-icons/google-gemini-3.1-pro/output.txt" download>Download raw output</a>
+    </div>
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">```svg
+&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 72 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;
+  &lt;g&gt;
+    &lt;circle cx=&#34;12&#34; cy=&#34;12&#34; r=&#34;4&#34; /&gt;
+    &lt;path d=&#34;M12 3v2M12 19v2M3 12h2M19 12h2M7 7l-1.4-1.4M17 7l1.4-1.4M7 17l-1.4 1.4M17 17l1.4 1.4&#34; /&gt;
+  &lt;/g&gt;
+  &lt;g transform=&#34;translate(24, 0)&#34;&gt;
+    &lt;path d=&#34;M17.5 16H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z&#34; /&gt;
+  &lt;/g&gt;
+  &lt;g transform=&#34;translate(48, 0)&#34;&gt;
+    &lt;path d=&#34;M17.5 16H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z&#34; /&gt;
+    &lt;path d=&#34;M10 18l-1.5 3M13 18l-1.5 3M16 18l-1.5 3&#34; /&gt;
+  &lt;/g&gt;
+&lt;/svg&gt;
+```</pre>
+    </details>
+
+    
+    <p class="cost-note">Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated.</p>
+    
+
+    
+  </article>
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemma 4</h2>
+      <p class="model-provider">Ollama · gemma4:latest</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>15.8s</dd></div>
+        <div><dt>Tokens</dt><dd>166 → 1.1k</dd></div>
+        <div><dt>Cost</dt><dd>$0.00</dd></div>
+        
+        <div><dt>Input cost</dt><dd>$0.00</dd></div>
+        <div><dt>Output cost</dt><dd>$0.00</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <div class="svg-preview">
+      <img src="../../runs/weather-icons/ollama-gemma4/artifacts/output.svg" alt="SVG output from Gemma 4">
+    </div>
+    
+
+    
+    
+
+    
+    
+
+    
+    <div class="artifact-actions">
+      
+      <a class="btn" href="../../runs/weather-icons/ollama-gemma4/artifacts/output.svg" download>Download svg</a>
+      
+      <a class="btn" href="../../runs/weather-icons/ollama-gemma4/output.txt" download>Download raw output</a>
+    </div>
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">```svg
+&lt;svg width=&#34;72&#34; height=&#34;24&#34; viewBox=&#34;0 0 72 24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+  &lt;!-- Sunny Icon (x=0 to x=24) --&gt;
+  &lt;g transform=&#34;translate(0, 0)&#34;&gt;
+    &lt;circle cx=&#34;16&#34; cy=&#34;12&#34; r=&#34;8&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
+    &lt;rect x=&#34;12&#34; y=&#34;7&#34; width=&#34;4&#34; height=&#34;10&#34; rx=&#34;2&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
+    &lt;rect x=&#34;20&#34; y=&#34;7&#34; width=&#34;4&#34; height=&#34;10&#34; rx=&#34;2&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
+  &lt;/g&gt;
+
+  &lt;!-- Cloudy Icon (x=24 to x=48) --&gt;
+  &lt;g transform=&#34;translate(24, 0)&#34;&gt;
+    &lt;path d=&#34;M4 8c0-1.1 0-2 .6-3.5l3-2 c.3-.3.7-.5 1-1h14c.3 0 .7.2 1 1l3 2 c.3.3.3.7 0 1.1L18 16H20V8H4z&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
+    &lt;path d=&#34;M10 12c0-.9 1.2-1.4 1.8-1.4h6c.6 0 1 .3 1.6 1H10z&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
+  &lt;/g&gt;
+
+  &lt;!-- Rainy Icon (x=48 to x=72) --&gt;
+  &lt;g transform=&#34;translate(48, 0)&#34;&gt;
+    &lt;!-- Cloud base --&gt;
+    &lt;path d=&#34;M3 10c0-1.1 0-2 .6-3.5l3-2 c.3-.3.7-.5 1-1h14c.3 0 .7.2 1 1l3 2 c.3.3.3.7 0 1.1L18 16H20V8H3z&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; fill=&#34;none&#34; /&gt;
+    &lt;!-- Raindrops --&gt;
+    &lt;line x1=&#34;6&#34; y1=&#34;14&#34; x2=&#34;6&#34; y2=&#34;20&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; opacity=&#34;.7&#34; /&gt;
+    &lt;line x1=&#34;10&#34; y1=&#34;13&#34; x2=&#34;10&#34; y2=&#34;19&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; opacity=&#34;.7&#34; transform=&#34;translate(0, -1)&#34; /&gt;
+    &lt;line x1=&#34;14&#34; y1=&#34;14.5&#34; x2=&#34;14&#34; y2=&#34;21&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; opacity=&#34;.7&#34; transform=&#34;translate(0, 0.5)&#34; /&gt;
+  &lt;/g&gt;
+&lt;/svg&gt;
+```</pre>
+    </details>
+
+    
+    <p class="cost-note">Local inference on your hardware — no API token cost.</p>
+    
+
+    
+  </article>
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Kimi K2.7 Code</h2>
+      <p class="model-provider">Ollama Cloud · kimi-k2.7-code</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>170.5s</dd></div>
+        <div><dt>Tokens</dt><dd>152 → 16.5k</dd></div>
+        <div><dt>Cost</dt><dd>~$0.03</dd></div>
+        
+        <div><dt>Input cost</dt><dd>~$0.0001</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.03</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <div class="svg-preview">
+      <img src="../../runs/weather-icons/ollama-kimi-k2.7-code/artifacts/output.svg" alt="SVG output from Kimi K2.7 Code">
+    </div>
+    
+
+    
+    
+
+    
+    
+
+    
+    <div class="artifact-actions">
+      
+      <a class="btn" href="../../runs/weather-icons/ollama-kimi-k2.7-code/artifacts/output.svg" download>Download svg</a>
+      
+      <a class="btn" href="../../runs/weather-icons/ollama-kimi-k2.7-code/output.txt" download>Download raw output</a>
+    </div>
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">```svg
+&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 72 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;1.5&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;
+  &lt;g&gt;
+    &lt;circle cx=&#34;12&#34; cy=&#34;12&#34; r=&#34;4.5&#34;/&gt;
+    &lt;line x1=&#34;12&#34; y1=&#34;6.5&#34; x2=&#34;12&#34; y2=&#34;2.5&#34;/&gt;
+    &lt;line x1=&#34;12&#34; y1=&#34;17.5&#34; x2=&#34;12&#34; y2=&#34;21.5&#34;/&gt;
+    &lt;line x1=&#34;6.5&#34; y1=&#34;12&#34; x2=&#34;2.5&#34; y2=&#34;12&#34;/&gt;
+    &lt;line x1=&#34;17.5&#34; y1=&#34;12&#34; x2=&#34;21.5&#34; y2=&#34;12&#34;/&gt;
+    &lt;line x1=&#34;7.4&#34; y1=&#34;7.4&#34; x2=&#34;5.3&#34; y2=&#34;5.3&#34;/&gt;
+    &lt;line x1=&#34;16.6&#34; y1=&#34;7.4&#34; x2=&#34;18.7&#34; y2=&#34;5.3&#34;/&gt;
+    &lt;line x1=&#34;7.4&#34; y1=&#34;16.6&#34; x2=&#34;5.3&#34; y2=&#34;18.7&#34;/&gt;
+    &lt;line x1=&#34;16.6&#34; y1=&#34;16.6&#34; x2=&#34;18.7&#34; y2=&#34;18.7&#34;/&gt;
+  &lt;/g&gt;
+  &lt;g transform=&#34;translate(24,0)&#34;&gt;
+    &lt;path d=&#34;M5,18 a3,3 0 0 1 0,-6 a7,7 0 0 1 14,0 a3,3 0 0 1 0,6 h-14 z&#34;/&gt;
+  &lt;/g&gt;
+  &lt;g transform=&#34;translate(48,0)&#34;&gt;
+    &lt;path d=&#34;M5,18 a3,3 0 0 1 0,-6 a7,7 0 0 1 14,0 a3,3 0 0 1 0,6 h-14 z&#34;/&gt;
+    &lt;line x1=&#34;9&#34; y1=&#34;20&#34; x2=&#34;9&#34; y2=&#34;22.5&#34;/&gt;
+    &lt;line x1=&#34;12&#34; y1=&#34;20.5&#34; x2=&#34;12&#34; y2=&#34;23&#34;/&gt;
+    &lt;line x1=&#34;15&#34; y1=&#34;20&#34; x2=&#34;15&#34; y2=&#34;22.5&#34;/&gt;
+  &lt;/g&gt;
+&lt;/svg&gt;
+```</pre>
+    </details>
+
+    
+    <p class="cost-note">Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated — Ollama Cloud uses subscription usage, not per-token billing.</p>
+    
+
+    
+  </article>
+  
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Open source. Every prompt versioned. Every artifact public.</p>
+    </div>
+  </footer>
+</body>
+</html>

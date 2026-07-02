@@ -1,0 +1,10 @@
+id: weather-icons
+slug: weather-icons
+category: svg-generation
+title: Weather Icon Set
+description: Generate three minimal monochrome SVG weather icons in a single file.
+prompt: svg-generation/weather-icons@v1.0.0
+post_process:
+  - extract_svg
+screenshot: false
+models: all

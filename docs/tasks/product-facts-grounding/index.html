@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Side-by-side comparison of AI model outputs for Grounded Product Q&amp;A">
+  <title>Grounded Product Q&amp;A — Open Model Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../../index.html">Open Model Archive</a>
+      <nav class="site-nav">
+        <a href="../../index.html">Archive</a>
+        <a href="../../about/index.html">About</a>
+        <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    
+<section class="container comparison-header">
+  <a class="back-link" href="../../index.html">← Archive</a>
+  <p class="eyebrow">web-grounding</p>
+  <h1>Grounded Product Q&amp;A</h1>
+  <p class="lede">Answer factual questions using only provided source excerpts — no outside knowledge.</p>
+</section>
+
+
+<section class="container prompt-panel">
+  <details>
+    <summary>Prompt v1.0.0</summary>
+    <div class="prompt-meta">
+      <span>ID: product-facts</span>
+      <span>SHA-256: <code>d8eb23b5e597321f…</code></span>
+    </div>
+    <pre class="prompt-text">Answer the questions below using **only** the source excerpts provided. If the sources do not contain enough information, say &#34;Not stated in sources.&#34;
+
+## Source excerpts
+
+**[Source A — Drift product page draft]**
+Drift is a CLI that scans configuration files across environments. It compares staging and production manifests and reports drift before deploy. The free tier allows 3 environments. Pro is $12/month per workspace and adds Slack alerts.
+
+**[Source B — Drift changelog excerpt]**
+v0.4.2 (March 2026): Added Terraform plan diff integration. v0.4.0: Introduced `drift scan --fix` for safe auto-remediation of YAML formatting drift only — never modifies secret values.
+
+**[Source C — Drift docs FAQ]**
+Drift supports Kubernetes manifests, Docker Compose, Terraform state snapshots, and `.env` files. It does not support Windows Registry or iOS provisioning profiles. Maximum file size per scan: 2 MB.
+
+## Questions
+
+1. What does Drift do in one sentence?
+2. How much does Pro cost and what does it add?
+3. What file types does Drift support?
+4. What does `drift scan --fix` modify?
+5. Does Drift support iOS provisioning profiles?
+
+## Output format
+
+Respond in plain text with numbered answers. After each answer, cite the source letter(s) in brackets, e.g. `[A]` or `[B, C]`. Do not use outside knowledge.</pre>
+  </details>
+</section>
+
+
+<section class="container comparison-grid" style="--cols: 3">
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemini 3.1 Pro</h2>
+      <p class="model-provider">Google · Gemini 3.1 Pro (High)</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>9.1s</dd></div>
+        <div><dt>Tokens</dt><dd>256 → 19</dd></div>
+        <div><dt>Cost</dt><dd>~$0.0004</dd></div>
+        
+        <div><dt>Input cost</dt><dd>~$0.0003</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0001</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <div class="text-output">
+      <pre class="response-text">I am currently running on Gemini 3.5 Flash (Medium). How can I help you today?</pre>
+    </div>
+    
+
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">I am currently running on Gemini 3.5 Flash (Medium). How can I help you today?</pre>
+    </details>
+
+    
+    <p class="cost-note">Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated.</p>
+    
+
+    
+  </article>
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemma 4</h2>
+      <p class="model-provider">Ollama · gemma4:latest</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>12.4s</dd></div>
+        <div><dt>Tokens</dt><dd>334 → 801</dd></div>
+        <div><dt>Cost</dt><dd>$0.00</dd></div>
+        
+        <div><dt>Input cost</dt><dd>$0.00</dd></div>
+        <div><dt>Output cost</dt><dd>$0.00</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <div class="text-output">
+      <pre class="response-text">1. Drift is a CLI that scans configuration files across environments, comparing staging and production manifests and reporting drift before deploy [A].
+2. Pro costs $12/month per workspace and adds Slack alerts [A].
+3. Drift supports Kubernetes manifests, Docker Compose, Terraform state snapshots, and .env files [C].
+4. It remediates YAML formatting drift only, and never modifies secret values [B].
+5. No, it does not support iOS provisioning profiles [C].</pre>
+    </div>
+    
+
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">1. Drift is a CLI that scans configuration files across environments, comparing staging and production manifests and reporting drift before deploy [A].
+2. Pro costs $12/month per workspace and adds Slack alerts [A].
+3. Drift supports Kubernetes manifests, Docker Compose, Terraform state snapshots, and .env files [C].
+4. It remediates YAML formatting drift only, and never modifies secret values [B].
+5. No, it does not support iOS provisioning profiles [C].</pre>
+    </details>
+
+    
+    <p class="cost-note">Local inference on your hardware — no API token cost.</p>
+    
+
+    
+  </article>
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Kimi K2.7 Code</h2>
+      <p class="model-provider">Ollama Cloud · kimi-k2.7-code</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>13.1s</dd></div>
+        <div><dt>Tokens</dt><dd>315 → 460</dd></div>
+        <div><dt>Cost</dt><dd>~$0.0010</dd></div>
+        
+        <div><dt>Input cost</dt><dd>~$0.0001</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0009</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <div class="text-output">
+      <pre class="response-text">1. Drift is a CLI that scans configuration files across environments and compares staging and production manifests to report drift before deploy. [A]
+
+2. Pro costs $12/month per workspace and adds Slack alerts. [A]
+
+3. Drift supports Kubernetes manifests, Docker Compose, Terraform state snapshots, and `.env` files. [C]
+
+4. `drift scan --fix` modifies YAML formatting drift only and never modifies secret values. [B]
+
+5. No, Drift does not support iOS provisioning profiles. [C]</pre>
+    </div>
+    
+
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">1. Drift is a CLI that scans configuration files across environments and compares staging and production manifests to report drift before deploy. [A]
+
+2. Pro costs $12/month per workspace and adds Slack alerts. [A]
+
+3. Drift supports Kubernetes manifests, Docker Compose, Terraform state snapshots, and `.env` files. [C]
+
+4. `drift scan --fix` modifies YAML formatting drift only and never modifies secret values. [B]
+
+5. No, Drift does not support iOS provisioning profiles. [C]</pre>
+    </details>
+
+    
+    <p class="cost-note">Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated — Ollama Cloud uses subscription usage, not per-token billing.</p>
+    
+
+    
+  </article>
+  
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Open source. Every prompt versioned. Every artifact public.</p>
+    </div>
+  </footer>
+</body>
+</html>

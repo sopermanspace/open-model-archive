@@ -37,10 +37,10 @@ docs/ (GitHub Pages)
 2. Set `adapter: ollama` and `model_ref` to your Ollama tag
 3. Enable the model and add it to a task's `models` list (or use `all`)
 
-### Frontier models via agy CLI
+### Frontier models via provider CLI
 
 1. Copy `models/_template.yaml`
-2. Set `adapter: agy` and `cli_model` to an `agy models` name
+2. Set `adapter: cli` and `cli_model` to the provider's CLI model name
 3. The adapter captures stdout and archives it
 
 ### Direct APIs (future)

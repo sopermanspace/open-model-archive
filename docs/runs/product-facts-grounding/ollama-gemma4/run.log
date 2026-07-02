@@ -1,0 +1,6 @@
+task=product-facts-grounding
+model=ollama/gemma4
+prompt=web-grounding/product-facts@1.0.0
+adapter=ollama
+duration_ms=12443
+tokens=334->801

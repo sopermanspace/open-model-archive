@@ -1,0 +1,61 @@
+import threading
+import time
+
+
+class TokenBucket:
+    def __init__(self, rate: float, capacity: float) -> None:
+        if rate <= 0:
+            raise ValueError("rate must be positive")
+        if capacity <= 0:
+            raise ValueError("capacity must be positive")
+
+        self.rate = float(rate)
+        self.capacity = float(capacity)
+        self._tokens = float(capacity)
+        self._last_update = time.monotonic()
+        self._lock = threading.Lock()
+
+    def _add_tokens(self) -> None:
+        now = time.monotonic()
+        elapsed = now - self._last_update
+        if elapsed > 0:
+            self._tokens = min(self.capacity, self._tokens + elapsed * self.rate)
+            self._last_update = now
+
+    def allow(self, amount: float = 1.0) -> bool:
+        if amount <= 0:
+            return True
+
+        with self._lock:
+            self._add_tokens()
+            if self._tokens >= amount:
+                self._tokens -= amount
+                return True
+            return False
+
+    def retry_after(self, amount: float = 1.0) -> float:
+        if amount <= 0:
+            return 0.0
+
+        with self._lock:
+            self._add_tokens()
+            if self._tokens >= amount:
+                return 0.0
+            deficit = amount - self._tokens
+            return deficit / self.rate
+
+
+if __name__ == "__main__":
+    bucket = TokenBucket(rate=2.0, capacity=5.0)
+
+    assert bucket.allow(5.0) is True
+    assert bucket.allow(1.0) is False
+    assert bucket.retry_after(1.0) == 0.5
+
+    time.sleep(1.0)
+    assert bucket.allow(2.0) is True
+    assert bucket.allow(2.0) is False
+
+    time.sleep(0.5)
+    assert bucket.allow(2.0) is True
+    assert bucket.retry_after(0.0) == 0.0

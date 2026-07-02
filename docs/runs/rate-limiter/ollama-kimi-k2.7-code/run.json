@@ -1,0 +1,50 @@
+{
+  "id": "rate-limiter/ollama-kimi-k2.7-code/2026-07-02T13:10:02Z",
+  "task": {
+    "id": "rate-limiter",
+    "slug": "rate-limiter",
+    "category": "code-generation",
+    "title": "Token Bucket Rate Limiter",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "rate-limiter",
+    "version": "1.0.0",
+    "sha256": "0a6ce40606ffbca1faea7d87afba1e53bbd5a630843757ce849476e12d6d4c4c",
+    "title": "Token Bucket Rate Limiter"
+  },
+  "executed_at": "2026-07-02T13:10:02.145770Z",
+  "duration_ms": 8278,
+  "tokens": {
+    "input": 205,
+    "output": 701,
+    "reasoning": 0
+  },
+  "cost_usd": 0.001496,
+  "cost": {
+    "total_usd": 0.001496,
+    "input_usd": 7.7e-05,
+    "output_usd": 0.00142,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated \u2014 Ollama Cloud uses subscription usage, not per-token billing."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "source",
+      "path": "artifacts/main.py",
+      "sha256": "11d4abbf66eadd9ebb815847fb2f742cefc16bb4e25c124c850deddffccdb9c1",
+      "language": "python"
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

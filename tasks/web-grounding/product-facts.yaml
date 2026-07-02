@@ -1,0 +1,8 @@
+id: product-facts-grounding
+slug: product-facts-grounding
+category: web-grounding
+title: Grounded Product Q&A
+description: Answer factual questions using only provided source excerpts — no outside knowledge.
+prompt: web-grounding/product-facts@v1.0.0
+screenshot: false
+models: all

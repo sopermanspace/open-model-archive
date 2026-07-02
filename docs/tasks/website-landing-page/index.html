@@ -62,15 +62,739 @@ The page should feel like a polished indie developer tool, not a generic AI temp
 </section>
 
 
-<section class="container comparison-grid" style="--cols: 2">
+<section class="container comparison-grid" style="--cols: 3">
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemini 3.1 Pro</h2>
+      <p class="model-provider">Google · Gemini 3.1 Pro (High)</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>57.4s</dd></div>
+        <div><dt>Tokens</dt><dd>256 → 5.4k</dd></div>
+        <div><dt>Cost</dt><dd>~$0.03</dd></div>
+        
+        <div><dt>Input cost</dt><dd>~$0.0003</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.03</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+    
+
+    
+    
+    
+    <div class="preview-tabs" data-tabs="1">
+      <input type="radio" name="tab-1" id="snap-1" checked>
+      <input type="radio" name="tab-1" id="live-1">
+      <div class="tab-labels">
+        <label for="snap-1">Snapshot</label>
+        <label for="live-1">Live preview</label>
+      </div>
+      <div class="tab-panel snap-panel">
+        <img src="../../runs/website-landing-page/google-gemini-3.1-pro/screenshots/desktop.png" alt="Snapshot of Gemini 3.1 Pro output" loading="lazy">
+      </div>
+      <div class="tab-panel live-panel">
+        <iframe src="../../runs/website-landing-page/google-gemini-3.1-pro/artifacts/index.html" title="Gemini 3.1 Pro preview" loading="lazy"></iframe>
+      </div>
+    </div>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    <div class="artifact-actions">
+      
+      <a class="btn" href="../../runs/website-landing-page/google-gemini-3.1-pro/artifacts/index.html" download>Download html</a>
+      
+      <a class="btn" href="../../runs/website-landing-page/google-gemini-3.1-pro/output.txt" download>Download raw output</a>
+    </div>
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">```html
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&#34;en&#34;&gt;
+&lt;head&gt;
+    &lt;meta charset=&#34;UTF-8&#34;&gt;
+    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34;&gt;
+    &lt;title&gt;Drift - Configuration Drift Detection CLI&lt;/title&gt;
+    &lt;meta name=&#34;description&#34; content=&#34;Detect configuration drift between your staging and production environments before you deploy.&#34;&gt;
+    
+    &lt;link rel=&#34;preconnect&#34; href=&#34;https://fonts.googleapis.com&#34;&gt;
+    &lt;link rel=&#34;preconnect&#34; href=&#34;https://fonts.gstatic.com&#34; crossorigin&gt;
+    &lt;link href=&#34;https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap&#34; rel=&#34;stylesheet&#34;&gt;
+    
+    &lt;style&gt;
+        :root {
+            --bg-base: #0f1115;
+            --bg-surface: #1a1d24;
+            --bg-surface-hover: #22262f;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-tertiary: #64748b;
+            --accent-primary: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --border-color: #2e3440;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --font-main: &#39;Inter&#39;, system-ui, -apple-system, BlinkMacSystemFont, &#34;Segoe UI&#34;, Roboto, sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &#34;Liberation Mono&#34;, &#34;Courier New&#34;, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent-primary);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--text-primary);
+            color: var(--bg-base);
+        }
+
+        .btn-primary:hover {
+            background-color: #f8fafc;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-secondary);
+            background-color: var(--bg-surface);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        /* Code Block */
+        .code-showcase {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 60px;
+            text-align: left;
+        }
+
+        .code-header {
+            display: flex;
+            gap: 8px;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(0,0,0,0.2);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+        }
+
+        .code-content {
+            padding: 24px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            overflow-x: auto;
+        }
+
+        .cmd { color: var(--text-primary); font-weight: 600; }
+        .arg { color: var(--accent-primary); }
+        .success { color: var(--success); }
+        .warning { color: var(--warning); }
+        .error { color: var(--error); }
+        .muted { color: var(--text-tertiary); }
+
+        /* Features */
+        .features {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 32px;
+        }
+
+        .feature-icon {
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .testimonial-card {
+            padding: 40px;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .testimonial-quote {
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            font-style: normal;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .author-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 100px 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.pro {
+            border-color: var(--text-primary);
+        }
+
+        .pricing-header {
+            margin-bottom: 32px;
+        }
+
+        .pricing-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 40px;
+            flex-grow: 1;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pricing-features li::before {
+            content: &#34;✓&#34;;
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        footer {
+            padding: 64px 0 32px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 64px;
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 8px;
+            max-width: 250px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 64px;
+        }
+
+        .footer-col h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 3rem; }
+            .feature-grid, .testimonial-grid, .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .testimonial-card {
+                padding: 24px;
+                border-left: none;
+                border-top: 2px solid var(--border-color);
+            }
+            .footer-content {
+                flex-direction: column;
+                gap: 48px;
+            }
+            .footer-links {
+                flex-wrap: wrap;
+                gap: 48px;
+            }
+        }
+        @media (max-width: 600px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-actions { flex-direction: column; }
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;div class=&#34;container&#34;&gt;
+        &lt;nav&gt;
+            &lt;div class=&#34;logo&#34;&gt;Drift.&lt;/div&gt;
+            &lt;div class=&#34;nav-links&#34;&gt;
+                &lt;a href=&#34;#features&#34;&gt;Features&lt;/a&gt;
+                &lt;a href=&#34;#testimonials&#34;&gt;Testimonials&lt;/a&gt;
+                &lt;a href=&#34;#pricing&#34;&gt;Pricing&lt;/a&gt;
+                &lt;a href=&#34;#docs&#34;&gt;Docs&lt;/a&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+                &lt;a href=&#34;#&#34; class=&#34;btn btn-outline&#34; style=&#34;margin-right: 12px;&#34;&gt;Sign In&lt;/a&gt;
+                &lt;a href=&#34;#&#34; class=&#34;btn btn-primary&#34;&gt;Get Started&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/nav&gt;
+
+        &lt;section class=&#34;hero&#34;&gt;
+            &lt;h1&gt;Know before you deploy.&lt;/h1&gt;
+            &lt;p&gt;Drift is a CLI that automatically detects configuration inconsistencies between your staging and production environments.&lt;/p&gt;
+            &lt;div class=&#34;hero-actions&#34;&gt;
+                &lt;a href=&#34;#&#34; class=&#34;btn btn-primary&#34;&gt;Start drift scan&lt;/a&gt;
+                &lt;a href=&#34;#&#34; class=&#34;btn btn-outline&#34;&gt;Read documentation&lt;/a&gt;
+            &lt;/div&gt;
+
+            &lt;div class=&#34;code-showcase&#34;&gt;
+                &lt;div class=&#34;code-header&#34;&gt;
+                    &lt;div class=&#34;dot&#34;&gt;&lt;/div&gt;
+                    &lt;div class=&#34;dot&#34;&gt;&lt;/div&gt;
+                    &lt;div class=&#34;dot&#34;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class=&#34;code-content&#34;&gt;
+&lt;span class=&#34;muted&#34;&gt;$&lt;/span&gt; &lt;span class=&#34;cmd&#34;&gt;drift scan&lt;/span&gt; &lt;span class=&#34;arg&#34;&gt;--target production --compare-to staging&lt;/span&gt;
+
+&lt;span class=&#34;muted&#34;&gt;Scanning environment infrastructure...&lt;/span&gt;
+&lt;span class=&#34;muted&#34;&gt;Comparing configuration state...&lt;/span&gt;
+
+&lt;span class=&#34;warning&#34;&gt;Warning: 3 configuration drifts detected.&lt;/span&gt;
+
+&lt;span class=&#34;muted&#34;&gt;1. Environment Variables [API_GATEWAY]&lt;/span&gt;
+   &lt;span class=&#34;error&#34;&gt;- production: https://api.prod.internal&lt;/span&gt;
+   &lt;span class=&#34;success&#34;&gt;+ staging: https://api.staging.internal&lt;/span&gt;
+
+&lt;span class=&#34;muted&#34;&gt;2. Redis Cluster Configuration&lt;/span&gt;
+   &lt;span class=&#34;error&#34;&gt;- production: maxmemory-policy allkeys-lru&lt;/span&gt;
+   &lt;span class=&#34;success&#34;&gt;+ staging: maxmemory-policy volatile-lru&lt;/span&gt;
+
+&lt;span class=&#34;muted&#34;&gt;3. IAM Roles&lt;/span&gt;
+   &lt;span class=&#34;error&#34;&gt;- production: missing policy [s3:PutObject] on role [app-worker-role]&lt;/span&gt;
+
+&lt;span class=&#34;cmd&#34;&gt;Run &lt;span class=&#34;arg&#34;&gt;drift patch generate&lt;/span&gt; to create a remediation plan.&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section id=&#34;features&#34; class=&#34;features&#34;&gt;
+            &lt;div class=&#34;section-header&#34;&gt;
+                &lt;h2&gt;Built for infrastructure reliability&lt;/h2&gt;
+                &lt;p&gt;Catch discrepancies before they cause production outages.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;feature-grid&#34;&gt;
+                &lt;div class=&#34;feature-card&#34;&gt;
+                    &lt;div class=&#34;feature-icon&#34;&gt;
+                        &lt;svg width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;&lt;path d=&#34;M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;
+                    &lt;/div&gt;
+                    &lt;h3&gt;Multi-Cloud Support&lt;/h3&gt;
+                    &lt;p&gt;Detects drift across AWS, GCP, and Azure configurations seamlessly. Connect your provider via native IAM roles or service accounts.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&#34;feature-card&#34;&gt;
+                    &lt;div class=&#34;feature-icon&#34;&gt;
+                        &lt;svg width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;&lt;polyline points=&#34;22 12 18 12 15 21 9 3 6 12 2 12&#34;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+                    &lt;/div&gt;
+                    &lt;h3&gt;CI/CD Integration&lt;/h3&gt;
+                    &lt;p&gt;Run Drift as a step in GitHub Actions, GitLab CI, or Jenkins. Fail builds automatically if unapproved configuration drift is detected.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&#34;feature-card&#34;&gt;
+                    &lt;div class=&#34;feature-icon&#34;&gt;
+                        &lt;svg width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;&lt;path d=&#34;M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z&#34;&gt;&lt;/path&gt;&lt;polyline points=&#34;14 2 14 8 20 8&#34;&gt;&lt;/polyline&gt;&lt;line x1=&#34;16&#34; y1=&#34;13&#34; x2=&#34;8&#34; y2=&#34;13&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;17&#34; x2=&#34;8&#34; y2=&#34;17&#34;&gt;&lt;/line&gt;&lt;polyline points=&#34;10 9 9 9 8 9&#34;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+                    &lt;/div&gt;
+                    &lt;h3&gt;Automated Remediation&lt;/h3&gt;
+                    &lt;p&gt;Generate Terraform or Pulumi patches instantly to align your environments. Review the patch, approve it, and deploy with confidence.&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section id=&#34;testimonials&#34; class=&#34;testimonials&#34;&gt;
+            &lt;div class=&#34;section-header&#34;&gt;
+                &lt;h2&gt;Trusted by platform teams&lt;/h2&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;testimonial-grid&#34;&gt;
+                &lt;div class=&#34;testimonial-card&#34;&gt;
+                    &lt;p class=&#34;testimonial-quote&#34;&gt;&#34;Drift caught a missing environment variable in production that would have broken our payment processing pipeline. It&#39;s now a mandatory step in our deployment workflow.&#34;&lt;/p&gt;
+                    &lt;div class=&#34;testimonial-author&#34;&gt;
+                        &lt;div class=&#34;author-avatar&#34;&gt;&lt;/div&gt;
+                        &lt;div class=&#34;author-info&#34;&gt;
+                            &lt;h4&gt;Sarah Jenkins&lt;/h4&gt;
+                            &lt;p&gt;Lead DevOps Engineer at FinFlow&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class=&#34;testimonial-card&#34;&gt;
+                    &lt;p class=&#34;testimonial-quote&#34;&gt;&#34;We used to spend hours debugging differences between staging and prod. Drift reduces that to a two-second CLI command. Absolute game changer for our infrastructure.&#34;&lt;/p&gt;
+                    &lt;div class=&#34;testimonial-author&#34;&gt;
+                        &lt;div class=&#34;author-avatar&#34;&gt;&lt;/div&gt;
+                        &lt;div class=&#34;author-info&#34;&gt;
+                            &lt;h4&gt;David Chen&lt;/h4&gt;
+                            &lt;p&gt;CTO at DataSphere&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section id=&#34;pricing&#34; class=&#34;pricing&#34;&gt;
+            &lt;div class=&#34;section-header&#34;&gt;
+                &lt;h2&gt;Simple, transparent pricing&lt;/h2&gt;
+                &lt;p&gt;Start for free, upgrade when you need team features.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;pricing-grid&#34;&gt;
+                &lt;div class=&#34;pricing-card&#34;&gt;
+                    &lt;div class=&#34;pricing-header&#34;&gt;
+                        &lt;h3&gt;Community&lt;/h3&gt;
+                        &lt;div class=&#34;price&#34;&gt;$0&lt;span&gt;/mo&lt;/span&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;ul class=&#34;pricing-features&#34;&gt;
+                        &lt;li&gt;Unlimited local scans&lt;/li&gt;
+                        &lt;li&gt;Basic AWS, GCP, Azure support&lt;/li&gt;
+                        &lt;li&gt;Standard output formats (JSON, text)&lt;/li&gt;
+                        &lt;li&gt;Community Discord support&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;a href=&#34;#&#34; class=&#34;btn btn-outline&#34; style=&#34;width: 100%;&#34;&gt;Download CLI&lt;/a&gt;
+                &lt;/div&gt;
+                &lt;div class=&#34;pricing-card pro&#34;&gt;
+                    &lt;div class=&#34;pricing-header&#34;&gt;
+                        &lt;h3&gt;Team&lt;/h3&gt;
+                        &lt;div class=&#34;price&#34;&gt;$49&lt;span&gt;/seat/mo&lt;/span&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;ul class=&#34;pricing-features&#34;&gt;
+                        &lt;li&gt;Everything in Community&lt;/li&gt;
+                        &lt;li&gt;Automated patch generation&lt;/li&gt;
+                        &lt;li&gt;CI/CD pipeline integrations&lt;/li&gt;
+                        &lt;li&gt;Custom drift ignore rules&lt;/li&gt;
+                        &lt;li&gt;Priority email support&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;a href=&#34;#&#34; class=&#34;btn btn-primary&#34; style=&#34;width: 100%;&#34;&gt;Start Free Trial&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;footer&gt;
+            &lt;div class=&#34;footer-content&#34;&gt;
+                &lt;div class=&#34;footer-brand&#34;&gt;
+                    &lt;div class=&#34;logo&#34;&gt;Drift.&lt;/div&gt;
+                    &lt;p&gt;Configuration drift detection for modern infrastructure teams.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&#34;footer-links&#34;&gt;
+                    &lt;div class=&#34;footer-col&#34;&gt;
+                        &lt;h4&gt;Product&lt;/h4&gt;
+                        &lt;ul&gt;
+                            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;CLI Reference&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Integrations&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&#34;footer-col&#34;&gt;
+                        &lt;h4&gt;Resources&lt;/h4&gt;
+                        &lt;ul&gt;
+                            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;GitHub Repository&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Community&lt;/a&gt;&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&#34;footer-col&#34;&gt;
+                        &lt;h4&gt;Company&lt;/h4&gt;
+                        &lt;ul&gt;
+                            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;About&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Terms of Service&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Privacy Policy&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Contact&lt;/a&gt;&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;footer-bottom&#34;&gt;
+                &lt;p&gt;&amp;copy; 2026 Drift Technologies, Inc. All rights reserved.&lt;/p&gt;
+                &lt;p&gt;Designed with minimal effort, maximum impact.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/footer&gt;
+    &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+```</pre>
+    </details>
+
+    
+    <p class="cost-note">Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated.</p>
+    
+
+    
+  </article>
+  
   
   <article class="model-column">
     <header class="model-header">
       <h2>Gemma 4</h2>
       <p class="model-provider">Ollama · gemma4:latest</p>
       <dl class="metrics">
-        <div><dt>Duration</dt><dd>66.0s</dd></div>
-        <div><dt>Tokens</dt><dd>242 → 4.3k</dd></div>
+        <div><dt>Duration</dt><dd>70.8s</dd></div>
+        <div><dt>Tokens</dt><dd>242 → 4.6k</dd></div>
         <div><dt>Cost</dt><dd>$0.00</dd></div>
         
         <div><dt>Input cost</dt><dd>$0.00</dd></div>
@@ -83,17 +807,34 @@ The page should feel like a polished indie developer tool, not a generic AI temp
     
 
     
-    <figure class="screenshot">
-      <img src="../../runs/website-landing-page/ollama-gemma4/screenshots/desktop.png" alt="Screenshot of Gemma 4 output" loading="lazy">
-    </figure>
     
 
     
-      
-      <div class="preview-frame">
+    
+    
+    <div class="preview-tabs" data-tabs="2">
+      <input type="radio" name="tab-2" id="snap-2" checked>
+      <input type="radio" name="tab-2" id="live-2">
+      <div class="tab-labels">
+        <label for="snap-2">Snapshot</label>
+        <label for="live-2">Live preview</label>
+      </div>
+      <div class="tab-panel snap-panel">
+        <img src="../../runs/website-landing-page/ollama-gemma4/screenshots/desktop.png" alt="Snapshot of Gemma 4 output" loading="lazy">
+      </div>
+      <div class="tab-panel live-panel">
         <iframe src="../../runs/website-landing-page/ollama-gemma4/artifacts/index.html" title="Gemma 4 preview" loading="lazy"></iframe>
       </div>
-      
+    </div>
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -101,22 +842,520 @@ The page should feel like a polished indie developer tool, not a generic AI temp
       
       <a class="btn" href="../../runs/website-landing-page/ollama-gemma4/artifacts/index.html" download>Download html</a>
       
+      <a class="btn" href="../../runs/website-landing-page/ollama-gemma4/output.txt" download>Download raw output</a>
     </div>
     
 
     <details class="source-panel">
       <summary>Raw model output</summary>
-      <iframe class="source-iframe" src="../../runs/website-landing-page/ollama-gemma4/output.txt" title="Raw output"></iframe>
-    </details>
+      <pre class="response-text compact">```html
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&#34;en&#34;&gt;
+&lt;head&gt;
+    &lt;meta charset=&#34;UTF-8&#34;&gt;
+    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34;&gt;
+    &lt;title&gt;Drift - Configuration Drift Detection CLI&lt;/title&gt;
+    &lt;!-- Google Font: Inter for professional UI feel --&gt;
+    &lt;link rel=&#34;preconnect&#34; href=&#34;https://fonts.googleapis.com&#34;&gt;
+    &lt;link rel=&#34;preconnect&#34; href=&#34;https://fonts.gstatic.com&#34; crossorigin&gt;
+    &lt;link href=&#34;https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap&#34; rel=&#34;stylesheet&#34;&gt;
 
-    
-      
-    <details class="source-panel">
-      <summary>Generated HTML</summary>
-      <iframe class="source-iframe" src="../../runs/website-landing-page/ollama-gemma4/artifacts/index.html" title="HTML source"></iframe>
+    &lt;style&gt;
+        /* ------------------------- */
+        /* Base Reset and Variables */
+        /* ------------------------- */
+        :root {
+            --color-bg: #0f172a; /* Slate-900 / Deep dark blue */
+            --color-fg: #e2e8f0; /* Light gray for text */
+            --color-primary: #3b82f6; /* Blue-500 for accents/CTAs */
+            --color-secondary-bg: #1e293b; /* Slate-800 / Slightly lighter dark container */
+            --color-border: #334155; /* Slate-700 */
+            --color-success: #10b981; /* Emerald Green */
+            --font-body: &#39;Inter&#39;, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--color-primary);
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Global Section Styling */
+        section {
+            padding: 6rem 0;
+            min-height: 80vh;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* ------------------------- */
+        /* Navigation */
+        /* ------------------------- */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--color-fg);
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            color: var(--color-fg);
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--color-primary);
+        }
+
+        /* ------------------------- */
+        /* Buttons (CTA) */
+        /* ------------------------- */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            text-align: center;
+        }
+
+        /* Primary CTA button style */
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb; /* Blue-600 */
+            transform: translateY(-1px);
+        }
+
+        /* Secondary button style (links) */
+        .btn-secondary {
+            background: none;
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+            opacity: 1;
+        }
+
+        /* ------------------------- */
+        /* Hero Section */
+        /* ------------------------- */
+        #hero {
+            padding: 8rem 0;
+            text-align: center;
+        }
+
+        #hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        #hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: var(--color-fg);
+            opacity: 0.8;
+        }
+
+        /* ------------------------- */
+        /* Features */
+        /* ------------------------- */
+        #features h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: flex;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 768px) {
+            .feature-grid {
+                flex-direction: column;
+            }
+        }
+
+        .feature-card {
+            background-color: var(--color-secondary-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--color-primary);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card h3 {
+            color: var(--color-primary);
+            margin-bottom: 0.75rem;
+        }
+
+
+        /* ------------------------- */
+        /* Code Example Block */
+        /* ------------------------- */
+        #code-example {
+            background-color: var(--color-secondary-bg);
+            border-radius: 10px;
+            padding: 3rem;
+            margin-top: -5rem; /* Pull up slightly over the fold for visual interest */
+            position: relative;
+            z-index: 1;
+        }
+
+        #code-example h2 {
+             text-align: center;
+        }
+
+        .code-block pre {
+            background-color: #0f172a; /* Match body background */
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: &#39;Consolas&#39;, monospace;
+            color: var(--color-success);
+            /* Syntax highlighting simulation */
+        }
+
+        .code-block code {
+            display: block;
+            white-space: pre-wrap;
+        }
+
+        .cmd-text { color: #fcd34d; /* Amber for commands */ }
+        .keyword { color: #60a5fa; /* Blue for keywords */ }
+        .argument { color: var(--color-success); }
+
+
+        /* ------------------------- */
+        /* Testimonials */
+        /* ------------------------- */
+        #testimonials {
+            background-color: var(--color-secondary-bg);
+            text-align: center;
+        }
+
+        .testimonial-grid {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        @media (max-width: 768px) {
+             .testimonial-card {
+                flex-basis: 100%;
+            }
+        }
+
+        .testimonial-card {
+            background-color: var(--color-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 450px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--color-fg);
+        }
+
+        .testimonial-card strong {
+            display: block;
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        /* ------------------------- */
+        /* Pricing */
+        /* ------------------------- */
+        #pricing h2 {
+             text-align: center;
+             margin-bottom: 3rem;
+        }
+        
+        .price-container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+             .price-card {
+                flex-basis: 100%;
+            }
+            .price-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .price-card {
+            background-color: var(--color-secondary-bg);
+            padding: 3rem;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+            max-width: 450px;
+            transition: transform 0.3s;
+        }
+
+        .price-card h3 {
+            font-size: 2rem;
+            color: var(--color-fg);
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-tag {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .price-card ul {
+             list-style: none;
+             padding: 0;
+             margin-bottom: 2rem;
+        }
+
+        .price-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed var(--color-border);
+            display: flex;
+            align-items: center;
+        }
+        
+        .price-card li::before {
+             content: &#39;✓&#39;;
+             margin-right: 0.5rem;
+             color: var(--color-success);
+        }
+
+        /* Highlight Pro plan */
+        .price-card.pro {
+            background-color: #1e293b;
+            border: 2px solid var(--color-primary);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+        }
+
+        /* ------------------------- */
+        /* Footer */
+        /* ------------------------- */
+        footer {
+            background-color: #071120; /* Slightly darker than body background */
+            padding: 3rem 0;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            margin: 0 1rem;
+            opacity: 0.7;
+        }
+
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+    &lt;!-- Navigation --&gt;
+    &lt;header class=&#34;navbar&#34;&gt;
+        &lt;div class=&#34;container nav-content&#34;&gt;
+            &lt;div class=&#34;logo&#34;&gt;Drift&lt;/div&gt;
+            &lt;nav class=&#34;nav-links&#34;&gt;
+                &lt;a href=&#34;#features&#34;&gt;Features&lt;/a&gt;
+                &lt;a href=&#34;#code-example&#34;&gt;Usage&lt;/a&gt;
+                &lt;a href=&#34;#pricing&#34;&gt;Pricing&lt;/a&gt;
+                &lt;a href=&#34;#&#34; class=&#34;btn btn-primary&#34; style=&#34;padding: 0.5rem 1.2rem;&#34;&gt;Log In&lt;/a&gt;
+            &lt;/nav&gt;
+        &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;!-- Hero Section --&gt;
+    &lt;section id=&#34;hero&#34;&gt;
+        &lt;div class=&#34;container&#34;&gt;
+            &lt;h1&gt;Detect configuration drift before it causes a catastrophe.&lt;/h1&gt;
+            &lt;p&gt;Drift analyzes infrastructure, application state, and config files across environments (Staging, Prod) to provide an immediate truth snapshot.&lt;/p&gt;
+            &lt;a href=&#34;#&#34; class=&#34;btn btn-primary&#34; style=&#34;font-size: 1.2rem;&#34;&gt;Start drift scan&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- Feature Cards --&gt;
+    &lt;section id=&#34;features&#34;&gt;
+        &lt;div class=&#34;container&#34;&gt;
+            &lt;h2&gt;Seamless Monitoring, Total Visibility&lt;/h2&gt;
+            &lt;p style=&#34;text-align: center; max-width: 600px; margin: -1rem;&#34;&gt;Know exactly what changed and who approved it. Drift eliminates the &#39;it worked locally&#39; excuse.&lt;/p&gt;
+
+            &lt;div class=&#34;feature-grid&#34;&gt;
+                &lt;article class=&#34;feature-card&#34;&gt;
+                    &lt;h3&gt;📊 State Comparison&lt;/h3&gt;
+                    &lt;p&gt;Compare live cloud resource states against defined IaC templates (Terraform, Pulumi). Identify unauthorized changes instantly.&lt;/p&gt;
+                &lt;/article&gt;
+                &lt;article class=&#34;feature-card&#34;&gt;
+                    &lt;h3&gt;📜 History Tracking&lt;/h3&gt;
+                    &lt;p&gt;Maintain a verifiable audit log of every configuration modification. Every change is tied to an identity and timestamp.&lt;/p&gt;
+                &lt;/article&gt;
+                &lt;article class=&#34;feature-card&#34;&gt;
+                    &lt;h3&gt;⚙️ Custom Scanners&lt;/h3&gt;
+                    &lt;p&gt;Use your own custom modules or SSH scripts to check application-level drifts that standard tooling misses (e.g., database schema versions).&lt;/p&gt;
+                &lt;/article&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- Code Example Block --&gt;
+    &lt;section id=&#34;code-example&#34;&gt;
+        &lt;div class=&#34;container&#34;&gt;
+            &lt;h2&gt;How it works: Scanning a Cloud Region&lt;/h2&gt;
+            &lt;p style=&#34;margin-bottom: 2rem;&#34;&gt;Run the command in your CI/CD pipeline to detect discrepancies between &#39;target&#39; (Prod) and &#39;source&#39; (Staging).&lt;/p&gt;
+
+            &lt;div class=&#34;code-block&#34;&gt;
+                &lt;pre&gt;&lt;code contenteditable=&#34;false&#34;&gt;
+$ drift --project infra-backend \
+  --environments staging,production \
+  --targets terraform/main.tfstate \
+  --output json &gt; drift_report.json
+                &lt;/code&gt;&lt;/pre&gt;
+                &lt;p style=&#34;margin-top: 1rem; font-size: 0.9em; color: var(--color-primary);&#34;&gt;
+                    Example output snippet:&lt;br&gt;&lt;code contenteditable=&#34;false&#34; class=&#34;argument&#34;&gt;Resource &#39;aws:s3/bucket-dev&#39; exists in Staging, but not found in Production target state.&lt;/code&gt;
+                &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- Testimonials --&gt;
+    &lt;section id=&#34;testimonials&#34;&gt;
+        &lt;div class=&#34;container&#34;&gt;
+            &lt;h2&gt;Trusted by modern DevOps teams&lt;/h2&gt;
+            &lt;div class=&#34;testimonial-grid&#34;&gt;
+                &lt;article class=&#34;testimonial-card&#34;&gt;
+                    &lt;p&gt;&#34;Before Drift, our staging and production environments often diverged for days at a time. Now we have real-time parity checks that saved us from a major rollback incident last month.&#34;&lt;/p&gt;
+                    &lt;strong&gt;— Maya R., VP of Engineering, FluxCorp&lt;/strong&gt;
+                &lt;/article&gt;
+                &lt;article class=&#34;testimonial-card&#34;&gt;
+                    &lt;p&gt;&#34;The custom scanner module was the killer feature. We could finally monitor things like API versioning consistency without writing complex wrappers. A massive time saver.&#34;&lt;/p&gt;
+                    &lt;strong&gt;— Julian K., Lead Platform Engineer, Beacon Systems&lt;/strong&gt;
+                &lt;/article&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- Pricing --&gt;
+    &lt;section id=&#34;pricing&#34;&gt;
+        &lt;div class=&#34;container&#34;&gt;
+            &lt;h2&gt;Pricing&lt;/h2&gt;
+            &lt;p style=&#34;text-align: center; margin-bottom: 3rem;&#34;&gt;Choose the plan that fits your team&#39;s complexity and operational scale.&lt;/p&gt;
+            
+            &lt;div class=&#34;price-container&#34;&gt;
+                
+                &lt;!-- Free Plan --&gt;
+                &lt;div class=&#34;price-card&#34;&gt;
+                    &lt;h3&gt;Starter&lt;/h3&gt;
+                    &lt;div class=&#34;price-tag&#34;&gt;$0&lt;/div&gt;
+                    &lt;p style=&#34;font-size: 1.2rem; color: var(--color-fg); margin-bottom: 2rem;&#34;&gt;Perfect for small projects and testing.&lt;/p&gt;
+
+                    &lt;ul&gt;
+                        &lt;li&gt;Basic environment drift checks&lt;/li&gt;
+                        &lt;li&gt;Up to 3 environments&lt;/li&gt;
+                        &lt;li&gt;Standard logging (90 days)&lt;/li&gt;
+                        &lt;li&gt;Community support&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;button class=&#34;btn btn-primary&#34; style=&#34;width: 100%;&#34;&gt;Get Started Free&lt;/button&gt;
+                &lt;/div&gt;
+
+                 &lt;!-- Pro Plan --&gt;
+                &lt;div class=&#34;price-card pro&#34;&gt;
+                    &lt;h3&gt;Enterprise Pro&lt;/h3&gt;
+                    &lt;div class=&#34;price-tag&#34;&gt;$49&lt;span&gt;/mo&lt;/span&gt;&lt;/div&gt;
+                    &lt;p style=&#34;font-size: 1.2rem; color: var(--color-fg); margin-bottom: 2rem;&#34;&gt;For teams requiring audited, cross-cloud consistency.&lt;/p&gt;
+
+                    &lt;ul&gt;
+                        &lt;li&gt;Unlimited environment scanning&lt;/li&gt;
+                        &lt;li&gt;Advanced Custom Scanner API access&lt;/li&gt;
+                        &lt;li&gt;Full audit log (Infinite retention)&lt;/li&gt;
+                        &lt;li&gt;Dedicated support &amp; SLA&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;button class=&#34;btn btn-primary&#34; style=&#34;width: 100%;&#34;&gt;Go Pro&lt;/button&gt;
+                &lt;/div&gt;
+
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+
+    &lt;!-- Footer --&gt;
+    &lt;footer&gt;
+        &lt;div class=&#34;container&#34;&gt;
+            &amp;copy; 2024 Drift Systems. All rights reserved. | &lt;a href=&#34;#&#34;&gt;Privacy&lt;/a&gt; | &lt;a href=&#34;#&#34;&gt;Terms&lt;/a&gt; | &lt;a href=&#34;#&#34;&gt;Contact&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+```</pre>
     </details>
-      
-    
 
     
     <p class="cost-note">Local inference on your hardware — no API token cost.</p>
@@ -125,17 +1364,18 @@ The page should feel like a polished indie developer tool, not a generic AI temp
     
   </article>
   
+  
   <article class="model-column">
     <header class="model-header">
       <h2>Kimi K2.7 Code</h2>
       <p class="model-provider">Ollama Cloud · kimi-k2.7-code</p>
       <dl class="metrics">
-        <div><dt>Duration</dt><dd>76.4s</dd></div>
-        <div><dt>Tokens</dt><dd>223 → 7.1k</dd></div>
-        <div><dt>Cost</dt><dd>~$0.01</dd></div>
+        <div><dt>Duration</dt><dd>73.1s</dd></div>
+        <div><dt>Tokens</dt><dd>223 → 7.9k</dd></div>
+        <div><dt>Cost</dt><dd>~$0.02</dd></div>
         
         <div><dt>Input cost</dt><dd>~$0.0001</dd></div>
-        <div><dt>Output cost</dt><dd>~$0.01</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.02</dd></div>
         
         <div><dt>Status</dt><dd class="status-success">success</dd></div>
       </dl>
@@ -144,17 +1384,34 @@ The page should feel like a polished indie developer tool, not a generic AI temp
     
 
     
-    <figure class="screenshot">
-      <img src="../../runs/website-landing-page/ollama-kimi-k2.7-code/screenshots/desktop.png" alt="Screenshot of Kimi K2.7 Code output" loading="lazy">
-    </figure>
     
 
     
-      
-      <div class="preview-frame">
+    
+    
+    <div class="preview-tabs" data-tabs="3">
+      <input type="radio" name="tab-3" id="snap-3" checked>
+      <input type="radio" name="tab-3" id="live-3">
+      <div class="tab-labels">
+        <label for="snap-3">Snapshot</label>
+        <label for="live-3">Live preview</label>
+      </div>
+      <div class="tab-panel snap-panel">
+        <img src="../../runs/website-landing-page/ollama-kimi-k2.7-code/screenshots/desktop.png" alt="Snapshot of Kimi K2.7 Code output" loading="lazy">
+      </div>
+      <div class="tab-panel live-panel">
         <iframe src="../../runs/website-landing-page/ollama-kimi-k2.7-code/artifacts/index.html" title="Kimi K2.7 Code preview" loading="lazy"></iframe>
       </div>
-      
+    </div>
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -162,22 +1419,874 @@ The page should feel like a polished indie developer tool, not a generic AI temp
       
       <a class="btn" href="../../runs/website-landing-page/ollama-kimi-k2.7-code/artifacts/index.html" download>Download html</a>
       
+      <a class="btn" href="../../runs/website-landing-page/ollama-kimi-k2.7-code/output.txt" download>Download raw output</a>
     </div>
     
 
     <details class="source-panel">
       <summary>Raw model output</summary>
-      <iframe class="source-iframe" src="../../runs/website-landing-page/ollama-kimi-k2.7-code/output.txt" title="Raw output"></iframe>
-    </details>
+      <pre class="response-text compact">```html
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&#34;en&#34;&gt;
+&lt;head&gt;
+  &lt;meta charset=&#34;UTF-8&#34;&gt;
+  &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34;&gt;
+  &lt;title&gt;Drift — Know before you deploy&lt;/title&gt;
+  &lt;meta name=&#34;description&#34; content=&#34;Drift is a CLI that detects configuration drift between environments so you catch differences before they become incidents.&#34;&gt;
+  &lt;link rel=&#34;preconnect&#34; href=&#34;https://fonts.googleapis.com&#34;&gt;
+  &lt;link rel=&#34;preconnect&#34; href=&#34;https://fonts.gstatic.com&#34; crossorigin&gt;
+  &lt;link href=&#34;https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap&#34; rel=&#34;stylesheet&#34;&gt;
+  &lt;style&gt;
+    :root {
+      --bg: #0b0d10;
+      --surface: #12151b;
+      --surface-2: #1a1e26;
+      --border: #2a303a;
+      --text: #f0f1f5;
+      --muted: #9ba3b0;
+      --accent: #fbbf24;
+      --accent-hover: #f59e0b;
+      --success: #34d399;
+      --danger: #f87171;
+      --radius: 10px;
+      --max-width: 1120px;
+      --font: &#34;Inter&#34;, system-ui, -apple-system, BlinkMacSystemFont, &#34;Segoe UI&#34;, Roboto, sans-serif;
+      --mono: &#34;JetBrains Mono&#34;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
 
-    
-      
-    <details class="source-panel">
-      <summary>Generated HTML</summary>
-      <iframe class="source-iframe" src="../../runs/website-landing-page/ollama-kimi-k2.7-code/artifacts/index.html" title="HTML source"></iframe>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(100% - 2rem, var(--max-width));
+      margin-inline: auto;
+    }
+
+    /* Navigation */
+    nav {
+      border-bottom: 1px solid var(--border);
+      background-color: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand svg {
+      width: 26px;
+      height: 26px;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--text);
+      outline: none;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.55rem 1.05rem;
+      border-radius: var(--radius);
+      background-color: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .nav-cta:hover,
+    .nav-cta:focus {
+      border-color: var(--accent);
+      color: var(--accent);
+      outline: none;
+    }
+
+    /* Hero */
+    header {
+      padding: 6rem 0 4.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .eyebrow svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      max-width: 16ch;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 54ch;
+      margin-bottom: 2rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.9rem 1.5rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .button-primary {
+      background-color: var(--accent);
+      color: #0b0d10;
+    }
+
+    .button-primary:hover,
+    .button-primary:focus {
+      background-color: var(--accent-hover);
+      outline: none;
+    }
+
+    .button-secondary {
+      background-color: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      margin-left: 0.75rem;
+    }
+
+    .button-secondary:hover,
+    .button-secondary:focus {
+      border-color: var(--muted);
+      outline: none;
+    }
+
+    .terminal {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      background-color: var(--surface-2);
+    }
+
+    .terminal-bar span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .dot-red { background-color: #ef4444; }
+    .dot-yellow { background-color: #eab308; }
+    .dot-green { background-color: #22c55e; }
+
+    .terminal-title {
+      margin-left: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: var(--mono);
+    }
+
+    .terminal pre {
+      padding: 1.25rem;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      color: var(--text);
+    }
+
+    .code-comment { color: var(--muted); }
+    .code-command { color: var(--accent); }
+    .code-added { color: var(--success); }
+    .code-removed { color: var(--danger); }
+    .code-dim { color: #6b7280; }
+
+    /* Sections */
+    section {
+      padding: 4.5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.7rem, 3vw, 2.25rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 60ch;
+      margin-inline: auto;
+    }
+
+    /* Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background-color: var(--surface-2);
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .feature-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Code example */
+    .code-section {
+      padding-top: 2rem;
+    }
+
+    .code-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      max-width: 800px;
+      margin-inline: auto;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.25rem;
+      background-color: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .code-card pre {
+      padding: 1.25rem;
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      line-height: 1.75;
+      overflow-x: auto;
+      color: var(--text);
+    }
+
+    /* Testimonials */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .testimonial {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+
+    .testimonial blockquote {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+
+    .testimonial footer {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .testimonial cite {
+      color: var(--text);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* Pricing */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      max-width: 720px;
+      margin-inline: auto;
+    }
+
+    .pricing-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card.popular {
+      border-color: var(--accent);
+      position: relative;
+    }
+
+    .badge {
+      position: absolute;
+      top: -12px;
+      right: 1.5rem;
+      background-color: var(--accent);
+      color: #0b0d10;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    .pricing-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .price {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 1rem 0;
+    }
+
+    .price span {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .pricing-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-card ul {
+      list-style: none;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .pricing-card li {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      color: var(--text);
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .pricing-card li svg {
+      width: 18px;
+      height: 18px;
+      color: var(--success);
+      flex-shrink: 0;
+    }
+
+    .pricing-card .button {
+      width: 100%;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-brand svg {
+      width: 22px;
+      height: 22px;
+      color: var(--accent);
+    }
+
+    .footer-about {
+      max-width: 28ch;
+    }
+
+    .footer-links h4 {
+      color: var(--text);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus {
+      color: var(--text);
+      outline: none;
+    }
+
+    .copyright {
+      margin-top: 3rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .features-grid,
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .button-secondary {
+        margin-left: 0;
+        margin-top: 0.75rem;
+      }
+
+      .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;nav&gt;
+    &lt;div class=&#34;container nav-inner&#34;&gt;
+      &lt;a href=&#34;#&#34; class=&#34;brand&#34;&gt;
+        &lt;svg viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;
+          &lt;path d=&#34;M13 2L4.09 12.11a1 1 0 0 0 .77 1.64H11l-1 8 8.91-10.11a1 1 0 0 0-.77-1.64H13l1-8z&#34;/&gt;
+        &lt;/svg&gt;
+        Drift
+      &lt;/a&gt;
+      &lt;ul class=&#34;nav-links&#34;&gt;
+        &lt;li&gt;&lt;a href=&#34;#features&#34;&gt;Features&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#code&#34;&gt;Docs&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#pricing&#34;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;a href=&#34;#&#34; class=&#34;nav-cta&#34;&gt;Install CLI&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
+
+  &lt;header class=&#34;hero&#34;&gt;
+    &lt;div class=&#34;container hero-grid&#34;&gt;
+      &lt;div&gt;
+        &lt;div class=&#34;eyebrow&#34;&gt;
+          &lt;svg viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;
+            &lt;circle cx=&#34;12&#34; cy=&#34;12&#34; r=&#34;10&#34;/&gt;
+            &lt;path d=&#34;m9 12 2 2 4-4&#34;/&gt;
+          &lt;/svg&gt;
+          Configuration drift detection
+        &lt;/div&gt;
+        &lt;h1&gt;Know before you deploy.&lt;/h1&gt;
+        &lt;p&gt;Drift compares your environment configurations — staging, production, and everything in between — so you catch mismatches before they become incidents.&lt;/p&gt;
+        &lt;div class=&#34;hero-buttons&#34;&gt;
+          &lt;a href=&#34;#code&#34; class=&#34;button button-primary&#34;&gt;
+            Start drift scan
+            &lt;svg width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;
+              &lt;path d=&#34;M5 12h14&#34;/&gt;&lt;path d=&#34;m12 5 7 7-7 7&#34;/&gt;
+            &lt;/svg&gt;
+          &lt;/a&gt;
+          &lt;a href=&#34;#&#34; class=&#34;button button-secondary&#34;&gt;View on GitHub&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&#34;terminal&#34; role=&#34;img&#34; aria-label=&#34;Example Drift CLI output comparing staging and production environments&#34;&gt;
+        &lt;div class=&#34;terminal-bar&#34;&gt;
+          &lt;span class=&#34;dot-red&#34; aria-hidden=&#34;true&#34;&gt;&lt;/span&gt;
+          &lt;span class=&#34;dot-yellow&#34; aria-hidden=&#34;true&#34;&gt;&lt;/span&gt;
+          &lt;span class=&#34;dot-green&#34; aria-hidden=&#34;true&#34;&gt;&lt;/span&gt;
+          &lt;span class=&#34;terminal-title&#34;&gt;drift compare staging..production&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;pre&gt;&lt;code&gt;&lt;span class=&#34;code-comment&#34;&gt;# Scan two environment configs in seconds&lt;/span&gt;
+&lt;span class=&#34;code-dim&#34;&gt;$&lt;/span&gt; &lt;span class=&#34;code-command&#34;&gt;drift compare&lt;/span&gt; --from staging --to production
+
+&lt;span class=&#34;code-dim&#34;&gt;Env:&lt;/span&gt; staging &lt;span class=&#34;code-dim&#34;&gt;-&gt;&lt;/span&gt; production
+
+&lt;span class=&#34;code-removed&#34;&gt;- AWS_REGION=us-east-1&lt;/span&gt;
+&lt;span class=&#34;code-added&#34;&gt;+ AWS_REGION=us-west-2&lt;/span&gt;
+
+&lt;span class=&#34;code-removed&#34;&gt;- LOG_LEVEL=debug&lt;/span&gt;
+&lt;span class=&#34;code-added&#34;&gt;+ LOG_LEVEL=info&lt;/span&gt;
+
+&lt;span class=&#34;code-removed&#34;&gt;- FEATURE_FLAGS=replay,canary&lt;/span&gt;
+&lt;span class=&#34;code-added&#34;&gt;+ FEATURE_FLAGS=replay&lt;/span&gt;
+
+&lt;span class=&#34;code-dim&#34;&gt;3 drifted keys found • 1 missing in production&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;section id=&#34;features&#34;&gt;
+      &lt;div class=&#34;container&#34;&gt;
+        &lt;div class=&#34;section-header&#34;&gt;
+          &lt;h2&gt;Everything you need to stay in sync&lt;/h2&gt;
+          &lt;p&gt;Drift fits into your existing workflow. No dashboards to learn, no agents to manage — just fast, reliable configuration diffing.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;features-grid&#34;&gt;
+          &lt;article class=&#34;feature-card&#34;&gt;
+            &lt;div class=&#34;feature-icon&#34;&gt;
+              &lt;svg viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;
+                &lt;path d=&#34;M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2&#34;/&gt;
+                &lt;rect x=&#34;8&#34; y=&#34;2&#34; width=&#34;8&#34; height=&#34;4&#34; rx=&#34;1&#34; ry=&#34;1&#34;/&gt;
+                &lt;path d=&#34;m9 14 2 2 4-4&#34;/&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;h3&gt;Compare any environments&lt;/h3&gt;
+            &lt;p&gt;Diff staging against production, preview deploys, or any two state files. Drift reads JSON, YAML, .env files, Terraform outputs, and cloud parameter stores.&lt;/p&gt;
+          &lt;/article&gt;
+          &lt;article class=&#34;feature-card&#34;&gt;
+            &lt;div class=&#34;feature-icon&#34;&gt;
+              &lt;svg viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;
+                &lt;path d=&#34;M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z&#34;/&gt;
+                &lt;path d=&#34;m9 12 2 2 4-4&#34;/&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;h3&gt;CI guardrails&lt;/h3&gt;
+            &lt;p&gt;Add one line to your pipeline and block merges when drift is detected. Exit codes make it trivial to integrate with GitHub Actions, GitLab CI, or CircleCI.&lt;/p&gt;
+          &lt;/article&gt;
+          &lt;article class=&#34;feature-card&#34;&gt;
+            &lt;div class=&#34;feature-icon&#34;&gt;
+              &lt;svg viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;
+                &lt;path d=&#34;M13 2L4.09 12.11a1 1 0 0 0 .77 1.64H11l-1 8 8.91-10.11a1 1 0 0 0-.77-1.64H13l1-8z&#34;/&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;h3&gt;Fast local CLI&lt;/h3&gt;
+            &lt;p&gt;Native binaries for macOS, Linux, and Windows. Most scans complete in milliseconds, so you can run Drift on every commit without slowing down.&lt;/p&gt;
+          &lt;/article&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id=&#34;code&#34; class=&#34;code-section&#34;&gt;
+      &lt;div class=&#34;container&#34;&gt;
+        &lt;div class=&#34;section-header&#34;&gt;
+          &lt;h2&gt;Add it to your pipeline in minutes&lt;/h2&gt;
+          &lt;p&gt;Drift is designed to be composed with the tools you already use. Define sources, run a comparison, and let your CI handle the rest.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;code-card&#34;&gt;
+          &lt;div class=&#34;code-header&#34;&gt;
+            &lt;span&gt;drift.yaml&lt;/span&gt;
+            &lt;span class=&#34;code-dim&#34;&gt;example config&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;pre&gt;&lt;code&gt;&lt;span class=&#34;code-dim&#34;&gt;version:&lt;/span&gt; &lt;span class=&#34;code-command&#34;&gt;1&lt;/span&gt;
+
+&lt;span class=&#34;code-dim&#34;&gt;environments:&lt;/span&gt;
+  &lt;span class=&#34;code-dim&#34;&gt;staging:&lt;/span&gt;
+    &lt;span class=&#34;code-dim&#34;&gt;source:&lt;/span&gt; ssm
+    &lt;span class=&#34;code-dim&#34;&gt;path:&lt;/span&gt; /app/staging
+  &lt;span class=&#34;code-dim&#34;&gt;production:&lt;/span&gt;
+    &lt;span class=&#34;code-dim&#34;&gt;source:&lt;/span&gt; ssm
+    &lt;span class=&#34;code-dim&#34;&gt;path:&lt;/span&gt; /app/production
+
+&lt;span class=&#34;code-dim&#34;&gt;rules:&lt;/span&gt;
+  - &lt;span class=&#34;code-dim&#34;&gt;name:&lt;/span&gt; &lt;span class=&#34;code-added&#34;&gt;required_keys_match&lt;/span&gt;
+    &lt;span class=&#34;code-dim&#34;&gt;severity:&lt;/span&gt; error
+  - &lt;span class=&#34;code-dim&#34;&gt;name:&lt;/span&gt; &lt;span class=&#34;code-added&#34;&gt;values_unchanged&lt;/span&gt;
+    &lt;span class=&#34;code-dim&#34;&gt;severity:&lt;/span&gt; warning
+    &lt;span class=&#34;code-dim&#34;&gt;ignore:&lt;/span&gt;
+      - &lt;span class=&#34;code-dim&#34;&gt;LOG_LEVEL&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id=&#34;testimonials&#34;&gt;
+      &lt;div class=&#34;container&#34;&gt;
+        &lt;div class=&#34;section-header&#34;&gt;
+          &lt;h2&gt;Loved by careful teams&lt;/h2&gt;
+          &lt;p&gt;From one-person studios to platform teams, Drift helps developers ship with confidence.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;testimonial-grid&#34;&gt;
+          &lt;article class=&#34;testimonial&#34;&gt;
+            &lt;blockquote&gt;
+              “Before Drift, we promoted changes that looked fine in staging but broke production configs. Now mismatches are caught in CI, not after deploy.”
+            &lt;/blockquote&gt;
+            &lt;footer&gt;
+              &lt;cite&gt;Maya Torres&lt;/cite&gt; — Platform Engineer at Rivus
+            &lt;/footer&gt;
+          &lt;/article&gt;
+          &lt;article class=&#34;testimonial&#34;&gt;
+            &lt;blockquote&gt;
+              “It runs in seconds and fits into our existing GitHub Actions workflow. We barely had to change anything to start catching drift automatically.”
+            &lt;/blockquote&gt;
+            &lt;footer&gt;
+              &lt;cite&gt;Sam Kowalski&lt;/cite&gt; — SRE at Northbyte
+            &lt;/footer&gt;
+          &lt;/article&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id=&#34;pricing&#34;&gt;
+      &lt;div class=&#34;container&#34;&gt;
+        &lt;div class=&#34;section-header&#34;&gt;
+          &lt;h2&gt;Simple pricing&lt;/h2&gt;
+          &lt;p&gt;Free for individuals and small teams. Upgrade when you need shared policies and team-wide visibility.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;pricing-grid&#34;&gt;
+          &lt;article class=&#34;pricing-card&#34;&gt;
+            &lt;h3&gt;Free&lt;/h3&gt;
+            &lt;div class=&#34;price&#34;&gt;$0 &lt;span&gt;/ forever&lt;/span&gt;&lt;/div&gt;
+            &lt;p&gt;Everything you need to start detecting drift locally and in CI.&lt;/p&gt;
+            &lt;ul&gt;
+              &lt;li&gt;
+                &lt;svg viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;&lt;polyline points=&#34;20 6 9 17 4 12&#34;/&gt;&lt;/svg&gt;
+                Unlimited local scans
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;svg viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;&lt;polyline points=&#34;20 6 9 17 4 12&#34;/&gt;&lt;/svg&gt;
+                CI exit-code checks
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;svg viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;&lt;polyline points=&#34;20 6 9 17 4 12&#34;/&gt;&lt;/svg&gt;
+                Community support
+              &lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;a href=&#34;#&#34; class=&#34;button button-secondary&#34;&gt;Install free&lt;/a&gt;
+          &lt;/article&gt;
+          &lt;article class=&#34;pricing-card popular&#34;&gt;
+            &lt;span class=&#34;badge&#34;&gt;Most popular&lt;/span&gt;
+            &lt;h3&gt;Pro&lt;/h3&gt;
+            &lt;div class=&#34;price&#34;&gt;$12 &lt;span&gt;/ user / month&lt;/span&gt;&lt;/div&gt;
+            &lt;p&gt;For teams that want shared drift policies and centralized visibility.&lt;/p&gt;
+            &lt;ul&gt;
+              &lt;li&gt;
+                &lt;svg viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;&lt;polyline points=&#34;20 6 9 17 4 12&#34;/&gt;&lt;/svg&gt;
+                Everything in Free
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;svg viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;&lt;polyline points=&#34;20 6 9 17 4 12&#34;/&gt;&lt;/svg&gt;
+                Shared organization policies
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;svg viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;&lt;polyline points=&#34;20 6 9 17 4 12&#34;/&gt;&lt;/svg&gt;
+                Team dashboards &amp; history
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;svg viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;&lt;polyline points=&#34;20 6 9 17 4 12&#34;/&gt;&lt;/svg&gt;
+                Priority email support
+              &lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;a href=&#34;#&#34; class=&#34;button button-primary&#34;&gt;Start Pro trial&lt;/a&gt;
+          &lt;/article&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;div class=&#34;container&#34;&gt;
+      &lt;div class=&#34;footer-grid&#34;&gt;
+        &lt;div&gt;
+          &lt;a href=&#34;#&#34; class=&#34;footer-brand&#34;&gt;
+            &lt;svg viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; aria-hidden=&#34;true&#34;&gt;
+              &lt;path d=&#34;M13 2L4.09 12.11a1 1 0 0 0 .77 1.64H11l-1 8 8.91-10.11a1 1 0 0 0-.77-1.64H13l1-8z&#34;/&gt;
+            &lt;/svg&gt;
+            Drift
+          &lt;/a&gt;
+          &lt;p class=&#34;footer-about&#34;&gt;A small, focused CLI for developers who care about consistency.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;footer-links&#34;&gt;
+          &lt;h4&gt;Product&lt;/h4&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#features&#34;&gt;Features&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#code&#34;&gt;Docs&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#pricing&#34;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;footer-links&#34;&gt;
+          &lt;h4&gt;Resources&lt;/h4&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;CLI reference&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;CI recipes&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Integrations&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Status page&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;footer-links&#34;&gt;
+          &lt;h4&gt;Company&lt;/h4&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Contact&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#&#34;&gt;Privacy&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;p class=&#34;copyright&#34;&gt;© 2026 Drift Software, Inc. All rights reserved. Fictional product demo.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+```</pre>
     </details>
-      
-    
 
     
     <p class="cost-note">Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated — Ollama Cloud uses subscription usage, not per-token billing.</p>

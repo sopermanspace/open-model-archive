@@ -1,0 +1,5 @@
+1. Drift is a CLI that scans configuration files across environments, comparing staging and production manifests and reporting drift before deploy [A].
+2. Pro costs $12/month per workspace and adds Slack alerts [A].
+3. Drift supports Kubernetes manifests, Docker Compose, Terraform state snapshots, and .env files [C].
+4. It remediates YAML formatting drift only, and never modifies secret values [B].
+5. No, it does not support iOS provisioning profiles [C].

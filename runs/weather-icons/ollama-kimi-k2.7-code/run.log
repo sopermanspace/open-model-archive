@@ -1,0 +1,6 @@
+task=weather-icons
+model=ollama/kimi-k2.7-code
+prompt=svg-generation/weather-icons@1.0.0
+adapter=ollama
+duration_ms=170539
+tokens=152->16491

@@ -1,0 +1,7 @@
+task=landing-design-critique
+model=ollama/gemma4
+prompt=design-critique/landing-review@1.0.0
+adapter=ollama
+inputs=['comparison-screenshot.jpg']
+duration_ms=15574
+tokens=482->978

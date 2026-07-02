@@ -1,0 +1,50 @@
+{
+  "id": "weather-icons/ollama-gemma4/2026-07-02T13:11:35Z",
+  "task": {
+    "id": "weather-icons",
+    "slug": "weather-icons",
+    "category": "svg-generation",
+    "title": "Weather Icon Set",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "weather-icons",
+    "version": "1.0.0",
+    "sha256": "aafa78802c275f69d66d8339e6de97fa4129f1e305a9d74b1d22c6b749df45b6",
+    "title": "Weather Icon Set"
+  },
+  "executed_at": "2026-07-02T13:11:35.900158Z",
+  "duration_ms": 15758,
+  "tokens": {
+    "input": 166,
+    "output": 1053,
+    "reasoning": 0
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "svg",
+      "path": "artifacts/output.svg",
+      "sha256": "47d88816ca42e3ca166699554128a95a75569ac8b89078754d0aa15c32b97bf1",
+      "language": "svg"
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

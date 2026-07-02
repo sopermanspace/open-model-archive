@@ -1,0 +1,7 @@
+task=landing-visual-analysis
+model=ollama/gemma4
+prompt=vision-understanding/landing-analysis@1.0.0
+adapter=ollama
+inputs=['drift-landing-reference.png']
+duration_ms=11468
+tokens=432->719

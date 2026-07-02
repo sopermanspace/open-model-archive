@@ -1,0 +1,56 @@
+{
+  "id": "website-landing-page/google-gemini-3.1-pro/2026-07-02T13:22:44Z",
+  "task": {
+    "id": "website-landing-page",
+    "slug": "website-landing-page",
+    "category": "website-generation",
+    "title": "Developer Tool Landing Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "landing-page",
+    "version": "1.0.0",
+    "sha256": "1d1b0e80f7d9ef53967bfb6407ed7980ee130e0eb08b10658d49cc46ef2c7bde",
+    "title": "Developer Tool Landing Page"
+  },
+  "executed_at": "2026-07-02T13:22:44.919956Z",
+  "duration_ms": 57411,
+  "tokens": {
+    "input": 256,
+    "output": 5361,
+    "reasoning": 0
+  },
+  "cost_usd": 0.027125,
+  "cost": {
+    "total_usd": 0.027125,
+    "input_usd": 0.00032,
+    "output_usd": 0.026805,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "e214c123657006ad4d5be432a1161726484c4ebe2cd9e315bc41f817cc9e688b",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "fbb7e184913f42f4faa48e192ad75ad0bf86fe4261c6355e1c73246a8cc6dd13"
+    }
+  ],
+  "logs": "run.log"
+}

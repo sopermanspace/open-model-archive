@@ -1,0 +1,24 @@
+## First impressions (both panels)
+The left panel feels overly dense with data blocks—the code snippets take up too much visual real estate, making it feel like documentation rather than a marketing page. The right panel immediately feels cleaner and more approachable; the large header section and substantial negative space draw the eye naturally to the value proposition before showing technical details.
+
+## Typography & hierarchy
+The left panel uses a slightly inconsistent heading scale (e.g., "Gemma 4" vs. "Know Before You Deploy.") which muddles the hierarchy, making the page feel like it has multiple topics rather than one core message. The right panel does a much better job; the use of large, punchy headlines ("Kimi K2.7 Code," followed by "Know before you deploy.") establishes a clear visual flow and superior informational grouping.
+
+## Color & atmosphere
+Both panels rely on dark mode backgrounds (or strong contrast blocks), which is standard for developer tools but can quickly become tiring. The right panel's overall palette feels more restrained and professional; it uses white space effectively to break up the tech blacks and grays, giving it an elevated, polished feel. The left panel feels slightly harsher due to its heavy reliance on distinct, rectangular background blocks for every piece of content.
+
+## Layout & composition
+The right panel is superior in composition. Its use of asymmetrical grid elements (e.g., mixing image/code block size with text) creates visual interest and rhythm, preventing the page from feeling like a spreadsheet. The spacing around section dividers and CTAs in the right panel are impeccable; they breathe and guide the user's eye smoothly down the page. The left panel suffers from boxy, overly structured layout that feels restrictive.
+
+## Conversion design
+The CTA on the right side ("Start drift scan" paired with "Read the docs") is more compelling because it balances immediate action (the scanner) with educational support (the docs). It anticipates user friction by offering both paths immediately. The left panel's CTAs are too isolated; they lack context or a clear progression path for a new visitor.
+
+## Verdict
+**Winner: Right Panel.** Its thoughtful utilization of white space, superior section rhythm, and refined visual hierarchy elevate it significantly. It successfully transitions from establishing technical credibility (the code blocks) to articulating the value proposition ("Know before you deploy.") without feeling overwhelming or cluttered.
+
+***
+
+## Top 3 improvements
+1. **Abstract the Code Examples:** Instead of showing full, verbose code snippets in both panels, use simplified "concept illustrations" or stylized UI elements that demonstrate the *result* of the tool (e.g., a dashboard graph showing "Drift Detected: API Key Mismatch") rather than just the input code. This makes the benefit tangible and universal.
+2. **Introduce Micro-Interactivity:** On the main landing page, add subtle hover states or a small animated state to the key technical components. For instance, make the sample YAML/JSON config block slightly expand or illuminate when hovered over, signaling that it's interactive data, not just text. This adds polish and modern appeal.
+3. **Refine the Value Block Hierarchy:** In the "Know before you deploy" section (the core value prop), use a three-column layout for bulleted benefits *instead* of plain paragraph blocks. Give each benefit its own icon/small heading, making the features easily scannable and digestible on mobile viewports.

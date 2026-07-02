@@ -1,0 +1,50 @@
+{
+  "id": "rate-limiter/ollama-gemma4/2026-07-02T13:09:53Z",
+  "task": {
+    "id": "rate-limiter",
+    "slug": "rate-limiter",
+    "category": "code-generation",
+    "title": "Token Bucket Rate Limiter",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "rate-limiter",
+    "version": "1.0.0",
+    "sha256": "0a6ce40606ffbca1faea7d87afba1e53bbd5a630843757ce849476e12d6d4c4c",
+    "title": "Token Bucket Rate Limiter"
+  },
+  "executed_at": "2026-07-02T13:09:53.864061Z",
+  "duration_ms": 31103,
+  "tokens": {
+    "input": 226,
+    "output": 2066,
+    "reasoning": 0
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "source",
+      "path": "artifacts/main.py",
+      "sha256": "74c65a1a3f8b07d09b8e94a9021f7ad016f83a9ac9354435db37eaac94227453",
+      "language": "python"
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

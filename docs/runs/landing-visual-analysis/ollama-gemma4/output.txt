@@ -1,0 +1,40 @@
+## Layout map
+The layout is structured linearly:
+1. **Navigation Bar/Header:** Occupying the top, containing branding and main navigation links.
+2. **Hero Section (Main Focus):** A large, dark section dominated by a primary headline, supportive text, and two major CTA buttons.
+3. **Sub-Feature/Value Proposition Section (Bottom Half):** Located below the fold (starting with "Find the gaps between environments"), which appears to be designed as an array or grid showcasing specific capabilities (indicated by icons in a dark background).
+
+## Visual hierarchy
+The largest and most dominant element is the primary headline, "Know before you deploy," due to its massive font size and high contrast against the dark background. The immediate CTA buttons ("Start drift scan" and "Read the docs") are also designed to catch the eye with clear contrast (white text/light background on a darker base). Navigation links in the header use white text, giving them moderate prominence, but they are smaller than the hero headline. The spacing is generous, particularly around the headlines and CTAs, which directs focus and makes the key messaging highly readable.
+
+## Content inventory
+**Navigation Bar Items:**
+*   Drift (Logo/Branding)
+*   Features
+*   Docs
+*   Pricing
+*   GitHub
+
+**Headline 1 (Hero):**
+*   Know before you deploy.
+
+**Sub-headline 1:**
+*   Drift is a lightweight CLI that catches configuration drift between staging and production—before it becomes an outage.
+
+**CTA Labels (Hero):**
+*   Start drift scan
+*   Read the docs
+
+**Headline 2 (Mid-page/Features):**
+*   Find the gaps between environments
+
+**Sub-headline 2:**
+*   Compare configs, flags, and schema differences across any two environments. No dashboards required.
+
+*(Note: The specific feature icons/cards at the bottom do not display visible text content in the screenshot beyond their container.)*
+
+## Accessibility observations
+The primary contrast (white text on a dark background) is excellent for readability in the Hero section. Tap target sizing for the main CTA buttons is appropriate and easily distinguishable. However, within the navigation bar, the links are closely spaced horizontally; while not an issue if they are standard link anchors, ensuring sufficient padding around each link cluster would improve tap target size on mobile devices. The overall use of large typography helps visibility.
+
+## One-sentence summary
+Drift is a lightweight CLI tool designed to help developers detect and mitigate configuration drift between staging and production environments before deployment causes an outage.

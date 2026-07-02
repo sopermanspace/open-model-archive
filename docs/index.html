@@ -27,13 +27,108 @@
     
 <section class="hero container">
   <p class="eyebrow">Public archive</p>
-  <h1>Compare what models actually generate</h1>
-  <p class="lede">Transparent AI model outputs for identical real-world tasks.</p>
+  <h1>The world's most transparent repository of AI model outputs on identical real-world tasks</h1>
+  <p class="lede">Not another benchmark. Inspect exact outputs — source files, screenshots, timing, tokens, and cost — side by side for the same prompt.</p>
+</section>
+
+<section class="container value-strip">
+  <div class="value-grid">
+    <div class="value-item"><strong>Versioned prompts</strong><span>Immutable by version. SHA-256 recorded per run.</span></div>
+    <div class="value-item"><strong>Public artifacts</strong><span>Every file committed. Git is the archive.</span></div>
+    <div class="value-item"><strong>Reproducible runs</strong><span>One command rebuilds the entire site.</span></div>
+  </div>
 </section>
 
 <section class="container archive-list">
   <h2>Tasks</h2>
   
+  
+  <h3 class="category-heading">code-generation</h3>
+  <div class="task-grid">
+    
+    <a class="task-card" href="tasks/rate-limiter/index.html">
+      <span class="task-category">code-generation</span>
+      <h3>Token Bucket Rate Limiter</h3>
+      <p>Implement a thread-safe token bucket rate limiter in Python from a fixed specification.</p>
+      <div class="task-meta">
+        <span>3 models</span>
+        
+        <span>Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro</span>
+        
+      </div>
+    </a>
+    
+  </div>
+  
+  <h3 class="category-heading">design-critique</h3>
+  <div class="task-grid">
+    
+    <a class="task-card" href="tasks/landing-design-critique/index.html">
+      <span class="task-category">design-critique</span>
+      <h3>Expert Designer Critique</h3>
+      <p>Senior designer critique of a side-by-side AI landing page comparison.</p>
+      <div class="task-meta">
+        <span>3 models</span>
+        
+        <span>Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro</span>
+        
+      </div>
+    </a>
+    
+  </div>
+  
+  <h3 class="category-heading">svg-generation</h3>
+  <div class="task-grid">
+    
+    <a class="task-card" href="tasks/weather-icons/index.html">
+      <span class="task-category">svg-generation</span>
+      <h3>Weather Icon Set</h3>
+      <p>Generate three minimal monochrome SVG weather icons in a single file.</p>
+      <div class="task-meta">
+        <span>3 models</span>
+        
+        <span>Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro</span>
+        
+      </div>
+    </a>
+    
+  </div>
+  
+  <h3 class="category-heading">vision-understanding</h3>
+  <div class="task-grid">
+    
+    <a class="task-card" href="tasks/landing-visual-analysis/index.html">
+      <span class="task-category">vision-understanding</span>
+      <h3>Landing Page Visual Analysis</h3>
+      <p>Analyze a landing page screenshot — layout, hierarchy, content, and accessibility.</p>
+      <div class="task-meta">
+        <span>3 models</span>
+        
+        <span>Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro</span>
+        
+      </div>
+    </a>
+    
+  </div>
+  
+  <h3 class="category-heading">web-grounding</h3>
+  <div class="task-grid">
+    
+    <a class="task-card" href="tasks/product-facts-grounding/index.html">
+      <span class="task-category">web-grounding</span>
+      <h3>Grounded Product Q&amp;A</h3>
+      <p>Answer factual questions using only provided source excerpts — no outside knowledge.</p>
+      <div class="task-meta">
+        <span>3 models</span>
+        
+        <span>Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro</span>
+        
+      </div>
+    </a>
+    
+  </div>
+  
+  <h3 class="category-heading">website-generation</h3>
   <div class="task-grid">
     
     <a class="task-card" href="tasks/website-landing-page/index.html">
@@ -42,14 +137,15 @@
       <p>Generate a complete single-file HTML landing page for a fictional developer tool. Same prompt, different models — compare structure, design, and code quality.
 </p>
       <div class="task-meta">
-        <span>2 models</span>
+        <span>3 models</span>
         
-        <span>Gemma 4, Kimi K2.7 Code</span>
+        <span>Gemma 4, Kimi K2.7 Code, Gemini 3.1 Pro</span>
         
       </div>
     </a>
     
   </div>
+  
   
 </section>
 

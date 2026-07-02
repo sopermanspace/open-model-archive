@@ -9,4 +9,6 @@ class TaskDefinition(BaseModel):
     description: str
     prompt: str
     post_process: list[str] = Field(default_factory=list)
+    inputs: list[str] = Field(default_factory=list)
+    screenshot: bool = True
     models: list[str] | str = "all"

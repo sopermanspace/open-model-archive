@@ -6,15 +6,25 @@
 {% block content %}
 <section class="hero container">
   <p class="eyebrow">Public archive</p>
-  <h1>Compare what models actually generate</h1>
-  <p class="lede">{{ tagline }}</p>
+  <h1>The world's most transparent repository of AI model outputs on identical real-world tasks</h1>
+  <p class="lede">Not another benchmark. Inspect exact outputs — source files, screenshots, timing, tokens, and cost — side by side for the same prompt.</p>
+</section>
+
+<section class="container value-strip">
+  <div class="value-grid">
+    <div class="value-item"><strong>Versioned prompts</strong><span>Immutable by version. SHA-256 recorded per run.</span></div>
+    <div class="value-item"><strong>Public artifacts</strong><span>Every file committed. Git is the archive.</span></div>
+    <div class="value-item"><strong>Reproducible runs</strong><span>One command rebuilds the entire site.</span></div>
+  </div>
 </section>
 
 <section class="container archive-list">
   <h2>Tasks</h2>
   {% if tasks %}
+  {% for category in categories %}
+  <h3 class="category-heading">{{ category }}</h3>
   <div class="task-grid">
-    {% for entry in tasks %}
+    {% for entry in tasks if entry.task.category == category %}
     <a class="task-card" href="tasks/{{ entry.task.slug }}/index.html">
       <span class="task-category">{{ entry.task.category }}</span>
       <h3>{{ entry.task.title }}</h3>
@@ -28,6 +38,7 @@
     </a>
     {% endfor %}
   </div>
+  {% endfor %}
   {% else %}
   <p class="muted">No runs published yet. Run <code>oma build</code> to generate the archive.</p>
   {% endif %}

@@ -89,10 +89,17 @@ def generate_site() -> None:
             }
         )
 
+    categories: list[str] = []
+    for entry in index_runs:
+        cat = entry["task"].category
+        if cat not in categories:
+            categories.append(cat)
+
     index_html = env.get_template("index.html").render(
         site_name="Open Model Archive",
         tagline="Transparent AI model outputs for identical real-world tasks.",
         tasks=index_runs,
+        categories=categories,
     )
     (DOCS_DIR / "index.html").write_text(index_html, encoding="utf-8")
 
@@ -114,11 +121,20 @@ def generate_site() -> None:
             except Exception:
                 prompt_body = ""
 
+        run_outputs: dict[str, str] = {}
+        for run in task_runs:
+            safe_model = run.model.id.replace("/", "-")
+            output_path = RUNS_DIR / task.slug / safe_model / "output.txt"
+            run_outputs[run.id] = (
+                output_path.read_text(encoding="utf-8") if output_path.exists() else ""
+            )
+
         page = env.get_template("comparison.html").render(
             site_name="Open Model Archive",
             task=task,
             runs=task_runs,
             prompt_body=prompt_body,
+            run_outputs=run_outputs,
         )
         out_dir = DOCS_DIR / "tasks" / task.slug
         out_dir.mkdir(parents=True, exist_ok=True)

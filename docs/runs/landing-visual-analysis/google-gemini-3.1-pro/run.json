@@ -1,0 +1,50 @@
+{
+  "id": "landing-visual-analysis/google-gemini-3.1-pro/2026-07-02T13:14:38Z",
+  "task": {
+    "id": "landing-visual-analysis",
+    "slug": "landing-visual-analysis",
+    "category": "vision-understanding",
+    "title": "Landing Page Visual Analysis",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "landing-analysis",
+    "version": "1.0.0",
+    "sha256": "a2189592b7d54212efacd3b3bc1a01b9e6d33c95e670e9bb36c88a4f92598276",
+    "title": "Landing Page Visual Analysis"
+  },
+  "executed_at": "2026-07-02T13:14:38.763793Z",
+  "duration_ms": 12316,
+  "tokens": {
+    "input": 256,
+    "output": 26,
+    "reasoning": 0
+  },
+  "cost_usd": 0.00045,
+  "cost": {
+    "total_usd": 0.00045,
+    "input_usd": 0.00032,
+    "output_usd": 0.00013,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "image",
+      "path": "inputs/drift-landing-reference.png",
+      "sha256": "a24dbaa2631af532fe260b79a4b77dd9037a1389cfc981d11f33fd0e6d4b6f2a",
+      "language": null
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

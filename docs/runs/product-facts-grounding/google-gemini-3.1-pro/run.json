@@ -1,0 +1,43 @@
+{
+  "id": "product-facts-grounding/google-gemini-3.1-pro/2026-07-02T13:15:12Z",
+  "task": {
+    "id": "product-facts-grounding",
+    "slug": "product-facts-grounding",
+    "category": "web-grounding",
+    "title": "Grounded Product Q&A",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "product-facts",
+    "version": "1.0.0",
+    "sha256": "d8eb23b5e597321f5f605eedde6b301c15653d35019c954a627b06f9a4aac5c4",
+    "title": "Grounded Product Q&A"
+  },
+  "executed_at": "2026-07-02T13:15:12.731329Z",
+  "duration_ms": 9121,
+  "tokens": {
+    "input": 256,
+    "output": 19,
+    "reasoning": 0
+  },
+  "cost_usd": 0.000415,
+  "cost": {
+    "total_usd": 0.000415,
+    "input_usd": 0.00032,
+    "output_usd": 9.5e-05,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}
