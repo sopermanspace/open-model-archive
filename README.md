@@ -22,12 +22,12 @@
 
 <p align="center">
   <a href="https://sopermanspace.github.io/open-model-archive/tasks/website-landing-page/">
-    <img src="assets/readme/comparison-hero.jpg" alt="Side-by-side comparison of AI-generated landing pages from Gemma 4, Kimi K2.7 Code, and Gemini 3.1 Pro" width="92%">
+    <img src="assets/readme/comparison-hero.jpg" alt="Side-by-side comparison of AI-generated landing pages" width="92%">
   </a>
 </p>
 
 <p align="center">
-  <sub>Same prompt · three models · <a href="https://sopermanspace.github.io/open-model-archive/tasks/website-landing-page/">open the full comparison</a> with snapshot and live preview tabs</sub>
+  <sub>Same prompt · multiple models · <a href="https://sopermanspace.github.io/open-model-archive/tasks/website-landing-page/">open the full comparison</a> with snapshot and live preview tabs</sub>
 </p>
 
 <br>
@@ -39,6 +39,32 @@
 | *"Which model scores higher?"* | *"What did it actually write, build, and draw?"* |
 
 Most evaluations reduce models to a number. **Open Model Archive** preserves the full artifact — HTML, code, SVG, markdown, raw text — in Git. The website is a read-only lens over committed runs, not a black-box scoreboard.
+
+<br>
+
+## Any model. Any provider.
+
+The archive is **model-agnostic**. You are not required to run Gemma, Kimi, Gemini, or anything else. Pick whatever you have access to — wire it up in `models/*.yaml`, run the tasks, commit the artifacts, open a PR.
+
+**Have a key? Have Ollama? Have a CLI? You can contribute.**
+
+| Adapter | Works with | Authentication | Ships with |
+| :--- | :--- | :--- | :--- |
+| `ollama` | **Any** Ollama model — local or cloud | Ollama running on your machine | Gemma 4, Kimi K2.7 Code |
+| `cli` | **Any** model behind an installed provider CLI | Your local CLI session | Gemini 3.1 Pro |
+| `openai` | OpenAI chat/completions APIs | `OPENAI_API_KEY` | GPT-5.5, GPT-5.4, GPT-5.5 Instant |
+| `anthropic` | Anthropic Messages API | `ANTHROPIC_API_KEY` | Claude Sonnet 5, Fable 5, Mythos 5 |
+| `openrouter` | **Any** model on OpenRouter | `OPENROUTER_API_KEY` | Llama 3.3 70B |
+| `together` | Together AI hosted models | `TOGETHER_API_KEY` | Llama (template) |
+| `fireworks` | Fireworks AI hosted models | `FIREWORKS_API_KEY` | Llama (template) |
+| `sarvam` | Sarvam AI models | `SARVAM_API_KEY` | Sarvam-M (template) |
+| `codex` | OpenAI Codex-compatible endpoints | `OPENAI_API_KEY` | Add your own YAML |
+
+Disabled templates live in `models/` — copy `_template.yaml`, set `enabled: true` locally, export your key, run, commit `runs/`. **Never commit secrets.**
+
+<p align="center">
+  <sub>Currently published on the live site: Gemma 4 · Kimi K2.7 Code · Gemini 3.1 Pro — one example set, not a requirement.</sub>
+</p>
 
 <br>
 
@@ -75,40 +101,14 @@ Most evaluations reduce models to a number. **Open Model Archive** preserves the
 </td>
 <td width="50%" valign="top">
 
-**Reproducibility**
-- One command rebuilds the entire site
-- `oma recost` updates pricing without re-running
-- Add tasks, models, and prompts via YAML
+**Open contribution**
+- Add any model via YAML — no code changes for supported adapters
+- Implement a new adapter if your provider isn't listed yet
+- `oma recost` updates pricing without re-executing
 
 </td>
 </tr>
 </table>
-
-<br>
-
-## Models in the archive
-
-<p align="center">
-  <img src="assets/readme/gemma4.png" alt="Gemma 4" height="48">
-  &nbsp;&nbsp;&nbsp;
-  <img src="assets/readme/kimi-k2.7-code.png" alt="Kimi K2.7 Code" height="48">
-  &nbsp;&nbsp;&nbsp;
-  <strong>Gemini 3.1 Pro</strong>
-</p>
-
-<p align="center">
-  <sub>All 11 tasks run against <strong>Gemma 4</strong>, <strong>Kimi K2.7 Code</strong>, and <strong>Gemini 3.1 Pro</strong> unless a task specifies otherwise.</sub>
-</p>
-
-| Provider | Integration | Status |
-| :--- | :--- | :---: |
-| Ollama | Local + cloud API | **Active** |
-| Provider CLI | Frontier models (Gemini) | **Active** |
-| OpenAI | API adapter | Template |
-| Anthropic | API adapter | Template |
-| OpenRouter · Together · Fireworks · Sarvam | API adapters | Template |
-
-Contributors can enable any adapter — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 <br>
 
@@ -152,7 +152,7 @@ flowchart LR
 ```
 prompts/     Versioned prompts (immutable Markdown + frontmatter)
 tasks/     Task definitions (category, models, screenshot flags)
-models/    Provider config, pricing, adapter type
+models/    Provider config, pricing, adapter type — your model goes here
 runs/      Public execution archive (run.json + artifacts)
 docs/      Generated static site for GitHub Pages
 src/oma/   CLI, adapters, engine, site generator
@@ -162,50 +162,67 @@ src/oma/   CLI, adapters, engine, site generator
 
 ## Quick start
 
-**Prerequisites:** Python 3.12+, [uv](https://docs.astral.sh/uv/), [Ollama](https://ollama.com/), Node.js 20+ (screenshots only)
+### Browse the archive
+
+No install, no API keys, no local models. The live site is built from committed runs:
+
+**[→ sopermanspace.github.io/open-model-archive](https://sopermanspace.github.io/open-model-archive/)**
+
+### Set up the toolchain
+
+**Prerequisites:** Python 3.12+, [uv](https://docs.astral.sh/uv/). Node.js 20+ only if you need Playwright screenshots.
 
 ```bash
 git clone https://github.com/sopermanspace/open-model-archive.git
 cd open-model-archive
-
 uv sync
-npm install && npx playwright install chromium
-
-ollama pull gemma4:latest
-ollama pull kimi-k2.7-code:cloud
-
-uv run oma build
-python -m http.server 8080 --directory docs
+uv run oma validate
+uv run oma generate    # rebuild docs/ from existing runs/
 ```
 
-Open `http://localhost:8080/open-model-archive/` to preview locally.
+### Publish runs with your models
 
-### CLI commands
+1. Copy `models/_template.yaml` (or enable a template in `models/`)
+2. Set `adapter`, model ID, and `enabled: true`
+3. Authenticate — export an API key (`cp .env.example .env`) or point Ollama at your model tag
+4. Run tasks against **your** model:
+
+```bash
+uv run oma run --task website-landing-page --model <your-model-id>
+uv run oma generate
+```
+
+5. Commit `runs/` + `docs/` and open a PR
+
+Use whatever model you have — Mistral, Claude, GPT, Llama, Qwen, a local Ollama tag, anything with a supported adapter.
+
+### CLI reference
 
 | Command | What it does |
 | :--- | :--- |
 | `oma validate` | Check tasks, prompts, and model configs |
+| `oma run --task <slug> --model <id>` | Run one task against one model |
+| `oma run --task <slug> --all` | Run one task against all enabled models |
 | `oma run --all` | Execute all tasks against all enabled models |
-| `oma run --task <slug> --all` | Run one task across all models |
 | `oma recost` | Recalculate cost from stored token counts |
 | `oma generate` | Build static site into `docs/` |
 | `oma build` | Validate → run → generate (full pipeline) |
 | `oma build --skip-run` | Regenerate site from existing `runs/` |
 
-Full setup details: [SETUP.md](SETUP.md) · Deployment: [DEPLOYMENT.md](DEPLOYMENT.md)
+Full setup: [SETUP.md](SETUP.md) · Deployment: [DEPLOYMENT.md](DEPLOYMENT.md)
 
 <br>
 
 ## Contributing
 
-Add a task, wire up a model, or improve the pipeline. The archive grows through pull requests — every new run is a public artifact.
+The archive grows when people publish what **their** models produce. You do not need the same stack as the maintainers.
 
 1. Fork the repo
-2. Add or edit YAML in `tasks/`, `prompts/`, or `models/`
-3. Run `oma build` and commit `runs/` + `docs/`
-4. Open a PR
+2. Add or enable a model in `models/` (any supported adapter)
+3. Run tasks locally with your credentials
+4. Commit `runs/` + `docs/` and open a PR
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide.
+New provider? Implement `ModelAdapter` in `src/oma/adapters/` and register it in `factory.py`. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 <br>
 
@@ -215,6 +232,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide.
 
 <br>
 
-<sub>MIT License · Every prompt versioned · Every artifact public</sub>
+<sub>MIT License · Every prompt versioned · Every artifact public · Any model welcome</sub>
 
 </div>

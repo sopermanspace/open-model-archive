@@ -62,12 +62,20 @@
     <li>A static site is generated for effortless comparison.</li>
   </ol>
 
-  <h2>Model providers</h2>
+  <h2>Any model, any provider</h2>
+  <p>The archive is model-agnostic. Contributors run whatever they have access to — there is no required model stack. Wire up a YAML config, authenticate locally, execute tasks, and publish the artifacts.</p>
   <ul>
-    <li><strong>Ollama</strong> — open-source and cloud-backed models via the local Ollama API.</li>
-    <li><strong>Provider CLI</strong> — frontier models via official CLI integrations where available.</li>
-    <li><strong>Direct APIs</strong> — OpenAI, Anthropic, OpenRouter, Together, Fireworks, Sarvam.</li>
+    <li><strong>Ollama</strong> (<code>ollama</code>) — any local or cloud-backed Ollama model</li>
+    <li><strong>Provider CLI</strong> (<code>cli</code>) — any model behind an installed CLI</li>
+    <li><strong>OpenAI</strong> (<code>openai</code>) — GPT and compatible APIs via <code>OPENAI_API_KEY</code></li>
+    <li><strong>Anthropic</strong> (<code>anthropic</code>) — Claude via <code>ANTHROPIC_API_KEY</code></li>
+    <li><strong>OpenRouter</strong> (<code>openrouter</code>) — any model on OpenRouter</li>
+    <li><strong>Together AI</strong> (<code>together</code>) — hosted models via <code>TOGETHER_API_KEY</code></li>
+    <li><strong>Fireworks</strong> (<code>fireworks</code>) — hosted models via <code>FIREWORKS_API_KEY</code></li>
+    <li><strong>Sarvam AI</strong> (<code>sarvam</code>) — via <code>SARVAM_API_KEY</code></li>
+    <li><strong>Codex</strong> (<code>codex</code>) — OpenAI Codex-compatible endpoints</li>
   </ul>
+  <p>Disabled templates ship in <code>models/</code>. Enable locally, never commit API keys. The live site currently shows Gemma 4, Kimi K2.7 Code, and Gemini 3.1 Pro as one published comparison set — your PR can add any other model.</p>
 
   <h2>Task categories</h2>
   <ul>
