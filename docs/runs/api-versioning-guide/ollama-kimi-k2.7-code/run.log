@@ -1,0 +1,6 @@
+task=api-versioning-guide
+model=ollama/kimi-k2.7-code
+prompt=blog-writing/api-versioning-guide@1.0.0
+adapter=ollama
+duration_ms=25468
+tokens=169->1651

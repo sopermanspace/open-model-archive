@@ -1,0 +1,6 @@
+task=onboarding-flow
+model=ollama/gemma4
+prompt=svg-generation/onboarding-flow@1.0.0
+adapter=ollama
+duration_ms=14581
+tokens=198->979

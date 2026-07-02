@@ -1,0 +1,7 @@
+task=indie-game-waitlist
+model=ollama/kimi-k2.7-code
+prompt=website-generation/indie-game-waitlist@1.0.0
+adapter=ollama
+duration_ms=60957
+tokens=237->7413
+screenshot=/Users/himanshu/open-model-archive/runs/indie-game-waitlist/ollama-kimi-k2.7-code/screenshots/desktop.png

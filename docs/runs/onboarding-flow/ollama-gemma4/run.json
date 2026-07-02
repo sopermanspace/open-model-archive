@@ -1,0 +1,51 @@
+{
+  "id": "onboarding-flow/ollama-gemma4/2026-07-02T16:49:51Z",
+  "task": {
+    "id": "onboarding-flow",
+    "slug": "onboarding-flow",
+    "category": "svg-generation",
+    "title": "Onboarding Flow Diagram",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "onboarding-flow",
+    "version": "1.0.0",
+    "sha256": "279daf6ff005d42fd47ac3a988d16ab19d304af7041ac0b2e3a7cd3933e17642",
+    "title": "Onboarding Flow Diagram"
+  },
+  "executed_at": "2026-07-02T16:49:51.156443Z",
+  "duration_ms": 14581,
+  "tokens": {
+    "input": 198,
+    "output": 979,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "svg",
+      "path": "artifacts/output.svg",
+      "sha256": "24ab46a2ec35825c56d1de164d9c1901c88523fe771da5efa121c003f399556c",
+      "language": "svg"
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

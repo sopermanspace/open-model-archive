@@ -1,0 +1,6 @@
+task=river-crossing-puzzle
+model=google/gemini-3.1-pro
+prompt=math/river-crossing-puzzle@1.0.0
+adapter=cli
+duration_ms=26641
+tokens=140->501

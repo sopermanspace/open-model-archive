@@ -1,0 +1,51 @@
+{
+  "id": "slugify-utility/google-gemini-3.1-pro/2026-07-02T16:44:42Z",
+  "task": {
+    "id": "slugify-utility",
+    "slug": "slugify-utility",
+    "category": "code-generation",
+    "title": "Unicode Slugify Utility",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "slugify-utility",
+    "version": "1.0.0",
+    "sha256": "a72c63d51c3959b1dc8ffd6e468e045fb0e7fd5f651e2fbdbd86724c986703e8",
+    "title": "Unicode Slugify Utility"
+  },
+  "executed_at": "2026-07-02T16:44:42.821115Z",
+  "duration_ms": 52319,
+  "tokens": {
+    "input": 185,
+    "output": 478,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.002621,
+  "cost": {
+    "total_usd": 0.002621,
+    "input_usd": 0.000231,
+    "output_usd": 0.00239,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "source",
+      "path": "artifacts/main.py",
+      "sha256": "94dac1bab04692071f040e6faa205bad6f380fd7d1d3602b2875d30e6b020422",
+      "language": "python"
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

@@ -1,0 +1,6 @@
+task=product-review-fiction
+model=ollama/kimi-k2.7-code
+prompt=creative-fiction/product-review@1.0.0
+adapter=ollama
+duration_ms=38325
+tokens=161->2979

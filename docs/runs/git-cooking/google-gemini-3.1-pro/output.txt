@@ -1,0 +1,17 @@
+Imagine you are developing a master recipe for a stew. Every time you finish a step, like chopping onions or searing meat, you write it down. Those recorded steps are your "commits."
+
+You decide to experiment with a spicy flavor profile, so you create a "branch." This is like setting up a separate prep station. Over here, you make a few new commits: you toast chilies, grind them, and stir them in. 
+
+While you are doing this, your sous chef updates the master stew recipe on the main counter by adding a crucial step: deglazing the pot with wine. 
+
+Now your spicy variation is out of date. You want that wine flavor in your spicy stew. You have two choices: merge or rebase.
+
+A "merge" is like dumping your spicy prep bowl directly into the main pot with the wine. The flavors combine, but your recipe journal gets messy. It suddenly reads like two people shouting instructions at once, mixing up who did what and when. 
+
+A "rebase" is a much cleaner approach to your mise en place. When you rebase, you temporarily set your spicy commits aside. You update your prep station to match the exact current state of the main recipe, including that new wine reduction. Then, you "replay" your spicy commits one by one on top of this fresh base. First, you toast the chilies, then grind them, then stir them in. 
+
+Your recipe journal remains a single, perfectly linear sequence of instructions, as if you had planned to add the wine before the chilies all along. 
+
+Sometimes, while replaying your steps, you hit a "conflict." Maybe the master recipe now says to puree the stew, but your spicy step says to leave it chunky. You have to pause, taste, and manually resolve whether you want a smooth or chunky spicy stew before you can finish rewriting the steps.
+
+"Ah, so rebasing is just rewriting my recipe steps as if I had the newest ingredients from the start, rather than just throwing everything into a pot together!"

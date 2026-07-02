@@ -1,0 +1,6 @@
+task=onboarding-flow
+model=ollama/kimi-k2.7-code
+prompt=svg-generation/onboarding-flow@1.0.0
+adapter=ollama
+duration_ms=34269
+tokens=177->4091

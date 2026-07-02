@@ -1,0 +1,27 @@
+## Type scale & hierarchy
+The main heading (H1) in the hero section ("Know before you deploy.") is significantly larger than the body copy and secondary headings, establishing a strong primary focus. However, the overall progression lacks clear differentiation between various content blocks.
+
+In the feature/value proposition areas below the fold (e.g., "Find the gaps between environments"), the subheading size seems too close to the body text size, diminishing the visual pause that should separate section themes. If this is meant to be a secondary H2, it needs more scale differentiation from the main introductory body copy.
+
+## Font pairing & voice
+The typography appears modern and clean (likely a sans-serif stack), which contributes positively to a technical, professional voice suitable for DevOps tooling. The pairing itself feels intentional, relying on variations of the same typeface family rather than mixing disparate fonts, lending consistency. There are no obvious generic or mismatched choices; the style is restrained and focused.
+
+## Line length & density
+The hero section body copy ("Drift is a lightweight CLI that catches configuration drift...") has an excellent line length (approx. 45–60 characters per line), making it very comfortable to read.
+
+As for the feature descriptions (e.g., under "Find the gaps between environments"), while the lines are not excessively long, the text density within these blocks feels slightly heavy. Increasing vertical white space around grouped text blocks would significantly improve scanability and reduce visual fatigue.
+
+## Microtypography
+*   **Navigation:** The link labels ("Features," "Docs," "Pricing") use consistent case (title/sentence case) and are appropriately sized for navigation links.
+*   **Buttons:** Button labels ("Start drift scan," "Read the docs") are highly legible, using clear action-oriented language and standard uppercase/sentence casing conventions. The button text is appropriately spaced from the surrounding content.
+*   **Casing Consistency:** Overall consistency is good (mostly sentence case for body copy, title case for major sections). However, check the capitalization of feature titles in subsequent sections to ensure they follow the same rule established above the fold.
+
+## Accessibility notes
+The primary contrast issue identified is subtle but present: the gray text used for supporting information or smaller callouts sometimes approaches a color that might not meet AAA WCAG AA standards against pure white backgrounds, especially when read quickly over long periods. While the main H1/body contrast looks good, any supportive fine print should be checked to ensure it maintains adequate luminance contrast (aiming for 4.5:1 minimum).
+
+## Summary
+Three bullet priorities a designer should fix first (typography only):
+
+*   **Improve Section Hierarchy:** Increase the scale differential between section subheadings and body text within subsequent value proposition blocks (e.g., "Find the gaps..."). The current hierarchy is too flat, making it hard for the reader to rapidly scan and identify new topic shifts.
+*   **Increase Vertical Spacing (Whitespace):** Add more white space around grouped descriptive text blocks in feature sections. This will break up the perceived density of information, significantly improving breathability and readability without changing content or color.
+*   **Verify Secondary Contrast:** Review all supporting body copy that appears *smaller* than primary paragraphs to ensure it meets WCAG contrast standards (especially against white backgrounds), guaranteeing legibility for all users.

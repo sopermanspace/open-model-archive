@@ -1,0 +1,44 @@
+{
+  "id": "river-crossing-puzzle/ollama-kimi-k2.7-code/2026-07-02T16:57:42Z",
+  "task": {
+    "id": "river-crossing-puzzle",
+    "slug": "river-crossing-puzzle",
+    "category": "math",
+    "title": "River Crossing Logic Puzzle",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "river-crossing-puzzle",
+    "version": "1.0.0",
+    "sha256": "6069f6424de20135350b1708d41e1c39ddd6581f82659db8da767dce52cd8c3e",
+    "title": "River Crossing Logic Puzzle"
+  },
+  "executed_at": "2026-07-02T16:57:42.990244Z",
+  "duration_ms": 11516,
+  "tokens": {
+    "input": 146,
+    "output": 784,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.001642,
+  "cost": {
+    "total_usd": 0.001642,
+    "input_usd": 5.5e-05,
+    "output_usd": 0.001588,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

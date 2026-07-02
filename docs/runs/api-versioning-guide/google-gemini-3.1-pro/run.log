@@ -1,0 +1,6 @@
+task=api-versioning-guide
+model=google/gemini-3.1-pro
+prompt=blog-writing/api-versioning-guide@1.0.0
+adapter=cli
+duration_ms=45516
+tokens=164->1316

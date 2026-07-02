@@ -1,0 +1,9 @@
+id: remote-policy-qa
+slug: remote-policy-qa
+category: web-grounding
+topics: [reasoning]
+title: Remote Work Policy Q&A
+description: Grounded HR policy answers from excerpts — different domain than product docs.
+prompt: web-grounding/remote-policy-qa@v1.0.0
+screenshot: false
+models: all

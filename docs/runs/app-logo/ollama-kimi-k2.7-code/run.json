@@ -1,0 +1,51 @@
+{
+  "id": "app-logo/ollama-kimi-k2.7-code/2026-07-02T16:48:08Z",
+  "task": {
+    "id": "app-logo",
+    "slug": "app-logo",
+    "category": "svg-generation",
+    "title": "App Logo Mark",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "app-logo",
+    "version": "1.0.0",
+    "sha256": "7899aa77f216918abc839200db0f17e9db412c43db43bb9fef15212aa9c70c36",
+    "title": "App Logo Mark"
+  },
+  "executed_at": "2026-07-02T16:48:08.951612Z",
+  "duration_ms": 51430,
+  "tokens": {
+    "input": 168,
+    "output": 6239,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.012697,
+  "cost": {
+    "total_usd": 0.012697,
+    "input_usd": 6.3e-05,
+    "output_usd": 0.012634,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "svg",
+      "path": "artifacts/output.svg",
+      "sha256": "c9ed3688b50d00d9158b58d368b84a4138ca9a7054d5c5a7eb899784f2b370cd",
+      "language": "svg"
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

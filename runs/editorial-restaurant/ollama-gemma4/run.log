@@ -1,0 +1,7 @@
+task=editorial-restaurant
+model=ollama/gemma4
+prompt=website-generation/editorial-restaurant@1.0.0
+adapter=ollama
+duration_ms=62241
+tokens=254->4089
+screenshot=/Users/himanshu/open-model-archive/runs/editorial-restaurant/ollama-gemma4/screenshots/desktop.png

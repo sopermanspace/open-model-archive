@@ -1,0 +1,7 @@
+task=mobile-first-critique
+model=google/gemini-3.1-pro
+prompt=design-critique/mobile-first-critique@1.0.0
+adapter=cli
+inputs=['comparison-screenshot.jpg']
+duration_ms=49668
+tokens=225->374

@@ -1,0 +1,6 @@
+task=app-logo
+model=google/gemini-3.1-pro
+prompt=svg-generation/app-logo@1.0.0
+adapter=cli
+duration_ms=99148
+tokens=161->142

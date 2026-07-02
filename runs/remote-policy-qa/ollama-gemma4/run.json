@@ -1,0 +1,44 @@
+{
+  "id": "remote-policy-qa/ollama-gemma4/2026-07-02T16:53:51Z",
+  "task": {
+    "id": "remote-policy-qa",
+    "slug": "remote-policy-qa",
+    "category": "web-grounding",
+    "title": "Remote Work Policy Q&A",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "remote-policy-qa",
+    "version": "1.0.0",
+    "sha256": "5f26f977ab94e26ad80416a95c06d236aa86ea3e182fd686b805c584843b4d83",
+    "title": "Remote Work Policy Q&A"
+  },
+  "executed_at": "2026-07-02T16:53:51.635346Z",
+  "duration_ms": 11762,
+  "tokens": {
+    "input": 316,
+    "output": 778,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

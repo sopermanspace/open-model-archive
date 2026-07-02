@@ -1,0 +1,53 @@
+```python
+import re
+import unicodedata
+
+def slugify(text: str, max_length: int = 80) -> str:
+    """
+    Generate a URL-friendly slug from a string.
+    """
+    # Unicode normalize to NFKD
+    text = unicodedata.normalize('NFKD', text)
+    
+    # Strip combining characters
+    text = ''.join(c for c in text if not unicodedata.combining(c))
+    
+    # Lowercase
+    text = text.lower()
+    
+    # Replace non-alphanumeric runs with a single hyphen
+    # \W matches any non-word character, _ matches underscore.
+    # Together, [\W_]+ matches any sequence of characters that are not alphanumeric.
+    text = re.sub(r'[\W_]+', '-', text)
+    
+    # Strip leading/trailing hyphens
+    text = text.strip('-')
+    
+    # Truncate to max_length without ending on a partial hyphen
+    text = text[:max_length].rstrip('-')
+    
+    return text
+
+
+if __name__ == "__main__":
+    # 1. Standard text and punctuation
+    assert slugify("Hello World!") == "hello-world"
+    
+    # 2. Unicode normalization and stripping combining characters
+    assert slugify("café au lait") == "cafe-au-lait"
+    
+    # 3. Non-latin alphanumeric characters (should be preserved)
+    assert slugify("日本語") == "日本語"
+    
+    # 4. Runs of non-alphanumerics, including underscores and hyphens
+    assert slugify("  ---  A  --  _B_  ---  ") == "a-b"
+    
+    # 5. Empty-ish input (only non-alphanumerics)
+    assert slugify("!@#$%^&*()_+-=") == ""
+    
+    # 6. Truncation that naturally falls on a character
+    assert slugify("a" * 100, max_length=10) == "a" * 10
+    
+    # 7. Truncation that leaves a trailing hyphen which must be stripped
+    assert slugify("a" * 9 + "-b", max_length=10) == "a" * 9
+```

@@ -1,0 +1,62 @@
+## Goal Statement
+
+The goal is to safely transport the farmer (F), wolf (W), goat (G), and cabbage (C) from the near bank to the far bank using a boat that can only hold the farmer plus one item, while ensuring that at no point are the wolf left alone with the goat, or the goat left alone with the cabbage.
+
+## Safety Constraints
+
+*   **Danger 1:** Wolf ($\text{W}$) and Goat ($\text{G}$) cannot be left together without the Farmer ($\text{F}$).
+*   **Danger 2:** Goat ($\text{G}$) and Cabbage ($\text{C}$) cannot be left together without the Farmer ($\text{F}$).
+
+***
+
+## Valid Moves Step-by-Step
+
+### Initial State: Near Bank {F, W, G, C} | Far Bank {}
+
+**Move 1:** The farmer takes the goat across.
+*   *Action:* F + G $\rightarrow$ Far Bank.
+*   *State:* Near Bank {W, C} (Safe) | Far Bank {F, G}.
+*   *Reasoning:* This is the only safe first move. If the farmer took the wolf, the goat would eat the cabbage. If the farmer took the cabbage, the wolf would eat the goat.
+
+**Move 2:** The farmer returns alone.
+*   *Action:* F $\leftarrow$ Near Bank.
+*   *State:* Near Bank {F, W, C} | Far Bank {G}.
+*   *Reasoning:* The farmer must return to pick up another item. Leaving the goat alone on the far bank is safe.
+
+**Move 3:** The farmer takes the wolf across.
+*   *Action:* F + W $\rightarrow$ Far Bank.
+*   *State:* Near Bank {C} (Safe) | Far Bank {F, G, W}.
+*   *Reasoning:* The wolf must cross now. However, doing so creates a potential danger (W and G are together). To prevent the immediate disaster (W eating G), the farmer must take an item back immediately on the return trip.
+
+**Move 4:** The farmer takes the goat back to the near bank.
+*   *Action:* F + G $\leftarrow$ Near Bank.
+*   *State:* Near Bank {F, G, C} | Far Bank {W}.
+*   *Reasoning:* This crucial step breaks up the danger pair (W and G). The wolf is now safely isolated on the far bank, ready to wait for its companions.
+
+**Move 5:** The farmer takes the cabbage across.
+*   *Action:* F + C $\rightarrow$ Far Bank.
+*   *State:* Near Bank {G} (Safe) | Far Bank {F, W, C}.
+*   *Reasoning:* The cabbage must cross next. Leaving the goat alone on the near bank is safe. W and C are safe together on the far bank.
+
+**Move 6:** The farmer returns alone.
+*   *Action:* F $\leftarrow$ Near Bank.
+*   *State:* Near Bank {F, G} | Far Bank {W, C}.
+*   *Reasoning:* The farmer must return for the final item. Leaving W and C together on the far bank is safe (the wolf doesn't eat cabbage).
+
+**Move 7:** The farmer takes the goat across.
+*   *Action:* F + G $\rightarrow$ Far Bank.
+*   *State:* Near Bank {} | Far Bank {F, W, G, C}.
+*   *Reasoning:* This is the final move, completing the journey and ensuring all items arrive safely.
+
+***
+
+## Confirmation of Safe Arrival
+
+All four (the farmer, wolf, goat, and cabbage) have arrived safely on the far bank in 7 moves. At every stage, the necessary safety constraints were maintained:
+
+*   W was never left with G without F.
+*   G was never left with C without F.
+
+## Impossible Variants
+
+No impossible variants were identified; this puzzle is solvable using the sequence provided above.

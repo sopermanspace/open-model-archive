@@ -1,0 +1,408 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ember & Oak | Modern Fine Dining in Portland</title>
+    <!-- Google Fonts: Playfair Display for Serif/Luxury feel, Inter for Clean Sans/Utility -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Variables and Base Styling */
+        :root {
+            --color-background: #f8f5ed; /* Cream/Off-white */
+            --color-text: #332d26; /* Deep earthy brown/near black */
+            --color-accent: #9b7a64; /* Taupe/Muted wood tone */
+            --color-highlight: #b08e5e; /* Muted gold/rust for accents */
+            --spacing-unit: 2rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif; /* Primary font for elegance */
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            padding-top: 80px; /* Space below fixed header/nav */
+        }
+
+        /* Utility Classes and Typography */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        .container {
+            max-width: 960px; /* Optimal reading width */
+            padding: 0 2rem;
+            margin: 0 auto;
+        }
+
+        /* --- Header and Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-background);
+            border-bottom: 1px solid rgba(51, 45, 38, 0.1);
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text);
+            margin-left: 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.25rem 0;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-highlight);
+        }
+
+        /* --- Buttons and CTAs --- */
+        .button, button {
+            background-color: var(--color-text);
+            color: #fff;
+            padding: 0.75rem 1.8rem;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            transition: background-color 0.3s, transform 0.1s;
+            text-decoration: none; /* For anchor tags used as buttons */
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: var(--color-highlight);
+            transform: translateY(-1px);
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            text-align: center;
+            padding: 6rem 0;
+            max-width: 960px;
+            margin: 40px auto 2rem auto;
+        }
+
+        #hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 0.5em;
+            line-height: 1.1;
+            text-transform: capitalize;
+        }
+
+        #hero p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1rem auto 2.5rem auto;
+            color: var(--color-accent);
+        }
+
+        /* --- Section Styling (General) --- */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid rgba(51, 45, 38, 0.08);
+        }
+
+        .section-heading {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 3rem;
+            color: var(--color-highlight);
+            padding-top: 1rem;
+            display: block; /* Ensures it behaves like a full heading */
+        }
+
+        /* --- Chef's Story --- */
+        #story {
+            background-color: var(--color-background);
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .pull-quote {
+            font-style: italic;
+            display: block;
+            width: 80%;
+            margin: 2rem auto 2rem auto;
+            border-left: 4px solid var(--color-highlight);
+            padding-left: 20px;
+        }
+
+        #story h2 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+
+        /* --- Menu Section (Thematic Focus) --- */
+        #menu .menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .course {
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            border: 1px solid rgba(51, 45, 38, 0.1);
+            background-color: #fff; /* Slight contrast for readability */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .course h3 {
+            font-size: 1.8em;
+            border-bottom: 1px solid var(--color-accent);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .dish-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dotted rgba(0, 0, 0, 0.05);
+        }
+
+        .dish-name {
+            flex-grow: 1;
+        }
+
+        /* --- Location and Hours --- */
+        #location {
+            display: flex;
+            gap: 4rem;
+            align-items: flex-start;
+            padding-top: 3rem;
+        }
+
+        .info-block {
+            flex: 1;
+            max-width: 45%;
+        }
+
+        .info-block h2 {
+             font-size: 1.8em;
+             margin-bottom: 1.5rem;
+        }
+
+        .hours p, .address p {
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 0.75rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--color-text);
+            color: #ccc;
+            padding: 2.5rem 0;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: var(--color-highlight);
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+
+        /* --- Responsiveness Adjustments (Mobile First) --- */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding-bottom: 0.5rem;
+                gap: 1rem;
+            }
+            .nav-links a {
+                margin: 0 0.5rem;
+                font-size: 0.9em;
+            }
+             #hero h1 {
+                font-size: 2.8em;
+            }
+            .section-heading {
+                font-size: 2em;
+                padding: 0 1rem;
+            }
+
+            /* Collapse multi-column layout */
+            #location {
+                flex-direction: column;
+                gap: 3rem;
+                align-items: center;
+            }
+            .info-block {
+                 max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <div class="logo">Ember & Oak</div>
+            <div class="nav-links">
+                <a href="#story">The Story</a>
+                <a href="#menu">Menu</a>
+                <a href="#location">Visit</a>
+                <button role="button" onclick="document.getElementById('hero').scrollIntoView({behavior: 'smooth'}); document.querySelector('.button').focus();">Book a table</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <h1>Ember & Oak</h1>
+            <p>Wood fire. Local grain. Long tables.</p>
+            <button class="button" onclick="document.getElementById('story').scrollIntoView({behavior: 'smooth'});">Book a table</button>
+        </div>
+    </section>
+
+    <!-- Chef's Story Section -->
+    <section id="story">
+        <div class="container">
+            <h2 class="section-heading">From Fire to Feast</h2>
+            <p style="font-family: 'Inter', sans-serif; max-width: 800px; margin: auto 1rem;">
+                Our ethos begins with the woods and ends at your table. At Ember & Oak, we honor the primal connection between earth and flame. Our ingredients are sourced within a hundred-mile radius of Portland—from heritage grain flour milled in Oregon to forest mushrooms harvested by local foragers. The cooking method is deliberately rustic: time-honored wood fire techniques meeting modern finesse.
+            </p>
+
+            <blockquote class="pull-quote">
+                "The perfect meal is less about plated perfection and more about the collective memory of a shared, slow moment. We build our dining room around that stillness."
+                <footer>— Chef Rowan Grey</footer>
+            </blockquote>
+        </div>
+    </section>
+
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <div class="container">
+            <h2 class="section-heading">Sample Tasting Sequence</h2>
+
+            <div class="menu-container">
+                
+                <!-- Course 1: Starter -->
+                <div class="course" role="group" aria-labelledby="starter-heading">
+                    <h3>The Awakening</h3>
+                    <p style="font-family: 'Inter', sans-serif; margin-bottom: 0.5rem;">*An exploration of acidity and smoke.</p>
+                    <div class="dish-item">
+                        <span class="dish-name">Smoke-kissed Oregon Trout, charred cedar plank</span>
+                    </div>
+                     <div class="dish-item">
+                        <span class="dish-name">Whipped ricotta crostini with local berries and thyme dust</span>
+                    </div>
+                </div>
+
+                <!-- Course 2: Main -->
+                 <div class="course" role="group" aria-labelledby="main-heading">
+                    <h3>The Centerpiece</h3>
+                    <p style="font-family: 'Inter', sans-serif; margin-bottom: 0.5rem;">*Meat and seasonal root vegetables.*</p>
+                    <div class="dish-item">
+                        <span class="dish-name">Wood-fired lamb shoulder, smoked rosemary jus</span>
+                    </div>
+                     <div class="dish-item">
+                        <span class="dish-name">Hay-infused polenta with truffle and burnt mushroom ragu</span>
+                    </div>
+                </div>
+
+                <!-- Course 3: Dessert -->
+                 <div class="course" role="group" aria-labelledby="dessert-heading">
+                    <h3>The Farewell</h3>
+                    <p style="font-family: 'Inter', sans-serif; margin-bottom: 0.5rem;">*A sweet ending, dark and deep.*</p>
+                    <div class="dish-item">
+                        <span class="dish-name">Black sesame panna cotta with burnt fig compote</span>
+                    </div>
+                     <div class="dish-item">
+                        <span class="dish-name">Madagascar vanilla bean brittle, candied hazelnuts</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Location and Hours -->
+    <section id="location">
+        <div class="container" role="main">
+            
+            <div class="info-block">
+                <h2 class="section-heading">Visit Us</h2>
+                
+                <div class="address">
+                    <h3>The Space</h3>
+                    <p>450 Hawthorne Blvd, Portland, OR 97214</p>
+                    <p style="margin-top: 1.5rem;">We welcome reservations; seating is limited and designed for intimacy.</p>
+                </div>
+
+                <div class="hours" style="margin-top: 3rem;">
+                     <h3>Hours</h3>
+                     <p>Dinner Service: Tuesday - Saturday | Sunset to late</p>
+                     <p style="font-family: 'Inter', sans-serif; font-weight: 600; color: var(--color-accent);">Seasonal Tasting Menu Only.</p>
+                </div>
+            </div>
+
+             <!-- Placeholder for Map/Visual Element -->
+            <div class="info-block" style="max-width: 50%;">
+                 <h2 class="section-heading">Come Taste the Wood Fire</h2>
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3182.267240695581!2d-122.515312382172!3d45.52319528829468!2m3!1f0!2f0!4m13!3m2!1i1024!2i768!4f13.1!3m3!1m2!1shttps%3A%2F%2Fwww.google.com!2sEmber%20and%20Oak!5e0" width="100%" height="400" style="border: 0; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></iframe>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            &copy; 2024 Ember & Oak. All rights reserved.<br>
+            <span style="margin-top: 1rem;">|</span> <a href="#story" aria-label="The Story">Our Ethos</a> <span style="margin: 0 1rem;">|</span> <a href="#" aria-label="Privacy Policy">Press</a> <span style="margin: 0 1rem;">|</span> <a href="mailto:reservations@emberoak.com" aria-label="Contact Email">Contact</a>
+        </div>
+    </footer>
+
+</body>
+</html>
+```

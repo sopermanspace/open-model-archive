@@ -1,0 +1,51 @@
+{
+  "id": "typography-audit/ollama-gemma4/2026-07-02T16:54:49Z",
+  "task": {
+    "id": "typography-audit",
+    "slug": "typography-audit",
+    "category": "vision-understanding",
+    "title": "Typography & Readability Audit",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "typography-audit",
+    "version": "1.0.0",
+    "sha256": "24de58053ffd2544973225d9637a81c3606c64223f8563e75080e415d8e4f2eb",
+    "title": "Typography & Readability Audit"
+  },
+  "executed_at": "2026-07-02T16:54:49.837460Z",
+  "duration_ms": 13120,
+  "tokens": {
+    "input": 474,
+    "output": 844,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "image",
+      "path": "inputs/drift-landing-reference.png",
+      "sha256": "a24dbaa2631af532fe260b79a4b77dd9037a1389cfc981d11f33fd0e6d4b6f2a",
+      "language": null
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

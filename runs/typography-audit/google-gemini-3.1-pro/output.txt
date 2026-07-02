@@ -1,0 +1,19 @@
+## Type scale & hierarchy
+Heading levels are clearly distinguishable and establish a strong visual hierarchy. There is a logical progression from the massive hero H1 ("Know before you deploy.") down to the H2 ("Find the gaps between environments"). The relationship between the headings and their accompanying body text is well-proportioned, making it easy for the eye to scan the most important information first.
+
+## Font pairing & voice
+The design relies on a single, modern sans-serif typeface (similar to Inter or Roboto). The voice feels clean, technical, and utilitarian, which perfectly aligns with a developer-focused CLI tool. However, because it is a very standard neo-grotesque sans-serif without a pairing, the typography feels a bit generic and lacks a distinct brand personality. 
+
+## Line length & density
+Line lengths are excellent. Both the hero subtitle and the secondary section subtext are constrained to a comfortable measure (roughly 60-75 characters per line). By breaking the text into two centered lines, it avoids overly wide, fatiguing blocks of text. The line-height (leading) is generous, giving the text plenty of room to breathe.
+
+## Microtypography
+Casing is handled well: button labels use sentence case ("Start drift scan", "Read the docs"), which feels conversational and modern, while the navigation uses standard title case. The use of a proper em-dash ("production—before") in the hero subtitle is a nice attention to detail that improves the reading rhythm. 
+
+## Accessibility notes
+Contrast is the most significant issue on this page. The grey body text used for the hero subtitle, the secondary section subtext, and the top navigation links ("Features", "Docs", "Pricing") is too dark against the near-black background. This low contrast likely fails WCAG AA readability standards and will cause eye strain for users, especially in less-than-ideal lighting conditions. 
+
+## Summary
+- **Increase body text contrast:** Lighten the grey color of the hero subtitle and section subtext to meet WCAG accessibility standards and ensure comfortable reading.
+- **Brighten navigation links:** Increase the brightness of the header links ("Features", "Docs", "Pricing") so they don't visually recede into the dark background.
+- **Improve secondary button contrast:** Lighten the text and border of the "Read the docs" button so it is clearly legible and identifiable as an interactive element.

@@ -1,0 +1,44 @@
+{
+  "id": "river-crossing-puzzle/ollama-gemma4/2026-07-02T16:57:31Z",
+  "task": {
+    "id": "river-crossing-puzzle",
+    "slug": "river-crossing-puzzle",
+    "category": "math",
+    "title": "River Crossing Logic Puzzle",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "river-crossing-puzzle",
+    "version": "1.0.0",
+    "sha256": "6069f6424de20135350b1708d41e1c39ddd6581f82659db8da767dce52cd8c3e",
+    "title": "River Crossing Logic Puzzle"
+  },
+  "executed_at": "2026-07-02T16:57:31.470813Z",
+  "duration_ms": 33578,
+  "tokens": {
+    "input": 160,
+    "output": 2216,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

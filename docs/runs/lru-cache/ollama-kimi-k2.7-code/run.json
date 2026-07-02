@@ -1,0 +1,51 @@
+{
+  "id": "lru-cache/ollama-kimi-k2.7-code/2026-07-02T16:43:50Z",
+  "task": {
+    "id": "lru-cache",
+    "slug": "lru-cache",
+    "category": "code-generation",
+    "title": "LRU Cache",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "lru-cache",
+    "version": "1.0.0",
+    "sha256": "5479beb8815b98705ae1690f695809daa45ac75d5116d6eb86397f36ca6ed0a7",
+    "title": "LRU Cache"
+  },
+  "executed_at": "2026-07-02T16:43:50.245721Z",
+  "duration_ms": 8085,
+  "tokens": {
+    "input": 199,
+    "output": 854,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.001804,
+  "cost": {
+    "total_usd": 0.001804,
+    "input_usd": 7.5e-05,
+    "output_usd": 0.001729,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "source",
+      "path": "artifacts/main.py",
+      "sha256": "d8ed041b07a9bce05b79fb05aefaa6839791d42dc7d251739881fcb43dcadfbd",
+      "language": "python"
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

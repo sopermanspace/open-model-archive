@@ -1,0 +1,6 @@
+task=app-logo
+model=ollama/kimi-k2.7-code
+prompt=svg-generation/app-logo@1.0.0
+adapter=ollama
+duration_ms=51430
+tokens=168->6239

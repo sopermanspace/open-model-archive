@@ -1,0 +1,7 @@
+task=editorial-restaurant
+model=ollama/kimi-k2.7-code
+prompt=website-generation/editorial-restaurant@1.0.0
+adapter=ollama
+duration_ms=47287
+tokens=231->4268
+screenshot=/Users/himanshu/open-model-archive/runs/editorial-restaurant/ollama-kimi-k2.7-code/screenshots/desktop.png

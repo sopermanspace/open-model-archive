@@ -1,0 +1,45 @@
+```python
+import re
+import unicodedata
+
+
+def slugify(text: str, max_length: int = 80) -> str:
+    """
+    Convert a string into a URL-friendly slug.
+    """
+    if not isinstance(text, str):
+        raise TypeError("text must be a string")
+    if not isinstance(max_length, int):
+        raise TypeError("max_length must be an integer")
+    if max_length < 0:
+        raise ValueError("max_length must be non-negative")
+
+    # 1. Unicode NFKD normalization and strip combining characters
+    normalized = unicodedata.normalize("NFKD", text)
+    without_combining = "".join(
+        char for char in normalized if unicodedata.category(char) != "Mn"
+    )
+
+    # 2. Lowercase and replace non-alphanumeric runs with a single hyphen
+    slug = re.sub(r"[^a-z0-9]+", "-", without_combining.lower())
+
+    # 3. Strip leading/trailing hyphens
+    slug = slug.strip("-")
+
+    # 4. Truncate without ending on a partial hyphen
+    if len(slug) > max_length:
+        slug = slug[:max_length].rstrip("-")
+
+    return slug
+
+
+if __name__ == "__main__":
+    assert slugify("Hello World!") == "hello-world"
+    assert slugify("café") == "cafe"
+    assert slugify("日本語のテキスト") == "日本語のテキスト"
+    assert slugify("---lots___of   spaces!!!") == "lots-of-spaces"
+    assert slugify("") == ""
+    assert slugify("   ???   ") == ""
+    assert slugify("foo-bar-baz", max_length=8) == "foo-bar"
+    assert slugify("a" * 100, max_length=80) == "a" * 80
+```

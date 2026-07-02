@@ -1,0 +1,57 @@
+{
+  "id": "editorial-restaurant/google-gemini-3.1-pro/2026-07-02T16:59:09Z",
+  "task": {
+    "id": "editorial-restaurant",
+    "slug": "editorial-restaurant",
+    "category": "website-generation",
+    "title": "Editorial Restaurant Site",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "editorial-restaurant",
+    "version": "1.0.0",
+    "sha256": "849d955d663e9158a2e5e18afa88b158c3f5bcd2d935e4b6a9f455164a06ec85",
+    "title": "Editorial Restaurant Site"
+  },
+  "executed_at": "2026-07-02T16:59:09.449718Z",
+  "duration_ms": 63875,
+  "tokens": {
+    "input": 224,
+    "output": 2665,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.013605,
+  "cost": {
+    "total_usd": 0.013605,
+    "input_usd": 0.00028,
+    "output_usd": 0.013325,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "7c7d9da418c2e30511aeb927aabd0d86e678132b07f5fc410d3e46c0d958090a",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "407732a0378638574cd16eb3901c8c8bb0790aa8f67db787a3afcc532d1a1ee7"
+    }
+  ],
+  "logs": "run.log"
+}

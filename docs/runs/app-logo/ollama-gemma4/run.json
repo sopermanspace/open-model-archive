@@ -1,0 +1,51 @@
+{
+  "id": "app-logo/ollama-gemma4/2026-07-02T16:47:17Z",
+  "task": {
+    "id": "app-logo",
+    "slug": "app-logo",
+    "category": "svg-generation",
+    "title": "App Logo Mark",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "app-logo",
+    "version": "1.0.0",
+    "sha256": "7899aa77f216918abc839200db0f17e9db412c43db43bb9fef15212aa9c70c36",
+    "title": "App Logo Mark"
+  },
+  "executed_at": "2026-07-02T16:47:17.518032Z",
+  "duration_ms": 9623,
+  "tokens": {
+    "input": 185,
+    "output": 637,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "svg",
+      "path": "artifacts/output.svg",
+      "sha256": "6502dd92883ebca5b4b72cd2a0781e19104567c0b32467815eb326aea1e8d5f8",
+      "language": "svg"
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

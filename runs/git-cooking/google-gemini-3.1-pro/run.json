@@ -1,0 +1,44 @@
+{
+  "id": "git-cooking/google-gemini-3.1-pro/2026-07-02T16:51:03Z",
+  "task": {
+    "id": "git-cooking",
+    "slug": "git-cooking",
+    "category": "humor-testing",
+    "title": "Explain Git Rebase as Cooking",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "git-cooking",
+    "version": "1.0.0",
+    "sha256": "520639b642ce794fcdf9daaea5e1ae94df15eac99baa127b58a4ddb23ffa567b",
+    "title": "Explain Git Rebase as Cooking"
+  },
+  "executed_at": "2026-07-02T16:51:03.911982Z",
+  "duration_ms": 38240,
+  "tokens": {
+    "input": 113,
+    "output": 422,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.002251,
+  "cost": {
+    "total_usd": 0.002251,
+    "input_usd": 0.000141,
+    "output_usd": 0.00211,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

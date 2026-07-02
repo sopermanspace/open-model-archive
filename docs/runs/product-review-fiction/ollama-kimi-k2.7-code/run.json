@@ -1,0 +1,44 @@
+{
+  "id": "product-review-fiction/ollama-kimi-k2.7-code/2026-07-02T16:53:05Z",
+  "task": {
+    "id": "product-review-fiction",
+    "slug": "product-review-fiction",
+    "category": "creative-fiction",
+    "title": "Fictional Product Review",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "product-review",
+    "version": "1.0.0",
+    "sha256": "1281d1a8b0f63e0f24adb83caeb8da097d13ef66819f3f0238c642cd197a4796",
+    "title": "Fictional Product Review"
+  },
+  "executed_at": "2026-07-02T16:53:05.133159Z",
+  "duration_ms": 38325,
+  "tokens": {
+    "input": 161,
+    "output": 2979,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.006093,
+  "cost": {
+    "total_usd": 0.006093,
+    "input_usd": 6e-05,
+    "output_usd": 0.006032,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

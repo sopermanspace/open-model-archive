@@ -1,0 +1,23 @@
+## Thumb-zone & navigation
+
+- **Left:** The primary CTA is a single, centered button, which lands comfortably in the thumb zone. However, the nav links and “Sign In” sit at the very top, requiring a stretch to reach on a 390 px screen. With no hamburger or condensed menu, the links would likely wrap or crowd the top bar.
+- **Right:** The “Start drift scan” and “Read the docs” buttons appear lower in the hero, within easy thumb reach. The top nav is minimal, but the “GitHub” button is still in the top-right corner, which is less reachable one-handed.
+
+## Vertical rhythm on narrow screens
+
+- **Left:** The layout feels denser. The repeated nav/hero blocks and the “How Drift Works” placeholder bars would stack into a long, cramped column with less breathing room between sections.
+- **Right:** Wider spacing and clearer section breaks give the page more air. On a narrow viewport, those gaps would help each block feel distinct rather than piling on top of one another.
+
+## Tap targets & forms
+
+- **Left:** One clear CTA means less risk of mis-taps. Nav links are small and close together, which is a concern for touch. No inputs are shown.
+- **Right:** The two hero CTAs would need to stack on 390 px. If they stay side-by-side, each would be roughly half the screen width, which is technically wide enough but still tight for thumbs. The “GitHub” nav button is smaller and farther away. No forms are visible.
+
+## Content prioritization
+
+- **Left:** The value proposition appears immediately, but the duplicated nav and second hero section below it create visual noise and could make a user question whether they already scrolled.
+- **Right:** The headline, tagline, and CTAs are presented cleanly at the top, followed by a clear “Find the gaps between environments” supporting section. It surfaces the core message before scroll with less distraction.
+
+## Verdict
+
+**Winner: Right.** While the left panel’s single centered CTA is slightly more thumb-friendly, the right panel wins on mobile-first overall: it offers clearer content hierarchy, better vertical rhythm, and a less cluttered stack at 390 px. The main caveat is making the two hero CTAs full-width on mobile so they don’t become narrow side-by-side targets.

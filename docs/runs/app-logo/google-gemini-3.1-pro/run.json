@@ -1,0 +1,51 @@
+{
+  "id": "app-logo/google-gemini-3.1-pro/2026-07-02T16:47:07Z",
+  "task": {
+    "id": "app-logo",
+    "slug": "app-logo",
+    "category": "svg-generation",
+    "title": "App Logo Mark",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "app-logo",
+    "version": "1.0.0",
+    "sha256": "7899aa77f216918abc839200db0f17e9db412c43db43bb9fef15212aa9c70c36",
+    "title": "App Logo Mark"
+  },
+  "executed_at": "2026-07-02T16:47:07.893030Z",
+  "duration_ms": 99148,
+  "tokens": {
+    "input": 161,
+    "output": 142,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.000911,
+  "cost": {
+    "total_usd": 0.000911,
+    "input_usd": 0.000201,
+    "output_usd": 0.00071,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "svg",
+      "path": "artifacts/output.svg",
+      "sha256": "218e1decc8407afbc98c5f2716351d3f9f4d65a30b07a2b84032c321ae6df468",
+      "language": "svg"
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

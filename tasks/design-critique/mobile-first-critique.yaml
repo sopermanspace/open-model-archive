@@ -1,0 +1,11 @@
+id: mobile-first-critique
+slug: mobile-first-critique
+category: design-critique
+topics: [vision, design]
+title: Mobile-First Design Critique
+description: Mobile usability critique of a comparison screenshot — different lens than desktop design review.
+prompt: design-critique/mobile-first-critique@v1.0.0
+inputs:
+  - assets/task-inputs/comparison-screenshot.jpg
+screenshot: false
+models: all

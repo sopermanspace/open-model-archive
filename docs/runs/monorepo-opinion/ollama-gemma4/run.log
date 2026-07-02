@@ -1,0 +1,6 @@
+task=monorepo-opinion
+model=ollama/gemma4
+prompt=blog-writing/monorepo-opinion@1.0.0
+adapter=ollama
+duration_ms=15367
+tokens=174->867

@@ -1,0 +1,7 @@
+task=typography-audit
+model=ollama/gemma4
+prompt=vision-understanding/typography-audit@1.0.0
+adapter=ollama
+inputs=['drift-landing-reference.png']
+duration_ms=13120
+tokens=474->844

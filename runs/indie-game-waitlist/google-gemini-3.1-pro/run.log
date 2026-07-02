@@ -1,0 +1,7 @@
+task=indie-game-waitlist
+model=google/gemini-3.1-pro
+prompt=website-generation/indie-game-waitlist@1.0.0
+adapter=cli
+duration_ms=65845
+tokens=230->2948
+screenshot=/Users/himanshu/open-model-archive/runs/indie-game-waitlist/google-gemini-3.1-pro/screenshots/desktop.png

@@ -1,0 +1,7 @@
+task=mobile-first-critique
+model=ollama/kimi-k2.7-code
+prompt=design-critique/mobile-first-critique@1.0.0
+adapter=ollama
+inputs=['comparison-screenshot.jpg']
+duration_ms=14272
+tokens=1178->1306

@@ -1,0 +1,10 @@
+id: indie-game-waitlist
+slug: indie-game-waitlist
+category: website-generation
+topics: [design, creative]
+title: Indie Game Waitlist Page
+description: Playful light-theme waitlist page for a fictional co-op game — compare visual tone vs developer SaaS landings.
+prompt: website-generation/indie-game-waitlist@v1.0.0
+post_process:
+  - extract_html
+models: all

@@ -1,0 +1,44 @@
+{
+  "id": "product-review-fiction/ollama-gemma4/2026-07-02T16:52:26Z",
+  "task": {
+    "id": "product-review-fiction",
+    "slug": "product-review-fiction",
+    "category": "creative-fiction",
+    "title": "Fictional Product Review",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "product-review",
+    "version": "1.0.0",
+    "sha256": "1281d1a8b0f63e0f24adb83caeb8da097d13ef66819f3f0238c642cd197a4796",
+    "title": "Fictional Product Review"
+  },
+  "executed_at": "2026-07-02T16:52:26.806015Z",
+  "duration_ms": 7553,
+  "tokens": {
+    "input": 174,
+    "output": 486,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

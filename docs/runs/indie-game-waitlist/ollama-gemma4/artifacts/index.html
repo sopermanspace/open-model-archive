@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starfield Salvage - Cozy Co-op Space Life</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Using Quicksand for a friendly, round, indie feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Global Resets and Variables */
+        :root {
+            --color-primary: #FFC3A0; /* Soft Coral/Peach - CTA focus */
+            --color-secondary: #83BFE4; /* Sky Blue - Accent */
+            --color-background: #FFF9F0; /* Creamy Off-White */
+            --color-text-dark: #4D4A42; /* Soft Cocoa Brown */
+            --color-card-bg: #FFFFFF;
+            --font-family: 'Quicksand', sans-serif;
+        }
+
+        /* Base Styling */
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-background);
+            color: var(--color-text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            color: var(--color-text-dark);
+        }
+
+        /* Utility Classes */
+        section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: var(--color-card-bg);
+            padding: 20px 5%;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-secondary);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--color-text-dark);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--color-primary);
+        }
+
+        /* CTA Button Styling */
+        .cta-button, button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--color-primary);
+            color: var(--color-text-dark); /* Using text-dark for better contrast on the pastel background */
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-button:hover, button:hover {
+            background-color: #e69c81; /* Slightly darker coral */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        #hero {
+            background-color: var(--color-secondary); /* Light sky blue background for pop */
+            padding: 120px 5%;
+            text-align: center;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: var(--color-text-dark);
+        }
+
+        #hero p {
+            font-size: 1.4rem;
+            max-width: 600px;
+            margin: 20px auto 40px auto;
+        }
+
+        /* Form Styling (Waitlist) */
+        .waitlist-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 500px;
+            margin: 20px auto 0 auto;
+        }
+
+        .waitlist-form input[type="email"] {
+            padding: 12px;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            flex-grow: 1;
+            font-size: 1rem;
+        }
+
+        .waitlist-form input[type="email"]:focus {
+             outline: none;
+             border-color: var(--color-secondary);
+        }
+
+
+        /* Feature Cards */
+        #features h2 {
+            margin-bottom: 50px;
+        }
+
+        #feature-grid {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            background-color: var(--color-card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            transition: transform 0.2s;
+            flex-basis: calc(33% - 20px); /* Three columns layout */
+            min-width: 280px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card .emoji {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        /* Crew Section */
+        #crew h2 {
+             color: var(--color-secondary);
+        }
+
+        #crew-grid {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .crew-member {
+            background-color: var(--color-card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .crew-member h3 {
+            font-size: 2rem;
+            margin-top: 15px;
+            color: var(--color-primary);
+        }
+
+        .crew-image-placeholder {
+            width: 120px;
+            height: 120px;
+            background-color: #EDEAD8; /* Placeholder background */
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            /* Simple circle placeholder look */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #F0EBE8; /* Lighter cream for separation */
+            padding: 40px 5%;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+
+        /* Responsiveness */
+        @media (max-width: 900px) {
+            .feature-card {
+                flex-basis: calc(50% - 20px); /* Two columns on tablets */
+            }
+
+            #crew-grid {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            /* Stack elements for small screens */
+            header {
+                flex-direction: column;
+                padding-bottom: 10px;
+            }
+            nav ul {
+                margin-top: 15px;
+                gap: 20px;
+            }
+
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+
+            #feature-grid {
+                flex-direction: column; /* Stack cards */
+                align-items: center;
+            }
+
+             /* Adjust the card width when stacked */
+            .feature-card {
+                flex-basis: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header and Navigation -->
+    <header>
+        <div class="logo">🛰️ Starfield Salvage</div>
+        <nav role="navigation">
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#crew">Crew</a></li>
+                <li><a href="#waitlist-section">Join Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" role="banner">
+        <div class="container">
+            <h1>Repair ships. Argue about wiring. Save the station.</h1>
+            <p>A cozy, co-op space salvage adventure for two. Bring your best banter and your worst soldering iron skills.</p>
+
+            <!-- Waitlist Form Section -->
+            <section id="waitlist-section" style="margin-top: 50px;">
+                <h2>The Scrapyard Awaits...</h2>
+                <p>Be the first to know when we launch into orbit. Join our waitlist below!</p>
+
+                <div class="waitlist-form">
+                    <input type="email" placeholder="Enter your cosmic email address..." aria-label="Email address for waitlist sign up">
+                    <button class="cta-button" onclick="alert('You successfully joined the salvage crew list! We will notify you when repairs begin.')">Join the waitlist</button>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <h2>Salvage Life in Harmony</h2>
+        <div class="container" id="feature-grid">
+
+            <article class="feature-card" aria-labelledby="f1">
+                <span class="emoji">🛠️</span>
+                <h3 id="f1">Modular Ship Repair</h3>
+                <p>From frayed conduits to engine core replacements, every salvaged module matters. Coordinate with your partner to keep the whole operation running!</p>
+            </article>
+
+            <article class="feature-card" aria-labelledby="f2">
+                <span class="emoji">🫂</span>
+                <h3 id="f2">Cooperative Mayhem</h3>
+                <p>Built for two! Assign roles, communicate vital structural weaknesses, and argue passionately about whether blue wire is interchangeable with red.</p>
+            </p>
+            </article>
+
+             <article class="feature-card" aria-labelledby="f3">
+                <span class="emoji">🧩</span>
+                <h3 id="f3">Deep Salvage Loop</h3>
+                <p>Don't just scrap it—optimize it! Discover hidden blueprints, sell rare components for currency, and upgrade your base station.</p>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Meet the Crew Section -->
+    <section id="crew" style="background-color: #F8FCFA;">
+        <h2>Meet Your Salvage Partners</h2>
+        <div class="container" id="crew-grid">
+
+            <figure class="crew-member" role="group" aria-labelledby="name1">
+                <div class="crew-image-placeholder">👩‍🔧</div>
+                <h3 id="name1">Captain Wren “Wrench”</h3>
+                <p>The grizzled veteran engineer. Specializes in pressurized hull repairs and highly dramatic pronouncements.</p>
+                <small>Role: The Fixer</small>
+            </figure>
+
+            <figure class="crew-member" role="group" aria-labelledby="name2">
+                 <div class="crew-image-placeholder">🧑‍🚀</div>
+                <h3 id="name2">Jax “Junction”</h3>
+                <p>The enthusiastic novice tech. Handles wiring diagrams and provides a running commentary on everything, even things that aren't broken.</p>
+                <small>Role: The Theory Nerd</small>
+            </figure>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Starfield Salvage. Dreamed up by the Orbital Wrench Workshop.</p>
+            <p>Developed with passion and a deep understanding of intergalactic clutter.</p>
+            <p><a href="#" style="color: var(--color-secondary);">Contact Support</a> | <a href="#" style="color: var(--color-secondary);">Press Kit</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+task=product-review-fiction
+model=ollama/gemma4
+prompt=creative-fiction/product-review@1.0.0
+adapter=ollama
+duration_ms=7553
+tokens=174->486

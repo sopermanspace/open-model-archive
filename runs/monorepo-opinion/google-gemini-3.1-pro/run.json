@@ -1,0 +1,44 @@
+{
+  "id": "monorepo-opinion/google-gemini-3.1-pro/2026-07-02T15:20:23Z",
+  "task": {
+    "id": "monorepo-opinion",
+    "slug": "monorepo-opinion",
+    "category": "blog-writing",
+    "title": "Monorepo Opinion Piece",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "monorepo-opinion",
+    "version": "1.0.0",
+    "sha256": "7ee83f9f09a6158f7e893b869e85d7b0f850d7240a8b01445b2f6f9fa025f684",
+    "title": "Monorepo Opinion Piece"
+  },
+  "executed_at": "2026-07-02T15:20:23.684814Z",
+  "duration_ms": 35990,
+  "tokens": {
+    "input": 149,
+    "output": 681,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.003591,
+  "cost": {
+    "total_usd": 0.003591,
+    "input_usd": 0.000186,
+    "output_usd": 0.003405,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

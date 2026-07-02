@@ -1,0 +1,63 @@
+# How to Version REST APIs Without Breaking Your Mobile Clients
+
+Mobile apps are some of the least forgiving API consumers you will ever support. Unlike a web frontend, you cannot refresh them with a single deploy. Once an app version is in the wild, real users may keep it running for months or even years, calling the same endpoints with the same assumptions. If you change a response shape or retire an endpoint without a plan, those old binaries will start failing in ways you cannot patch from the server side.
+
+That is why API versioning deserves attention early in a project, not after the first breaking change is already live. The good news is that a little structure upfront prevents most of the panic later.
+
+## 1. Why Mobile Changes Everything
+
+A backend developer working on a web dashboard can usually release a breaking change and trust that every browser will load the updated client within minutes. Mobile does not work that way. The App Store or Play Store review process can take days, users can disable automatic updates, and some devices stay on old releases far longer than you expect.
+
+For your API, this means two things. First, breaking changes must be opt-in for the client, not forced globally. Second, you need to keep old versions alive long enough for the install base to migrate. A versioned API is essentially a promise that you will not pull the rug out from under apps that shipped last quarter.
+
+## 2. URL Versioning vs. Header Versioning
+
+There are two popular ways to advertise an API version, and both have loyal fans.
+
+URL versioning puts the version directly in the path, like this:
+
+```
+GET /v1/users/123
+```
+
+It is hard to miss, easy to test in a browser or curl, and obvious in server logs. The downside is that a resource's canonical URL changes whenever you bump the version, which purists find inelegant.
+
+Header versioning keeps the URL stable and puts the version in a header, such as:
+
+```
+Accept: application/vnd.myapi.v2+json
+```
+
+This leaves prettier URLs, but it also hides the contract in metadata. Debugging becomes harder, documentation becomes noisier, and it is much easier for a mobile developer to accidentally call the wrong version because a header was omitted in one request.
+
+For teams that are new to versioning, I recommend URL versioning. It makes the contract visible to everyone, including the engineer who is debugging a crash at two in the morning. You can always move to header versioning later if your API surface becomes large enough that noisy URLs are genuinely hurting you.
+
+## 3. Shipping a New Version Without Drama
+
+The real work is not choosing a scheme; it is managing change over time. When you need to introduce a breaking change, create a new version, keep the old one running, and give clients a clear migration window.
+
+Start by making additive changes whenever possible. Adding a new field to an existing response is usually safe for older clients because they will simply ignore it. Removing a field, changing its type, or renaming it is what creates a breaking change and triggers a new version.
+
+Once you do ship `/v2/`, keep `/v1/` alive with a published end-of-life date. A `Sunset` header is a nice touch because it tells clients exactly when support will end:
+
+```
+Sunset: Sat, 31 May 2025 00:00:00 GMT
+```
+
+Communicate that date to your mobile team well in advance so they can schedule an app release around it. Nothing ruins a deprecation plan faster than an app update getting stuck in review the week after you turn the old API off.
+
+### Common Mistakes to Avoid
+
+One common pitfall is treating every tweak as a new version. If you create `/v3/` two weeks after `/v2/`, your mobile team will lose patience and start hard-coding the latest path everywhere. Versions should represent meaningful contract changes, not incremental features.
+
+Another mistake is sunsetting too quickly. Mobile migrations take time, and users do not update instantly. A six-month window is often the minimum for anything with a sizeable install base, and some teams support old versions for a year or more.
+
+Finally, avoid changing the semantics of an existing version after it ships. If `/v1/users` returns an integer ID today, it must keep returning an integer ID until that version is fully retired. Fixing a bug by silently changing a field type inside a live version is how old app releases start crashing.
+
+## Closing Checklist
+
+Before your next breaking change, run through this list. Choose either URL or header versioning and stick with it. Define what counts as a breaking change for your API. Keep old versions running with a published sunset date. Notify mobile developers before any deprecation. Test older app builds against the old version regularly. Document which app releases target which API versions.
+
+Versioning is not glamorous, but it is the reason your Friday evening does not end with an emergency revert because half your users are still running an app from March. Get the foundation right, and future breaking changes become boring instead of terrifying.
+
+The one thing to remember is this: a versioned API buys your mobile clients the time they need to update, and that patience is what keeps both your users and your release calendar sane.

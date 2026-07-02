@@ -1,0 +1,10 @@
+id: editorial-restaurant
+slug: editorial-restaurant
+category: website-generation
+topics: [design, writing]
+title: Editorial Restaurant Site
+description: Warm typography-led restaurant page — editorial layout vs product marketing.
+prompt: website-generation/editorial-restaurant@v1.0.0
+post_process:
+  - extract_html
+models: all

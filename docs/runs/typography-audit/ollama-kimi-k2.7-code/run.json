@@ -1,0 +1,51 @@
+{
+  "id": "typography-audit/ollama-kimi-k2.7-code/2026-07-02T16:55:05Z",
+  "task": {
+    "id": "typography-audit",
+    "slug": "typography-audit",
+    "category": "vision-understanding",
+    "title": "Typography & Readability Audit",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "typography-audit",
+    "version": "1.0.0",
+    "sha256": "24de58053ffd2544973225d9637a81c3606c64223f8563e75080e415d8e4f2eb",
+    "title": "Typography & Readability Audit"
+  },
+  "executed_at": "2026-07-02T16:55:05.511835Z",
+  "duration_ms": 15669,
+  "tokens": {
+    "input": 1526,
+    "output": 1622,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.003857,
+  "cost": {
+    "total_usd": 0.003857,
+    "input_usd": 0.000572,
+    "output_usd": 0.003285,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "image",
+      "path": "inputs/drift-landing-reference.png",
+      "sha256": "a24dbaa2631af532fe260b79a4b77dd9037a1389cfc981d11f33fd0e6d4b6f2a",
+      "language": null
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

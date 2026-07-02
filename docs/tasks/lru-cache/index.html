@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LRU Cache — Open Model Archive</title>
+  <meta name="description" content="Compare AI model outputs for LRU Cache — Implement an O(1) Least Recently Used cache in Python — compare against the rate limiter task. Artifacts, timing, tokens, and cost side by side.">
+  <meta name="keywords" content="AI model comparison, LLM outputs, model evaluation, prompt versioning, AI artifacts, side-by-side comparison, open source AI, Gemma, Gemini">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="sopermanspace">
+  <meta name="publisher" content="Open Model Archive">
+  <link rel="canonical" href="https://sopermanspace.github.io/open-model-archive/tasks/lru-cache/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LRU Cache — Open Model Archive">
+  <meta property="og:description" content="Compare AI model outputs for LRU Cache — Implement an O(1) Least Recently Used cache in Python — compare against the rate limiter task.">
+  <meta property="og:url" content="https://sopermanspace.github.io/open-model-archive/tasks/lru-cache/">
+  <meta property="og:site_name" content="Open Model Archive">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="LRU Cache — Open Model Archive">
+  <meta name="twitter:description" content="Compare AI model outputs for LRU Cache — Implement an O(1) Least Recently Used cache in Python — compare against the rate limiter task.">
+  <link rel="icon" href="/open-model-archive/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/open-model-archive/assets/css/main.css">
+  <script>
+    (function () {
+      var path = location.pathname;
+      if (path.endsWith('/index.html')) {
+        history.replaceState(null, '', path.slice(0, -10) + location.search + location.hash);
+      }
+    })();
+  </script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/open-model-archive/">Open Model Archive</a>
+      <nav class="site-nav">
+        <a href="/open-model-archive/">Archive</a>
+        <a href="/open-model-archive/about/">About</a>
+        <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    
+<section class="container comparison-header">
+  <a class="back-link" href="/open-model-archive/">← Archive</a>
+  <p class="eyebrow">code-generation · Code, Reasoning</p>
+  <h1>LRU Cache</h1>
+  <p class="lede">Implement an O(1) Least Recently Used cache in Python — compare against the rate limiter task.</p>
+</section>
+
+
+<section class="container prompt-panel">
+  <details>
+    <summary>Prompt v1.0.0</summary>
+    <div class="prompt-meta">
+      <span>ID: lru-cache</span>
+      <span>SHA-256: <code>5479beb8815b9870…</code></span>
+    </div>
+    <pre class="prompt-text">Implement an **LRU (Least Recently Used) cache** in Python.
+
+## Requirements
+
+1. Output **only** a single fenced `python` code block. No explanation outside the block.
+2. Class name: `LRUCache`
+3. Constructor: `LRUCache(capacity: int)` — capacity is a positive integer.
+4. Method: `get(key: int) -&gt; int` — return the value if present, else `-1`. Mark key as recently used.
+5. Method: `put(key: int, value: int) -&gt; None` — insert or update. Evict least recently used item when over capacity.
+6. Both operations must be **O(1)** average time complexity.
+7. Include type hints and a minimal `if __name__ == &#34;__main__&#34;` demo with assertions.
+8. No external dependencies beyond the standard library.
+
+The code must be correct and suitable for interview or production use.</pre>
+  </details>
+</section>
+
+
+<section class="container comparison-grid" style="--cols: 3">
+  
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemini 3.1 Pro</h2>
+      <p class="model-provider">Google · Gemini 3.1 Pro (High)</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>0ms</dd></div>
+        <div><dt>Tokens</dt><dd>0 → 0</dd></div>
+        <div><dt>Cost</dt><dd>—</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-error">error</dd></div>
+      </dl>
+    </header>
+
+    
+    <div class="error-box">CLI execution failed</div>
+    
+  </article>
+  
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemma 4</h2>
+      <p class="model-provider">Ollama · gemma4:latest</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>107.6s</dd></div>
+        <div><dt>Tokens</dt><dd>218 → 2.3k</dd></div>
+        <div><dt>Cost</dt><dd>$0.00</dd></div>
+        
+        <div><dt>Input cost</dt><dd>$0.00</dd></div>
+        <div><dt>Output cost</dt><dd>$0.00</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+    <div class="output-viewer" data-viewer="code">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">Generated python</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="code-output">
+        
+        <pre class="response-text code-block"><code>from collections import OrderedDict
+from typing import Any, Dict
+
+class LRUCache:
+    &#34;&#34;&#34;
+    Implements an LRU Cache using collections.OrderedDict to maintain 
+    O(1) time complexity for both get and put operations.
+    &#34;&#34;&#34;
+
+    def __init__(self, capacity: int):
+        &#34;&#34;&#34;
+        Initializes the cache with a given capacity.
+        Capacity must be a positive integer.
+        &#34;&#34;&#34;
+        if capacity &lt;= 0:
+            raise ValueError(&#34;Capacity must be a positive integer.&#34;)
+            
+        self.capacity = capacity
+        # OrderedDict stores key-value pairs and maintains insertion order.
+        # We use it to track usage: MRU is at the end, LRU is at the start.
+        self._cache: OrderedDict[int, int] = OrderedDict()
+
+    def get(self, key: int) -&gt; int:
+        &#34;&#34;&#34;
+        Returns the value associated with the key if present. 
+        Marks the key as recently used (MRU). Returns -1 if not found.
+        Time complexity: O(1)
+        &#34;&#34;&#34;
+        if key not in self._cache:
+            return -1
+        
+        # Accessing the item makes it MRU by moving it to the end of the OrderedDict.
+        self._cache[key] 
+        self._cache.move_to_end(key)
+        
+        return self._cache[key]
+
+    def put(self, key: int, value: int) -&gt; None:
+        &#34;&#34;&#34;
+        Inserts or updates a key-value pair. If the cache exceeds capacity, 
+        the least recently used item is evicted.
+        Time complexity: O(1)
+        &#34;&#34;&#34;
+        if self.capacity == 0:
+            return # Cannot store anything if capacity is zero
+
+        # 1. Update existing entry or insert new one (always moves it to MRU)
+        self._cache[key] = value
+        self._cache.move_to_end(key)
+        
+        # 2. Check for overflow and evict LRU item if necessary
+        if len(self._cache) &gt; self.capacity:
+            # popitem(last=False) removes the item from the beginning (the oldest/LRU item).
+            # We discard the key returned, as we only care about eviction logic.
+            self._cache.popitem(last=False)
+
+
+if __name__ == &#34;__main__&#34;:
+    print(&#34;--- LRUCache Test Suite ---&#34;)
+
+    # --- Test Case 1: Basic PUT and GET functionality (Capacity 2) ---
+    print(&#34;\n[Test 1: Basic Flow]&#34;)
+    cache = LRUCache(2)
+    
+    # Put a, b. Cache state: [a] -&gt; [b]. Capacity used: 2/2.
+    cache.put(1, 10);
+    cache.put(2, 20);
+    assert cache._cache == OrderedDict([(1, 10), (2, 20)]), &#34;Initial put failed&#34;
+
+    # Get a. Moves &#39;a&#39; to MRU. Cache state: [b] -&gt; [a].
+    val_a = cache.get(1)
+    print(f&#34;Get key 1: {val_a}&#34;)
+    assert val_a == 10, &#34;Get 1 failed&#34;
+    # Verify order change (2 should now be the LRU item at index 0)
+    assert list(cache._cache.keys()) == [2, 1], &#34;Order changed incorrectly after get&#34;
+
+    # Put c. Capacity exceeded. Evicts B (the current LRU). Cache state: [a] -&gt; [c].
+    print(&#34;Putting key 3...&#34;)
+    cache.put(3, 30)
+    assert cache._cache == OrderedDict([(1, 10), (3, 30)]), &#34;Eviction failed or order incorrect&#34;
+
+    # Check if the evicted item is gone
+    val_b = cache.get(2)
+    print(f&#34;Get key 2: {val_b}&#34;)
+    assert val_b == -1, &#34;Key 2 should have been evicted&#34;
+
+    # --- Test Case 2: Update and Hit/Miss Cycle (Capacity 3) ---
+    print(&#34;\n[Test 2: Update &amp; Eviction]&#34;)
+    cache = LRUCache(3)
+    
+    # Put x, y, z. Cache state: [x] -&gt; [y] -&gt; [z].
+    cache.put(&#39;x&#39;, 1);
+    cache.put(&#39;y&#39;, 2);
+    cache.put(&#39;z&#39;, 3);
+
+    # Hit &#39;x&#39;. Moves x to MRU. State: [y] -&gt; [z] -&gt; [x].
+    val_x = cache.get(&#39;x&#39;)
+    print(f&#34;Get key &#39;x&#39;: {val_x}&#34;)
+    assert val_x == 1, &#34;Hit failed&#34;
+    assert list(cache._cache.keys()) == [&#39;y&#39;, &#39;z&#39;, &#39;x&#39;], &#34;Order incorrect after hit&#34;
+
+    # Put w. Evicts LRU item: &#39;y&#39;. State: [z] -&gt; [x] -&gt; [w].
+    print(&#34;Putting key &#39;w&#39;...&#34;)
+    cache.put(&#39;w&#39;, 4)
+    assert list(cache._cache.keys()) == [&#39;z&#39;, &#39;x&#39;, &#39;w&#39;], &#34;Eviction/Order incorrect on put&#34;
+
+    # Miss check
+    val_y = cache.get(&#39;y&#39;)
+    print(f&#34;Get key &#39;y&#39;: {val_y}&#34;)
+    assert val_y == -1, &#34;Key &#39;y&#39; should be evicted&#34;
+    
+    # Update &#39;z&#39;. State: [x] -&gt; [w] -&gt; [z].
+    cache.put(&#39;z&#39;, 30);
+    assert list(cache._cache.keys()) == [&#39;x&#39;, &#39;w&#39;, &#39;z&#39;], &#34;Order incorrect after update&#34;
+
+    print(&#34;\nAll LRUCache tests passed successfully!&#34;)</code></pre>
+        
+      </div>
+    </div>
+    
+
+    
+
+    
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">```python
+from collections import OrderedDict
+from typing import Any, Dict
+
+class LRUCache:
+    &#34;&#34;&#34;
+    Implements an LRU Cache using collections.OrderedDict to maintain 
+    O(1) time complexity for both get and put operations.
+    &#34;&#34;&#34;
+
+    def __init__(self, capacity: int):
+        &#34;&#34;&#34;
+        Initializes the cache with a given capacity.
+        Capacity must be a positive integer.
+        &#34;&#34;&#34;
+        if capacity &lt;= 0:
+            raise ValueError(&#34;Capacity must be a positive integer.&#34;)
+            
+        self.capacity = capacity
+        # OrderedDict stores key-value pairs and maintains insertion order.
+        # We use it to track usage: MRU is at the end, LRU is at the start.
+        self._cache: OrderedDict[int, int] = OrderedDict()
+
+    def get(self, key: int) -&gt; int:
+        &#34;&#34;&#34;
+        Returns the value associated with the key if present. 
+        Marks the key as recently used (MRU). Returns -1 if not found.
+        Time complexity: O(1)
+        &#34;&#34;&#34;
+        if key not in self._cache:
+            return -1
+        
+        # Accessing the item makes it MRU by moving it to the end of the OrderedDict.
+        self._cache[key] 
+        self._cache.move_to_end(key)
+        
+        return self._cache[key]
+
+    def put(self, key: int, value: int) -&gt; None:
+        &#34;&#34;&#34;
+        Inserts or updates a key-value pair. If the cache exceeds capacity, 
+        the least recently used item is evicted.
+        Time complexity: O(1)
+        &#34;&#34;&#34;
+        if self.capacity == 0:
+            return # Cannot store anything if capacity is zero
+
+        # 1. Update existing entry or insert new one (always moves it to MRU)
+        self._cache[key] = value
+        self._cache.move_to_end(key)
+        
+        # 2. Check for overflow and evict LRU item if necessary
+        if len(self._cache) &gt; self.capacity:
+            # popitem(last=False) removes the item from the beginning (the oldest/LRU item).
+            # We discard the key returned, as we only care about eviction logic.
+            self._cache.popitem(last=False)
+
+
+if __name__ == &#34;__main__&#34;:
+    print(&#34;--- LRUCache Test Suite ---&#34;)
+
+    # --- Test Case 1: Basic PUT and GET functionality (Capacity 2) ---
+    print(&#34;\n[Test 1: Basic Flow]&#34;)
+    cache = LRUCache(2)
+    
+    # Put a, b. Cache state: [a] -&gt; [b]. Capacity used: 2/2.
+    cache.put(1, 10);
+    cache.put(2, 20);
+    assert cache._cache == OrderedDict([(1, 10), (2, 20)]), &#34;Initial put failed&#34;
+
+    # Get a. Moves &#39;a&#39; to MRU. Cache state: [b] -&gt; [a].
+    val_a = cache.get(1)
+    print(f&#34;Get key 1: {val_a}&#34;)
+    assert val_a == 10, &#34;Get 1 failed&#34;
+    # Verify order change (2 should now be the LRU item at index 0)
+    assert list(cache._cache.keys()) == [2, 1], &#34;Order changed incorrectly after get&#34;
+
+    # Put c. Capacity exceeded. Evicts B (the current LRU). Cache state: [a] -&gt; [c].
+    print(&#34;Putting key 3...&#34;)
+    cache.put(3, 30)
+    assert cache._cache == OrderedDict([(1, 10), (3, 30)]), &#34;Eviction failed or order incorrect&#34;
+
+    # Check if the evicted item is gone
+    val_b = cache.get(2)
+    print(f&#34;Get key 2: {val_b}&#34;)
+    assert val_b == -1, &#34;Key 2 should have been evicted&#34;
+
+    # --- Test Case 2: Update and Hit/Miss Cycle (Capacity 3) ---
+    print(&#34;\n[Test 2: Update &amp; Eviction]&#34;)
+    cache = LRUCache(3)
+    
+    # Put x, y, z. Cache state: [x] -&gt; [y] -&gt; [z].
+    cache.put(&#39;x&#39;, 1);
+    cache.put(&#39;y&#39;, 2);
+    cache.put(&#39;z&#39;, 3);
+
+    # Hit &#39;x&#39;. Moves x to MRU. State: [y] -&gt; [z] -&gt; [x].
+    val_x = cache.get(&#39;x&#39;)
+    print(f&#34;Get key &#39;x&#39;: {val_x}&#34;)
+    assert val_x == 1, &#34;Hit failed&#34;
+    assert list(cache._cache.keys()) == [&#39;y&#39;, &#39;z&#39;, &#39;x&#39;], &#34;Order incorrect after hit&#34;
+
+    # Put w. Evicts LRU item: &#39;y&#39;. State: [z] -&gt; [x] -&gt; [w].
+    print(&#34;Putting key &#39;w&#39;...&#34;)
+    cache.put(&#39;w&#39;, 4)
+    assert list(cache._cache.keys()) == [&#39;z&#39;, &#39;x&#39;, &#39;w&#39;], &#34;Eviction/Order incorrect on put&#34;
+
+    # Miss check
+    val_y = cache.get(&#39;y&#39;)
+    print(f&#34;Get key &#39;y&#39;: {val_y}&#34;)
+    assert val_y == -1, &#34;Key &#39;y&#39; should be evicted&#34;
+    
+    # Update &#39;z&#39;. State: [x] -&gt; [w] -&gt; [z].
+    cache.put(&#39;z&#39;, 30);
+    assert list(cache._cache.keys()) == [&#39;x&#39;, &#39;w&#39;, &#39;z&#39;], &#34;Order incorrect after update&#34;
+
+    print(&#34;\nAll LRUCache tests passed successfully!&#34;)
+```</pre>
+    </details>
+
+    
+    <p class="cost-note">Local inference on your hardware — no API token cost.</p>
+    
+
+    
+  </article>
+  
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Kimi K2.7 Code</h2>
+      <p class="model-provider">Ollama Cloud · kimi-k2.7-code</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>8.1s</dd></div>
+        <div><dt>Tokens</dt><dd>199 → 854</dd></div>
+        <div><dt>Cost</dt><dd>~$0.0018</dd></div>
+        
+        <div><dt>Input cost</dt><dd>~$0.0001</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0017</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+    <div class="output-viewer" data-viewer="code">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">Generated python</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="code-output">
+        
+        <pre class="response-text code-block"><code>from collections import OrderedDict
+
+class LRUCache:
+    &#34;&#34;&#34;LRU cache with O(1) average get and put operations.&#34;&#34;&#34;
+
+    def __init__(self, capacity: int) -&gt; None:
+        if capacity &lt;= 0:
+            raise ValueError(&#34;Capacity must be a positive integer&#34;)
+        self.capacity: int = capacity
+        self.cache: OrderedDict[int, int] = OrderedDict()
+
+    def get(self, key: int) -&gt; int:
+        &#34;&#34;&#34;Return the value for key if present; otherwise return -1.
+        Accessing the key marks it as recently used.&#34;&#34;&#34;
+        if key not in self.cache:
+            return -1
+        self.cache.move_to_end(key)
+        return self.cache[key]
+
+    def put(self, key: int, value: int) -&gt; None:
+        &#34;&#34;&#34;Insert or update key with value. Evict the least recently used
+        item if the cache exceeds its capacity.&#34;&#34;&#34;
+        if key in self.cache:
+            self.cache.move_to_end(key)
+        self.cache[key] = value
+        if len(self.cache) &gt; self.capacity:
+            self.cache.popitem(last=False)
+
+
+if __name__ == &#34;__main__&#34;:
+    cache = LRUCache(2)
+
+    cache.put(1, 1)
+    cache.put(2, 2)
+    assert cache.get(1) == 1  # 1 becomes most recently used
+
+    cache.put(3, 3)           # evicts key 2
+    assert cache.get(2) == -1
+
+    cache.put(4, 4)           # evicts key 1
+    assert cache.get(1) == -1
+    assert cache.get(3) == 3
+    assert cache.get(4) == 4</code></pre>
+        
+      </div>
+    </div>
+    
+
+    
+
+    
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">```python
+from collections import OrderedDict
+
+class LRUCache:
+    &#34;&#34;&#34;LRU cache with O(1) average get and put operations.&#34;&#34;&#34;
+
+    def __init__(self, capacity: int) -&gt; None:
+        if capacity &lt;= 0:
+            raise ValueError(&#34;Capacity must be a positive integer&#34;)
+        self.capacity: int = capacity
+        self.cache: OrderedDict[int, int] = OrderedDict()
+
+    def get(self, key: int) -&gt; int:
+        &#34;&#34;&#34;Return the value for key if present; otherwise return -1.
+        Accessing the key marks it as recently used.&#34;&#34;&#34;
+        if key not in self.cache:
+            return -1
+        self.cache.move_to_end(key)
+        return self.cache[key]
+
+    def put(self, key: int, value: int) -&gt; None:
+        &#34;&#34;&#34;Insert or update key with value. Evict the least recently used
+        item if the cache exceeds its capacity.&#34;&#34;&#34;
+        if key in self.cache:
+            self.cache.move_to_end(key)
+        self.cache[key] = value
+        if len(self.cache) &gt; self.capacity:
+            self.cache.popitem(last=False)
+
+
+if __name__ == &#34;__main__&#34;:
+    cache = LRUCache(2)
+
+    cache.put(1, 1)
+    cache.put(2, 2)
+    assert cache.get(1) == 1  # 1 becomes most recently used
+
+    cache.put(3, 3)           # evicts key 2
+    assert cache.get(2) == -1
+
+    cache.put(4, 4)           # evicts key 1
+    assert cache.get(1) == -1
+    assert cache.get(3) == 3
+    assert cache.get(4) == 4
+```</pre>
+    </details>
+
+    
+    <p class="cost-note">Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated.</p>
+    
+
+    
+  </article>
+  
+</section>
+
+<div id="fullscreen-overlay" class="fullscreen-overlay" hidden>
+  <header class="fullscreen-header">
+    <span class="fullscreen-title"></span>
+    <button type="button" class="btn-icon fullscreen-close" aria-label="Close fullscreen" title="Close (Esc)">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </header>
+  <div class="fullscreen-body"></div>
+</div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Open source. Every prompt versioned. Every artifact public.</p>
+    </div>
+  </footer>
+  
+<script>
+(function () {
+  var overlay = document.getElementById('fullscreen-overlay');
+  if (!overlay) return;
+
+  var titleEl = overlay.querySelector('.fullscreen-title');
+  var bodyEl = overlay.querySelector('.fullscreen-body');
+  var closeBtn = overlay.querySelector('.fullscreen-close');
+
+  function closeFullscreen() {
+    overlay.hidden = true;
+    document.body.classList.remove('fullscreen-open');
+    bodyEl.innerHTML = '';
+  }
+
+  function openFullscreen(label, buildContent) {
+    titleEl.textContent = label;
+    bodyEl.innerHTML = '';
+    buildContent(bodyEl);
+    overlay.hidden = false;
+    document.body.classList.add('fullscreen-open');
+    closeBtn.focus();
+  }
+
+  function getActiveTabPanel(viewer) {
+    var tabs = viewer.querySelector('.preview-tabs');
+    if (!tabs) return null;
+    if (tabs.querySelector('input[id^="live-"]:checked')) {
+      return tabs.querySelector('.live-panel');
+    }
+    return tabs.querySelector('.snap-panel');
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.btn-fullscreen');
+    if (!btn) return;
+
+    var viewer = btn.closest('.output-viewer');
+    if (!viewer) return;
+
+    var label = viewer.querySelector('.output-viewer-label');
+    var labelText = label ? label.textContent : 'Output';
+    var viewerType = viewer.dataset.viewer;
+
+    if (viewerType === 'iframe') {
+      var src = btn.dataset.iframeSrc || viewer.querySelector('iframe')?.src;
+      if (!src) return;
+      openFullscreen(labelText, function (body) {
+        var iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.title = labelText;
+        iframe.setAttribute('loading', 'lazy');
+        body.appendChild(iframe);
+      });
+      return;
+    }
+
+    if (viewerType === 'tabs') {
+      var panel = getActiveTabPanel(viewer);
+      if (!panel) return;
+      var iframe = panel.querySelector('iframe');
+      var img = panel.querySelector('img');
+      if (iframe) {
+        openFullscreen(labelText + ' — Live preview', function (body) {
+          var frame = document.createElement('iframe');
+          frame.src = iframe.src;
+          frame.title = iframe.title || labelText;
+          body.appendChild(frame);
+        });
+      } else if (img) {
+        openFullscreen(labelText + ' — Snapshot', function (body) {
+          var fullImg = document.createElement('img');
+          fullImg.src = img.src;
+          fullImg.alt = img.alt;
+          body.classList.add('fullscreen-image');
+          body.appendChild(fullImg);
+        });
+      }
+      return;
+    }
+
+    if (viewerType === 'image') {
+      var imageSrc = btn.dataset.imageSrc || viewer.querySelector('img')?.src;
+      if (!imageSrc) return;
+      openFullscreen(labelText, function (body) {
+        var fullImg = document.createElement('img');
+        fullImg.src = imageSrc;
+        fullImg.alt = labelText;
+        body.classList.add('fullscreen-image');
+        body.appendChild(fullImg);
+      });
+      return;
+    }
+
+    if (viewerType === 'code') {
+      var codeBlock = viewer.querySelector('pre');
+      if (!codeBlock) return;
+      openFullscreen(labelText, function (body) {
+        body.classList.add('fullscreen-code');
+        body.appendChild(codeBlock.cloneNode(true));
+      });
+      return;
+    }
+
+    if (viewerType === 'prose') {
+      var prose = viewer.querySelector('.rendered-md');
+      if (!prose) return;
+      openFullscreen(labelText, function (body) {
+        body.classList.add('fullscreen-prose');
+        body.appendChild(prose.cloneNode(true));
+      });
+      return;
+    }
+
+    if (viewerType === 'text') {
+      var pre = viewer.querySelector('pre');
+      if (!pre) return;
+      openFullscreen(labelText, function (body) {
+        body.classList.add('fullscreen-code');
+        body.appendChild(pre.cloneNode(true));
+      });
+    }
+  });
+
+  closeBtn.addEventListener('click', closeFullscreen);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeFullscreen();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !overlay.hidden) closeFullscreen();
+  });
+})();
+</script>
+
+</body>
+</html>

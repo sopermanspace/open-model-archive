@@ -1,0 +1,37 @@
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80" width="400" height="80" style="color:#374151;">
+  <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- arrows -->
+    <path d="M68 28 h52 M116 22 l7 6 -7 6"/>
+    <path d="M168 28 h52 M216 22 l7 6 -7 6"/>
+    <path d="M268 28 h52 M316 22 l7 6 -7 6"/>
+
+    <!-- Sign up -->
+    <circle cx="50" cy="28" r="18"/>
+    <path d="M50 22 a4 4 0 1 0 0 -8 a4 4 0 1 0 0 8 M42 34 q0 -6 8 -6 q8 0 8 6"/>
+
+    <!-- Connect repo -->
+    <circle cx="150" cy="28" r="18"/>
+    <path d="M142 28 h16 M150 28 v-8 M142 28 v-8 M158 28 v-8"/>
+    <circle cx="150" cy="18" r="2" fill="currentColor" stroke="none"/>
+    <circle cx="142" cy="18" r="2" fill="currentColor" stroke="none"/>
+    <circle cx="158" cy="18" r="2" fill="currentColor" stroke="none"/>
+
+    <!-- Run scan -->
+    <circle cx="250" cy="28" r="18"/>
+    <circle cx="247" cy="25" r="5"/>
+    <line x1="251" y1="29" x2="258" y2="36"/>
+
+    <!-- Get alerts -->
+    <circle cx="350" cy="28" r="18"/>
+    <path d="M342 26 a8 8 0 0 0 16 0 v9 h-16 z M350 41 v3"/>
+  </g>
+
+  <g fill="currentColor" stroke="none" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" text-anchor="middle">
+    <text x="50" y="58">Sign up</text>
+    <text x="150" y="58">Connect repo</text>
+    <text x="250" y="58">Run scan</text>
+    <text x="350" y="58">Get alerts</text>
+  </g>
+</svg>
+```

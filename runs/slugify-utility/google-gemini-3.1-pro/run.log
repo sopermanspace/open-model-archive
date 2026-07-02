@@ -1,0 +1,6 @@
+task=slugify-utility
+model=google/gemini-3.1-pro
+prompt=code-generation/slugify-utility@1.0.0
+adapter=cli
+duration_ms=52319
+tokens=185->478

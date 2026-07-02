@@ -1,0 +1,6 @@
+task=river-crossing-puzzle
+model=ollama/kimi-k2.7-code
+prompt=math/river-crossing-puzzle@1.0.0
+adapter=ollama
+duration_ms=11516
+tokens=146->784

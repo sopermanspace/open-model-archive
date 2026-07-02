@@ -1,0 +1,28 @@
+## Type scale & hierarchy
+
+The visible page shows a clear H1 → body → H2 → body progression. The hero H1 “Know before you deploy.” dominates the viewport with the largest, heaviest weight, followed by a smaller gray subhead and two CTA buttons. Further down, “Find the gaps between environments” reads as an H2 and is clearly subordinate to the H1. Only two heading levels are visible in the screenshot, so deeper hierarchy (H3s inside the feature cards, for example) cannot be evaluated.
+
+## Font pairing & voice
+
+The page appears to use a single geometric sans-serif family throughout (likely Inter or a similar system sans). This is an intentional, modern choice for a developer-tool/CLI product and keeps the voice clean and technical. No mismatched or decorative typefaces are visible. The pairing is cohesive across nav, hero, body, and buttons.
+
+## Line length & density
+
+The centered body blocks in the hero and feature section are short—roughly 50–65 characters per line—so they read comfortably without feeling cramped or excessively wide. Line-height looks generous enough for the short passages shown. Density is appropriate for a sparse landing-page layout.
+
+## Microtypography
+
+- **Button labels:** “Start drift scan” and “Read the docs” use sentence case, which is consistent and friendly.
+- **Nav links:** “Features,” “Docs,” “Pricing,” and “GitHub” use title/proper-case consistently.
+- **Punctuation:** The H1 ends with a period (“Know before you deploy.”), a deliberate stylistic choice that reads as a complete statement. The em dash in the hero description is correctly used.
+- **One note:** since only icons are visible on the three feature cards, their eventual titles and microcopy should use the same casing convention as the buttons and nav.
+
+## Accessibility notes
+
+The main readability risk is the **gray body text on the near-black background** in both the hero and feature sections. Depending on the exact gray value, it may fall below WCAG AA contrast thresholds for normal-sized text (4.5:1). The large white H1 on black is excellent. The white button labels also appear to have sufficient contrast, but the secondary/outline “Read the docs” button and any future small card text should be checked with a contrast checker.
+
+## Summary
+
+- **Verify and, if needed, darken the gray body copy** in the hero and feature sections to hit WCAG AA contrast for normal text.
+- **Audit the eventual H3/card headings** for size/weight differentiation once the card titles are added, so the hierarchy does not flatten.
+- **Confirm small text contrast** on the dark cards and secondary buttons before launch.

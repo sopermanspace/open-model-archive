@@ -1,0 +1,7 @@
+task=editorial-restaurant
+model=google/gemini-3.1-pro
+prompt=website-generation/editorial-restaurant@1.0.0
+adapter=cli
+duration_ms=63875
+tokens=224->2665
+screenshot=/Users/himanshu/open-model-archive/runs/editorial-restaurant/google-gemini-3.1-pro/screenshots/desktop.png

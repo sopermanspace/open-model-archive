@@ -1,0 +1,44 @@
+{
+  "id": "product-review-fiction/google-gemini-3.1-pro/2026-07-02T16:52:19Z",
+  "task": {
+    "id": "product-review-fiction",
+    "slug": "product-review-fiction",
+    "category": "creative-fiction",
+    "title": "Fictional Product Review",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "product-review",
+    "version": "1.0.0",
+    "sha256": "1281d1a8b0f63e0f24adb83caeb8da097d13ef66819f3f0238c642cd197a4796",
+    "title": "Fictional Product Review"
+  },
+  "executed_at": "2026-07-02T16:52:19.250761Z",
+  "duration_ms": 49148,
+  "tokens": {
+    "input": 151,
+    "output": 432,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.002349,
+  "cost": {
+    "total_usd": 0.002349,
+    "input_usd": 0.000189,
+    "output_usd": 0.00216,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

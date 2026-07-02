@@ -1,0 +1,9 @@
+id: monorepo-opinion
+slug: monorepo-opinion
+category: blog-writing
+topics: [writing, reasoning]
+title: Monorepo Opinion Piece
+description: Short editorial essay on monorepos — opinion voice vs tutorial or post-mortem style.
+prompt: blog-writing/monorepo-opinion@v1.0.0
+screenshot: false
+models: all

@@ -1,0 +1,13 @@
+Imagine your kitchen has the master recipe on the counter—call it main. You grab a prep bowl to experiment in private—say, a branch named garlic-butter-pasta. Every change you make is a commit: a single recorded step like mincing garlic, melting butter, or tossing the noodles.
+
+While you are working, someone else updates the master recipe on the counter—perhaps they changed the sauce base. Your prep bowl still started from the older version. Rebase is like lifting your prep bowl off the counter, moving its starting point to the freshest master recipe, and then replaying your steps one by one on top: mince garlic, melt butter, toss noodles. Git takes each of your commits and reapplies it in order to the new tip.
+
+If one of your steps now clashes with the updated master recipe—say the main sauce now simmers for ten minutes but you reduced yours to five—Git pauses the rebase. That is a conflict. You taste, adjust the dish, and then tell Git to continue so the remaining steps can be replayed.
+
+The result is a clean, linear history. Your garlic-butter-pasta branch looks as if you had been cooking from the latest master recipe all along, because rebase rewrites the history of your branch rather than weaving two histories together.
+
+Merge works differently. Merge would combine both versions into one finished dish and leave both histories visible, like serving two sauces side by side on the plate. Rebase is more like reducing those sauces into one smooth glaze.
+
+One warning: do not rebase commits you have already shared with other cooks, because you are rewriting recipe cards they may have already copied into their own kitchens.
+
+"So rebase is basically wiping my station, starting from the freshest recipe, and redoing my steps so the whole dish looks like I planned it that way from the start."

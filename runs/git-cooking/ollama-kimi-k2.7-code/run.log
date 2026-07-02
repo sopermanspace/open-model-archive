@@ -1,0 +1,6 @@
+task=git-cooking
+model=ollama/kimi-k2.7-code
+prompt=humor-testing/git-cooking@1.0.0
+adapter=ollama
+duration_ms=16758
+tokens=119->1048

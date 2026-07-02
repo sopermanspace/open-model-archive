@@ -1,0 +1,9 @@
+id: git-cooking
+slug: git-cooking
+category: humor-testing
+topics: [humor, code]
+title: Explain Git Rebase as Cooking
+description: Accurate git concepts via kitchen metaphors — different comedic frame than the golden retriever task.
+prompt: humor-testing/git-cooking@v1.0.0
+screenshot: false
+models: all

@@ -1,0 +1,9 @@
+id: river-crossing-puzzle
+slug: river-crossing-puzzle
+category: math
+topics: [math, reasoning]
+title: River Crossing Logic Puzzle
+description: Classic wolf-goat-cabbage puzzle with step-by-step reasoning — logic vs arithmetic word problems.
+prompt: math/river-crossing-puzzle@v1.0.0
+screenshot: false
+models: all

@@ -1,0 +1,51 @@
+{
+  "id": "lru-cache/ollama-gemma4/2026-07-02T16:43:42Z",
+  "task": {
+    "id": "lru-cache",
+    "slug": "lru-cache",
+    "category": "code-generation",
+    "title": "LRU Cache",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "lru-cache",
+    "version": "1.0.0",
+    "sha256": "5479beb8815b98705ae1690f695809daa45ac75d5116d6eb86397f36ca6ed0a7",
+    "title": "LRU Cache"
+  },
+  "executed_at": "2026-07-02T16:43:42.148502Z",
+  "duration_ms": 107564,
+  "tokens": {
+    "input": 218,
+    "output": 2290,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "source",
+      "path": "artifacts/main.py",
+      "sha256": "c5bf32affcb4fe52a22929a6ab2219fb50692f3505b2259c0150da861f0d77fe",
+      "language": "python"
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

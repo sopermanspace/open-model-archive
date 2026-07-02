@@ -1,0 +1,6 @@
+task=slugify-utility
+model=ollama/kimi-k2.7-code
+prompt=code-generation/slugify-utility@1.0.0
+adapter=ollama
+duration_ms=22228
+tokens=188->2058

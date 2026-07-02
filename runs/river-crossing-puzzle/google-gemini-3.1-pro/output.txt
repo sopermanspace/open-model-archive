@@ -1,0 +1,30 @@
+## Goal
+
+The goal is to safely transport the farmer, the wolf, the goat, and the cabbage from the starting bank of the river to the far bank, using a boat that can only carry the farmer and one other item at a time. The wolf and goat cannot be left alone together on either bank, nor can the goat and cabbage.
+
+## Step-by-Step Solution
+
+1. **The farmer takes the goat across to the far bank.**
+   *Reasoning:* If the farmer takes the wolf first, the goat will eat the cabbage. If the farmer takes the cabbage first, the wolf will eat the goat. The goat is the common factor in both conflict scenarios, so it must be removed from the starting bank first.
+
+2. **The farmer returns alone to the starting bank.**
+   *Reasoning:* The farmer needs to bring the boat back to pick up the remaining items (the wolf and the cabbage), leaving the goat safely alone on the far bank.
+
+3. **The farmer takes the wolf across to the far bank.**
+   *Reasoning:* The farmer must transport one of the remaining items. Bringing the wolf is a valid next step (bringing the cabbage here is also a valid alternative path).
+
+4. **The farmer returns to the starting bank with the goat.**
+   *Reasoning:* If the farmer leaves the wolf and the goat on the far bank to go back for the cabbage, the wolf will eat the goat. Therefore, the farmer must take the goat back to the starting bank to prevent this.
+
+5. **The farmer leaves the goat on the starting bank and takes the cabbage across to the far bank.**
+   *Reasoning:* The farmer drops off the goat (which is now separated from the cabbage) and takes the cabbage across to join the wolf. The wolf and cabbage are safe to be left together.
+
+6. **The farmer returns alone to the starting bank.**
+   *Reasoning:* The farmer leaves the wolf and cabbage safely on the far bank and goes back to pick up the last remaining item, the goat.
+
+7. **The farmer takes the goat across to the far bank.**
+   *Reasoning:* This is the final step to transport the last item across the river.
+
+## Conclusion
+
+By following these steps, the farmer successfully transports the wolf, the goat, and the cabbage across the river. All four arrive safely on the far bank without any of the animals eating the others' food or each other.

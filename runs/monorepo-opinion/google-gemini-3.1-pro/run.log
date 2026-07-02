@@ -1,0 +1,6 @@
+task=monorepo-opinion
+model=google/gemini-3.1-pro
+prompt=blog-writing/monorepo-opinion@1.0.0
+adapter=cli
+duration_ms=35990
+tokens=149->681

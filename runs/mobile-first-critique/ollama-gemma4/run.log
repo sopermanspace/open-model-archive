@@ -1,0 +1,7 @@
+task=mobile-first-critique
+model=ollama/gemma4
+prompt=design-critique/mobile-first-critique@1.0.0
+adapter=ollama
+inputs=['comparison-screenshot.jpg']
+duration_ms=21294
+tokens=463->1393

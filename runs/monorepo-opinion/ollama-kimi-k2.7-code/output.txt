@@ -1,0 +1,17 @@
+# Monorepos Are Overprescribed — And Your Team Size Is the Real Variable
+
+The monorepo has become the architectural equivalent of a standing desk: recommended by everyone, purchased in bulk, and quietly hated by the people who actually have to use it. For the last decade, engineering blogs have sold the single repository as a cure-all for consistency, cross-team collaboration, and "the way the best companies work." But the real variable that determines whether a monorepo will accelerate or suffocate your engineering culture is not your deployment topology or your language stack. It is team size — and most teams adopting monorepos today are nowhere near large enough to justify the tax.
+
+## The Convenience Trap
+
+At small scale, monorepos feel magical. You rename a shared library, update every caller, and ship one atomic commit. No versioning dance, no cross-repo PRs, no "who owns this package?" existential crisis. I watched Team Sprocket at Rivet hit exactly this honeymoon phase. With eight engineers, their single repository was a shared campfire: everyone knew the songs, and if someone moved a log, the group noticed immediately. Then the team grew to thirty-five. The same repository became a parking garage where every car was connected to every other car by a tow cable. A minor dependency bump triggered four-hour CI queues. Refactors that once took an afternoon now required a migration calendar. The tool they had adopted for velocity had become the reason velocity stalled.
+
+## The Team-Size Pivot Point
+
+This is the pivot point nobody talks about. Monorepos start paying dividends when coordination costs between repositories exceed the friction of a single shared space. That crossover usually happens at an engineering population far larger than the average Series B or mid-market company. Below that threshold, the costs are real and the benefits are theoretical: you are not doing Google-scale refactors; you are fighting Bazel, Nx, or a homegrown build cache so you can merge a one-line change in a service you do not own. The larger the population, the more a monorepo's atomicity and visibility justify the tooling investment. The smaller the population, the more it resembles centralized planning for a village.
+
+## What Monorepos Still Get Right
+
+None of this means monorepos are wrong universally. When you have hundreds of engineers shipping interdependent products, a single source of truth for dependencies, APIs, and shared infrastructure is a genuine force multiplier. Atomic cross-service refactors and universal dependency upgrades can prevent the version-matrix hell that multi-repo companies accept as fate. The mistake is not that monorepos exist; it is that they have been promoted from a scaling strategy to a default morality. A team of twelve copying the repository strategy of a company with twelve thousand engineers is not learning from the best — it is cosplaying as them.
+
+The next time someone proposes a monorepo, do not ask which CI tool they prefer. Ask how many engineers will actually live inside it. If the answer does not justify the empire, stop building the palace.

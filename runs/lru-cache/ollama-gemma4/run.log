@@ -1,0 +1,6 @@
+task=lru-cache
+model=ollama/gemma4
+prompt=code-generation/lru-cache@1.0.0
+adapter=ollama
+duration_ms=107564
+tokens=218->2290

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unicode Slugify Utility — Open Model Archive</title>
+  <meta name="description" content="Compare AI model outputs for Unicode Slugify Utility — URL slug generator with unicode normalization — string utility vs concurrency code. Artifacts, timing, tokens, and cost side by side.">
+  <meta name="keywords" content="AI model comparison, LLM outputs, model evaluation, prompt versioning, AI artifacts, side-by-side comparison, open source AI, Gemma, Gemini">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="sopermanspace">
+  <meta name="publisher" content="Open Model Archive">
+  <link rel="canonical" href="https://sopermanspace.github.io/open-model-archive/tasks/slugify-utility/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Unicode Slugify Utility — Open Model Archive">
+  <meta property="og:description" content="Compare AI model outputs for Unicode Slugify Utility — URL slug generator with unicode normalization — string utility vs concurrency code.">
+  <meta property="og:url" content="https://sopermanspace.github.io/open-model-archive/tasks/slugify-utility/">
+  <meta property="og:site_name" content="Open Model Archive">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Unicode Slugify Utility — Open Model Archive">
+  <meta name="twitter:description" content="Compare AI model outputs for Unicode Slugify Utility — URL slug generator with unicode normalization — string utility vs concurrency code.">
+  <link rel="icon" href="/open-model-archive/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/open-model-archive/assets/css/main.css">
+  <script>
+    (function () {
+      var path = location.pathname;
+      if (path.endsWith('/index.html')) {
+        history.replaceState(null, '', path.slice(0, -10) + location.search + location.hash);
+      }
+    })();
+  </script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/open-model-archive/">Open Model Archive</a>
+      <nav class="site-nav">
+        <a href="/open-model-archive/">Archive</a>
+        <a href="/open-model-archive/about/">About</a>
+        <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    
+<section class="container comparison-header">
+  <a class="back-link" href="/open-model-archive/">← Archive</a>
+  <p class="eyebrow">code-generation · Code</p>
+  <h1>Unicode Slugify Utility</h1>
+  <p class="lede">URL slug generator with unicode normalization — string utility vs concurrency code.</p>
+</section>
+
+
+<section class="container prompt-panel">
+  <details>
+    <summary>Prompt v1.0.0</summary>
+    <div class="prompt-meta">
+      <span>ID: slugify-utility</span>
+      <span>SHA-256: <code>a72c63d51c3959b1…</code></span>
+    </div>
+    <pre class="prompt-text">Implement a **URL slugify utility** in Python.
+
+## Requirements
+
+1. Output **only** a single fenced `python` code block. No explanation outside the block.
+2. Function: `slugify(text: str, max_length: int = 80) -&gt; str`
+3. Behavior:
+   - Unicode normalize to NFKD and strip combining characters
+   - Lowercase
+   - Replace non-alphanumeric runs with a single hyphen
+   - Strip leading/trailing hyphens
+   - Truncate to `max_length` without ending on a partial hyphen
+4. Include type hints and at least 6 `assert` cases in `if __name__ == &#34;__main__&#34;` covering unicode (e.g. café, 日本語), punctuation, and empty-ish input.
+5. No external dependencies beyond the standard library.
+
+The code must be readable and handle edge cases explicitly.</pre>
+  </details>
+</section>
+
+
+<section class="container comparison-grid" style="--cols: 3">
+  
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemini 3.1 Pro</h2>
+      <p class="model-provider">Google · Gemini 3.1 Pro (High)</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>52.3s</dd></div>
+        <div><dt>Tokens</dt><dd>~185 → ~478 <span class="metric-note">(est.)</span></dd></div>
+        <div><dt>Cost</dt><dd>~$0.0026</dd></div>
+        
+        <div><dt>Input cost</dt><dd>~$0.0002</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0024</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+    <div class="output-viewer" data-viewer="code">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">Generated python</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="code-output">
+        
+        <pre class="response-text code-block"><code>import re
+import unicodedata
+
+def slugify(text: str, max_length: int = 80) -&gt; str:
+    &#34;&#34;&#34;
+    Generate a URL-friendly slug from a string.
+    &#34;&#34;&#34;
+    # Unicode normalize to NFKD
+    text = unicodedata.normalize(&#39;NFKD&#39;, text)
+    
+    # Strip combining characters
+    text = &#39;&#39;.join(c for c in text if not unicodedata.combining(c))
+    
+    # Lowercase
+    text = text.lower()
+    
+    # Replace non-alphanumeric runs with a single hyphen
+    # \W matches any non-word character, _ matches underscore.
+    # Together, [\W_]+ matches any sequence of characters that are not alphanumeric.
+    text = re.sub(r&#39;[\W_]+&#39;, &#39;-&#39;, text)
+    
+    # Strip leading/trailing hyphens
+    text = text.strip(&#39;-&#39;)
+    
+    # Truncate to max_length without ending on a partial hyphen
+    text = text[:max_length].rstrip(&#39;-&#39;)
+    
+    return text
+
+
+if __name__ == &#34;__main__&#34;:
+    # 1. Standard text and punctuation
+    assert slugify(&#34;Hello World!&#34;) == &#34;hello-world&#34;
+    
+    # 2. Unicode normalization and stripping combining characters
+    assert slugify(&#34;café au lait&#34;) == &#34;cafe-au-lait&#34;
+    
+    # 3. Non-latin alphanumeric characters (should be preserved)
+    assert slugify(&#34;日本語&#34;) == &#34;日本語&#34;
+    
+    # 4. Runs of non-alphanumerics, including underscores and hyphens
+    assert slugify(&#34;  ---  A  --  _B_  ---  &#34;) == &#34;a-b&#34;
+    
+    # 5. Empty-ish input (only non-alphanumerics)
+    assert slugify(&#34;!@#$%^&amp;*()_+-=&#34;) == &#34;&#34;
+    
+    # 6. Truncation that naturally falls on a character
+    assert slugify(&#34;a&#34; * 100, max_length=10) == &#34;a&#34; * 10
+    
+    # 7. Truncation that leaves a trailing hyphen which must be stripped
+    assert slugify(&#34;a&#34; * 9 + &#34;-b&#34;, max_length=10) == &#34;a&#34; * 9</code></pre>
+        
+      </div>
+    </div>
+    
+
+    
+
+    
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">```python
+import re
+import unicodedata
+
+def slugify(text: str, max_length: int = 80) -&gt; str:
+    &#34;&#34;&#34;
+    Generate a URL-friendly slug from a string.
+    &#34;&#34;&#34;
+    # Unicode normalize to NFKD
+    text = unicodedata.normalize(&#39;NFKD&#39;, text)
+    
+    # Strip combining characters
+    text = &#39;&#39;.join(c for c in text if not unicodedata.combining(c))
+    
+    # Lowercase
+    text = text.lower()
+    
+    # Replace non-alphanumeric runs with a single hyphen
+    # \W matches any non-word character, _ matches underscore.
+    # Together, [\W_]+ matches any sequence of characters that are not alphanumeric.
+    text = re.sub(r&#39;[\W_]+&#39;, &#39;-&#39;, text)
+    
+    # Strip leading/trailing hyphens
+    text = text.strip(&#39;-&#39;)
+    
+    # Truncate to max_length without ending on a partial hyphen
+    text = text[:max_length].rstrip(&#39;-&#39;)
+    
+    return text
+
+
+if __name__ == &#34;__main__&#34;:
+    # 1. Standard text and punctuation
+    assert slugify(&#34;Hello World!&#34;) == &#34;hello-world&#34;
+    
+    # 2. Unicode normalization and stripping combining characters
+    assert slugify(&#34;café au lait&#34;) == &#34;cafe-au-lait&#34;
+    
+    # 3. Non-latin alphanumeric characters (should be preserved)
+    assert slugify(&#34;日本語&#34;) == &#34;日本語&#34;
+    
+    # 4. Runs of non-alphanumerics, including underscores and hyphens
+    assert slugify(&#34;  ---  A  --  _B_  ---  &#34;) == &#34;a-b&#34;
+    
+    # 5. Empty-ish input (only non-alphanumerics)
+    assert slugify(&#34;!@#$%^&amp;*()_+-=&#34;) == &#34;&#34;
+    
+    # 6. Truncation that naturally falls on a character
+    assert slugify(&#34;a&#34; * 100, max_length=10) == &#34;a&#34; * 10
+    
+    # 7. Truncation that leaves a trailing hyphen which must be stripped
+    assert slugify(&#34;a&#34; * 9 + &#34;-b&#34;, max_length=10) == &#34;a&#34; * 9
+```</pre>
+    </details>
+
+    
+    <p class="cost-note">Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated.</p>
+    
+
+    
+  </article>
+  
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Gemma 4</h2>
+      <p class="model-provider">Ollama · gemma4:latest</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>23.4s</dd></div>
+        <div><dt>Tokens</dt><dd>210 → 1.5k</dd></div>
+        <div><dt>Cost</dt><dd>$0.00</dd></div>
+        
+        <div><dt>Input cost</dt><dd>$0.00</dd></div>
+        <div><dt>Output cost</dt><dd>$0.00</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+    <div class="output-viewer" data-viewer="code">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">Generated python</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="code-output">
+        
+        <pre class="response-text code-block"><code>import re
+import unicodedata
+
+def slugify(text: str, max_length: int = 80) -&gt; str:
+    &#34;&#34;&#34;
+    Converts a string into a URL-friendly slug.
+
+    Args:
+        text (str): The input text to slugify.
+        max_length (int): The maximum allowed length of the resulting slug.
+
+    Returns:
+        str: The generated URL slug.
+    &#34;&#34;&#34;
+    if not isinstance(text, str):
+        raise TypeError(&#34;Input must be a string.&#34;)
+
+    # 1. Unicode Normalization (NFKD) and combining character stripping
+    # This step converts characters like é -&gt; e + accent mark, then removes the accent mark.
+    normalized_string = unicodedata.normalize(&#39;NFKD&#39;, text).encode(&#39;ascii&#39;, &#39;ignore&#39;).decode(&#39;ascii&#39;)
+
+    # 2. Lowercase conversion
+    s = normalized_string.lower()
+
+    # 3. Replace non-alphanumeric runs with a single hyphen
+    # We replace anything that isn&#39;t a letter, number, or space with nothing first,
+    # then handle whitespace/punctuation groups.
+    s = re.sub(r&#39;[^\w\s-]&#39;, &#39;&#39;, s).strip()
+
+    # 4. Replace contiguous runs of whitespace or hyphens/spaces with a single hyphen
+    s = re.sub(r&#39;[-\s]+&#39;, &#39;-&#39;, s)
+
+    # 5. Strip leading/trailing hyphens
+    slug = s.strip(&#39;-&#39;)
+
+    # 6. Truncate and handle potential trailing hyphens from truncation
+    if len(slug) &gt; max_length:
+        truncated_slug = slug[:max_length]
+        # If the truncation happens right before a hyphen, we need to ensure it&#39;s clean.
+        # We slice up to (and including) the character at max_length - 1.
+        if len(slug) &gt; max_length:
+            final_slug = slug[:max_length].rstrip(&#39;-&#39;)
+        else:
+             final_slug = slug
+    else:
+        final_slug = slug
+
+    # Ensure it never ends with a hyphen even after truncation/cleanup
+    return final_slug.strip(&#39;-&#39;)
+
+
+if __name__ == &#34;__main__&#34;:
+    print(&#34;--- Running Slugify Assertions ---&#34;)
+
+    # Test 1: Basic text, punctuation, and whitespace handling
+    assert slugify(&#34;   Hello World! This is a test slug... &#34;, max_length=50) == &#34;hello-world-this-is-a-test-slug&#34;
+
+    # Test 2: Unicode characters (French &#39;é&#39;)
+    assert slugify(&#34;Café Latte for Paris&#34;, max_length=50) == &#34;cafe-latte-for-paris&#34;
+
+    # Test 3: Complex non-Latin script and symbols (Japanese, emojis, etc.)
+    # NFKD + ASCII encoding handles most of this by removing the non-ASCII parts.
+    assert slugify(&#34;日本語 Blog ✨ with $$$ signs.&#34;, max_length=50) == &#34;blog-with-signs&#34;
+
+    # Test 4: Leading/Trailing Separators and excessive delimiters
+    assert slugify(&#34;--A very--long---title---&#34;, max_length=100) == &#34;a-very-long-title&#34;
+
+    # Test 5: Max Length Truncation (should cut gracefully without leaving a hyphen)
+    long_text = &#34;This is an extremely long string that needs to be truncated because it exceeds eighty characters limit.&#34;
+    expected_slug = &#34;this-is-an-extremely-long-string-that-needs-&#34; # Cut at max 80, ending in &#39;e&#39;
+    assert slugify(long_text, max_length=21) == &#34;this-is-an-ex&#34;
+
+    # Test 6: Empty or nearly empty input
+    assert slugify(&#34;&#34;) == &#34;&#34;
+    assert slugify(&#34;  \t\n &#34;, max_length=50) == &#34;&#34;
+
+    # Test 7 (Edge case): Testing a string that is exactly the max length and ends cleanly
+    max_text = &#34;a&#34; * 12 + &#34;-&#34; + &#34;b&#34; * 68
+    expected_slug_full = &#34;aaaaaaaaaaaa-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&#34;
+    assert slugify(max_text, max_length=100) == expected_slug_full
+
+    # Test 8 (Edge case): Max length cut precisely at a hyphen boundary
+    # The input is &#34;a-b-c&#34;. Length 5. We want the output to be &#39;a-b&#39;.
+    assert slugify(&#34;a-b-c&#34;, max_length=3) == &#34;a&#34; # Because slice gives &#39;a-b&#39;, but then re-strips potentially left over hyphen
+
+    print(&#34;\nAll assertions passed successfully!&#34;)</code></pre>
+        
+      </div>
+    </div>
+    
+
+    
+
+    
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">```python
+import re
+import unicodedata
+
+def slugify(text: str, max_length: int = 80) -&gt; str:
+    &#34;&#34;&#34;
+    Converts a string into a URL-friendly slug.
+
+    Args:
+        text (str): The input text to slugify.
+        max_length (int): The maximum allowed length of the resulting slug.
+
+    Returns:
+        str: The generated URL slug.
+    &#34;&#34;&#34;
+    if not isinstance(text, str):
+        raise TypeError(&#34;Input must be a string.&#34;)
+
+    # 1. Unicode Normalization (NFKD) and combining character stripping
+    # This step converts characters like é -&gt; e + accent mark, then removes the accent mark.
+    normalized_string = unicodedata.normalize(&#39;NFKD&#39;, text).encode(&#39;ascii&#39;, &#39;ignore&#39;).decode(&#39;ascii&#39;)
+
+    # 2. Lowercase conversion
+    s = normalized_string.lower()
+
+    # 3. Replace non-alphanumeric runs with a single hyphen
+    # We replace anything that isn&#39;t a letter, number, or space with nothing first,
+    # then handle whitespace/punctuation groups.
+    s = re.sub(r&#39;[^\w\s-]&#39;, &#39;&#39;, s).strip()
+
+    # 4. Replace contiguous runs of whitespace or hyphens/spaces with a single hyphen
+    s = re.sub(r&#39;[-\s]+&#39;, &#39;-&#39;, s)
+
+    # 5. Strip leading/trailing hyphens
+    slug = s.strip(&#39;-&#39;)
+
+    # 6. Truncate and handle potential trailing hyphens from truncation
+    if len(slug) &gt; max_length:
+        truncated_slug = slug[:max_length]
+        # If the truncation happens right before a hyphen, we need to ensure it&#39;s clean.
+        # We slice up to (and including) the character at max_length - 1.
+        if len(slug) &gt; max_length:
+            final_slug = slug[:max_length].rstrip(&#39;-&#39;)
+        else:
+             final_slug = slug
+    else:
+        final_slug = slug
+
+    # Ensure it never ends with a hyphen even after truncation/cleanup
+    return final_slug.strip(&#39;-&#39;)
+
+
+if __name__ == &#34;__main__&#34;:
+    print(&#34;--- Running Slugify Assertions ---&#34;)
+
+    # Test 1: Basic text, punctuation, and whitespace handling
+    assert slugify(&#34;   Hello World! This is a test slug... &#34;, max_length=50) == &#34;hello-world-this-is-a-test-slug&#34;
+
+    # Test 2: Unicode characters (French &#39;é&#39;)
+    assert slugify(&#34;Café Latte for Paris&#34;, max_length=50) == &#34;cafe-latte-for-paris&#34;
+
+    # Test 3: Complex non-Latin script and symbols (Japanese, emojis, etc.)
+    # NFKD + ASCII encoding handles most of this by removing the non-ASCII parts.
+    assert slugify(&#34;日本語 Blog ✨ with $$$ signs.&#34;, max_length=50) == &#34;blog-with-signs&#34;
+
+    # Test 4: Leading/Trailing Separators and excessive delimiters
+    assert slugify(&#34;--A very--long---title---&#34;, max_length=100) == &#34;a-very-long-title&#34;
+
+    # Test 5: Max Length Truncation (should cut gracefully without leaving a hyphen)
+    long_text = &#34;This is an extremely long string that needs to be truncated because it exceeds eighty characters limit.&#34;
+    expected_slug = &#34;this-is-an-extremely-long-string-that-needs-&#34; # Cut at max 80, ending in &#39;e&#39;
+    assert slugify(long_text, max_length=21) == &#34;this-is-an-ex&#34;
+
+    # Test 6: Empty or nearly empty input
+    assert slugify(&#34;&#34;) == &#34;&#34;
+    assert slugify(&#34;  \t\n &#34;, max_length=50) == &#34;&#34;
+
+    # Test 7 (Edge case): Testing a string that is exactly the max length and ends cleanly
+    max_text = &#34;a&#34; * 12 + &#34;-&#34; + &#34;b&#34; * 68
+    expected_slug_full = &#34;aaaaaaaaaaaa-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&#34;
+    assert slugify(max_text, max_length=100) == expected_slug_full
+
+    # Test 8 (Edge case): Max length cut precisely at a hyphen boundary
+    # The input is &#34;a-b-c&#34;. Length 5. We want the output to be &#39;a-b&#39;.
+    assert slugify(&#34;a-b-c&#34;, max_length=3) == &#34;a&#34; # Because slice gives &#39;a-b&#39;, but then re-strips potentially left over hyphen
+
+    print(&#34;\nAll assertions passed successfully!&#34;)
+```</pre>
+    </details>
+
+    
+    <p class="cost-note">Local inference on your hardware — no API token cost.</p>
+    
+
+    
+  </article>
+  
+  
+  
+  <article class="model-column">
+    <header class="model-header">
+      <h2>Kimi K2.7 Code</h2>
+      <p class="model-provider">Ollama Cloud · kimi-k2.7-code</p>
+      <dl class="metrics">
+        <div><dt>Duration</dt><dd>22.2s</dd></div>
+        <div><dt>Tokens</dt><dd>188 → 2.1k</dd></div>
+        <div><dt>Cost</dt><dd>~$0.0042</dd></div>
+        
+        <div><dt>Input cost</dt><dd>~$0.0001</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0042</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
+      </dl>
+    </header>
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+    <div class="output-viewer" data-viewer="code">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">Generated python</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="code-output">
+        
+        <pre class="response-text code-block"><code>import re
+import unicodedata
+
+
+def slugify(text: str, max_length: int = 80) -&gt; str:
+    &#34;&#34;&#34;
+    Convert a string into a URL-friendly slug.
+    &#34;&#34;&#34;
+    if not isinstance(text, str):
+        raise TypeError(&#34;text must be a string&#34;)
+    if not isinstance(max_length, int):
+        raise TypeError(&#34;max_length must be an integer&#34;)
+    if max_length &lt; 0:
+        raise ValueError(&#34;max_length must be non-negative&#34;)
+
+    # 1. Unicode NFKD normalization and strip combining characters
+    normalized = unicodedata.normalize(&#34;NFKD&#34;, text)
+    without_combining = &#34;&#34;.join(
+        char for char in normalized if unicodedata.category(char) != &#34;Mn&#34;
+    )
+
+    # 2. Lowercase and replace non-alphanumeric runs with a single hyphen
+    slug = re.sub(r&#34;[^a-z0-9]+&#34;, &#34;-&#34;, without_combining.lower())
+
+    # 3. Strip leading/trailing hyphens
+    slug = slug.strip(&#34;-&#34;)
+
+    # 4. Truncate without ending on a partial hyphen
+    if len(slug) &gt; max_length:
+        slug = slug[:max_length].rstrip(&#34;-&#34;)
+
+    return slug
+
+
+if __name__ == &#34;__main__&#34;:
+    assert slugify(&#34;Hello World!&#34;) == &#34;hello-world&#34;
+    assert slugify(&#34;café&#34;) == &#34;cafe&#34;
+    assert slugify(&#34;日本語のテキスト&#34;) == &#34;日本語のテキスト&#34;
+    assert slugify(&#34;---lots___of   spaces!!!&#34;) == &#34;lots-of-spaces&#34;
+    assert slugify(&#34;&#34;) == &#34;&#34;
+    assert slugify(&#34;   ???   &#34;) == &#34;&#34;
+    assert slugify(&#34;foo-bar-baz&#34;, max_length=8) == &#34;foo-bar&#34;
+    assert slugify(&#34;a&#34; * 100, max_length=80) == &#34;a&#34; * 80</code></pre>
+        
+      </div>
+    </div>
+    
+
+    
+
+    
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">```python
+import re
+import unicodedata
+
+
+def slugify(text: str, max_length: int = 80) -&gt; str:
+    &#34;&#34;&#34;
+    Convert a string into a URL-friendly slug.
+    &#34;&#34;&#34;
+    if not isinstance(text, str):
+        raise TypeError(&#34;text must be a string&#34;)
+    if not isinstance(max_length, int):
+        raise TypeError(&#34;max_length must be an integer&#34;)
+    if max_length &lt; 0:
+        raise ValueError(&#34;max_length must be non-negative&#34;)
+
+    # 1. Unicode NFKD normalization and strip combining characters
+    normalized = unicodedata.normalize(&#34;NFKD&#34;, text)
+    without_combining = &#34;&#34;.join(
+        char for char in normalized if unicodedata.category(char) != &#34;Mn&#34;
+    )
+
+    # 2. Lowercase and replace non-alphanumeric runs with a single hyphen
+    slug = re.sub(r&#34;[^a-z0-9]+&#34;, &#34;-&#34;, without_combining.lower())
+
+    # 3. Strip leading/trailing hyphens
+    slug = slug.strip(&#34;-&#34;)
+
+    # 4. Truncate without ending on a partial hyphen
+    if len(slug) &gt; max_length:
+        slug = slug[:max_length].rstrip(&#34;-&#34;)
+
+    return slug
+
+
+if __name__ == &#34;__main__&#34;:
+    assert slugify(&#34;Hello World!&#34;) == &#34;hello-world&#34;
+    assert slugify(&#34;café&#34;) == &#34;cafe&#34;
+    assert slugify(&#34;日本語のテキスト&#34;) == &#34;日本語のテキスト&#34;
+    assert slugify(&#34;---lots___of   spaces!!!&#34;) == &#34;lots-of-spaces&#34;
+    assert slugify(&#34;&#34;) == &#34;&#34;
+    assert slugify(&#34;   ???   &#34;) == &#34;&#34;
+    assert slugify(&#34;foo-bar-baz&#34;, max_length=8) == &#34;foo-bar&#34;
+    assert slugify(&#34;a&#34; * 100, max_length=80) == &#34;a&#34; * 80
+```</pre>
+    </details>
+
+    
+    <p class="cost-note">Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated.</p>
+    
+
+    
+  </article>
+  
+</section>
+
+<div id="fullscreen-overlay" class="fullscreen-overlay" hidden>
+  <header class="fullscreen-header">
+    <span class="fullscreen-title"></span>
+    <button type="button" class="btn-icon fullscreen-close" aria-label="Close fullscreen" title="Close (Esc)">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </header>
+  <div class="fullscreen-body"></div>
+</div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Open source. Every prompt versioned. Every artifact public.</p>
+    </div>
+  </footer>
+  
+<script>
+(function () {
+  var overlay = document.getElementById('fullscreen-overlay');
+  if (!overlay) return;
+
+  var titleEl = overlay.querySelector('.fullscreen-title');
+  var bodyEl = overlay.querySelector('.fullscreen-body');
+  var closeBtn = overlay.querySelector('.fullscreen-close');
+
+  function closeFullscreen() {
+    overlay.hidden = true;
+    document.body.classList.remove('fullscreen-open');
+    bodyEl.innerHTML = '';
+  }
+
+  function openFullscreen(label, buildContent) {
+    titleEl.textContent = label;
+    bodyEl.innerHTML = '';
+    buildContent(bodyEl);
+    overlay.hidden = false;
+    document.body.classList.add('fullscreen-open');
+    closeBtn.focus();
+  }
+
+  function getActiveTabPanel(viewer) {
+    var tabs = viewer.querySelector('.preview-tabs');
+    if (!tabs) return null;
+    if (tabs.querySelector('input[id^="live-"]:checked')) {
+      return tabs.querySelector('.live-panel');
+    }
+    return tabs.querySelector('.snap-panel');
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.btn-fullscreen');
+    if (!btn) return;
+
+    var viewer = btn.closest('.output-viewer');
+    if (!viewer) return;
+
+    var label = viewer.querySelector('.output-viewer-label');
+    var labelText = label ? label.textContent : 'Output';
+    var viewerType = viewer.dataset.viewer;
+
+    if (viewerType === 'iframe') {
+      var src = btn.dataset.iframeSrc || viewer.querySelector('iframe')?.src;
+      if (!src) return;
+      openFullscreen(labelText, function (body) {
+        var iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.title = labelText;
+        iframe.setAttribute('loading', 'lazy');
+        body.appendChild(iframe);
+      });
+      return;
+    }
+
+    if (viewerType === 'tabs') {
+      var panel = getActiveTabPanel(viewer);
+      if (!panel) return;
+      var iframe = panel.querySelector('iframe');
+      var img = panel.querySelector('img');
+      if (iframe) {
+        openFullscreen(labelText + ' — Live preview', function (body) {
+          var frame = document.createElement('iframe');
+          frame.src = iframe.src;
+          frame.title = iframe.title || labelText;
+          body.appendChild(frame);
+        });
+      } else if (img) {
+        openFullscreen(labelText + ' — Snapshot', function (body) {
+          var fullImg = document.createElement('img');
+          fullImg.src = img.src;
+          fullImg.alt = img.alt;
+          body.classList.add('fullscreen-image');
+          body.appendChild(fullImg);
+        });
+      }
+      return;
+    }
+
+    if (viewerType === 'image') {
+      var imageSrc = btn.dataset.imageSrc || viewer.querySelector('img')?.src;
+      if (!imageSrc) return;
+      openFullscreen(labelText, function (body) {
+        var fullImg = document.createElement('img');
+        fullImg.src = imageSrc;
+        fullImg.alt = labelText;
+        body.classList.add('fullscreen-image');
+        body.appendChild(fullImg);
+      });
+      return;
+    }
+
+    if (viewerType === 'code') {
+      var codeBlock = viewer.querySelector('pre');
+      if (!codeBlock) return;
+      openFullscreen(labelText, function (body) {
+        body.classList.add('fullscreen-code');
+        body.appendChild(codeBlock.cloneNode(true));
+      });
+      return;
+    }
+
+    if (viewerType === 'prose') {
+      var prose = viewer.querySelector('.rendered-md');
+      if (!prose) return;
+      openFullscreen(labelText, function (body) {
+        body.classList.add('fullscreen-prose');
+        body.appendChild(prose.cloneNode(true));
+      });
+      return;
+    }
+
+    if (viewerType === 'text') {
+      var pre = viewer.querySelector('pre');
+      if (!pre) return;
+      openFullscreen(labelText, function (body) {
+        body.classList.add('fullscreen-code');
+        body.appendChild(pre.cloneNode(true));
+      });
+    }
+  });
+
+  closeBtn.addEventListener('click', closeFullscreen);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeFullscreen();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !overlay.hidden) closeFullscreen();
+  });
+})();
+</script>
+
+</body>
+</html>

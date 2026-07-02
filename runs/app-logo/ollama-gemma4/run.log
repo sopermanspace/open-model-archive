@@ -1,0 +1,6 @@
+task=app-logo
+model=ollama/gemma4
+prompt=svg-generation/app-logo@1.0.0
+adapter=ollama
+duration_ms=9623
+tokens=185->637

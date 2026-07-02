@@ -1,0 +1,7 @@
+task=typography-audit
+model=ollama/kimi-k2.7-code
+prompt=vision-understanding/typography-audit@1.0.0
+adapter=ollama
+inputs=['drift-landing-reference.png']
+duration_ms=15669
+tokens=1526->1622

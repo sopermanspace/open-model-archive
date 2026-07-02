@@ -1,0 +1,5 @@
+task=lru-cache
+model=google/gemini-3.1-pro
+prompt=code-generation/lru-cache@1.0.0
+adapter=cli
+error=CLI execution failed

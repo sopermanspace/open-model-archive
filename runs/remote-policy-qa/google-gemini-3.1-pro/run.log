@@ -1,0 +1,6 @@
+task=remote-policy-qa
+model=google/gemini-3.1-pro
+prompt=web-grounding/remote-policy-qa@1.0.0
+adapter=cli
+duration_ms=34461
+tokens=280->58

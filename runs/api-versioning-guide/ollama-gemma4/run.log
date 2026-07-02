@@ -1,0 +1,6 @@
+task=api-versioning-guide
+model=ollama/gemma4
+prompt=blog-writing/api-versioning-guide@1.0.0
+adapter=ollama
+duration_ms=21247
+tokens=190->1422

@@ -1,0 +1,19 @@
+# Monorepos Are Overprescribed — And Your Team Size Is the Real Variable
+
+The tech industry has a persistent habit of treating the architectural choices of trillion-dollar behemoths as universal truths. Somewhere along the line, the monorepo became the default prescription for every engineering organization experiencing growing pains. The pitch is undeniably seductive: atomic commits, a single source of truth, and the absolute elimination of dependency drift. But for the vast majority of engineering teams, adopting a monorepo is an act of premature optimization that actively destroys velocity. The harsh reality is that the monorepo is not a silver bullet; it is an organizational scaling mechanism, and its true value is entirely dependent on the size of your team.
+
+## The Tooling Tax and Google Envy
+
+When you adopt a monorepo, you are not just changing where your code lives—you are fundamentally altering your relationship with infrastructure. Small to mid-sized teams frequently underestimate the sheer gravitational pull of maintaining a unified repository. They suffer from "Google Envy," adopting patterns built for tens of thousands of engineers without possessing the dedicated developer productivity teams required to sustain them.
+
+Consider the all-too-common trajectory of a mid-stage startup. I once observed an engineering organization of twenty developers at a fintech company, let's call them LedgerFlow, who decided their scattered microservices were too difficult to test end-to-end. Their solution was to migrate everything into a single repository powered by Bazel. The theoretical goal was seamless shared libraries and atomic refactoring. The practical result was that their most senior product engineers spent the next four months fighting cache invalidation issues, debugging esoteric CI pipeline timeouts, and writing custom tooling just to get their local builds under ten minutes. They solved their dependency problem by introducing an infrastructure tax they simply could not afford to pay. 
+
+## The Validity of Atomic Commits
+
+To be fair, the proponents of monorepos are not wrong about the pain of polyrepos. Anyone who has manually bumped a core authentication library version across thirty different microservices knows the acute misery of dependency hell. Diamond dependency conflicts and asynchronous deployments can quickly turn a microservice architecture into a distributed monolith that is impossible to safely update. In these scenarios, the monorepo’s promise of atomic commits—where a change to a core library and the updating of all its consumers happen in a single operation—is genuinely transformative. If you have hundreds of engineers working across deeply intertwined domains, the coordination cost of separate repositories eventually exceeds the infrastructure cost of a monorepo. 
+
+## Aligning Architecture with Reality
+
+But that crossover point happens much later than most engineering leaders want to admit. If your engineering department fits comfortably on a single floor, or if you can still recognize everyone on your Zoom all-hands, a monorepo is likely going to slow you down. At that scale, the friction of maintaining multiple repositories is a communication problem, not an architectural one. You don't need a unified, bespoke build graph; you need better internal API contracts and a little organizational discipline.
+
+We need to stop prescribing enterprise-scale solutions to mid-market problems. Architecture should reflect the reality of your organizational chart, not the aspirational engineering blogs of a FAANG company. If you are spending more time configuring your build system than writing business logic, you haven't solved your scaling problem—you've just successfully distracted yourself from it.

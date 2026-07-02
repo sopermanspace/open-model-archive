@@ -1,0 +1,9 @@
+id: product-review-fiction
+slug: product-review-fiction
+category: creative-fiction
+topics: [creative, humor]
+title: Fictional Product Review
+description: Plausible 1-star Amazon review of an absurd gadget — consumer satire vs press release fiction.
+prompt: creative-fiction/product-review@v1.0.0
+screenshot: false
+models: all

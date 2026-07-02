@@ -1,0 +1,6 @@
+task=remote-policy-qa
+model=ollama/gemma4
+prompt=web-grounding/remote-policy-qa@1.0.0
+adapter=ollama
+duration_ms=11762
+tokens=316->778

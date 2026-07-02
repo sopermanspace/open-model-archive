@@ -1,0 +1,51 @@
+{
+  "id": "mobile-first-critique/google-gemini-3.1-pro/2026-07-02T16:55:55Z",
+  "task": {
+    "id": "mobile-first-critique",
+    "slug": "mobile-first-critique",
+    "category": "design-critique",
+    "title": "Mobile-First Design Critique",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "mobile-first-critique",
+    "version": "1.0.0",
+    "sha256": "b02aa3301dd8654a24bf17d3c06137ab96c0187204ebe23c52c994805c8f266b",
+    "title": "Mobile-First Design Critique"
+  },
+  "executed_at": "2026-07-02T16:55:55.430378Z",
+  "duration_ms": 49668,
+  "tokens": {
+    "input": 225,
+    "output": 374,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.002151,
+  "cost": {
+    "total_usd": 0.002151,
+    "input_usd": 0.000281,
+    "output_usd": 0.00187,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "image",
+      "path": "inputs/comparison-screenshot.jpg",
+      "sha256": "62d9cbc42a91fa4897b08fcce3c5fea09318090ad2dde2cf91b259e6403ceb2c",
+      "language": null
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

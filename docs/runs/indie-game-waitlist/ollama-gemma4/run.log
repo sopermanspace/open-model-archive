@@ -1,0 +1,7 @@
+task=indie-game-waitlist
+model=ollama/gemma4
+prompt=website-generation/indie-game-waitlist@1.0.0
+adapter=ollama
+duration_ms=55839
+tokens=258->3565
+screenshot=/Users/himanshu/open-model-archive/runs/indie-game-waitlist/ollama-gemma4/screenshots/desktop.png

@@ -1,0 +1,6 @@
+task=remote-policy-qa
+model=ollama/kimi-k2.7-code
+prompt=web-grounding/remote-policy-qa@1.0.0
+adapter=ollama
+duration_ms=10886
+tokens=288->332

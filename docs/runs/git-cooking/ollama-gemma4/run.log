@@ -1,0 +1,6 @@
+task=git-cooking
+model=ollama/gemma4
+prompt=humor-testing/git-cooking@1.0.0
+adapter=ollama
+duration_ms=9174
+tokens=133->605

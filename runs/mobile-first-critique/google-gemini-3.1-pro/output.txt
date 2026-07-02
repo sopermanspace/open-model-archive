@@ -1,0 +1,14 @@
+## Thumb-zone & navigation
+The left panel clumsily forces its navigation links and a "Sign In" button into a tight horizontal row beneath the logo, which would result in error-prone, clustered tap targets on a phone. The right panel makes the smart mobile-first choice to simplify the header to just the logo and a single "GitHub" button, respecting the limited horizontal space and keeping the primary action easily reachable for the thumb.
+
+## Vertical rhythm on narrow screens
+The left panel exhibits erratic text scaling, with a massive headline and oversized body copy that would feel bloated and overwhelming when stacked vertically. The right panel retains excellent typographic control and spacing, ensuring the content feels breathable, well-paced, and naturally flows down a narrow device.
+
+## Tap targets & forms
+On the left, the header navigation links fail basic touch-target sizing guidelines due to their close proximity. The right panel offers well-isolated, adequately padded buttons; however, on a strict 390px viewport, it would be best practice to stack those two side-by-side hero CTAs vertically to guarantee flawless touch usability. Regardless, it still offers a vastly superior touch experience to the left panel.
+
+## Content prioritization
+The left panel's chunky header layout and inflated typography act as a space hog, meaning a user would likely have to scroll just to see the primary CTA. The right panel highly optimizes its vertical space, allowing the complete value proposition—headline, supporting text, and both CTAs—to sit comfortably above the fold immediately upon load.
+
+## Verdict
+The right panel is the clear mobile-first winner. It demonstrates a strong understanding of mobile constraints by thoughtfully simplifying navigation and preserving a readable typographic hierarchy. The left panel fails to adapt its layout meaningfully, resulting in a cramped header and blown-out text that would provide a poor experience on a small screen.

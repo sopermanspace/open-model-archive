@@ -1,0 +1,6 @@
+task=git-cooking
+model=google/gemini-3.1-pro
+prompt=humor-testing/git-cooking@1.0.0
+adapter=cli
+duration_ms=38240
+tokens=113->422

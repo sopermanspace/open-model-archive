@@ -1,0 +1,11 @@
+id: app-logo
+slug: app-logo
+category: svg-generation
+topics: [design]
+title: App Logo Mark
+description: Filled geometric app icon — compare against stroke-based weather icons.
+prompt: svg-generation/app-logo@v1.0.0
+post_process:
+  - extract_svg
+screenshot: false
+models: all

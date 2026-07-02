@@ -1,0 +1,44 @@
+{
+  "id": "river-crossing-puzzle/google-gemini-3.1-pro/2026-07-02T16:56:57Z",
+  "task": {
+    "id": "river-crossing-puzzle",
+    "slug": "river-crossing-puzzle",
+    "category": "math",
+    "title": "River Crossing Logic Puzzle",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "river-crossing-puzzle",
+    "version": "1.0.0",
+    "sha256": "6069f6424de20135350b1708d41e1c39ddd6581f82659db8da767dce52cd8c3e",
+    "title": "River Crossing Logic Puzzle"
+  },
+  "executed_at": "2026-07-02T16:56:57.890684Z",
+  "duration_ms": 26641,
+  "tokens": {
+    "input": 140,
+    "output": 501,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.00268,
+  "cost": {
+    "total_usd": 0.00268,
+    "input_usd": 0.000175,
+    "output_usd": 0.002505,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "api-versioning-guide/ollama-gemma4/2026-07-02T15:19:21Z",
+  "task": {
+    "id": "api-versioning-guide",
+    "slug": "api-versioning-guide",
+    "category": "blog-writing",
+    "title": "API Versioning Tutorial",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "api-versioning-guide",
+    "version": "1.0.0",
+    "sha256": "c7ebe2dee9a96cfa470326f668bc998889cdc20483c2123e076a821898f574ce",
+    "title": "API Versioning Tutorial"
+  },
+  "executed_at": "2026-07-02T15:19:21.955566Z",
+  "duration_ms": 21247,
+  "tokens": {
+    "input": 190,
+    "output": 1422,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

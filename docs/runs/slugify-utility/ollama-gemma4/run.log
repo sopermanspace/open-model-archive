@@ -1,0 +1,6 @@
+task=slugify-utility
+model=ollama/gemma4
+prompt=code-generation/slugify-utility@1.0.0
+adapter=ollama
+duration_ms=23444
+tokens=210->1517

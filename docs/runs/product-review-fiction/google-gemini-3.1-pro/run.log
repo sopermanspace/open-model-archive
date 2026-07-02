@@ -1,0 +1,6 @@
+task=product-review-fiction
+model=google/gemini-3.1-pro
+prompt=creative-fiction/product-review@1.0.0
+adapter=cli
+duration_ms=49148
+tokens=151->432

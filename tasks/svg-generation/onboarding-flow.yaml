@@ -1,0 +1,11 @@
+id: onboarding-flow
+slug: onboarding-flow
+category: svg-generation
+topics: [design, code]
+title: Onboarding Flow Diagram
+description: Four-step horizontal process diagram — diagram style vs icon set.
+prompt: svg-generation/onboarding-flow@v1.0.0
+post_process:
+  - extract_svg
+screenshot: false
+models: all

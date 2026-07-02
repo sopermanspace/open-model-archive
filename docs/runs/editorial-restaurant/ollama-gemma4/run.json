@@ -1,0 +1,57 @@
+{
+  "id": "editorial-restaurant/ollama-gemma4/2026-07-02T15:17:25Z",
+  "task": {
+    "id": "editorial-restaurant",
+    "slug": "editorial-restaurant",
+    "category": "website-generation",
+    "title": "Editorial Restaurant Site",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "editorial-restaurant",
+    "version": "1.0.0",
+    "sha256": "849d955d663e9158a2e5e18afa88b158c3f5bcd2d935e4b6a9f455164a06ec85",
+    "title": "Editorial Restaurant Site"
+  },
+  "executed_at": "2026-07-02T15:17:25.013181Z",
+  "duration_ms": 62241,
+  "tokens": {
+    "input": 254,
+    "output": 4089,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "8e48a9d2cec36361d302b79e9fce9c7f758b340213629d18cde51adfffe33ecb",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "7c6e9ce1a2ffcbf201c80f48f2ed66e81a2e5a4fbbd6a4657a4bf4b882889ba4"
+    }
+  ],
+  "logs": "run.log"
+}

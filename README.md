@@ -114,21 +114,35 @@ Disabled templates live in `models/` — copy `_template.yaml`, set `enabled: tr
 
 ## Task library
 
-11 real-world tasks across 9 categories. Every task uses **prompt v1.0.0** — immutable and committed to Git.
+**25 tasks** across 9 categories — most categories include **multiple prompts in different styles** so you can compare how models handle tone, format, and constraints, not just one example.
 
-| Category | Task | Topics | Compare |
+| Category | Task | Style / lens | Compare |
 | :--- | :--- | :--- | :--- |
-| Website generation | Developer Tool Landing Page | design, code | [View →](https://sopermanspace.github.io/open-model-archive/tasks/website-landing-page/) |
-| Code generation | Token Bucket Rate Limiter | code | [View →](https://sopermanspace.github.io/open-model-archive/tasks/rate-limiter/) |
-| SVG generation | Weather Icon Set | design, code | [View →](https://sopermanspace.github.io/open-model-archive/tasks/weather-icons/) |
-| Web grounding | Grounded Product Q&A | reasoning | [View →](https://sopermanspace.github.io/open-model-archive/tasks/product-facts-grounding/) |
-| Vision understanding | Landing Page Visual Analysis | vision, design | [View →](https://sopermanspace.github.io/open-model-archive/tasks/landing-visual-analysis/) |
-| Design critique | Expert Designer Critique | vision, design | [View →](https://sopermanspace.github.io/open-model-archive/tasks/landing-design-critique/) |
-| Blog writing | Configuration Drift Blog | writing, reasoning | [View →](https://sopermanspace.github.io/open-model-archive/tasks/config-drift-blog/) |
-| Humor testing | Kubernetes Golden Retriever | humor, writing | [View →](https://sopermanspace.github.io/open-model-archive/tasks/kubernetes-golden-retriever/) |
-| Creative fiction | Startup Launch Fiction | creative, writing | [View →](https://sopermanspace.github.io/open-model-archive/tasks/startup-launch-fiction/) |
-| Math | Elementary Word Problems | math, reasoning | [View →](https://sopermanspace.github.io/open-model-archive/tasks/elementary-math/) |
-| Math | College Calculus & Linear Algebra | math, reasoning | [View →](https://sopermanspace.github.io/open-model-archive/tasks/college-math/) |
+| **Website generation** | Developer Tool Landing Page | Dark SaaS, full marketing page | [View →](https://sopermanspace.github.io/open-model-archive/tasks/website-landing-page/) |
+| | Indie Game Waitlist Page | Light playful, email waitlist | [View →](https://sopermanspace.github.io/open-model-archive/tasks/indie-game-waitlist/) |
+| | Editorial Restaurant Site | Warm typography-led editorial | [View →](https://sopermanspace.github.io/open-model-archive/tasks/editorial-restaurant/) |
+| **Code generation** | Token Bucket Rate Limiter | Concurrency / systems code | [View →](https://sopermanspace.github.io/open-model-archive/tasks/rate-limiter/) |
+| | LRU Cache | Classic data-structure implementation | [View →](https://sopermanspace.github.io/open-model-archive/tasks/lru-cache/) |
+| | Unicode Slugify Utility | String processing + edge cases | [View →](https://sopermanspace.github.io/open-model-archive/tasks/slugify-utility/) |
+| **SVG generation** | Weather Icon Set | Stroke icons, 3-up set | [View →](https://sopermanspace.github.io/open-model-archive/tasks/weather-icons/) |
+| | App Logo Mark | Filled geometric app icon | [View →](https://sopermanspace.github.io/open-model-archive/tasks/app-logo/) |
+| | Onboarding Flow Diagram | Labeled process diagram | [View →](https://sopermanspace.github.io/open-model-archive/tasks/onboarding-flow/) |
+| **Blog writing** | Configuration Drift Blog | Authoritative incident-style essay | [View →](https://sopermanspace.github.io/open-model-archive/tasks/config-drift-blog/) |
+| | API Versioning Tutorial | Beginner how-to with code examples | [View →](https://sopermanspace.github.io/open-model-archive/tasks/api-versioning-guide/) |
+| | Monorepo Opinion Piece | Short editorial / argumentative | [View →](https://sopermanspace.github.io/open-model-archive/tasks/monorepo-opinion/) |
+| **Web grounding** | Grounded Product Q&A | Product docs excerpts | [View →](https://sopermanspace.github.io/open-model-archive/tasks/product-facts-grounding/) |
+| | Remote Work Policy Q&A | HR policy excerpts | [View →](https://sopermanspace.github.io/open-model-archive/tasks/remote-policy-qa/) |
+| **Vision understanding** | Landing Page Visual Analysis | Full layout & hierarchy audit | [View →](https://sopermanspace.github.io/open-model-archive/tasks/landing-visual-analysis/) |
+| | Typography & Readability Audit | Type-only narrow lens | [View →](https://sopermanspace.github.io/open-model-archive/tasks/typography-audit/) |
+| **Design critique** | Expert Designer Critique | Desktop design comparison | [View →](https://sopermanspace.github.io/open-model-archive/tasks/landing-design-critique/) |
+| | Mobile-First Design Critique | Touch / thumb-zone lens | [View →](https://sopermanspace.github.io/open-model-archive/tasks/mobile-first-critique/) |
+| **Humor testing** | Kubernetes Golden Retriever | Dog metaphors | [View →](https://sopermanspace.github.io/open-model-archive/tasks/kubernetes-golden-retriever/) |
+| | Explain Git Rebase as Cooking | Kitchen metaphors | [View →](https://sopermanspace.github.io/open-model-archive/tasks/git-cooking/) |
+| **Creative fiction** | Startup Launch Fiction | Press release satire | [View →](https://sopermanspace.github.io/open-model-archive/tasks/startup-launch-fiction/) |
+| | Fictional Product Review | 1-star Amazon review | [View →](https://sopermanspace.github.io/open-model-archive/tasks/product-review-fiction/) |
+| **Math** | Elementary Word Problems | Arithmetic word problems | [View →](https://sopermanspace.github.io/open-model-archive/tasks/elementary-math/) |
+| | College Calculus & Linear Algebra | College-level problems | [View →](https://sopermanspace.github.io/open-model-archive/tasks/college-math/) |
+| | River Crossing Logic Puzzle | Step-by-step logic reasoning | [View →](https://sopermanspace.github.io/open-model-archive/tasks/river-crossing-puzzle/) |
 
 <br>
 

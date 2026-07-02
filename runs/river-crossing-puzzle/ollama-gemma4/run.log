@@ -1,0 +1,6 @@
+task=river-crossing-puzzle
+model=ollama/gemma4
+prompt=math/river-crossing-puzzle@1.0.0
+adapter=ollama
+duration_ms=33578
+tokens=160->2216

@@ -1,0 +1,57 @@
+{
+  "id": "editorial-restaurant/ollama-kimi-k2.7-code/2026-07-02T15:18:13Z",
+  "task": {
+    "id": "editorial-restaurant",
+    "slug": "editorial-restaurant",
+    "category": "website-generation",
+    "title": "Editorial Restaurant Site",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "editorial-restaurant",
+    "version": "1.0.0",
+    "sha256": "849d955d663e9158a2e5e18afa88b158c3f5bcd2d935e4b6a9f455164a06ec85",
+    "title": "Editorial Restaurant Site"
+  },
+  "executed_at": "2026-07-02T15:18:13.810068Z",
+  "duration_ms": 47287,
+  "tokens": {
+    "input": 231,
+    "output": 4268,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.008729,
+  "cost": {
+    "total_usd": 0.008729,
+    "input_usd": 8.7e-05,
+    "output_usd": 0.008643,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "a133b649a5b3114d28c53331ac5e824e8d2409319c83a5fe2f2c1db90c6666a3",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "1a774112a6b49af2e6ca23034ff843f6aac77ece669ad9503ac21a11d68ec1a4"
+    }
+  ],
+  "logs": "run.log"
+}

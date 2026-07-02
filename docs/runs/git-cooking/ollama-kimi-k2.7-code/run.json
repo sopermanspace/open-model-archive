@@ -1,0 +1,44 @@
+{
+  "id": "git-cooking/ollama-kimi-k2.7-code/2026-07-02T16:51:29Z",
+  "task": {
+    "id": "git-cooking",
+    "slug": "git-cooking",
+    "category": "humor-testing",
+    "title": "Explain Git Rebase as Cooking",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "git-cooking",
+    "version": "1.0.0",
+    "sha256": "520639b642ce794fcdf9daaea5e1ae94df15eac99baa127b58a4ddb23ffa567b",
+    "title": "Explain Git Rebase as Cooking"
+  },
+  "executed_at": "2026-07-02T16:51:29.846658Z",
+  "duration_ms": 16758,
+  "tokens": {
+    "input": 119,
+    "output": 1048,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.002167,
+  "cost": {
+    "total_usd": 0.002167,
+    "input_usd": 4.5e-05,
+    "output_usd": 0.002122,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [],
+  "screenshots": [],
+  "logs": "run.log"
+}

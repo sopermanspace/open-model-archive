@@ -1,0 +1,6 @@
+task=onboarding-flow
+model=google/gemini-3.1-pro
+prompt=svg-generation/onboarding-flow@1.0.0
+adapter=cli
+duration_ms=87362
+tokens=169->893

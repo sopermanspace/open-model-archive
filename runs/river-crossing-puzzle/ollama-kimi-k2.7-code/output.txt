@@ -1,0 +1,54 @@
+## Goal
+
+Get the farmer, the wolf, the goat, and the cabbage across the river without ever leaving the wolf alone with the goat, or the goat alone with the cabbage. The boat carries only the farmer plus one item.
+
+## Why the first move matters
+
+If the farmer starts by taking the **wolf**, the goat and cabbage are left together and the goat eats the cabbage.  
+If the farmer starts by taking the **cabbage**, the wolf and goat are left together and the wolf eats the goat.  
+So the first crossing must be with the **goat**, separating the two pairs.
+
+## Step-by-step solution
+
+1. **Farmer takes the goat across the river.**  
+   - Near bank: wolf, cabbage.  
+   - Far bank: farmer, goat.  
+   - Reason: Only safe first move. Wolf and cabbage can be left together safely.
+
+2. **Farmer returns alone.**  
+   - Near bank: farmer, wolf, cabbage.  
+   - Far bank: goat.  
+   - Reason: The farmer must go back to fetch another item.
+
+3. **Farmer takes the wolf across.**  
+   - Near bank: cabbage.  
+   - Far bank: farmer, wolf, goat.  
+   - Reason: Moves the wolf. Now the goat is with the farmer and wolf on the far bank, so it is safe.
+
+4. **Farmer brings the goat back.**  
+   - Near bank: farmer, goat, cabbage.  
+   - Far bank: wolf.  
+   - Reason: If the farmer left the goat with the wolf and returned alone, the wolf would eat the goat. The goat must come back.
+
+5. **Farmer takes the cabbage across.**  
+   - Near bank: goat.  
+   - Far bank: farmer, wolf, cabbage.  
+   - Reason: Moves the cabbage. The wolf and cabbage can be left together safely.
+
+6. **Farmer returns alone.**  
+   - Near bank: farmer, goat.  
+   - Far bank: wolf, cabbage.  
+   - Reason: The farmer must fetch the last item.
+
+7. **Farmer takes the goat across.**  
+   - Near bank: empty.  
+   - Far bank: farmer, wolf, goat, cabbage.  
+   - Reason: Brings the goat to the far bank. The farmer is present, so nothing is eaten.
+
+## Confirmation
+
+All four — farmer, wolf, goat, and cabbage — arrive safely on the far bank. At no point was the wolf left alone with the goat, nor the goat left alone with the cabbage.
+
+## Note on impossible variants
+
+A variant where the boat cannot carry the goat back from the far bank (for example, if the farmer is not allowed to bring anything back) would be impossible, because the wolf and goat can never be left together. The standard puzzle is solvable as shown above.

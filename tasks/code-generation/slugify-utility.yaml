@@ -1,0 +1,11 @@
+id: slugify-utility
+slug: slugify-utility
+category: code-generation
+topics: [code]
+title: Unicode Slugify Utility
+description: URL slug generator with unicode normalization — string utility vs concurrency code.
+prompt: code-generation/slugify-utility@v1.0.0
+post_process:
+  - extract_python
+screenshot: false
+models: all

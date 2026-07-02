@@ -1,0 +1,51 @@
+{
+  "id": "slugify-utility/ollama-kimi-k2.7-code/2026-07-02T16:45:28Z",
+  "task": {
+    "id": "slugify-utility",
+    "slug": "slugify-utility",
+    "category": "code-generation",
+    "title": "Unicode Slugify Utility",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "slugify-utility",
+    "version": "1.0.0",
+    "sha256": "a72c63d51c3959b1dc8ffd6e468e045fb0e7fd5f651e2fbdbd86724c986703e8",
+    "title": "Unicode Slugify Utility"
+  },
+  "executed_at": "2026-07-02T16:45:28.499027Z",
+  "duration_ms": 22228,
+  "tokens": {
+    "input": 188,
+    "output": 2058,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.004238,
+  "cost": {
+    "total_usd": 0.004238,
+    "input_usd": 7.1e-05,
+    "output_usd": 0.004167,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "source",
+      "path": "artifacts/main.py",
+      "sha256": "ce6c5940cb6763c187f4318583b63b83f50c7277756f45aa7fd150a1bd2eb9ca",
+      "language": "python"
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

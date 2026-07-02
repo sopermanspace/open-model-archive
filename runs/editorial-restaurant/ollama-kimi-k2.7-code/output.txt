@@ -1,0 +1,488 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ember & Oak — Wood fire. Local grain. Long tables.</title>
+  <meta name="description" content="Ember & Oak is a modern fine dining restaurant in Portland, Oregon. Wood fire cooking, local grains, and communal tables.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F9F7F1;
+      --bg-2: #F3EFE6;
+      --ink: #2A2622;
+      --ink-light: #5C5750;
+      --accent: #9C4B28;
+      --accent-hover: #7A3A20;
+      --border: #D9D3C7;
+      --max-width: 1200px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 18px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--ink);
+      background-color: var(--bg);
+    }
+
+    h1, h2, h3, blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover, a:focus {
+      text-decoration: underline;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 6vw;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(249, 247, 241, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1.1rem;
+      padding-bottom: 1.1rem;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      color: var(--ink-light);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--accent);
+    }
+
+    .nav-cta {
+      display: none;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn:hover, .btn:focus {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .btn-outline:hover, .btn-outline:focus {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 10vh 0 12vh;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(156, 75, 40, 0.06) 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-overline {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.2rem, 10vw, 7rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      font-style: italic;
+      color: var(--ink-light);
+      margin-bottom: 3rem;
+    }
+
+    /* Sections */
+    section {
+      padding: 7vh 0;
+    }
+
+    section + section {
+      border-top: 1px solid var(--border);
+    }
+
+    h2.section-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 2.5rem;
+      color: var(--ink);
+    }
+
+    /* Chef story */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .story-prose p {
+      margin-bottom: 1.5rem;
+      max-width: 62ch;
+      color: var(--ink-light);
+    }
+
+    .pull-quote {
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+
+    .pull-quote blockquote {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-style: italic;
+      color: var(--accent);
+      max-width: 30ch;
+    }
+
+    .pull-quote figcaption {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+    }
+
+    /* Menu */
+    .menu-section {
+      background-color: #FDFCF8;
+    }
+
+    .menu-list {
+      list-style: none;
+      max-width: 800px;
+    }
+
+    .menu-item {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .menu-item:first-child {
+      padding-top: 0;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .course-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .menu-item h3 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .menu-item p {
+      color: var(--ink-light);
+      max-width: 55ch;
+    }
+
+    /* Hours & Location */
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .visit-block h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .hours-list {
+      list-style: none;
+    }
+
+    .hours-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--border);
+      max-width: 320px;
+    }
+
+    .hours-list li span {
+      color: var(--ink-light);
+    }
+
+    .address {
+      font-style: normal;
+      color: var(--ink-light);
+      line-height: 1.8;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--ink);
+      color: #D8D2C6;
+      padding: 4vh 0;
+      font-size: 0.85rem;
+    }
+
+    footer .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    footer a {
+      color: #E9E3DA;
+    }
+
+    /* Responsive */
+    @media (min-width: 760px) {
+      .story-grid {
+        grid-template-columns: 1fr 1.2fr;
+        gap: 5rem;
+      }
+
+      .visit-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+      }
+
+      .nav-cta {
+        display: inline-block;
+      }
+
+      .hero {
+        padding: 14vh 0 16vh;
+      }
+
+      .pull-quote blockquote {
+        max-width: 22ch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav aria-label="Primary">
+    <div class="container">
+      <a class="logo" href="#top" aria-label="Ember & Oak home">Ember & Oak</a>
+      <ul class="nav-links">
+        <li><a href="#story">Story</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+      <a class="btn nav-cta" href="#reservations">Book a table</a>
+    </div>
+  </nav>
+
+  <header id="top" class="hero">
+    <div class="container">
+      <p class="hero-overline">Modern fine dining in Portland</p>
+      <h1>Ember & Oak</h1>
+      <p class="hero-tagline">Wood fire. Local grain. Long tables.</p>
+      <a class="btn" href="#reservations">Book a table</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="story" aria-labelledby="story-heading">
+      <div class="container story-grid">
+        <div>
+          <h2 id="story-heading" class="section-title">The chef's story</h2>
+          <figure class="pull-quote">
+            <blockquote>
+              “A meal should taste like the place it comes from.”
+            </blockquote>
+            <figcaption>— Chef Margot Vance</figcaption>
+          </figure>
+        </div>
+        <div class="story-prose">
+          <p>
+            Margot Vance grew up splitting firewood on her grandfather’s farm in the Willamette Valley, where dinner was whatever the orchard, garden, and larder allowed. That sense of restraint—and reverence—still shapes every plate at Ember & Oak.
+          </p>
+          <p>
+            After a decade in kitchens from Copenhagen to the Sonoma coast, Margot returned to Oregon with a simple conviction: the finest dining is also the most honest. Here, whole grains are milled nearby, produce arrives before sunrise from farms she knows by name, and proteins are cooked over a hand-tended oak fire that has not gone out since we opened.
+          </p>
+          <p>
+            The long tables in our dining room were built from a single fallen Douglas fir. They are communal by design, because a good evening is measured less by courses than by the conversations that unfold between them.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" class="menu-section" aria-labelledby="menu-heading">
+      <div class="container">
+        <h2 id="menu-heading" class="section-title">A sample evening</h2>
+        <p class="intro" style="color: var(--ink-light); max-width: 60ch; margin-bottom: 2rem;">
+          Our menu changes with the season and the harvest. Below is one possible path through a recent evening.
+        </p>
+        <ol class="menu-list">
+          <li class="menu-item">
+            <span class="course-label">First</span>
+            <h3>Charred leek & rye</h3>
+            <p>Young leeks blackened over embers, paired with fermented rye crema, toasted seeds, and a soft-cooked farm egg.</p>
+          </li>
+          <li class="menu-item">
+            <span class="course-label">Main</span>
+            <h3>Oak-fired lamb with wild grains</h3>
+            <p>Shoulder from a Portland-area ranch, slow-roasted over white oak, served with emmer, nettle, and preserved spring onion.</p>
+          </li>
+          <li class="menu-item">
+            <span class="course-label">Dessert</span>
+            <h3>Hazelnut ash & honey</h3>
+            <p>Toasted Willamette hazelnuts, barely sweetened mascarpone, and raw honeycomb finished with a whisper of smoked salt.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="visit" aria-labelledby="visit-heading">
+      <div class="container visit-grid">
+        <div class="visit-block">
+          <h2 id="visit-heading" class="section-title">Hours &amp; location</h2>
+          <address class="address">
+            Ember & Oak<br>
+            814 Northrup Street<br>
+            Portland, Oregon 97209
+          </address>
+          <p style="margin-top: 1.5rem;">
+            <a href="tel:+15035550147">(503) 555-0147</a><br>
+            <a href="mailto:hello@emberandoak.com">hello@emberandoak.com</a>
+          </p>
+        </div>
+        <div class="visit-block">
+          <h3>Dinner service</h3>
+          <ul class="hours-list">
+            <li>Wednesday <span>5:30 – 9:30 pm</span></li>
+            <li>Thursday <span>5:30 – 9:30 pm</span></li>
+            <li>Friday <span>5:30 – 10:00 pm</span></li>
+            <li>Saturday <span>5:30 – 10:00 pm</span></li>
+            <li>Sunday <span>5:00 – 9:00 pm</span></li>
+          </ul>
+          <p style="color: var(--ink-light); margin-top: 1.5rem; font-size: 0.9rem;">
+            Closed Monday &amp; Tuesday. Reservations recommended.
+          </p>
+          <a class="btn" href="#reservations" style="margin-top: 2rem;">Book a table</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Ember & Oak. A fictional restaurant.</p>
+      <p><a href="#top">Back to top</a></p>
+    </div>
+  </footer>
+</body>
+</html>
+```

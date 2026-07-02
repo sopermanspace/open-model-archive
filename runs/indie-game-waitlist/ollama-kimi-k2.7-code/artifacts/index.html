@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starfield Salvage — Repair ships. Argue about wiring. Save the station.</title>
+  <meta name="description" content="Starfield Salvage is a cozy two-player co-op space salvage game. Repair ships, sort scrap, and keep the station running.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #FFF8F2;
+      --bg-peach: #FFEADF;
+      --bg-lavender: #F0E6FF;
+      --bg-mint: #E6F5F0;
+      --bg-sky: #EAF4FF;
+      --text: #2A2D3E;
+      --text-light: #4E5166;
+      --accent-coral: #D95D46;
+      --accent-coral-dark: #B43F2B;
+      --accent-teal: #3A9B9C;
+      --accent-gold: #F2B705;
+      --accent-lilac: #7C6FBA;
+      --white: #FFFFFF;
+      --radius: 1.25rem;
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Nunito', sans-serif;
+      color: var(--text);
+      background-color: var(--bg-cream);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, .logo {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      line-height: 1.2;
+      margin: 0 0 0.5em;
+    }
+
+    p {
+      margin: 0 0 1em;
+    }
+
+    a {
+      color: var(--accent-coral);
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+
+    a:hover, a:focus {
+      color: var(--accent-coral-dark);
+    }
+
+    :focus-visible {
+      outline: 0.2rem solid var(--accent-gold);
+      outline-offset: 0.2rem;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 1rem;
+      z-index: 100;
+      background: var(--accent-coral);
+      color: var(--white);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .skip-link:focus {
+      left: 1rem;
+    }
+
+    header {
+      background-color: var(--bg-cream);
+      border-bottom: 0.15rem solid #F0E0D4;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--accent-coral);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo::before {
+      content: "★";
+      color: var(--accent-gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-coral);
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.75rem 1.5rem;
+      border: 0.15rem solid transparent;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-coral);
+      color: var(--white);
+    }
+
+    .btn-primary:hover, .btn-primary:focus {
+      background-color: var(--accent-coral-dark);
+      color: var(--white);
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    section {
+      padding: 4rem 1.5rem;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero {
+      background-color: var(--bg-sky);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .hero-copy {
+      max-width: 560px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      color: var(--accent-teal);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .waitlist-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .waitlist-form label {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .waitlist-form input[type="email"] {
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.85rem 1.25rem;
+      border: 0.15rem solid #D7C9C0;
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--text);
+      width: 100%;
+    }
+
+    .waitlist-form input[type="email"]:focus {
+      border-color: var(--accent-teal);
+      outline: none;
+      box-shadow: 0 0 0 0.2rem rgba(58, 155, 156, 0.2);
+    }
+
+    .waitlist-form .btn {
+      align-self: flex-start;
+    }
+
+    .privacy-note {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    .hero-art {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      height: 340px;
+      margin: 0 auto;
+    }
+
+    .hero-art .planet {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      background-color: #C5EAE6;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-art .ship {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 220px;
+      height: 120px;
+    }
+
+    .hero-art .hull {
+      position: absolute;
+      width: 190px;
+      height: 78px;
+      background-color: var(--accent-teal);
+      border-radius: 40px;
+      top: 26px;
+      left: 15px;
+    }
+
+    .hero-art .dome {
+      position: absolute;
+      width: 78px;
+      height: 56px;
+      background-color: var(--white);
+      border-radius: 40px 40px 12px 12px;
+      top: 0;
+      left: 71px;
+    }
+
+    .hero-art .window {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      background-color: var(--accent-coral);
+      border-radius: 50%;
+      top: 12px;
+      left: 93px;
+    }
+
+    .hero-art .fin-left,
+    .hero-art .fin-right {
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 60px;
+    }
+
+    .hero-art .fin-left {
+      border-top: 24px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-right: 34px solid var(--accent-lilac);
+      left: -10px;
+    }
+
+    .hero-art .fin-right {
+      border-top: 24px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 34px solid var(--accent-lilac);
+      right: -10px;
+    }
+
+    .hero-art .star {
+      position: absolute;
+      background-color: var(--accent-gold);
+      border-radius: 50%;
+    }
+
+    .hero-art .star-1 { width: 12px; height: 12px; top: 24px; left: 30px; }
+    .hero-art .star-2 { width: 18px; height: 18px; top: 80px; left: 0; }
+    .hero-art .star-3 { width: 10px; height: 10px; top: 40px; right: 20px; }
+    .hero-art .star-4 { width: 14px; height: 14px; bottom: 40px; right: 10px; }
+
+    .features {
+      background-color: var(--bg-lavender);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .card {
+      background-color: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      border: 0.15rem solid #E6D8F5;
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.25rem;
+      position: relative;
+    }
+
+    .icon-repair .bolt {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
+      height: 56px;
+      background-color: var(--accent-gold);
+      border-radius: 4px;
+    }
+
+    .icon-repair .bolt::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 16px;
+      background-color: var(--accent-gold);
+      border-radius: 4px;
+    }
+
+    .icon-coop {
+      background-color: #FDE6F0;
+      border-radius: 50%;
+    }
+
+    .icon-coop .head {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background-color: var(--accent-coral);
+      border-radius: 50%;
+      top: 22px;
+    }
+
+    .icon-coop .head:first-child { left: 16px; }
+    .icon-coop .head:last-child { right: 16px; background-color: var(--accent-teal); }
+
+    .icon-station .ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      border: 10px solid var(--accent-lilac);
+      border-radius: 50%;
+    }
+
+    .icon-station .hub {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 22px;
+      height: 22px;
+      background-color: var(--accent-gold);
+      border-radius: 50%;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card p {
+      color: var(--text-light);
+      margin-bottom: 0;
+    }
+
+    .crew {
+      background-color: var(--bg-mint);
+    }
+
+    .crew-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .crew-card {
+      background-color: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      border: 0.15rem solid #D0E8E0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .avatar {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin-bottom: 1.25rem;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #F7E6D4;
+    }
+
+    .avatar .body {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 84px;
+      height: 56px;
+      border-radius: 40px 40px 0 0;
+    }
+
+    .avatar .head {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 58px;
+      height: 58px;
+      background-color: #FAD4AE;
+      border-radius: 50%;
+    }
+
+    .avatar .hair {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 68px;
+      height: 30px;
+      border-radius: 30px 30px 6px 6px;
+    }
+
+    .avatar .eyes {
+      position: absolute;
+      top: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .avatar .eyes::before,
+    .avatar .eyes::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background-color: var(--text);
+      border-radius: 50%;
+    }
+
+    .avatar .smile {
+      position: absolute;
+      top: 58px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 8px;
+      border-bottom: 3px solid var(--text);
+      border-radius: 0 0 18px 18px;
+    }
+
+    .juno .hair { background-color: #5A4E6E; }
+    .juno .body { background-color: var(--accent-coral); }
+    .juno .body::after {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 6px;
+      background-color: var(--accent-gold);
+      border-radius: 3px;
+    }
+
+    .milo .hair { background-color: #C08A5D; }
+    .milo .body { background-color: var(--accent-teal); }
+    .milo .body::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 22px;
+      background-color: var(--accent-gold);
+      border-radius: 2px;
+    }
+
+    .crew-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .role {
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--accent-coral);
+      background-color: var(--bg-peach);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+
+    .crew-card p {
+      color: var(--text-light);
+      margin-bottom: 0;
+      max-width: 360px;
+    }
+
+    footer {
+      background-color: #F5ECE5;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    footer p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0 0 1rem;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-coral);
+    }
+
+    @media (min-width: 700px) {
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .waitlist-form {
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .waitlist-form input[type="email"] {
+        flex: 1 1 240px;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .crew-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header>
+    <nav aria-label="Primary">
+      <a href="#" class="logo">Starfield Salvage</a>
+      <ul class="nav-links">
+        <li><a href="#features">Gameplay</a></li>
+        <li><a href="#crew">Crew</a></li>
+        <li><a href="#waitlist" class="btn btn-primary">Join the waitlist</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="waitlist" aria-labelledby="hero-heading">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="tagline">Repair ships. Argue about wiring. Save the station.</p>
+          <h1 id="hero-heading">Starfield Salvage</h1>
+          <p>A cozy two-player co-op game about fixing derelict ships, sorting mystery scrap, and keeping your little orbital station in one piece. No lasers. No deadlines. Just teamwork, tea breaks, and the occasional spark.</p>
+
+          <form class="waitlist-form" action="#" method="post" aria-label="Waitlist signup">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="you@spacepost.com" required>
+            <button type="submit" class="btn btn-primary">Join the waitlist</button>
+            <p class="privacy-note">We only send launch updates. No spam, no orbital ads.</p>
+          </form>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="planet"></div>
+          <div class="ship">
+            <div class="fin-left"></div>
+            <div class="fin-right"></div>
+            <div class="hull"></div>
+            <div class="dome"></div>
+            <div class="window"></div>
+          </div>
+          <div class="star star-1"></div>
+          <div class="star star-2"></div>
+          <div class="star star-3"></div>
+          <div class="star star-4"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features" aria-labelledby="features-heading">
+      <div class="container">
+        <h2 id="features-heading" class="section-title">What you'll do aboard</h2>
+        <ul class="feature-grid">
+          <li class="card">
+            <div class="feature-icon icon-repair" aria-hidden="true">
+              <div class="bolt"></div>
+            </div>
+            <h3>Patch &amp; polish</h3>
+            <p>Reroute power, replace cracked panels, and convince your partner that red wire definitely connects to the happy node.</p>
+          </li>
+          <li class="card">
+            <div class="feature-icon icon-coop" aria-hidden="true">
+              <div class="head"></div>
+              <div class="head"></div>
+            </div>
+            <h3>Two-player teamwork</h3>
+            <p>One pilot, one engineer. Share a toolkit, a to-do list, and the last biscuit while you bring each ship back to life.</p>
+          </li>
+          <li class="card">
+            <div class="feature-icon icon-station" aria-hidden="true">
+              <div class="ring"></div>
+              <div class="hub"></div>
+            </div>
+            <h3>Tend your station</h3>
+            <p>Spend salvage credits on gardens, comfy chairs, and a better kettle. A happy station makes for better repairs.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="crew" id="crew" aria-labelledby="crew-heading">
+      <div class="container">
+        <h2 id="crew-heading" class="section-title">Meet the crew</h2>
+        <div class="crew-grid">
+          <article class="crew-card">
+            <div class="avatar juno" aria-hidden="true">
+              <div class="hair"></div>
+              <div class="head">
+                <div class="eyes"></div>
+                <div class="smile"></div>
+              </div>
+              <div class="body"></div>
+            </div>
+            <h3>Juno</h3>
+            <span class="role">Pilot &amp; optimist</span>
+            <p>"Sure, the airlock is squeaky and the lights flicker, but have you seen the view? Every job is an adventure if you hum loudly enough."</p>
+          </article>
+
+          <article class="crew-card">
+            <div class="avatar milo" aria-hidden="true">
+              <div class="hair"></div>
+              <div class="head">
+                <div class="eyes"></div>
+                <div class="smile"></div>
+              </div>
+              <div class="body"></div>
+            </div>
+            <h3>Milo</h3>
+            <span class="role">Engineer &amp; snack planner</span>
+            <p>"I brought three wrenches, a schematic, and sandwiches. If we follow the manual step-by-step, nothing can go wrong. Probably."</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <ul class="footer-links">
+      <li><a href="#">Press kit</a></li>
+      <li><a href="#">Cosmic FAQ</a></li>
+      <li><a href="#">Contact the station</a></li>
+    </ul>
+    <p>&copy; 2026 Starfield Salvage. A fictional indie game made with stardust and spare duct tape.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{
+  "id": "indie-game-waitlist/ollama-kimi-k2.7-code/2026-07-02T15:13:24Z",
+  "task": {
+    "id": "indie-game-waitlist",
+    "slug": "indie-game-waitlist",
+    "category": "website-generation",
+    "title": "Indie Game Waitlist Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "indie-game-waitlist",
+    "version": "1.0.0",
+    "sha256": "397099410dd9480cdf7a92b5415ce99f4666174bb8558630f49b5ecad2db134b",
+    "title": "Indie Game Waitlist Page"
+  },
+  "executed_at": "2026-07-02T15:13:24.054612Z",
+  "duration_ms": 60957,
+  "tokens": {
+    "input": 237,
+    "output": 7413,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0151,
+  "cost": {
+    "total_usd": 0.0151,
+    "input_usd": 8.9e-05,
+    "output_usd": 0.015011,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "f3924d5e3e74e5ed1ae639b623b75547398b73efe6f6b8a3153e9fef67371c1c",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "a5999bf2b8bf4de8f94846ccc38f35039c3aa605c9bca07f2cf74868fea341ae"
+    }
+  ],
+  "logs": "run.log"
+}

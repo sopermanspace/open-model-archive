@@ -1,0 +1,51 @@
+{
+  "id": "typography-audit/google-gemini-3.1-pro/2026-07-02T16:54:36Z",
+  "task": {
+    "id": "typography-audit",
+    "slug": "typography-audit",
+    "category": "vision-understanding",
+    "title": "Typography & Readability Audit",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "typography-audit",
+    "version": "1.0.0",
+    "sha256": "24de58053ffd2544973225d9637a81c3606c64223f8563e75080e415d8e4f2eb",
+    "title": "Typography & Readability Audit"
+  },
+  "executed_at": "2026-07-02T16:54:36.714772Z",
+  "duration_ms": 33952,
+  "tokens": {
+    "input": 240,
+    "output": 495,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.002775,
+  "cost": {
+    "total_usd": 0.002775,
+    "input_usd": 0.0003,
+    "output_usd": 0.002475,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "image",
+      "path": "inputs/drift-landing-reference.png",
+      "sha256": "a24dbaa2631af532fe260b79a4b77dd9037a1389cfc981d11f33fd0e6d4b6f2a",
+      "language": null
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

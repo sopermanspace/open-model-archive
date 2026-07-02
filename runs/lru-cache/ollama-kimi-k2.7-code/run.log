@@ -1,0 +1,6 @@
+task=lru-cache
+model=ollama/kimi-k2.7-code
+prompt=code-generation/lru-cache@1.0.0
+adapter=ollama
+duration_ms=8085
+tokens=199->854

@@ -1,0 +1,422 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starfield Salvage | Cozy Co-op Space Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FFF9F2;
+            --text-color: #2D3047;
+            --primary-color: #FF7B54;
+            --primary-hover: #E8653F;
+            --secondary-color: #93E1D8;
+            --accent-color: #FFD56B;
+            --card-bg: #FFFFFF;
+            --border-color: #2D3047;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 500;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            border: 3px solid var(--border-color);
+            box-shadow: 4px 4px 0px var(--border-color);
+            text-decoration: none;
+            transition: transform 0.1s, box-shadow 0.1s;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover, .btn:focus {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--border-color);
+            outline: none;
+            background-color: var(--primary-hover);
+        }
+
+        /* Navigation */
+        header {
+            padding: 2rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            background-color: var(--accent-color);
+            border: 3px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a:not(.btn) {
+            font-weight: 700;
+            position: relative;
+        }
+
+        .nav-links a:not(.btn):hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 650px;
+            margin: 0 auto 3rem auto;
+            color: #4A4E69;
+        }
+
+        .waitlist-form {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .waitlist-form input {
+            flex: 1;
+            padding: 1rem;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            border: 3px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--card-bg);
+            box-shadow: 4px 4px 0px rgba(45, 48, 71, 0.1);
+        }
+
+        .waitlist-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0 6rem 0;
+            background-color: #FEE7C8;
+            border-top: 4px dashed var(--border-color);
+            border-bottom: 4px dashed var(--border-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            border: 3px solid var(--border-color);
+            box-shadow: 6px 6px 0px var(--border-color);
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--secondary-color);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--border-color);
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background-color: var(--accent-color);
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background-color: var(--bg-color);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #4A4E69;
+            font-weight: 600;
+        }
+
+        /* Crew Section */
+        .crew {
+            padding: 6rem 0;
+        }
+
+        .crew-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            align-items: start;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .crew-member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .crew-avatar {
+            width: 180px;
+            height: 180px;
+            background-color: #E2E8F0;
+            border-radius: 50%;
+            border: 4px solid var(--border-color);
+            box-shadow: 8px 8px 0px var(--accent-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+        }
+
+        .crew-avatar.bolt {
+            box-shadow: 8px 8px 0px var(--secondary-color);
+            background-color: #FFE6E6;
+        }
+
+        .crew-member h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .crew-role {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .crew-member p {
+            color: #4A4E69;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--bg-color);
+            opacity: 0.8;
+            font-weight: 600;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero {
+                padding: 4rem 0;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .waitlist-form {
+                flex-direction: column;
+            }
+            .crew-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <div class="logo-icon">🪐</div>
+                    Starfield Salvage
+                </a>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#crew">The Crew</a>
+                    <a href="#waitlist" class="btn">Join the waitlist</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="waitlist">
+            <div class="container">
+                <h1>Repair ships.<br>Argue about wiring.<br>Save the station.</h1>
+                <p>A cozy co-op space salvage game for two players. Grab your hydro-spanner and try not to float away into the void.</p>
+                <form class="waitlist-form" aria-label="Waitlist sign up form">
+                    <input type="email" placeholder="Enter your email address" aria-label="Email address" required>
+                    <button type="submit" class="btn">Join the waitlist</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">Why You'll Love It</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🛠️</div>
+                        <h3>Co-op Chaos</h3>
+                        <p>Work together or accidentally eject your partner into space. Communication is key, even when the intercom is sparking.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Fix & Upgrade</h3>
+                        <p>Scavenge rare parts to turn your rusty little tugboat into a top-tier galactic salvage rig.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">☕</div>
+                        <h3>Cozy Vibes</h3>
+                        <p>Relax in the station lounge after a hard day's work. Customize your living quarters and brew some space coffee.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="crew" id="crew">
+            <div class="container">
+                <h2 class="section-title">Meet the Crew</h2>
+                <div class="crew-grid">
+                    <div class="crew-member">
+                        <div class="crew-avatar">🦝</div>
+                        <h3>Scrap</h3>
+                        <div class="crew-role">Optimistic Mechanic</div>
+                        <p>Firmly believes that duct tape and a little percussive maintenance can fix absolutely any hyperdrive engine.</p>
+                    </div>
+                    <div class="crew-member">
+                        <div class="crew-avatar bolt">🦊</div>
+                        <h3>Bolt</h3>
+                        <div class="crew-role">Pragmatic Pilot</div>
+                        <p>Prefers reading the manual. Constantly stressed about the ship's structural integrity, but wouldn't fly with anyone else.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Press Kit</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Contact Support</a>
+            </div>
+            <p>&copy; 2026 Cosmic Tea Games. "Starfield Salvage" is a fictional game.</p>
+        </div>
+    </footer>
+</body>
+</html>
+```

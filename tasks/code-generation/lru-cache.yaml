@@ -1,0 +1,11 @@
+id: lru-cache
+slug: lru-cache
+category: code-generation
+topics: [code, reasoning]
+title: LRU Cache
+description: Implement an O(1) Least Recently Used cache in Python — compare against the rate limiter task.
+prompt: code-generation/lru-cache@v1.0.0
+post_process:
+  - extract_python
+screenshot: false
+models: all

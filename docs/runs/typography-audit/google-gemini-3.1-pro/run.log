@@ -1,0 +1,7 @@
+task=typography-audit
+model=google/gemini-3.1-pro
+prompt=vision-understanding/typography-audit@1.0.0
+adapter=cli
+inputs=['drift-landing-reference.png']
+duration_ms=33952
+tokens=240->495

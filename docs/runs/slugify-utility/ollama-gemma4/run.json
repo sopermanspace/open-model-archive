@@ -1,0 +1,51 @@
+{
+  "id": "slugify-utility/ollama-gemma4/2026-07-02T16:45:06Z",
+  "task": {
+    "id": "slugify-utility",
+    "slug": "slugify-utility",
+    "category": "code-generation",
+    "title": "Unicode Slugify Utility",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "slugify-utility",
+    "version": "1.0.0",
+    "sha256": "a72c63d51c3959b1dc8ffd6e468e045fb0e7fd5f651e2fbdbd86724c986703e8",
+    "title": "Unicode Slugify Utility"
+  },
+  "executed_at": "2026-07-02T16:45:06.267839Z",
+  "duration_ms": 23444,
+  "tokens": {
+    "input": 210,
+    "output": 1517,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "source",
+      "path": "artifacts/main.py",
+      "sha256": "0c59f9977e05528be0991cbd8a1058680b294edcbac70971b7e347ce93bf75be",
+      "language": "python"
+    }
+  ],
+  "screenshots": [],
+  "logs": "run.log"
+}

@@ -1,0 +1,14 @@
+## Thumb-zone & navigation
+The **Right panel** performs better. Its primary CTAs are positioned immediately in the hero section and then repeated lower down ("Know before you deploy."), ensuring that critical actions (like "Start drift scan") fall within or near easy reach of the thumb zone, minimizing scroll fatigue for conversion. The Left panel clusters many different action buttons at the bottom edge, requiring the user to navigate past all content blocks just to find the main sign-up/action area.
+
+## Vertical rhythm on narrow screens
+The **Left panel** feels less cramped. It uses distinct, visually separated content modules ("How Drift Works," "Know Before You Deploy.") that translate perfectly into a stackable, rhythmic flow. Each section break provides necessary mental white space, making the page feel digestible even if it is long. The right side’s sudden jump from a clean hero to potentially dense technical grids could lose rhythm quickly on a small screen.
+
+## Tap targets & forms
+Both panels achieve excellent tap target size and spacing for their primary buttons. However, the **Right panel** uses a more strategic combination of large button targets paired with accessible text links ("Read the docs"). This variety prevents button fatigue and ensures that different user intents (action vs. research) have equally clear, distinct visual pathways.
+
+## Content prioritization
+The **Right panel** decisively wins this category. It immediately establishes the value proposition (the "know before you deploy" concept) with a concise headline, supporting text, and a primary CTA right in the fold. The Left panel is too text-heavy in its hero section; the user must process several paragraphs of technical description before they encounter the single main action button, slowing down conversion intent.
+
+## Verdict
+**Right.** The Right panel’s structure demonstrates superior mobile-first thinking because it maximizes clarity and actionability above the fold. By getting straight to the "what" and "why," it respects the user's time and minimizes decision fatigue, which is critical for high conversion rates on a 390px viewport.

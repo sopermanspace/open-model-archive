@@ -1,0 +1,57 @@
+{
+  "id": "indie-game-waitlist/google-gemini-3.1-pro/2026-07-02T15:11:24Z",
+  "task": {
+    "id": "indie-game-waitlist",
+    "slug": "indie-game-waitlist",
+    "category": "website-generation",
+    "title": "Indie Game Waitlist Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "indie-game-waitlist",
+    "version": "1.0.0",
+    "sha256": "397099410dd9480cdf7a92b5415ce99f4666174bb8558630f49b5ecad2db134b",
+    "title": "Indie Game Waitlist Page"
+  },
+  "executed_at": "2026-07-02T15:11:24.610304Z",
+  "duration_ms": 65845,
+  "tokens": {
+    "input": 230,
+    "output": 2948,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.015027,
+  "cost": {
+    "total_usd": 0.015027,
+    "input_usd": 0.000287,
+    "output_usd": 0.01474,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "2d7701bd65285666fe3091497e88e7d5278b4770e1e8e72e6ab3532567295c18",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "e5357ccfc7a55e9bac02fdd89099b5fb7e877e9d7f2d95e7b4d69b8d3bf2c927"
+    }
+  ],
+  "logs": "run.log"
+}

@@ -1,0 +1,11 @@
+id: typography-audit
+slug: typography-audit
+category: vision-understanding
+topics: [vision, design]
+title: Typography & Readability Audit
+description: Type-focused landing page audit — narrow lens vs full visual analysis.
+prompt: vision-understanding/typography-audit@v1.0.0
+inputs:
+  - assets/task-inputs/drift-landing-reference.png
+screenshot: false
+models: all

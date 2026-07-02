@@ -1,0 +1,62 @@
+# How to Version REST APIs Without Breaking Your Mobile Clients
+
+If there is one universal truth in backend development, it is that APIs must evolve. Requirements change, new features are dreamt up, and old data models become obsolete. When building a web application, rolling out a breaking API change might only require a coordinated deployment of your backend and frontend. The user refreshes their browser, downloads the new JavaScript bundle, and everything works seamlessly. Mobile applications, however, are a completely different beast. 
+
+When a user downloads a mobile app from an app store, that specific compiled binary lives on their device until they explicitly choose to update it. Some users enable automatic updates, but many do not. This means that at any given moment, a backend might be fielding requests from a half-dozen different versions of a mobile client, some of which could be months or even years old. Simply overwriting an existing endpoint with a breaking change—such as renaming a crucial JSON field or removing an endpoint entirely—will cause those older clients to crash. To prevent a poor user experience and plummeting app store ratings, a robust API versioning strategy must be implemented from day one.
+
+## 1. Understanding What Constitutes a Breaking Change
+
+Before choosing a versioning mechanism, it helps to establish exactly what requires a new version. A breaking change is any modification that violates the established contract with existing clients. For a REST API, this typically includes removing an existing endpoint, changing the HTTP method required for an operation, removing a field from a JSON response, or changing the data type of an existing field. 
+
+Conversely, adding new endpoints or adding new, optional fields to an existing JSON response are generally considered non-breaking changes. Most modern JSON parsers in mobile development frameworks are resilient enough to ignore unrecognized fields. Therefore, you do not need to create a new API version every time a new feature is introduced. You only need to version when altering the existing structure in a way that would confuse older, inflexible clients. By understanding this distinction, the number of API versions maintained simultaneously can be minimized, keeping backend architecture much cleaner.
+
+## 2. URL Versioning vs. Header Versioning
+
+When the time finally comes to introduce a breaking change, there are two primary methods for routing the request to the correct version of the logic: URL versioning and header versioning. 
+
+URL versioning is the most straightforward approach. The version number is explicitly included directly in the path of the endpoint. For example, a request to fetch user details would look something like this:
+
+```http
+GET /api/v1/users/123 HTTP/1.1
+Host: api.example.com
+```
+
+To introduce a breaking change, a new path is created under `/api/v2/users/123`, leaving the `v1` endpoint intact for older clients. 
+
+Header versioning, on the other hand, relies on HTTP headers to dictate the version. The URL remains clean and timeless, such as `/api/users/123`. The client specifies the desired version using a custom request header or the standard `Accept` header. An example using the `Accept` header might look like this:
+
+```http
+GET /api/users/123 HTTP/1.1
+Host: api.example.com
+Accept: application/vnd.myapi.v2+json
+```
+
+While header versioning is arguably more aligned with strict RESTful principles—since the URL represents the resource itself, not the version of the representation—it comes with significant practical drawbacks. Header versioning is harder to test quickly in a browser, makes caching strategies much more complicated, and often requires more complex routing logic in a web framework. 
+
+For the vast majority of teams, the clear recommendation is to use URL versioning. It is explicit, incredibly easy to debug, effortlessly cacheable by standard CDNs, and supported out-of-the-box by nearly every API gateway and backend framework. The slight deviation from academic REST purity is well worth the massive gain in developer experience and operational simplicity.
+
+## 3. Managing the Lifecycle of API Versions
+
+Once a versioning strategy is chosen and multiple versions of an endpoint are deployed, their lifecycle must be managed carefully. Maintaining old code is expensive and introduces technical debt, so every version cannot be supported forever.
+
+Start by designing the backend architecture so that different endpoint versions share as much core logic as possible. Often, a `v1` endpoint can be internally rewritten to call the `v2` business logic, perhaps mapping the old request format to the new one and then translating the response back into the `v1` shape. This adapter pattern allows database schemas and core services to be updated without duplicating thousands of lines of code.
+
+Eventually, old versions will need to be retired entirely. This requires a well-communicated deprecation policy. Track analytics to see exactly how much traffic is still hitting the older endpoints. Coordinate with the mobile engineering team to ensure they have migrated to the new endpoints in the latest app releases. 
+
+### Common Mistakes
+
+When implementing API versioning, teams frequently stumble into a few predictable traps. One major mistake is versioning at too granular a level, such as trying to version individual endpoints independently (e.g., `/api/users/v2` alongside `/api/orders/v1`). This quickly becomes a routing nightmare. It is much better to version the entire API globally, moving everything to `/api/v2` when a significant breaking change occurs, even if some endpoints remain identical under the hood.
+
+Another common pitfall is failing to implement versioning early enough. Retroactively adding `/api/v1` to routes after clients are already consuming unversioned paths requires awkward redirects and messy transition periods. Start the very first release with a `v1` in the URL to save future headaches.
+
+### Closing Checklist
+
+Before deploying any breaking change to a backend, run through this quick checklist to ensure mobile clients remain safe:
+
+* Verify that the change is truly breaking and cannot be solved by simply adding optional fields.
+* Ensure the new version is accessible via a distinct URL path (e.g., `/v2/`).
+* Confirm that the old `v1` endpoint remains fully operational and has not been accidentally altered.
+* Check that integration tests cover both the old and new versions simultaneously.
+* Establish a sunset date for the old version and communicate it to the client teams.
+
+Ultimately, treating your API as a permanent contract ensures that the apps sitting on your users' home screens will continue to function flawlessly, no matter how much your backend evolves.

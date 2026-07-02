@@ -1,0 +1,9 @@
+id: api-versioning-guide
+slug: api-versioning-guide
+category: blog-writing
+topics: [writing, code]
+title: API Versioning Tutorial
+description: Beginner-friendly how-to guide on REST API versioning — tutorial voice vs incident essay.
+prompt: blog-writing/api-versioning-guide@v1.0.0
+screenshot: false
+models: all

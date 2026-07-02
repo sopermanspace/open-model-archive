@@ -1,0 +1,55 @@
+# How to Version REST APIs Without Breaking Your Mobile Clients
+
+If you’ve ever shipped a massive new feature and then watched reports flood in about your old mobile app suddenly failing, you know the terror of an unplanned breaking change. As backend developers building microservices or evolving monolithic APIs, maintaining backward compatibility isn't just good practice—it's mandatory. You can't build a great API if half your consumers are using versions that don't work anymore.
+
+The core challenge is this: how do you allow mobile clients (and web partners) to rely on stable endpoints while you continue iterating and improving the backend model? The answer is API versioning. But there isn't one perfect way to do it, which can feel overwhelming when you first encounter the topic. This guide walks you through the necessary strategies so you can manage changes gracefully.
+
+## 1. Understanding Your Versioning Methods
+
+When an API needs a new version (e.g., moving from `v1` to `v2`), developers generally use one of three common mechanisms: URL, Header, or Query Parameter. Each method has different implications for caching, readability, and implementation effort.
+
+**URL Versioning:** This is the most visible approach, modifying the endpoint path itself. For instance, instead of calling `/users`, clients call `/v1/users` and later move to `/v2/users`. It’s simple because everything appears in the browser or logging system.
+
+**Header Versioning (Accept Header):** This method uses custom HTTP headers, most commonly the `Accept` header, to signal the required version. Clients send a specific MIME type, such as `Accept: application/vnd.myapi.v2+json`. The server reads this header and serves the appropriate payload structure.
+
+**Query Parameter Versioning:** Adding a parameter like `?version=2` to the URL. While easy to implement quickly, it is often discouraged because it pollutes the URI and makes cached results less predictable for intermediate proxies.
+
+When choosing your strategy, think about discoverability and client burden. Does the version number need to be part of the actual *contract* (the resource path) or just a subtle directive that affects the *content* (the payload)?
+
+## 2. The Best Practices: Evolution vs. Revolution
+
+The golden rule of API versioning is this: **never change existing behavior unless absolutely necessary.** If you find yourself forced to break something, pause and ask if the change can be added rather than replacing.
+
+**Additive Changes:** This is your best friend. When you add a new field to an object (e.g., adding `user_status` to the User resource), most clients that don't expect this data will simply ignore it, and those using version `v1` remain functional. Your server should always default to returning all previously used fields when serving older versions, only exposing extra fields for newer consumers.
+
+**Breaking Changes:** These are things like renaming a field (`old_name` to `new_name`), changing the data type (String to Integer), or removing an endpoint entirely. If you must make a breaking change, treat it as a dedicated major version upgrade—you *must* deploy both the old and new versions side-by-side for a transition period.
+
+## 3. Making the Recommendation: Header Versioning Wins
+
+While URL versioning (`/v2/users`) is immediately understandable and easy to implement initially, we strongly recommend using **Header Versioning** when possible, specifically by leveraging the `Accept` header.
+
+Why? Because it keeps your resource paths clean and stable. Your API endpoint remains simply `/users`, regardless of how complex the data structure gets internally. The versioning logic is moved out of the URL path and into a protocol layer designed for content negotiation. This makes your API endpoints more RESTful, predictable, and cleaner to manage as you scale.
+
+To summarize this process, when upgrading from `v1` to `v2`, instead of forcing clients to change their entire calling structure, your backend logic should intercept the request, check the `Accept` header, and then route the payload through appropriate transformation layers before sending it back. For example, a client wanting the new data might send:
+
+```http
+Accept: application/vnd.myapi.v2+json
+```
+
+And your server's middleware handles the version switch before reaching the primary business logic.
+
+### ⚠️ Common Mistakes to Avoid
+
+*   **The "One-and-Done" Version:** Never assume a single version will last forever. Plan for evolution *at every step*. If you wait until `v10` is needed, your clients will be hopelessly behind and unable to keep up with the transition overhead.
+*   **Deprecating Too Quickly:** When removing an endpoint or field (a breaking change), don't just remove it. Change its status code description in your documentation and optionally include a deprecation warning header (`Warning: 299 Your resource will be retired after X date`). Give consumers time to adapt.
+*   **Hardcoding Versions:** Never bake version logic deep inside your core business models. Versioning logic should live in an API Gateway or middleware layer, acting as the first point of interception before the request hits the service handler.
+
+---
+### ✅ Versioning Checklist Before Deployment
+
+1.  [ ] Is every breaking change documented with a clear deprecation timeline?
+2.  [ ] Have we implemented additive changes (new fields) rather than destructive ones?
+3.  [ ] Does our API Gateway correctly route and transform payloads based on the desired version header/path?
+4.  [ ] Are testing environments configured to simulate multiple older client versions simultaneously?
+
+API versioning is not a single feature; it's a continuous, disciplined practice of managing change gracefully.
