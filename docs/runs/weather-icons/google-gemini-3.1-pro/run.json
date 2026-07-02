@@ -23,14 +23,15 @@
   "duration_ms": 42869,
   "tokens": {
     "input": 142,
-    "output": 204,
-    "reasoning": 0
+    "output": 415,
+    "reasoning": 0,
+    "source": "estimated"
   },
-  "cost_usd": 0.001197,
+  "cost_usd": 0.002253,
   "cost": {
-    "total_usd": 0.001197,
+    "total_usd": 0.002253,
     "input_usd": 0.000177,
-    "output_usd": 0.00102,
+    "output_usd": 0.002075,
     "reasoning_usd": 0.0,
     "estimated": true,
     "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."

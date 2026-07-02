@@ -5,6 +5,7 @@ from pathlib import Path
 
 from oma.adapters.base import AdapterResult, ModelAdapter
 from oma.metrics.cost import estimate_from_model
+from oma.metrics.tokens import count_prompt_and_output
 
 
 class CliAdapter(ModelAdapter):
@@ -62,9 +63,13 @@ class CliAdapter(ModelAdapter):
                 except json.JSONDecodeError:
                     continue
 
+        tokens_source = "provider"
         if input_tokens == 0 and output_tokens == 0 and response:
-            input_tokens = max(1, len(full_prompt) // 4)
-            output_tokens = max(1, len(response) // 4)
+            input_tokens, output_tokens = count_prompt_and_output(
+                prompt=full_prompt,
+                output=response,
+            )
+            tokens_source = "estimated"
 
         breakdown = estimate_from_model(
             self.config,
@@ -77,6 +82,7 @@ class CliAdapter(ModelAdapter):
             duration_ms=duration_ms,
             input_tokens=input_tokens,
             output_tokens=output_tokens,
+            tokens_source=tokens_source,
             model_version=self.config.cli_model,
             cost_usd=breakdown.total_usd if breakdown else None,
             cost_breakdown=breakdown.as_dict() if breakdown else None,

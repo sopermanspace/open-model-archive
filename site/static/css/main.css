@@ -296,6 +296,12 @@ h3 { font-size: 1.2rem; }
 
 .metrics dt { color: var(--muted); }
 .metrics dd { font-weight: 500; }
+
+.metric-note {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 400;
+}
 .status-success { color: #7d9e7d; }
 .status-error { color: var(--error); }
 

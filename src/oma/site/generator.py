@@ -9,6 +9,7 @@ from oma.models.task import TaskDefinition
 from oma.paths import DOCS_DIR, ROOT, RUNS_DIR, SITE_STATIC
 from oma.registry.prompts import load_prompt
 from oma.registry.tasks import list_tasks
+from oma.registry.site import load_site_config
 from oma.registry.topics import list_topics, topics_by_id
 from oma.storage.artifacts import copy_runs_to_docs
 
@@ -41,10 +42,11 @@ def _format_duration(ms: int) -> str:
     return f"{ms / 1000:.1f}s"
 
 
-def _format_tokens(count: int) -> str:
+def _format_tokens(count: int, estimated: bool = False) -> str:
+    prefix = "~" if estimated else ""
     if count >= 1000:
-        return f"{count / 1000:.1f}k"
-    return str(count)
+        return f"{prefix}{count / 1000:.1f}k"
+    return f"{prefix}{count}"
 
 
 def _format_cost(cost: float | None, estimated: bool = False) -> str:
@@ -77,6 +79,9 @@ def generate_site() -> None:
     env.filters["tokens"] = _format_tokens
     env.filters["cost"] = _format_cost
 
+    site = load_site_config()
+    site_root = site.base_path.rstrip("/")
+
     tasks = list_tasks()
     runs_by_task = collect_runs()
     topic_catalog = topics_by_id()
@@ -106,6 +111,8 @@ def generate_site() -> None:
 
     index_html = env.get_template("index.html").render(
         site_name="Open Model Archive",
+        site_root=site_root,
+        canonical_url=site.canonical_url,
         tagline="Transparent AI model outputs for identical real-world tasks.",
         tasks=index_runs,
         categories=categories,
@@ -115,7 +122,11 @@ def generate_site() -> None:
     )
     (DOCS_DIR / "index.html").write_text(index_html, encoding="utf-8")
 
-    about_html = env.get_template("about.html").render(site_name="Open Model Archive")
+    about_html = env.get_template("about.html").render(
+        site_name="Open Model Archive",
+        site_root=site_root,
+        canonical_url=site.canonical_url,
+    )
     about_dir = DOCS_DIR / "about"
     about_dir.mkdir()
     (about_dir / "index.html").write_text(about_html, encoding="utf-8")
@@ -143,6 +154,8 @@ def generate_site() -> None:
 
         page = env.get_template("comparison.html").render(
             site_name="Open Model Archive",
+            site_root=site_root,
+            canonical_url=site.canonical_url,
             task=task,
             runs=task_runs,
             prompt_body=prompt_body,

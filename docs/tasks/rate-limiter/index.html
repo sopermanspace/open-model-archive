@@ -4,21 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Side-by-side comparison of AI model outputs for Token Bucket Rate Limiter">
+  <link rel="canonical" href="https://sopermanspace.github.io/open-model-archive/tasks/rate-limiter/">
   <title>Token Bucket Rate Limiter — Open Model Archive</title>
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/open-model-archive/assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="/open-model-archive/assets/css/main.css">
+  <script>
+    (function () {
+      var path = location.pathname;
+      if (path.endsWith('/index.html')) {
+        history.replaceState(null, '', path.slice(0, -10) + location.search + location.hash);
+      }
+    })();
+  </script>
   
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="../../">Open Model Archive</a>
+      <a class="logo" href="/open-model-archive/">Open Model Archive</a>
       <nav class="site-nav">
-        <a href="../../">Archive</a>
-        <a href="../../about/">About</a>
+        <a href="/open-model-archive/">Archive</a>
+        <a href="/open-model-archive/about/">About</a>
         <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
       </nav>
     </div>
@@ -27,7 +36,7 @@
   <main class="site-main">
     
 <section class="container comparison-header">
-  <a class="back-link" href="../../">← Archive</a>
+  <a class="back-link" href="/open-model-archive/">← Archive</a>
   <p class="eyebrow">code-generation · Code</p>
   <h1>Token Bucket Rate Limiter</h1>
   <p class="lede">Implement a thread-safe token bucket rate limiter in Python from a fixed specification.</p>
@@ -62,13 +71,14 @@ The code must be correct, readable, and suitable for use in a real API gateway.<
 <section class="container comparison-grid" style="--cols: 3">
   
   
+  
   <article class="model-column">
     <header class="model-header">
       <h2>Gemini 3.1 Pro</h2>
       <p class="model-provider">Google · Gemini 3.1 Pro (High)</p>
       <dl class="metrics">
         <div><dt>Duration</dt><dd>22.1s</dd></div>
-        <div><dt>Tokens</dt><dd>196 → 482</dd></div>
+        <div><dt>Tokens</dt><dd>~197 → ~485 <span class="metric-note">(est.)</span></dd></div>
         <div><dt>Cost</dt><dd>~$0.0027</dd></div>
         
         <div><dt>Input cost</dt><dd>~$0.0002</dd></div>
@@ -81,32 +91,27 @@ The code must be correct, readable, and suitable for use in a real API gateway.<
     
 
     
-    
-
-    
-    
-    
 
     
     
 
     
+
     
     <details class="source-panel" open>
       <summary>Generated python</summary>
-      <iframe class="source-iframe" src="../../runs/rate-limiter/google-gemini-3.1-pro/artifacts/main.py" title="Source code"></iframe>
+      <iframe class="source-iframe" src="/open-model-archive/runs/rate-limiter/google-gemini-3.1-pro/artifacts/main.py" title="Source code"></iframe>
     </details>
     
 
-    
     
 
     
     <div class="artifact-actions">
       
-      <a class="btn" href="../../runs/rate-limiter/google-gemini-3.1-pro/artifacts/main.py" download>Download source</a>
+      <a class="btn" href="/open-model-archive/runs/rate-limiter/google-gemini-3.1-pro/artifacts/main.py" download>Download source</a>
       
-      <a class="btn" href="../../runs/rate-limiter/google-gemini-3.1-pro/output.txt" download>Download raw output</a>
+      <a class="btn" href="/open-model-archive/runs/rate-limiter/google-gemini-3.1-pro/output.txt" download>Download raw output</a>
     </div>
     
 
@@ -186,6 +191,7 @@ if __name__ == &#34;__main__&#34;:
   </article>
   
   
+  
   <article class="model-column">
     <header class="model-header">
       <h2>Gemma 4</h2>
@@ -205,32 +211,27 @@ if __name__ == &#34;__main__&#34;:
     
 
     
-    
-
-    
-    
-    
 
     
     
 
     
+
     
     <details class="source-panel" open>
       <summary>Generated python</summary>
-      <iframe class="source-iframe" src="../../runs/rate-limiter/ollama-gemma4/artifacts/main.py" title="Source code"></iframe>
+      <iframe class="source-iframe" src="/open-model-archive/runs/rate-limiter/ollama-gemma4/artifacts/main.py" title="Source code"></iframe>
     </details>
     
 
-    
     
 
     
     <div class="artifact-actions">
       
-      <a class="btn" href="../../runs/rate-limiter/ollama-gemma4/artifacts/main.py" download>Download source</a>
+      <a class="btn" href="/open-model-archive/runs/rate-limiter/ollama-gemma4/artifacts/main.py" download>Download source</a>
       
-      <a class="btn" href="../../runs/rate-limiter/ollama-gemma4/output.txt" download>Download raw output</a>
+      <a class="btn" href="/open-model-archive/runs/rate-limiter/ollama-gemma4/output.txt" download>Download raw output</a>
     </div>
     
 
@@ -438,6 +439,7 @@ if __name__ == &#34;__main__&#34;:
   </article>
   
   
+  
   <article class="model-column">
     <header class="model-header">
       <h2>Kimi K2.7 Code</h2>
@@ -457,32 +459,27 @@ if __name__ == &#34;__main__&#34;:
     
 
     
-    
-
-    
-    
-    
 
     
     
 
     
+
     
     <details class="source-panel" open>
       <summary>Generated python</summary>
-      <iframe class="source-iframe" src="../../runs/rate-limiter/ollama-kimi-k2.7-code/artifacts/main.py" title="Source code"></iframe>
+      <iframe class="source-iframe" src="/open-model-archive/runs/rate-limiter/ollama-kimi-k2.7-code/artifacts/main.py" title="Source code"></iframe>
     </details>
     
 
-    
     
 
     
     <div class="artifact-actions">
       
-      <a class="btn" href="../../runs/rate-limiter/ollama-kimi-k2.7-code/artifacts/main.py" download>Download source</a>
+      <a class="btn" href="/open-model-archive/runs/rate-limiter/ollama-kimi-k2.7-code/artifacts/main.py" download>Download source</a>
       
-      <a class="btn" href="../../runs/rate-limiter/ollama-kimi-k2.7-code/output.txt" download>Download raw output</a>
+      <a class="btn" href="/open-model-archive/runs/rate-limiter/ollama-kimi-k2.7-code/output.txt" download>Download raw output</a>
     </div>
     
 

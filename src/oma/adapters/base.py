@@ -10,6 +10,7 @@ class AdapterResult:
     input_tokens: int = 0
     output_tokens: int = 0
     reasoning_tokens: int = 0
+    tokens_source: str = "provider"
     model_version: str = ""
     cost_usd: float | None = None
     cost_breakdown: dict | None = None

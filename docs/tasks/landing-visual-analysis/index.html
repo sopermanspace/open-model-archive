@@ -4,21 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Side-by-side comparison of AI model outputs for Landing Page Visual Analysis">
+  <link rel="canonical" href="https://sopermanspace.github.io/open-model-archive/tasks/landing-visual-analysis/">
   <title>Landing Page Visual Analysis — Open Model Archive</title>
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/open-model-archive/assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="/open-model-archive/assets/css/main.css">
+  <script>
+    (function () {
+      var path = location.pathname;
+      if (path.endsWith('/index.html')) {
+        history.replaceState(null, '', path.slice(0, -10) + location.search + location.hash);
+      }
+    })();
+  </script>
   
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="../../">Open Model Archive</a>
+      <a class="logo" href="/open-model-archive/">Open Model Archive</a>
       <nav class="site-nav">
-        <a href="../../">Archive</a>
-        <a href="../../about/">About</a>
+        <a href="/open-model-archive/">Archive</a>
+        <a href="/open-model-archive/about/">About</a>
         <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
       </nav>
     </div>
@@ -27,7 +36,7 @@
   <main class="site-main">
     
 <section class="container comparison-header">
-  <a class="back-link" href="../../">← Archive</a>
+  <a class="back-link" href="/open-model-archive/">← Archive</a>
   <p class="eyebrow">vision-understanding · Vision, Design</p>
   <h1>Landing Page Visual Analysis</h1>
   <p class="lede">Analyze a landing page screenshot — layout, hierarchy, content, and accessibility.</p>
@@ -68,17 +77,18 @@ Be specific to what you see in the image. Do not invent sections that are not vi
 <section class="container comparison-grid" style="--cols: 3">
   
   
+  
   <article class="model-column">
     <header class="model-header">
       <h2>Gemini 3.1 Pro</h2>
       <p class="model-provider">Google · Gemini 3.1 Pro (High)</p>
       <dl class="metrics">
         <div><dt>Duration</dt><dd>28.7s</dd></div>
-        <div><dt>Tokens</dt><dd>227 → 578</dd></div>
-        <div><dt>Cost</dt><dd>~$0.0032</dd></div>
+        <div><dt>Tokens</dt><dd>~137 → ~431 <span class="metric-note">(est.)</span></dd></div>
+        <div><dt>Cost</dt><dd>~$0.0023</dd></div>
         
-        <div><dt>Input cost</dt><dd>~$0.0003</dd></div>
-        <div><dt>Output cost</dt><dd>~$0.0029</dd></div>
+        <div><dt>Input cost</dt><dd>~$0.0002</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0022</dd></div>
         
         <div><dt>Status</dt><dd class="status-success">success</dd></div>
       </dl>
@@ -87,24 +97,19 @@ Be specific to what you see in the image. Do not invent sections that are not vi
     
 
     
-    
     <figure class="input-image">
       <figcaption>Task input</figcaption>
-      <img src="../../runs/landing-visual-analysis/google-gemini-3.1-pro/inputs/drift-landing-reference.png" alt="Task input image" loading="lazy">
+      <img src="/open-model-archive/runs/landing-visual-analysis/google-gemini-3.1-pro/inputs/drift-landing-reference.png" alt="Task input image" loading="lazy">
     </figure>
     
 
     
     
+
     
 
     
-    
 
-    
-    
-
-    
     
     <div class="text-output">
       <pre class="response-text">## Layout map
@@ -134,7 +139,7 @@ Drift is a lightweight CLI tool designed to help developers prevent outages by e
     
     <div class="artifact-actions">
       
-      <a class="btn" href="../../runs/landing-visual-analysis/google-gemini-3.1-pro/output.txt" download>Download raw output</a>
+      <a class="btn" href="/open-model-archive/runs/landing-visual-analysis/google-gemini-3.1-pro/output.txt" download>Download raw output</a>
     </div>
     
 
@@ -171,6 +176,7 @@ Drift is a lightweight CLI tool designed to help developers prevent outages by e
   </article>
   
   
+  
   <article class="model-column">
     <header class="model-header">
       <h2>Gemma 4</h2>
@@ -190,24 +196,19 @@ Drift is a lightweight CLI tool designed to help developers prevent outages by e
     
 
     
-    
     <figure class="input-image">
       <figcaption>Task input</figcaption>
-      <img src="../../runs/landing-visual-analysis/ollama-gemma4/inputs/drift-landing-reference.png" alt="Task input image" loading="lazy">
+      <img src="/open-model-archive/runs/landing-visual-analysis/ollama-gemma4/inputs/drift-landing-reference.png" alt="Task input image" loading="lazy">
     </figure>
     
 
     
     
+
     
 
     
-    
 
-    
-    
-
-    
     
     <div class="text-output">
       <pre class="response-text">## Layout map
@@ -239,7 +240,7 @@ This landing page communicates that Drift is a lightweight CLI tool designed to 
     
     <div class="artifact-actions">
       
-      <a class="btn" href="../../runs/landing-visual-analysis/ollama-gemma4/output.txt" download>Download raw output</a>
+      <a class="btn" href="/open-model-archive/runs/landing-visual-analysis/ollama-gemma4/output.txt" download>Download raw output</a>
     </div>
     
 
@@ -278,6 +279,7 @@ This landing page communicates that Drift is a lightweight CLI tool designed to 
   </article>
   
   
+  
   <article class="model-column">
     <header class="model-header">
       <h2>Kimi K2.7 Code</h2>
@@ -297,24 +299,19 @@ This landing page communicates that Drift is a lightweight CLI tool designed to 
     
 
     
-    
     <figure class="input-image">
       <figcaption>Task input</figcaption>
-      <img src="../../runs/landing-visual-analysis/ollama-kimi-k2.7-code/inputs/drift-landing-reference.png" alt="Task input image" loading="lazy">
+      <img src="/open-model-archive/runs/landing-visual-analysis/ollama-kimi-k2.7-code/inputs/drift-landing-reference.png" alt="Task input image" loading="lazy">
     </figure>
     
 
     
     
+
     
 
     
-    
 
-    
-    
-
-    
     
     <div class="text-output">
       <pre class="response-text">## Layout map
@@ -348,7 +345,7 @@ This page communicates that Drift is a simple CLI tool for catching configuratio
     
     <div class="artifact-actions">
       
-      <a class="btn" href="../../runs/landing-visual-analysis/ollama-kimi-k2.7-code/output.txt" download>Download raw output</a>
+      <a class="btn" href="/open-model-archive/runs/landing-visual-analysis/ollama-kimi-k2.7-code/output.txt" download>Download raw output</a>
     </div>
     
 

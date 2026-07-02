@@ -46,6 +46,7 @@ def build_run_record(
             input=result.input_tokens,
             output=result.output_tokens,
             reasoning=result.reasoning_tokens,
+            source=result.tokens_source,
         ),
         cost_usd=result.cost_usd,
         cost=CostBreakdown.model_validate(result.cost_breakdown)

@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% set root = "." %}
 
 {% block title %}{{ site_name }} — Archive{% endblock %}
 
@@ -40,7 +39,7 @@
   <h3 class="category-heading">{{ category }}</h3>
   <div class="task-grid">
     {% for entry in tasks if entry.task.category == category %}
-    <a class="task-card" href="tasks/{{ entry.task.slug }}/">
+    <a class="task-card" href="{{ site_root }}/tasks/{{ entry.task.slug }}/">
       <span class="task-category">{{ entry.task.category }}</span>
       {% if entry.task.topics %}
       <div class="topic-tags">

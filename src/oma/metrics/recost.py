@@ -2,9 +2,20 @@ import json
 from pathlib import Path
 
 from oma.metrics.cost import estimate_from_model
+from oma.metrics.tokens import count_prompt_and_output
 from oma.models.run import CostBreakdown, RunRecord
 from oma.paths import RUNS_DIR
 from oma.registry.models import load_model
+from oma.registry.prompts import load_prompt
+from oma.registry.tasks import load_task
+
+
+def _resolve_prompt_text(record: RunRecord) -> str:
+    try:
+        task = load_task(record.task.id)
+        return load_prompt(task.prompt).full_text
+    except Exception:
+        return ""
 
 
 def recost_run(run_json_path: Path) -> RunRecord:
@@ -13,12 +24,26 @@ def recost_run(run_json_path: Path) -> RunRecord:
 
     input_tokens = record.tokens.input
     output_tokens = record.tokens.output
-    if input_tokens == 0 and output_tokens == 0:
+    tokens_source = record.tokens.source
+
+    # CLI models never return provider token counts — always re-estimate from archived text
+    cli_adapters = {"cli", "agy"}
+    needs_estimate = (
+        model_config.adapter.lower() in cli_adapters
+        or tokens_source == "estimated"
+        or (input_tokens == 0 and output_tokens == 0)
+    )
+
+    if needs_estimate:
         output_path = run_json_path.parent / "output.txt"
-        if output_path.exists():
-            output_text = output_path.read_text(encoding="utf-8")
-            output_tokens = max(1, len(output_text) // 4)
-            input_tokens = max(1, 256)
+        prompt_text = _resolve_prompt_text(record)
+        output_text = output_path.read_text(encoding="utf-8") if output_path.exists() else ""
+        if prompt_text or output_text:
+            input_tokens, output_tokens = count_prompt_and_output(
+                prompt=prompt_text,
+                output=output_text,
+            )
+            tokens_source = "estimated"
 
     breakdown = estimate_from_model(
         model_config,
@@ -27,9 +52,9 @@ def recost_run(run_json_path: Path) -> RunRecord:
         reasoning_tokens=record.tokens.reasoning,
     )
 
-    if input_tokens != record.tokens.input or output_tokens != record.tokens.output:
-        record.tokens.input = input_tokens
-        record.tokens.output = output_tokens
+    record.tokens.input = input_tokens
+    record.tokens.output = output_tokens
+    record.tokens.source = tokens_source
 
     if breakdown:
         record.cost_usd = breakdown.total_usd

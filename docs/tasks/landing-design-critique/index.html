@@ -4,21 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Side-by-side comparison of AI model outputs for Expert Designer Critique">
+  <link rel="canonical" href="https://sopermanspace.github.io/open-model-archive/tasks/landing-design-critique/">
   <title>Expert Designer Critique — Open Model Archive</title>
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/open-model-archive/assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="/open-model-archive/assets/css/main.css">
+  <script>
+    (function () {
+      var path = location.pathname;
+      if (path.endsWith('/index.html')) {
+        history.replaceState(null, '', path.slice(0, -10) + location.search + location.hash);
+      }
+    })();
+  </script>
   
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="../../">Open Model Archive</a>
+      <a class="logo" href="/open-model-archive/">Open Model Archive</a>
       <nav class="site-nav">
-        <a href="../../">Archive</a>
-        <a href="../../about/">About</a>
+        <a href="/open-model-archive/">Archive</a>
+        <a href="/open-model-archive/about/">About</a>
         <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
       </nav>
     </div>
@@ -27,7 +36,7 @@
   <main class="site-main">
     
 <section class="container comparison-header">
-  <a class="back-link" href="../../">← Archive</a>
+  <a class="back-link" href="/open-model-archive/">← Archive</a>
   <p class="eyebrow">design-critique · Vision, Design</p>
   <h1>Expert Designer Critique</h1>
   <p class="lede">Senior designer critique of a side-by-side AI landing page comparison.</p>
@@ -74,17 +83,18 @@ Be direct and opinionated. Reference specific elements you see in the image.</pr
 <section class="container comparison-grid" style="--cols: 3">
   
   
+  
   <article class="model-column">
     <header class="model-header">
       <h2>Gemini 3.1 Pro</h2>
       <p class="model-provider">Google · Gemini 3.1 Pro (High)</p>
       <dl class="metrics">
         <div><dt>Duration</dt><dd>34.9s</dd></div>
-        <div><dt>Tokens</dt><dd>291 → 902</dd></div>
-        <div><dt>Cost</dt><dd>~$0.0049</dd></div>
+        <div><dt>Tokens</dt><dd>~188 → ~767 <span class="metric-note">(est.)</span></dd></div>
+        <div><dt>Cost</dt><dd>~$0.0041</dd></div>
         
-        <div><dt>Input cost</dt><dd>~$0.0004</dd></div>
-        <div><dt>Output cost</dt><dd>~$0.0045</dd></div>
+        <div><dt>Input cost</dt><dd>~$0.0002</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0038</dd></div>
         
         <div><dt>Status</dt><dd class="status-success">success</dd></div>
       </dl>
@@ -93,24 +103,19 @@ Be direct and opinionated. Reference specific elements you see in the image.</pr
     
 
     
-    
     <figure class="input-image">
       <figcaption>Task input</figcaption>
-      <img src="../../runs/landing-design-critique/google-gemini-3.1-pro/inputs/comparison-screenshot.jpg" alt="Task input image" loading="lazy">
+      <img src="/open-model-archive/runs/landing-design-critique/google-gemini-3.1-pro/inputs/comparison-screenshot.jpg" alt="Task input image" loading="lazy">
     </figure>
     
 
     
     
+
     
 
     
-    
 
-    
-    
-
-    
     
     <div class="text-output">
       <pre class="response-text">## First impressions (both panels)
@@ -147,7 +152,7 @@ Actionable changes to elevate the right panel:
     
     <div class="artifact-actions">
       
-      <a class="btn" href="../../runs/landing-design-critique/google-gemini-3.1-pro/output.txt" download>Download raw output</a>
+      <a class="btn" href="/open-model-archive/runs/landing-design-critique/google-gemini-3.1-pro/output.txt" download>Download raw output</a>
     </div>
     
 
@@ -191,6 +196,7 @@ Actionable changes to elevate the right panel:
   </article>
   
   
+  
   <article class="model-column">
     <header class="model-header">
       <h2>Gemma 4</h2>
@@ -210,24 +216,19 @@ Actionable changes to elevate the right panel:
     
 
     
-    
     <figure class="input-image">
       <figcaption>Task input</figcaption>
-      <img src="../../runs/landing-design-critique/ollama-gemma4/inputs/comparison-screenshot.jpg" alt="Task input image" loading="lazy">
+      <img src="/open-model-archive/runs/landing-design-critique/ollama-gemma4/inputs/comparison-screenshot.jpg" alt="Task input image" loading="lazy">
     </figure>
     
 
     
     
+
     
 
     
-    
 
-    
-    
-
-    
     
     <div class="text-output">
       <pre class="response-text">## First impressions (both panels)
@@ -263,7 +264,7 @@ The Left panel relies too heavily on comparison widgets in the hero section—if
     
     <div class="artifact-actions">
       
-      <a class="btn" href="../../runs/landing-design-critique/ollama-gemma4/output.txt" download>Download raw output</a>
+      <a class="btn" href="/open-model-archive/runs/landing-design-critique/ollama-gemma4/output.txt" download>Download raw output</a>
     </div>
     
 
@@ -306,6 +307,7 @@ The Left panel relies too heavily on comparison widgets in the hero section—if
   </article>
   
   
+  
   <article class="model-column">
     <header class="model-header">
       <h2>Kimi K2.7 Code</h2>
@@ -325,24 +327,19 @@ The Left panel relies too heavily on comparison widgets in the hero section—if
     
 
     
-    
     <figure class="input-image">
       <figcaption>Task input</figcaption>
-      <img src="../../runs/landing-design-critique/ollama-kimi-k2.7-code/inputs/comparison-screenshot.jpg" alt="Task input image" loading="lazy">
+      <img src="/open-model-archive/runs/landing-design-critique/ollama-kimi-k2.7-code/inputs/comparison-screenshot.jpg" alt="Task input image" loading="lazy">
     </figure>
     
 
     
     
+
     
 
     
-    
 
-    
-    
-
-    
     
     <div class="text-output">
       <pre class="response-text">## First impressions (both panels)
@@ -380,7 +377,7 @@ The right&#39;s CTA is more compelling. &#34;Start drift scan&#34; is specific a
     
     <div class="artifact-actions">
       
-      <a class="btn" href="../../runs/landing-design-critique/ollama-kimi-k2.7-code/output.txt" download>Download raw output</a>
+      <a class="btn" href="/open-model-archive/runs/landing-design-critique/ollama-kimi-k2.7-code/output.txt" download>Download raw output</a>
     </div>
     
 

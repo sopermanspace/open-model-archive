@@ -10,6 +10,8 @@
 
 **[Explore the live archive →](https://sopermanspace.github.io/open-model-archive/)**
 
+Includes **blog writing**, humor, creative fiction, elementary & college math, and 6 other task categories.
+
 ---
 
 ## What you can compare today

@@ -4,21 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Side-by-side comparison of AI model outputs for Explain Kubernetes to a Golden Retriever">
+  <link rel="canonical" href="https://sopermanspace.github.io/open-model-archive/tasks/kubernetes-golden-retriever/">
   <title>Explain Kubernetes to a Golden Retriever — Open Model Archive</title>
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/open-model-archive/assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="/open-model-archive/assets/css/main.css">
+  <script>
+    (function () {
+      var path = location.pathname;
+      if (path.endsWith('/index.html')) {
+        history.replaceState(null, '', path.slice(0, -10) + location.search + location.hash);
+      }
+    })();
+  </script>
   
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="../../">Open Model Archive</a>
+      <a class="logo" href="/open-model-archive/">Open Model Archive</a>
       <nav class="site-nav">
-        <a href="../../">Archive</a>
-        <a href="../../about/">About</a>
+        <a href="/open-model-archive/">Archive</a>
+        <a href="/open-model-archive/about/">About</a>
         <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
       </nav>
     </div>
@@ -27,7 +36,7 @@
   <main class="site-main">
     
 <section class="container comparison-header">
-  <a class="back-link" href="../../">← Archive</a>
+  <a class="back-link" href="/open-model-archive/">← Archive</a>
   <p class="eyebrow">humor-testing · Humor, Writing</p>
   <h1>Explain Kubernetes to a Golden Retriever</h1>
   <p class="lede">Humor test — technically accurate Kubernetes explained with dog metaphors.</p>
@@ -59,17 +68,18 @@ Output plain text only. No title, no markdown headers.</pre>
 <section class="container comparison-grid" style="--cols: 3">
   
   
+  
   <article class="model-column">
     <header class="model-header">
       <h2>Gemini 3.1 Pro</h2>
       <p class="model-provider">Google · Gemini 3.1 Pro (High)</p>
       <dl class="metrics">
         <div><dt>Duration</dt><dd>51.6s</dd></div>
-        <div><dt>Tokens</dt><dd>102 → 486</dd></div>
-        <div><dt>Cost</dt><dd>~$0.0026</dd></div>
+        <div><dt>Tokens</dt><dd>~107 → ~429 <span class="metric-note">(est.)</span></dd></div>
+        <div><dt>Cost</dt><dd>~$0.0023</dd></div>
         
         <div><dt>Input cost</dt><dd>~$0.0001</dd></div>
-        <div><dt>Output cost</dt><dd>~$0.0024</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0021</dd></div>
         
         <div><dt>Status</dt><dd class="status-success">success</dd></div>
       </dl>
@@ -78,19 +88,14 @@ Output plain text only. No title, no markdown headers.</pre>
     
 
     
-    
-
-    
-    
-    
 
     
     
 
     
-    
 
     
+
     
     <div class="text-output">
       <pre class="response-text">Listen here, Biscuit. You know how you have your favorite dog bed? In Kubernetes, that bed is called a Pod. It is a cozy little spot just for you and maybe your squeaky squirrel toy. You are the container inside it, doing all the important work like sleeping, chewing on a bone, or dreaming about chasing squirrels.
@@ -132,6 +137,7 @@ Basically, Kubernetes is just a giant, magical house that makes sure you always 
   </article>
   
   
+  
   <article class="model-column">
     <header class="model-header">
       <h2>Gemma 4</h2>
@@ -151,19 +157,14 @@ Basically, Kubernetes is just a giant, magical house that makes sure you always 
     
 
     
-    
-
-    
-    
-    
 
     
     
 
     
-    
 
     
+
     
     <div class="text-output">
       <pre class="response-text">(Kneels down, tail wagging enthusiastically)
@@ -205,6 +206,7 @@ But Biscuit, here is the sneaky part: when a pod moves or gets replaced, its add
   </article>
   
   
+  
   <article class="model-column">
     <header class="model-header">
       <h2>Kimi K2.7 Code</h2>
@@ -224,19 +226,14 @@ But Biscuit, here is the sneaky part: when a pod moves or gets replaced, its add
     
 
     
-    
-
-    
-    
-    
 
     
     
 
     
-    
 
     
+
     
     <div class="text-output">
       <pre class="response-text">Hey Biscuit. Kubernetes is like a magical dog park manager for computer programs. A program usually lives inside a container—imagine it as one of those treat puzzles you love. Kubernetes groups containers into Pods. A Pod is the smallest pack it watches over, and it can hold one container or several that share the same dog bed and water bowl.

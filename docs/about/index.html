@@ -4,21 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Open Model Archive — transparent AI model output comparison">
+  <link rel="canonical" href="https://sopermanspace.github.io/open-model-archive/about/">
   <title>About — Open Model Archive</title>
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/open-model-archive/assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="/open-model-archive/assets/css/main.css">
+  <script>
+    (function () {
+      var path = location.pathname;
+      if (path.endsWith('/index.html')) {
+        history.replaceState(null, '', path.slice(0, -10) + location.search + location.hash);
+      }
+    })();
+  </script>
   
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="../">Open Model Archive</a>
+      <a class="logo" href="/open-model-archive/">Open Model Archive</a>
       <nav class="site-nav">
-        <a href="../">Archive</a>
-        <a href="../about/">About</a>
+        <a href="/open-model-archive/">Archive</a>
+        <a href="/open-model-archive/about/">About</a>
         <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
       </nav>
     </div>
@@ -45,17 +54,20 @@
   <ul>
     <li><strong>Ollama</strong> — open-source and cloud-backed models via the local Ollama API.</li>
     <li><strong>Provider CLI</strong> — frontier models via official CLI integrations where available.</li>
-    <li><strong>Direct APIs</strong> — planned for providers without CLI tooling.</li>
+    <li><strong>Direct APIs</strong> — OpenAI, Anthropic, OpenRouter, Together, Fireworks, Sarvam.</li>
   </ul>
 
   <h2>Task categories</h2>
   <ul>
     <li><strong>Website generation</strong> — full HTML pages with snapshot and live preview.</li>
     <li><strong>Code generation</strong> — extractable source artifacts.</li>
+    <li><strong>Blog writing</strong> — long-form markdown posts.</li>
     <li><strong>SVG generation</strong> — inline vector graphics.</li>
     <li><strong>Web grounding</strong> — answer only from provided source excerpts.</li>
     <li><strong>Vision understanding</strong> — analyze reference images.</li>
     <li><strong>Design critique</strong> — expert designer review of visual outputs.</li>
+    <li><strong>Humor & creative</strong> — tone, wit, and plausible fiction.</li>
+    <li><strong>Math</strong> — elementary through college-level problems.</li>
   </ul>
 
   <h2>Contributing</h2>

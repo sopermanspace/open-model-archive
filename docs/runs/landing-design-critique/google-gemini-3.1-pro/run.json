@@ -22,15 +22,16 @@
   "executed_at": "2026-07-02T13:31:07.474868Z",
   "duration_ms": 34852,
   "tokens": {
-    "input": 291,
-    "output": 902,
-    "reasoning": 0
+    "input": 188,
+    "output": 767,
+    "reasoning": 0,
+    "source": "estimated"
   },
-  "cost_usd": 0.004874,
+  "cost_usd": 0.00407,
   "cost": {
-    "total_usd": 0.004874,
-    "input_usd": 0.000364,
-    "output_usd": 0.00451,
+    "total_usd": 0.00407,
+    "input_usd": 0.000235,
+    "output_usd": 0.003835,
     "reasoning_usd": 0.0,
     "estimated": true,
     "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."

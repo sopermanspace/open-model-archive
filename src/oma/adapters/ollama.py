@@ -63,6 +63,7 @@ class OllamaAdapter(ModelAdapter):
             duration_ms=duration_ms,
             input_tokens=input_tokens,
             output_tokens=output_tokens,
+            tokens_source="provider",
             model_version=data.get("model") or self.config.model_ref,
             cost_usd=breakdown.total_usd if breakdown else None,
             cost_breakdown=breakdown.as_dict() if breakdown else None,

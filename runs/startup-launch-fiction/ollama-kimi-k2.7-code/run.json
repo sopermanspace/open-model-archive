@@ -24,7 +24,8 @@
   "tokens": {
     "input": 174,
     "output": 2972,
-    "reasoning": 0
+    "reasoning": 0,
+    "source": "provider"
   },
   "cost_usd": 0.006084,
   "cost": {

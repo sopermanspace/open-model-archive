@@ -7,6 +7,7 @@ class TokenUsage(BaseModel):
     input: int = 0
     output: int = 0
     reasoning: int = 0
+    source: str = "provider"  # provider | estimated
 
 
 class CostBreakdown(BaseModel):
