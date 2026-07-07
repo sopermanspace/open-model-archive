@@ -2,846 +2,590 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Voxel Hop</title>
-    <style>
-        :root {
-            --ui-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: #2B2E4A;
-            touch-action: none; /* Prevent pull-to-refresh and scrolling */
-            font-family: var(--ui-font);
-            user-select: none;
-            -webkit-user-select: none;
-        }
-        #game-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-        }
-        canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-        #ui-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: opacity 0.3s ease;
-        }
-        h1 {
-            font-size: clamp(3rem, 10vw, 5rem);
-            margin: 0;
-            color: #FFE600;
-            text-shadow: 0 6px 0 #FFA200, 0 12px 24px rgba(0,0,0,0.4);
-            font-weight: 900;
-            letter-spacing: 2px;
-            transform: rotate(-2deg);
-        }
-        .pulse-text {
-            font-size: clamp(1.2rem, 4vw, 1.5rem);
-            color: #fff;
-            margin-top: 30px;
-            font-weight: 700;
-            background: rgba(0,0,0,0.3);
-            padding: 10px 24px;
-            border-radius: 30px;
-            backdrop-filter: blur(5px);
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        #hud-ui {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-        .pill {
-            background: rgba(0,0,0,0.3);
-            backdrop-filter: blur(8px);
-            padding: 12px 24px;
-            border-radius: 40px;
-            color: #fff;
-            font-size: 1.5rem;
-            font-weight: 800;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border: 2px solid rgba(255,255,255,0.1);
-        }
-        .coin-icon {
-            width: 20px;
-            height: 20px;
-            background: #FFD166;
-            border-radius: 50%;
-            box-shadow: inset -3px -3px 0 #E09F3E;
-        }
-        #gameover-ui {
-            background: rgba(43, 46, 74, 0.85);
-            padding: 40px 60px;
-            border-radius: 30px;
-            backdrop-filter: blur(12px);
-            border: 2px solid rgba(255,255,255,0.1);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            transform: translateY(20px);
-            opacity: 0;
-            pointer-events: none;
-        }
-        #gameover-ui.active {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
-        }
-        h2 {
-            font-size: 3.5rem;
-            margin: 0;
-            color: #FF477E;
-            text-shadow: 0 4px 0 #D12257;
-            font-weight: 900;
-        }
-        .stats {
-            color: #fff;
-            font-size: 1.5rem;
-            margin: 30px 0;
-            line-height: 1.8;
-            font-weight: 600;
-        }
-        .stats span {
-            color: #FFD166;
-            font-size: 2rem;
-            font-weight: 800;
-            margin-left: 10px;
-        }
-        .btn {
-            background: #FFE600;
-            color: #D12257;
-            padding: 16px 40px;
-            border-radius: 40px;
-            font-size: 1.5rem;
-            font-weight: 900;
-            cursor: pointer;
-            box-shadow: 0 6px 0 #FFA200;
-            transition: all 0.1s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #FFA200;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Voxel Hop</title>
+<style>
+  body, html {
+    margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
+    background: #1e1b4b; font-family: system-ui, -apple-system, sans-serif;
+    user-select: none; -webkit-user-select: none; touch-action: none;
+  }
+  canvas { display: block; width: 100%; height: 100%; }
+  
+  #ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+  .screen {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: rgba(30, 27, 75, 0.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+    color: white; text-align: center; pointer-events: auto;
+    transition: opacity 0.3s;
+  }
+  .hidden { opacity: 0; pointer-events: none !important; }
+  
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  
+  h1 { font-size: 4.5rem; margin: 0 0 1rem 0; color: #fff; text-shadow: 0 6px 0 #db2777, 0 12px 20px rgba(0,0,0,0.5); font-weight: 900; letter-spacing: 3px; animation: float 3s ease-in-out infinite; }
+  h2 { font-size: 3.5rem; margin: 0 0 1rem 0; color: #f87171; text-shadow: 0 5px 0 #991b1b; font-weight: 900; }
+  p { font-size: 1.2rem; font-weight: 600; color: #e2e8f0; margin: 0.5rem 0; }
+  
+  .instruction { margin-top: 2rem; font-size: 1.5rem; color: #fde047; animation: pulse 1.5s infinite; cursor: pointer; padding: 15px 30px; border-radius: 99px; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); }
+  
+  #hud {
+    position: absolute; top: 20px; left: 20px; right: 20px;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  #hud.hidden { transform: translateY(-100px); opacity: 1; pointer-events: none; }
+  
+  .pill {
+    background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-radius: 99px; padding: 12px 24px; border: 1px solid rgba(255,255,255,0.1);
+    font-size: 1.8rem; font-weight: 900; color: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    display: flex; align-items: center; gap: 12px;
+  }
+  
+  .coin-icon {
+    width: 24px; height: 24px; background: #fde047;
+    border-radius: 50%; box-shadow: inset -4px -4px 0 #eab308, 0 0 10px rgba(253,224,71,0.5);
+  }
+  
+  .score-label { font-size: 1rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-right: 8px; }
+</style>
 </head>
 <body>
-    <div id="game-container">
-        <canvas id="gameCanvas"></canvas>
-        <div id="ui-layer">
-            <!-- Title Screen -->
-            <div id="title-ui" class="screen">
-                <h1>VOXEL<br>HOP</h1>
-                <div class="pulse-text">Tap or Space to Play</div>
-            </div>
 
-            <!-- HUD -->
-            <div id="hud-ui" class="screen" style="display: none;">
-                <div class="pill" style="color: #45B8D1;">
-                    SCORE <span id="score-disp" style="color: #fff;">0</span>
-                </div>
-                <div class="pill" style="color: #FFD166;">
-                    <div class="coin-icon"></div>
-                    <span id="coins-disp" style="color: #fff;">0</span>
-                </div>
-            </div>
+<canvas id="game"></canvas>
 
-            <!-- Game Over Screen -->
-            <div id="gameover-ui" class="screen" style="display: none;">
-                <h2>CRASHED!</h2>
-                <div class="stats">
-                    SCORE <span id="go-score">0</span><br>
-                    BEST <span id="go-best">0</span>
-                </div>
-                <div class="btn" onclick="resetGame()">Play Again</div>
-            </div>
-        </div>
+<div id="ui">
+  <div id="hud" class="hidden">
+    <div class="pill">
+      <span id="score">0</span>
     </div>
+    <div class="pill">
+      <div class="coin-icon"></div>
+      <span id="coins">0</span>
+    </div>
+  </div>
+  
+  <div id="title" class="screen">
+    <h1>VOXEL HOP</h1>
+    <div class="instruction" id="btn-start">Press Space or Tap to Play</div>
+  </div>
+  
+  <div id="gameover" class="screen hidden">
+    <h2>GAME OVER</h2>
+    <p>Score: <span id="final-score" style="color: #fff; font-size: 2rem;">0</span></p>
+    <p>Best: <span id="best-score" style="color: #fde047; font-size: 1.5rem;">0</span></p>
+    <div class="instruction" id="btn-restart" style="margin-top: 3rem;">Tap to Play Again</div>
+  </div>
+</div>
 
-    <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
+<script>
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d', { alpha: false });
+
+const TILE_W = 40;
+const TILE_H = 26;
+const COLS = 15;
+
+const STATE = { TITLE: 0, PLAYING: 1, GAMEOVER: 2 };
+let currentState = STATE.TITLE;
+let stateTime = 0;
+
+let lastTime = 0, time = 0;
+let score = 0, bestScore = parseInt(localStorage.getItem('voxelHopBest') || 0);
+let coinCount = parseInt(localStorage.getItem('voxelHopCoins') || 0);
+
+let player, lanes, maxGeneratedRow, difficulty, cameraRow;
+let screenShakeX = 0, screenShakeY = 0;
+let particles = [];
+
+const PALETTE = {
+  grass: { light: { top: '#a3e635', front: '#65a30d' }, dark: { top: '#84cc16', front: '#4d7c0f' } },
+  road:  { light: { top: '#52525b', front: '#3f3f46' }, dark: { top: '#3f3f46', front: '#27272a' } },
+  river: { light: { top: '#38bdf8', front: '#0284c7' }, dark: { top: '#0ea5e9', front: '#0369a1' } },
+  rail:  { light: { top: '#a1a1aa', front: '#71717a' }, dark: { top: '#71717a', front: '#52525b' } }
+};
+
+const CAR_COLORS = [
+  {top: '#ef4444', front: '#b91c1c'}, {top: '#3b82f6', front: '#1d4ed8'},
+  {top: '#f59e0b', front: '#b45309'}, {top: '#10b981', front: '#047857'},
+  {top: '#8b5cf6', front: '#6d28d9'}, {top: '#f472b6', front: '#db2777'}
+];
+
+class Lane {
+  constructor(row, type, diff) {
+    this.row = row;
+    this.type = type;
+    this.entities = [];
+    this.dir = Math.random() < 0.5 ? 1 : -1;
+    this.speed = 0;
+    this.trainState = 'idle';
+    
+    if (type === 'road') {
+      this.speed = (2.5 + Math.random() * 2 + diff * 0.5) * this.dir;
+      let numCars = Math.floor(Math.random() * 2) + 1;
+      let spacing = (COLS + 6) / numCars;
+      for (let i=0; i<numCars; i++) {
+        this.entities.push({ type: 'car', col: i * spacing - 3, len: 1.8, colors: CAR_COLORS[Math.floor(Math.random()*CAR_COLORS.length)] });
+      }
+    } else if (type === 'river') {
+      this.speed = (1.5 + Math.random() * 1.5 + diff * 0.2) * this.dir;
+      let numLogs = Math.floor(Math.random() * 2) + 2;
+      let spacing = (COLS + 6) / numLogs;
+      for (let i=0; i<numLogs; i++) {
+        this.entities.push({ type: 'log', col: i * spacing - 3, len: Math.random() < 0.5 ? 2.5 : 3.5 });
+      }
+    } else if (type === 'grass') {
+      let num = Math.floor(Math.random() * 5) + 1;
+      for(let i=0; i<num; i++) {
+        let c = Math.floor(Math.random() * COLS);
+        if (row === 0 && Math.abs(c - Math.floor(COLS/2)) <= 1) continue;
+        if (!this.entities.find(e => e.col === c)) this.entities.push({ type: 'tree', col: c });
+      }
+      if (Math.random() < 0.25) {
+        let c = Math.floor(Math.random() * COLS);
+        if (!this.entities.find(e => e.col === c)) this.entities.push({ type: 'coin', col: c, collected: false });
+      }
+    } else if (type === 'rail') {
+      this.speed = 35 * this.dir;
+      this.trainTimer = Math.random() * 3 + 2;
+    }
+  }
+}
+
+function getNextLaneType(prevType) {
+  let r = Math.random();
+  if (prevType === 'river') return r < 0.3 ? 'river' : (r < 0.7 ? 'grass' : 'road');
+  if (prevType === 'rail') return 'grass';
+  if (prevType === 'road') return r < 0.4 ? 'road' : (r < 0.8 ? 'grass' : (r < 0.9 ? 'rail' : 'river'));
+  return r < 0.4 ? 'road' : (r < 0.65 ? 'river' : (r < 0.85 ? 'rail' : 'grass'));
+}
+
+function initGame() {
+  score = 0;
+  difficulty = 0;
+  maxGeneratedRow = -5;
+  cameraRow = -2;
+  particles = [];
+  lanes = [];
+  
+  player = {
+    col: Math.floor(COLS/2), row: 0, z: 0,
+    startCol: 0, startRow: 0, targetCol: 0, targetRow: 0,
+    hopProgress: 0, state: 'idle', maxRow: 0,
+    dir: {dx: 0, dy: 1}, onLog: null
+  };
+  
+  for (let r = -5; r <= 30; r++) {
+    lanes.push(new Lane(r, r < 4 ? 'grass' : getNextLaneType(lanes[lanes.length-1].type), difficulty));
+    maxGeneratedRow = r;
+  }
+}
+
+function startGame() {
+  initGame();
+  currentState = STATE.PLAYING;
+  document.getElementById('title').classList.add('hidden');
+  document.getElementById('gameover').classList.add('hidden');
+  document.getElementById('hud').classList.remove('hidden');
+  updateUI();
+}
+
+function updateUI() {
+  document.getElementById('score').innerText = score;
+  document.getElementById('coins').innerText = coinCount;
+}
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+function spawnParticles(x, y, z, color, count) {
+  for(let i=0; i<count; i++) {
+    particles.push({
+      x: x, y: y, z: z,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+      vz: Math.random() * 6 + 3,
+      life: 1.0, color: color
+    });
+  }
+}
+
+function drawVoxel(c, r, z, wTiles, dTiles, h, colors) {
+  let px = Math.floor(c * TILE_W);
+  let py = Math.floor(-r * TILE_H - z);
+  let w = Math.ceil(wTiles * TILE_W) + 1;
+  let d = Math.ceil(dTiles * TILE_H) + 1;
+  
+  ctx.fillStyle = colors.top;
+  ctx.fillRect(px, py - h, w, d);
+  if (h > 0) {
+    ctx.fillStyle = colors.front;
+    ctx.fillRect(px, py - h + d - 1, w, h + 2);
+  }
+}
+
+function drawShadow(c, r, w, d) {
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.35)';
+  ctx.fillRect(c * TILE_W, -r * TILE_H, w * TILE_W, d * TILE_H);
+}
+
+function drawPlayer(c, r, z) {
+  let cx = c + 0.2, cy = r + 0.2, pz = Math.max(0, z);
+  let stretch = 1, squash = 1;
+  
+  if (player.state === 'hopping') {
+    let s = Math.sin(player.hopProgress * Math.PI);
+    stretch = 1 + s * 0.35; squash = 1 - s * 0.15;
+  }
+  
+  let w = 0.6 * squash, d = 0.6 * squash, h = 14 * stretch;
+  cx = c + (1 - w)/2; cy = r + (1 - d)/2;
+  
+  if (z > 0) {
+    let shrink = Math.max(0.3, 1 - z / 25);
+    drawShadow(cx + (w - w*shrink)/2, cy + (d - d*shrink)/2, w*shrink, d*shrink);
+  } else {
+    drawShadow(cx, cy, w, d);
+  }
+  
+  // Backpack
+  drawVoxel(cx + w*0.2, cy - 0.1, pz + h*0.2, w*0.6, 0.2, h*0.5, {top: '#0ea5e9', front: '#0284c7'});
+  // Body
+  drawVoxel(cx, cy, pz, w, d, h, {top: '#22d3ee', front: '#06b6d4'});
+  // Visor
+  drawVoxel(cx + w*0.1, cy + d - 0.1, pz + h*0.4, w*0.8, 0.2, h*0.35, {top: '#fbcfe8', front: '#f472b6'});
+}
+
+function render(time, dt) {
+  let grad = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.6);
+  grad.addColorStop(0, '#1e1b4b');
+  grad.addColorStop(0.3, '#3b82f6');
+  grad.addColorStop(0.7, '#a78bfa');
+  grad.addColorStop(1, '#fda4af');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  ctx.fillStyle = 'rgba(255,255,255,0.15)';
+  let cw = canvas.width + 400;
+  ctx.fillRect((time * 12) % cw - 200, canvas.height * 0.1, 80, 30);
+  ctx.fillRect((time * 12) % cw - 160, canvas.height * 0.1 - 20, 60, 50);
+  ctx.fillRect((time * 8 + 300) % cw - 200, canvas.height * 0.2, 120, 40);
+  ctx.fillRect((time * 8 + 300) % cw - 140, canvas.height * 0.2 - 20, 80, 60);
+
+  ctx.save();
+  let gameWidth = COLS * TILE_W + 40;
+  let scale = canvas.width < gameWidth ? canvas.width / gameWidth : Math.min(1.5, canvas.width / (gameWidth * 0.8));
+  
+  ctx.translate(canvas.width / 2 + screenShakeX, canvas.height * 0.65 + screenShakeY);
+  ctx.scale(scale, scale);
+  ctx.translate(-(COLS * TILE_W)/2, cameraRow * TILE_H);
+
+  let cRow = Math.floor(cameraRow);
+  for (let r = cRow + 25; r >= cRow - 8; r--) {
+    let lane = lanes.find(l => l.row === r);
+    if (!lane) continue;
+    
+    let p = PALETTE[lane.type];
+    let isDark = r % 2 === 0;
+    
+    if (lane.type === 'rail') {
+      for (let c = 0; c < COLS; c++) drawVoxel(c, r, -20, 1, 1, 40, c % 2 === (isDark?0:1) ? p.light : p.dark);
+      drawVoxel(-5, r + 0.2, 0, COLS+10, 0.1, 1, {top: '#3f3f46', front: '#27272a'});
+      drawVoxel(-5, r + 0.7, 0, COLS+10, 0.1, 1, {top: '#3f3f46', front: '#27272a'});
+      if (lane.trainState === 'warning' && Math.floor(time * 10) % 2 === 0) {
+        ctx.fillStyle = 'rgba(239, 68, 68, 0.3)';
+        ctx.fillRect(-200, -r * TILE_H - 20, COLS * TILE_W + 400, TILE_H + 40);
+      }
+    } else if (lane.type === 'river') {
+      for (let c = 0; c < COLS; c++) drawVoxel(c, r, -28, 1, 1, 40, c % 2 === (isDark?0:1) ? p.light : p.dark);
+    } else {
+      for (let c = 0; c < COLS; c++) drawVoxel(c, r, -20, 1, 1, 40, c % 2 === (isDark?0:1) ? p.light : p.dark);
+    }
+    
+    let entities = [...lane.entities];
+    if (Math.round(player.row) === r) entities.push({ type: 'player_ref' });
+    
+    entities.sort((a, b) => {
+      let ax = a.col || 0, bx = b.col || 0;
+      if (a.type === 'player_ref') ax = player.col;
+      if (b.type === 'player_ref') bx = player.col;
+      return ax - bx;
+    });
+    
+    for (let e of entities) {
+      if (e.type === 'tree') {
+        drawShadow(e.col + 0.1, r + 0.1, 0.8, 0.8);
+        drawVoxel(e.col + 0.35, r + 0.35, 0, 0.3, 0.3, 14, {top: '#78350f', front: '#451a03'});
+        drawVoxel(e.col + 0.1, r + 0.1, 14, 0.8, 0.8, 10, {top: '#22c55e', front: '#16a34a'});
+        drawVoxel(e.col + 0.2, r + 0.2, 24, 0.6, 0.6, 10, {top: '#4ade80', front: '#22c55e'});
+        drawVoxel(e.col + 0.35, r + 0.35, 34, 0.3, 0.3, 8, {top: '#86efac', front: '#4ade80'});
+      } else if (e.type === 'car') {
+        drawShadow(e.col, r + 0.15, e.len, 0.7);
+        drawVoxel(e.col, r + 0.15, 0, e.len, 0.7, 14, e.colors);
+        let cbX = lane.dir === 1 ? e.col + e.len*0.2 : e.col + e.len*0.3;
+        drawVoxel(cbX, r + 0.2, 14, e.len*0.5, 0.6, 10, {top: '#e0f2fe', front: '#bae6fd'});
+        let hlX = lane.dir === 1 ? e.col + e.len - 0.1 : e.col - 0.1;
+        drawVoxel(hlX, r + 0.25, 4, 0.2, 0.2, 4, {top: '#fef08a', front: '#fde047'});
+        drawVoxel(hlX, r + 0.55, 4, 0.2, 0.2, 4, {top: '#fef08a', front: '#fde047'});
+      } else if (e.type === 'log') {
+        ctx.fillStyle = 'rgba(255,255,255,0.15)';
+        ctx.fillRect(e.col * TILE_W - 4, -r * TILE_H + 2, e.len * TILE_W + 8, TILE_H - 4);
+        drawVoxel(e.col, r + 0.1, -6, e.len, 0.8, 10, {top: '#b45309', front: '#92400e'});
+      } else if (e.type === 'train') {
+        drawShadow(e.col, r + 0.05, e.len, 0.9);
+        drawVoxel(e.col, r + 0.05, 0, e.len, 0.9, 28, {top: '#ef4444', front: '#b91c1c'});
+        drawVoxel(e.col, r + 0.04, 10, e.len, 0.92, 4, {top: '#fde047', front: '#eab308'});
+      } else if (e.type === 'coin' && !e.collected) {
+        let b = Math.sin(time * 5 + e.col) * 4, rot = Math.sin(time * 3 + r) * 0.15, cw = 0.4 + rot;
+        drawShadow(e.col + 0.3, r + 0.3, 0.4, 0.4);
+        drawVoxel(e.col + (1 - cw)/2, r + 0.3, 6 + b, cw, 0.4, 4, {top: '#fef08a', front: '#eab308'});
+      } else if (e.type === 'player_ref') {
+        if (player.state !== 'dead' || player.deathTimer > 0) {
+           drawPlayer(player.col, player.row, player.z);
+        }
+      }
+    }
+  }
+  
+  for(let i = particles.length - 1; i >= 0; i--) {
+    let p = particles[i];
+    p.x += p.vx; p.y += p.vy; p.z += p.vz; p.vz -= 0.5; p.life -= dt * 2.5;
+    if (p.life <= 0 || p.z < -15) { particles.splice(i, 1); continue; }
+    ctx.fillStyle = p.color; ctx.globalAlpha = Math.max(0, p.life);
+    ctx.fillRect(p.x * TILE_W, -p.y * TILE_H - p.z, 8, 8);
+  }
+  ctx.globalAlpha = 1.0;
+  ctx.restore();
+}
+
+function die(reason) {
+  if (player.state === 'dead') return;
+  player.state = 'dead';
+  player.deathTimer = 0.5;
+  screenShakeX = 25; screenShakeY = 25;
+  
+  let color = '#06b6d4';
+  if (reason === 'drown') color = '#38bdf8';
+  if (reason === 'car' || reason === 'train') color = '#ef4444';
+  spawnParticles(player.col + 0.5, player.row + 0.5, 10, color, 50);
+  
+  if (score > bestScore) {
+    bestScore = score;
+    localStorage.setItem('voxelHopBest', bestScore);
+  }
+  
+  setTimeout(() => {
+    currentState = STATE.GAMEOVER;
+    stateTime = time;
+    document.getElementById('gameover').classList.remove('hidden');
+    document.getElementById('final-score').innerText = score;
+    document.getElementById('best-score').innerText = bestScore;
+    document.getElementById('hud').classList.add('hidden');
+  }, 1200);
+}
+
+function updateLogic(dt) {
+  if (currentState === STATE.TITLE) {
+    cameraRow += 2.5 * dt;
+    if (cameraRow + 30 > maxGeneratedRow) {
+      maxGeneratedRow++;
+      lanes.push(new Lane(maxGeneratedRow, getNextLaneType(lanes[lanes.length-1].type), 0));
+    }
+    player.row = cameraRow;
+    player.z = Math.abs(Math.sin(time * 6)) * 12;
+  } else if (currentState === STATE.PLAYING) {
+    if (player.state === 'dead') {
+      player.deathTimer -= dt;
+    } else if (player.state === 'idle') {
+      let lane = lanes.find(l => l.row === Math.round(player.row));
+      if (lane && lane.type === 'river') {
+        if (player.onLog) {
+          player.col += player.onLog.speed * dt;
+          if (player.col < -1 || player.col > COLS) die('bounds');
+        } else {
+          die('drown');
+        }
+      }
+    } else if (player.state === 'hopping') {
+      player.hopProgress += dt * 6.5; 
+      if (player.hopProgress >= 1) {
+        player.hopProgress = 1;
+        player.col = player.targetCol;
+        player.row = player.targetRow;
+        player.z = 0;
+        player.state = 'idle';
         
-        let cw, ch;
-        let TW, TH_VISUAL, BLOCK_Z;
+        if (player.row > player.maxRow) {
+          player.maxRow = player.row;
+          score++; updateUI();
+        }
         
-        function resize() {
-            let dpr = window.devicePixelRatio || 1;
-            cw = window.innerWidth;
-            ch = window.innerHeight;
-            canvas.width = cw * dpr;
-            canvas.height = ch * dpr;
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            
-            let baseScale = Math.min(1.4, cw / 400); 
-            TW = 42 * baseScale;
-            TH_VISUAL = 28 * baseScale;
-            BLOCK_Z = 16 * baseScale;
+        if (player.row + 30 > maxGeneratedRow) {
+          maxGeneratedRow++; difficulty += 0.05;
+          lanes.push(new Lane(maxGeneratedRow, getNextLaneType(lanes[lanes.length-1].type), Math.min(10, difficulty)));
         }
-        window.addEventListener('resize', resize);
-        resize();
-
-        // Aesthetics Palette
-        const PALETTE = {
-            grass:  { top: '#7DD16D', front: '#54A045' },
-            road:   { top: '#5C6670', front: '#3E464C' },
-            river:  { top: '#45B8D1', front: '#2789A5' },
-            rail:   { top: '#564D4A', front: '#3A3331' },
-            wood:   { top: '#A06A42', front: '#724525' },
-            player: { top: '#FFE600', front: '#FFA200' },
-            car1:   { top: '#FF477E', front: '#D12257' },
-            car2:   { top: '#00E5FF', front: '#009BCC' },
-            truck:  { top: '#F8F9FA', front: '#DEE2E6' },
-            train:  { top: '#E63946', front: '#A11D27' },
-            coin:   { top: '#FFD166', front: '#E09F3E' },
-            tree:   { top: '#38B000', front: '#008000' },
-            rock:   { top: '#9CA3AF', front: '#6B7280' }
-        };
-
-        const STATE = { TITLE: 0, PLAY: 1, GAMEOVER: 2 };
-        let state = STATE.TITLE;
         
-        let score = 0;
-        let bestScore = 0;
-        try { bestScore = parseInt(localStorage.getItem('voxelhop_best')) || 0; } catch(e){}
-        let coins = 0;
-        
-        let cameraY = 0;
-        let maxCamY = 0;
-        let shakeTime = 0;
-        let shakeMag = 0;
-        let screenShakeY = 0;
-        let gameTime = 0;
-        
-        let lanes = [];
-        let particles = [];
-        let clouds = [];
-        
-        let player = {};
-
-        // Generate clouds
-        for(let i=0; i<12; i++) {
-            clouds.push({
-                x: Math.random() * cw,
-                y: Math.random() * ch * 0.6,
-                w: 80 + Math.random() * 120,
-                h: 20 + Math.random() * 20,
-                s: 5 + Math.random() * 15,
-                a: 0.05 + Math.random() * 0.1
-            });
+        let lane = lanes.find(l => l.row === player.row);
+        if (lane) {
+          if (lane.type === 'river') {
+            let hitLog = lane.entities.find(e => e.type === 'log' && player.col >= e.col - 0.7 && player.col <= e.col + e.len - 0.3);
+            if (hitLog) { player.onLog = hitLog; hitLog.speed = lane.speed; } else { die('drown'); }
+          } else if (lane.type === 'rail' && lane.trainState === 'passing') {
+            die('train');
+          }
+          
+          let hitCoin = lane.entities.find(e => e.type === 'coin' && !e.collected && e.col === player.col);
+          if (hitCoin) {
+            hitCoin.collected = true;
+            coinCount++; localStorage.setItem('voxelHopCoins', coinCount); updateUI();
+            spawnParticles(player.col + 0.5, player.row + 0.5, 8, '#fde047', 15);
+          }
         }
-
-        class Lane {
-            constructor(y, type) {
-                this.y = y;
-                this.type = type;
-                this.obstacles = [];
-                this.coins = [];
-                this.props = [];
-                
-                let isTitle = state === STATE.TITLE;
-                this.speed = (2.5 + Math.random() * 1.5 + (isTitle ? 0 : y * 0.03)) * (Math.random() < 0.5 ? 1 : -1);
-
-                // Populate lane
-                for (let x = -8; x <= 8; x++) {
-                    if (x < -5 || x > 5) {
-                        if (type === 'grass' && Math.random() < 0.9) this.props.push({ x, type: 'tree' });
-                        else if (type === 'river' && Math.random() < 0.6) this.props.push({ x, type: 'rock' });
-                    } else {
-                        if (type === 'grass' && Math.random() < 0.1 && y > 3 && x !== 0) {
-                            this.props.push({ x, type: 'tree' });
-                        } else if (type === 'grass' && Math.random() < 0.05 && y > 3 && x !== 0) {
-                            this.coins.push({ x, active: true, bob: Math.random() * Math.PI * 2 });
-                        }
-                    }
-                }
-
-                if (type === 'road') {
-                    let num = 1 + Math.floor(Math.random() * 2);
-                    for(let i=0; i<num; i++) {
-                        this.obstacles.push({
-                            x: (this.speed > 0 ? -6 : 6) - Math.random() * 6 * i * Math.sign(this.speed),
-                            w: Math.random() < 0.3 ? 2 : 1.2,
-                            color: Math.random() < 0.4 ? PALETTE.car1 : (Math.random() < 0.7 ? PALETTE.car2 : PALETTE.truck)
-                        });
-                    }
-                } else if (type === 'river') {
-                    let num = 2 + Math.floor(Math.random() * 2);
-                    for(let i=0; i<num; i++) {
-                        this.obstacles.push({
-                            x: (this.speed > 0 ? -6 : 6) - Math.random() * 5 * i * Math.sign(this.speed),
-                            w: 2 + Math.floor(Math.random() * 2),
-                            color: PALETTE.wood
-                        });
-                    }
-                } else if (type === 'rail') {
-                    this.trainTimer = Math.random() * 2000 + 1000;
-                    this.trainActive = false;
-                    this.trainWarning = 0;
-                    this.speed = (18 + (isTitle ? 0 : y * 0.05)) * Math.sign(this.speed);
-                }
-            }
+      } else {
+        let p = player.hopProgress;
+        player.col = player.startCol + (player.targetCol - player.startCol) * p;
+        player.row = player.startRow + (player.targetRow - player.startRow) * p;
+        player.z = Math.sin(p * Math.PI) * 18;
+      }
+    }
+    
+    if (player.state !== 'dead') {
+      let speed = Math.max(1, 1 + difficulty * 0.1);
+      cameraRow += (Math.max(player.row - 2, cameraRow) - cameraRow) * 6 * dt;
+      cameraRow += speed * dt;
+      if (player.row < cameraRow - 5) die('screen_bottom');
+    }
+    
+    if (player.state === 'idle' || (player.state === 'hopping' && player.z < 8)) {
+      let r = Math.round(player.row), lane = lanes.find(l => l.row === r);
+      if (lane) {
+        if (lane.type === 'road') {
+          for (let e of lane.entities) {
+            if (e.type === 'car' && player.col + 0.6 > e.col && player.col < e.col + e.len) die('car');
+          }
+        } else if (lane.type === 'rail' && lane.trainState === 'passing') {
+          die('train');
         }
-
-        function ensureLanes() {
-            let targetY = (state === STATE.TITLE) ? Math.floor(cameraY / TH_VISUAL) + 20 : player.gridY + 20;
-            let maxY = lanes.length > 0 ? lanes[lanes.length-1].y : -5;
-            
-            while (maxY < targetY) {
-                maxY++;
-                let type = 'grass';
-                if (maxY > 3 && state !== STATE.TITLE) {
-                    let prevType = lanes[lanes.length-1].type;
-                    let prevPrevType = lanes.length > 1 ? lanes[lanes.length-2].type : 'grass';
-                    
-                    if (prevType !== 'grass' && prevPrevType !== 'grass' && Math.random() < 0.85) {
-                        type = 'grass';
-                    } else {
-                        let r = Math.random();
-                        if (r < 0.4) type = 'road';
-                        else if (r < 0.75) type = 'river';
-                        else if (r < 0.9) type = 'rail';
-                    }
-                }
-                lanes.push(new Lane(maxY, type));
-            }
-            
-            let minY = (state === STATE.TITLE) ? Math.floor(cameraY / TH_VISUAL) - 10 : player.gridY - 8;
-            while (lanes.length > 0 && lanes[0].y < minY) {
-                lanes.shift();
-            }
+      }
+    }
+  }
+  
+  for (let lane of lanes) {
+    if (lane.type === 'road') {
+      for (let e of lane.entities) {
+        if (e.type === 'car') {
+          e.col += lane.speed * dt;
+          if (lane.dir === 1 && e.col > COLS + 3) e.col = -e.len - 2;
+          if (lane.dir === -1 && e.col < -e.len - 3) e.col = COLS + 2;
         }
-
-        function initPlayer() {
-            player = {
-                x: 0, y: 0, gridX: 0, gridY: 0,
-                isHopping: false, hopT: 0, startX: 0, startY: 0,
-                dead: false, deadZ: 0, onLog: null
-            };
+      }
+    } else if (lane.type === 'river') {
+      for (let e of lane.entities) {
+        if (e.type === 'log') {
+          e.col += lane.speed * dt;
+          if (lane.dir === 1 && e.col > COLS + 4) e.col = -e.len - 3;
+          if (lane.dir === -1 && e.col < -e.len - 4) e.col = COLS + 3;
         }
-
-        function resetGame(toTitle = false) {
-            state = toTitle ? STATE.TITLE : STATE.PLAY;
-            score = 0;
-            cameraY = 0;
-            maxCamY = -ch * 0.15;
-            lanes = [];
-            particles = [];
-            
-            initPlayer();
-            for (let y = -5; y <= 3; y++) {
-                lanes.push(new Lane(y, 'grass'));
-            }
-            ensureLanes();
-            updateUI();
+      }
+    } else if (lane.type === 'rail') {
+      if (lane.trainState === 'idle') {
+        lane.trainTimer -= dt;
+        if (lane.trainTimer <= 0) { lane.trainState = 'warning'; lane.trainTimer = 1.2; }
+      } else if (lane.trainState === 'warning') {
+        lane.trainTimer -= dt;
+        if (lane.trainTimer <= 0) {
+          lane.trainState = 'passing'; lane.trainTimer = 0.5;
+          lane.train = { type: 'train', col: lane.dir === 1 ? -30 : COLS + 10, len: 35 };
+          lane.entities.push(lane.train);
         }
-
-        function updateUI() {
-            document.getElementById('title-ui').style.display = state === STATE.TITLE ? 'flex' : 'none';
-            document.getElementById('hud-ui').style.display = state === STATE.PLAY ? 'flex' : 'none';
-            
-            let goUI = document.getElementById('gameover-ui');
-            if (state === STATE.GAMEOVER) {
-                goUI.style.display = 'flex';
-                setTimeout(() => goUI.classList.add('active'), 50);
-            } else {
-                goUI.classList.remove('active');
-                setTimeout(() => { if(state !== STATE.GAMEOVER) goUI.style.display = 'none'; }, 300);
-            }
-            
-            document.getElementById('score-disp').innerText = score;
-            document.getElementById('coins-disp').innerText = coins;
-            document.getElementById('go-score').innerText = score;
-            document.getElementById('go-best').innerText = bestScore;
+      } else if (lane.trainState === 'passing') {
+        lane.trainTimer -= dt;
+        lane.train.col += lane.speed * dt;
+        if (lane.trainTimer <= 0) {
+          lane.trainState = 'idle'; lane.trainTimer = Math.random() * 4 + 3;
+          lane.entities = lane.entities.filter(e => e.type !== 'train');
         }
+      }
+    }
+  }
+  
+  if (lanes.length > 60) lanes = lanes.filter(l => l.row >= cameraRow - 12);
+  screenShakeX *= -0.7; screenShakeY *= -0.7;
+  if (Math.abs(screenShakeX) < 0.5) screenShakeX = 0;
+  if (Math.abs(screenShakeY) < 0.5) screenShakeY = 0;
+}
 
-        function tryHop(dx, dy) {
-            if (state === STATE.TITLE) { resetGame(); return; }
-            if (state !== STATE.PLAY || player.isHopping || player.dead) return;
-            
-            let nx = player.gridX + dx;
-            let ny = player.gridY + dy;
+function tryHop(dx, dy) {
+  if (currentState !== STATE.PLAYING || (player.state !== 'idle' && player.state !== 'onLog')) return;
+  let tCol = Math.round(player.col) + dx, tRow = Math.round(player.row) + dy;
+  if (tCol < 0 || tCol >= COLS || tRow < cameraRow - 4) return;
+  
+  let lane = lanes.find(l => l.row === tRow);
+  if (lane && lane.entities.some(e => e.type === 'tree' && e.col === tCol)) return;
+  
+  player.startCol = player.col; player.startRow = player.row;
+  player.targetCol = tCol; player.targetRow = tRow;
+  player.hopProgress = 0; player.state = 'hopping'; player.onLog = null;
+}
 
-            if (nx < -5 || nx > 5) return;
-            if (ny < cameraY / TH_VISUAL - 1) return;
+window.addEventListener('keydown', e => {
+  if (e.code === 'Space') {
+    if (currentState === STATE.TITLE) startGame();
+    else if (currentState === STATE.GAMEOVER && time - stateTime > 1.0) startGame();
+    return;
+  }
+  if (currentState !== STATE.PLAYING) return;
+  let dx = 0, dy = 0;
+  if (e.code === 'ArrowUp' || e.code === 'KeyW') dy = 1;
+  if (e.code === 'ArrowDown' || e.code === 'KeyS') dy = -1;
+  if (e.code === 'ArrowLeft' || e.code === 'KeyA') dx = -1;
+  if (e.code === 'ArrowRight' || e.code === 'KeyD') dx = 1;
+  if (dx || dy) { if (Math.abs(dx) > Math.abs(dy)) dy = 0; else dx = 0; tryHop(dx, dy); }
+});
 
-            let targetLane = lanes.find(l => l.y === ny);
-            if (targetLane && targetLane.props.some(p => Math.round(p.x) === nx && p.type === 'tree')) return;
+let touchStartX = 0, touchStartY = 0;
+window.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, {passive: false});
 
-            player.isHopping = true;
-            player.hopT = 0;
-            player.startX = player.x;
-            player.startY = player.y;
-            player.gridX = nx;
-            player.gridY = ny;
-            player.onLog = null;
-            
-            if (ny > score) {
-                score = ny;
-                if (score > bestScore) {
-                    bestScore = score;
-                    try { localStorage.setItem('voxelhop_best', bestScore); } catch(e){}
-                }
-                document.getElementById('score-disp').innerText = score;
-                // Add slight score juice
-                let sd = document.getElementById('score-disp');
-                sd.style.transform = 'scale(1.5)';
-                setTimeout(() => sd.style.transform = 'scale(1)', 150);
-            }
-        }
+window.addEventListener('touchend', e => {
+  if (e.target.id === 'btn-start' || e.target.id === 'btn-restart') return; // Handled by click
+  if (currentState === STATE.TITLE) { startGame(); return; }
+  if (currentState === STATE.GAMEOVER && time - stateTime > 1.0) { startGame(); return; }
+  if (currentState !== STATE.PLAYING) return;
+  
+  let dx = e.changedTouches[0].screenX - touchStartX;
+  let dy = e.changedTouches[0].screenY - touchStartY;
+  
+  if (Math.abs(dx) > 30 || Math.abs(dy) > 30) {
+    if (Math.abs(dx) > Math.abs(dy)) tryHop(dx > 0 ? 1 : -1, 0);
+    else tryHop(0, dy > 0 ? -1 : 1);
+  } else { tryHop(0, 1); }
+}, {passive: false});
 
-        function die(reason) {
-            if (player.dead) return;
-            player.dead = true;
-            player.isHopping = false;
-            
-            shakeTime = 300;
-            shakeMag = 8;
-            
-            let color = reason === "splash" ? {top:'#fff', front:'#45B8D1'} : PALETTE.player;
-            let count = reason === "eagle" ? 30 : 15;
-            for(let i = 0; i < count; i++) {
-                particles.push({
-                    x: player.x + (Math.random()-0.5)*0.6,
-                    y: player.y + (Math.random()-0.5)*0.6,
-                    z: Math.random() * 10 + 5,
-                    vx: (Math.random()-0.5) * 6,
-                    vy: (Math.random()-0.5) * 6,
-                    vz: Math.random() * 15 + 5,
-                    s: Math.random() * 0.3 + 0.1,
-                    color: color,
-                    life: 1.2
-                });
-            }
-            
-            if (reason === "splash") player.deadZ = -8;
-            
-            setTimeout(() => {
-                state = STATE.GAMEOVER;
-                updateUI();
-            }, 1200);
-        }
+document.getElementById('btn-start').addEventListener('click', () => { if (currentState === STATE.TITLE) startGame(); });
+document.getElementById('btn-restart').addEventListener('click', () => { if (currentState === STATE.GAMEOVER && time - stateTime > 1.0) startGame(); });
 
-        function spawnDust(x, y) {
-            for(let i=0; i<5; i++) {
-                particles.push({
-                    x: x + (Math.random()-0.5)*0.8,
-                    y: y + (Math.random()-0.5)*0.8,
-                    z: 0,
-                    vx: (Math.random()-0.5) * 2,
-                    vy: (Math.random()-0.5) * 2,
-                    vz: Math.random() * 4 + 2,
-                    s: 0.15,
-                    color: {top: '#fff', front: '#ddd'},
-                    life: 0.4
-                });
-            }
-        }
-
-        function spawnCoinSparkle(x, y) {
-            for(let i=0; i<8; i++) {
-                particles.push({
-                    x: x + (Math.random()-0.5)*0.5,
-                    y: y + (Math.random()-0.5)*0.5,
-                    z: Math.random() * 8 + 4,
-                    vx: (Math.random()-0.5) * 3,
-                    vy: (Math.random()-0.5) * 3,
-                    vz: Math.random() * 8 + 4,
-                    s: 0.15,
-                    color: PALETTE.coin,
-                    life: 0.6
-                });
-            }
-        }
-
-        function drawBlockCenter(ctx, wTiles, dTiles, hVis, colors, z = 0) {
-            let w = wTiles * TW;
-            let d = dTiles * TH_VISUAL;
-            let drawY = -z;
-            
-            // Front
-            ctx.fillStyle = colors.front;
-            ctx.beginPath();
-            ctx.roundRect(-w/2, drawY, w, hVis, 2);
-            ctx.fill();
-            
-            // Top
-            ctx.fillStyle = colors.top;
-            ctx.beginPath();
-            ctx.roundRect(-w/2, drawY - d, w, d, 2);
-            ctx.fill();
-            
-            // Inner shadow for depth
-            ctx.fillStyle = 'rgba(0,0,0,0.1)';
-            ctx.fillRect(w/2 - 4, drawY - d + 2, 2, d - 4);
-            ctx.fillRect(-w/2 + 2, drawY - 4, w - 4, 2);
-        }
-
-        let lastTime = performance.now();
-        function loop(time) {
-            let dt = Math.min(time - lastTime, 50);
-            lastTime = time;
-            gameTime = time;
-            
-            update(dt);
-            render();
-            
-            requestAnimationFrame(loop);
-        }
-
-        function update(dt) {
-            // Camera Logic
-            if (state === STATE.TITLE) {
-                cameraY += 12 * (dt/1000);
-                ensureLanes();
-            } else if (state === STATE.PLAY) {
-                let targetCam = player.y * TH_VISUAL - ch * 0.15;
-                if (!player.dead) {
-                    maxCamY = Math.max(maxCamY, targetCam);
-                    maxCamY += (15 + score * 0.2) * (dt/1000); // Auto-scroll speeds up slightly
-                }
-                cameraY += (maxCamY - cameraY) * (dt/150);
-                
-                if (!player.dead && player.y * TH_VISUAL < cameraY - ch * 0.6) {
-                    die("eagle");
-                }
-            }
-
-            // Screen Shake
-            if (shakeTime > 0) {
-                shakeTime -= dt;
-                screenShakeY = (Math.random() - 0.5) * shakeMag * 2;
-                if (shakeTime <= 0) screenShakeY = 0;
-            }
-
-            // Update Lanes & Obstacles
-            for (let lane of lanes) {
-                if (lane.type === 'road' || lane.type === 'river') {
-                    for (let obs of lane.obstacles) {
-                        obs.x += lane.speed * (dt / 1000);
-                    }
-                    for (let obs of lane.obstacles) {
-                        if (lane.speed > 0 && obs.x > 10) {
-                            let minX = Math.min(...lane.obstacles.map(o => o.x));
-                            obs.x = Math.min(-10, minX - (2 + Math.random()*5));
-                        } else if (lane.speed < 0 && obs.x < -10) {
-                            let maxX = Math.max(...lane.obstacles.map(o => o.x));
-                            obs.x = Math.max(10, maxX + (2 + Math.random()*5));
-                        }
-                    }
-                } else if (lane.type === 'rail') {
-                    if (!lane.trainActive) {
-                        lane.trainTimer -= dt;
-                        lane.trainWarning = lane.trainTimer < 1500 ? 1 : 0;
-                        if (lane.trainTimer <= 0) {
-                            lane.trainActive = true;
-                            lane.obstacles = [{ x: lane.speed > 0 ? -15 : 15, w: 14, color: PALETTE.train }];
-                            if (state === STATE.PLAY && Math.abs(lane.y - player.y) < 4) shakeTime = 300, shakeMag = 5;
-                        }
-                    } else {
-                        lane.trainWarning = 0;
-                        lane.obstacles[0].x += lane.speed * (dt / 1000);
-                        if ((lane.speed > 0 && lane.obstacles[0].x > 25) || (lane.speed < 0 && lane.obstacles[0].x < -25)) {
-                            lane.trainActive = false;
-                            lane.obstacles = [];
-                            lane.trainTimer = 2000 + Math.random() * 4000;
-                        }
-                    }
-                }
-            }
-
-            // Update Particles
-            for (let i = particles.length - 1; i >= 0; i--) {
-                let p = particles[i];
-                p.x += p.vx * dt/1000;
-                p.y += p.vy * dt/1000;
-                p.z += p.vz * dt/1000;
-                p.vz -= 50 * dt/1000;
-                if (p.z < 0) {
-                    p.z = 0;
-                    p.vz *= -0.4;
-                    p.vx *= 0.7;
-                    p.vy *= 0.7;
-                }
-                p.life -= dt/1000;
-                if (p.life <= 0) particles.splice(i, 1);
-            }
-
-            // Player Logic
-            if (state === STATE.PLAY) {
-                if (player.isHopping) {
-                    player.hopT += dt / 140;
-                    if (player.hopT >= 1) {
-                        player.hopT = 1;
-                        player.isHopping = false;
-                        player.x = player.gridX;
-                        player.y = player.gridY;
-                        spawnDust(player.x, player.y);
-                        ensureLanes();
-                    } else {
-                        let ease = 1 - Math.pow(1 - player.hopT, 3);
-                        player.x = player.startX + (player.gridX - player.startX) * ease;
-                        player.y = player.startY + (player.gridY - player.startY) * ease;
-                    }
-                }
-                
-                let currentLane = lanes.find(l => l.y === player.gridY);
-                if (currentLane && !player.isHopping && !player.dead) {
-                    if (currentLane.type === 'road' || currentLane.type === 'rail') {
-                        for (let obs of currentLane.obstacles) {
-                            if (Math.abs(player.x - obs.x) < (0.6 + obs.w)/2) die("splat");
-                        }
-                    } else if (currentLane.type === 'river') {
-                        let onLog = null;
-                        for (let obs of currentLane.obstacles) {
-                            if (Math.abs(player.x - obs.x) < (0.4 + obs.w)/2) {
-                                onLog = obs; break;
-                            }
-                        }
-                        if (onLog) {
-                            player.onLog = onLog;
-                            player.x += currentLane.speed * (dt / 1000);
-                            player.gridX = Math.round(player.x);
-                            if (player.x < -6.5 || player.x > 6.5) die("drift");
-                        } else {
-                            die("splash");
-                        }
-                    }
-                    
-                    for (let c of currentLane.coins) {
-                        if (c.active && Math.abs(player.x - c.x) < 0.8) {
-                            c.active = false;
-                            coins++;
-                            score += 2;
-                            document.getElementById('coins-disp').innerText = coins;
-                            document.getElementById('score-disp').innerText = score;
-                            spawnCoinSparkle(c.x, currentLane.y);
-                        }
-                    }
-                }
-            }
-        }
-
-        function render() {
-            // Sky
-            let grad = ctx.createLinearGradient(0, 0, 0, ch);
-            grad.addColorStop(0, '#FF6B6B');
-            grad.addColorStop(0.4, '#C86B85');
-            grad.addColorStop(1, '#2B2E4A');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, cw, ch);
-
-            // Parallax Clouds
-            ctx.fillStyle = '#fff';
-            for(let c of clouds) {
-                c.x += c.s * 0.016;
-                if (c.x > cw + 100) c.x = -c.w;
-                ctx.globalAlpha = c.a;
-                ctx.beginPath();
-                ctx.roundRect(c.x, c.y, c.w, c.h, c.h/2);
-                ctx.fill();
-            }
-            ctx.globalAlpha = 1.0;
-
-            ctx.save();
-            ctx.translate(cw/2, ch * 0.75 + cameraY + screenShakeY);
-
-            let visibleLanes = lanes.filter(l => {
-                let cy = (state === STATE.TITLE) ? cameraY/TH_VISUAL : player.gridY;
-                return l.y >= cy - 10 && l.y <= cy + 22;
-            });
-
-            // 1. Draw Ground (Lanes) back to front
-            for (let lane of visibleLanes.slice().reverse()) {
-                let sy = -lane.y * TH_VISUAL;
-                ctx.save();
-                ctx.translate(0, sy);
-                
-                let baseZ = (lane.type === 'river') ? -6 + Math.sin(gameTime/300 + lane.y)*2 : 0;
-                drawBlockCenter(ctx, 17, 1, BLOCK_Z, PALETTE[lane.type], baseZ);
-                
-                if (lane.type === 'rail') {
-                    ctx.fillStyle = '#222';
-                    ctx.fillRect(-17 * TW / 2, -TH_VISUAL*0.8, 17*TW, 3);
-                    ctx.fillRect(-17 * TW / 2, -TH_VISUAL*0.3, 17*TW, 3);
-                    
-                    for(let px = -8; px <= 8; px++) {
-                        ctx.fillRect(px * TW - 2, -TH_VISUAL*0.9, 4, TH_VISUAL*0.8);
-                    }
-                    
-                    if (lane.trainWarning > 0 && Math.floor(gameTime / 150) % 2 === 0) {
-                        ctx.fillStyle = 'rgba(255, 50, 50, 0.4)';
-                        ctx.fillRect(-17 * TW / 2, -TH_VISUAL, 17*TW, TH_VISUAL);
-                    }
-                }
-                ctx.restore();
-            }
-
-            // 2. Build Entity List
-            let entities = [];
-            for (let lane of visibleLanes) {
-                for (let p of lane.props) entities.push({ type: 'prop', obj: p, y: lane.y });
-                for (let o of lane.obstacles) entities.push({ type: 'obstacle', obj: o, y: lane.y });
-                for (let c of lane.coins) if (c.active) entities.push({ type: 'coin', obj: c, y: lane.y });
-            }
-            if (state !== STATE.TITLE) {
-                entities.push({ type: 'player', obj: player, y: player.y });
-            }
-            for (let p of particles) entities.push({ type: 'particle', obj: p, y: p.y });
-
-            entities.sort((a, b) => b.y - a.y);
-
-            // 3. Draw Entities
-            for (let item of entities) {
-                let sy = -item.y * TH_VISUAL;
-                ctx.save();
-                ctx.translate(item.obj.x * TW, sy);
-                
-                // Drop Shadows
-                if (!item.obj.deadZ || item.obj.deadZ === 0) {
-                    ctx.fillStyle = 'rgba(0,0,0,0.25)';
-                    if (item.type === 'player' && !player.dead) {
-                        let sc = player.isHopping ? 1 - player.hopT*0.3 : 1;
-                        ctx.beginPath();
-                        ctx.ellipse(0, 0, TW*0.35*sc, TH_VISUAL*0.35*sc, 0, 0, Math.PI*2);
-                        ctx.fill();
-                    } else if (item.type === 'obstacle' && item.obj.color !== PALETTE.wood && item.obj.color !== PALETTE.train) {
-                        ctx.beginPath();
-                        ctx.roundRect(-item.obj.w*TW/2 + 2, -TH_VISUAL*0.6, item.obj.w*TW - 4, TH_VISUAL*0.8, 4);
-                        ctx.fill();
-                    } else if (item.type === 'prop') {
-                        ctx.beginPath();
-                        ctx.ellipse(0, 0, TW*0.4, TH_VISUAL*0.4, 0, 0, Math.PI*2);
-                        ctx.fill();
-                    }
-                }
-
-                if (item.type === 'prop') {
-                    if (item.obj.type === 'tree') {
-                        drawBlockCenter(ctx, 0.3, 0.3, BLOCK_Z*1.2, PALETTE.wood, 0);
-                        let bounce = Math.sin(gameTime/500 + item.obj.x + item.y) * 2;
-                        drawBlockCenter(ctx, 0.8, 0.8, BLOCK_Z*1.5, PALETTE.tree, BLOCK_Z + bounce);
-                    } else if (item.obj.type === 'rock') {
-                        drawBlockCenter(ctx, 0.6, 0.6, BLOCK_Z*0.6, PALETTE.rock, 0);
-                    }
-                }
-                else if (item.type === 'obstacle') {
-                    let isLog = item.obj.color === PALETTE.wood;
-                    let z = isLog ? -3 : 0;
-                    let h = isLog ? BLOCK_Z*0.5 : BLOCK_Z*1.2;
-                    drawBlockCenter(ctx, item.obj.w, 0.85, h, item.obj.color, z);
-                    
-                    if (!isLog && item.obj.color !== PALETTE.train) {
-                        ctx.fillStyle = 'rgba(0,0,0,0.3)';
-                        ctx.fillRect(-item.obj.w*TW/2 + 4, -z - TH_VISUAL*0.85 + 4, item.obj.w*TW - 8, TH_VISUAL*0.85 - 8);
-                    }
-                }
-                else if (item.type === 'coin') {
-                    item.obj.bob += 0.1;
-                    let z = 8 + Math.sin(item.obj.bob) * 4;
-                    ctx.translate(0, Math.sin(gameTime/150)*2);
-                    drawBlockCenter(ctx, 0.35, 0.35, 4, PALETTE.coin, z);
-                }
-                else if (item.type === 'player') {
-                    let pz = 0, scX = 1, scY = 1;
-                    if (player.isHopping) {
-                        let t = player.hopT;
-                        pz = Math.sin(t * Math.PI) * 24;
-                        if (t < 0.2) { scX = 1.2; scY = 0.8; }
-                        else if (t < 0.8) { scX = 0.9; scY = 1.2; }
-                        else { scX = 1.1; scY = 0.9; }
-                    } else if (player.dead) {
-                        scX = 1.6; scY = 0.2; pz = player.deadZ || 0;
-                    } else {
-                        scY = 1 + Math.sin(gameTime / 120) * 0.06;
-                    }
-                    ctx.scale(scX, scY);
-                    drawBlockCenter(ctx, 0.65, 0.65, BLOCK_Z * 0.9, PALETTE.player, pz);
-                }
-                else if (item.type === 'particle') {
-                    ctx.globalAlpha = Math.min(1, item.obj.life * 2);
-                    drawBlockCenter(ctx, item.obj.s, item.obj.s, item.obj.s * BLOCK_Z, item.obj.color, item.obj.z);
-                    ctx.globalAlpha = 1.0;
-                }
-                ctx.restore();
-            }
-            ctx.restore();
-            
-            // Vignette overlay
-            let vig = ctx.createRadialGradient(cw/2, ch/2, ch*0.4, cw/2, ch/2, ch*0.8);
-            vig.addColorStop(0, 'rgba(0,0,0,0)');
-            vig.addColorStop(1, 'rgba(0,0,0,0.4)');
-            ctx.fillStyle = vig;
-            ctx.fillRect(0, 0, cw, ch);
-        }
-
-        // Controls
-        window.addEventListener('keydown', (e) => {
-            if (state === STATE.TITLE || state === STATE.GAMEOVER) {
-                if (e.code === 'Space' || e.code === 'Enter') resetGame();
-                return;
-            }
-            if (e.code === 'ArrowUp' || e.code === 'KeyW') tryHop(0, 1);
-            else if (e.code === 'ArrowDown' || e.code === 'KeyS') tryHop(0, -1);
-            else if (e.code === 'ArrowLeft' || e.code === 'KeyA') tryHop(-1, 0);
-            else if (e.code === 'ArrowRight' || e.code === 'KeyD') tryHop(1, 0);
-        });
-
-        let touchStartX = 0, touchStartY = 0;
-        window.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-            if (state === STATE.TITLE) resetGame();
-        }, {passive: false});
-
-        window.addEventListener('touchend', (e) => {
-            if (state !== STATE.PLAY) return;
-            let dx = e.changedTouches[0].clientX - touchStartX;
-            let dy = e.changedTouches[0].clientY - touchStartY;
-            if (Math.abs(dx) > 30 || Math.abs(dy) > 30) {
-                if (Math.abs(dx) > Math.abs(dy)) tryHop(Math.sign(dx), 0);
-                else tryHop(0, -Math.sign(dy)); // Swipe up = negative Y screen space = positive grid space
-            } else {
-                tryHop(0, 1); // Tap defaults to forward
-            }
-        });
-
-        // Start
-        resetGame(true);
-        requestAnimationFrame(loop);
-    </script>
+initGame();
+requestAnimationFrame(function loop(t) {
+  let dt = (t - lastTime) / 1000 || 0;
+  lastTime = t; time = t / 1000;
+  if (dt > 0.1) dt = 0.1;
+  updateLogic(dt);
+  render(time, dt);
+  requestAnimationFrame(loop);
+});
+</script>
 </body>
 </html>
 ```

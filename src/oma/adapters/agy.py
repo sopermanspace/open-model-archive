@@ -41,7 +41,15 @@ class CliAdapter(ModelAdapter):
                 "bypassPermissions",
             ]
 
-        cmd = ["agy", "-p", full_prompt, "--model", self.config.cli_model]
+        cmd = [
+            "agy",
+            "-p",
+            full_prompt,
+            "--model",
+            self.config.cli_model,
+            "--print-timeout",
+            f"{self.config.timeout_seconds}s",
+        ]
         for directory in sorted(add_dirs):
             cmd.extend(["--add-dir", str(directory)])
         return cmd
@@ -75,8 +83,10 @@ class CliAdapter(ModelAdapter):
 
         duration_ms = int((time.perf_counter() - started) * 1000)
         if result.returncode != 0:
-            stderr = result.stderr.strip() or "CLI execution failed"
-            raise RuntimeError(stderr)
+            stderr = result.stderr.strip()
+            stdout_tail = result.stdout.strip()[-500:] if result.stdout else ""
+            detail = stderr or stdout_tail or "CLI execution failed"
+            raise RuntimeError(detail)
 
         response = result.stdout.strip()
         metadata: dict = {}

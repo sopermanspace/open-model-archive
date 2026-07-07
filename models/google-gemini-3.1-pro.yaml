@@ -11,4 +11,4 @@ pricing_source: Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Es
 cost_estimate: true
 notes: Frontier model via provider CLI integration.
 enabled: true
-timeout_seconds: 600
+timeout_seconds: 1200
