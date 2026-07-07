@@ -27,7 +27,7 @@ def recost_run(run_json_path: Path) -> RunRecord:
     tokens_source = record.tokens.source
 
     # CLI models never return provider token counts — always re-estimate from archived text
-    cli_adapters = {"cli", "agy"}
+    cli_adapters = {"cli", "agy", "claude", "grok"}
     needs_estimate = (
         model_config.adapter.lower() in cli_adapters
         or tokens_source == "estimated"

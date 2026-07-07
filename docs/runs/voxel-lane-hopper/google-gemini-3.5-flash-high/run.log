@@ -1,0 +1,7 @@
+task=voxel-lane-hopper
+model=google/gemini-3.5-flash-high
+prompt=game-generation/voxel-lane-hopper@1.0.0
+adapter=cli
+duration_ms=158129
+tokens=702->30861
+screenshot=/Users/himanshu/open-model-archive/runs/voxel-lane-hopper/google-gemini-3.5-flash-high/screenshots/desktop.png

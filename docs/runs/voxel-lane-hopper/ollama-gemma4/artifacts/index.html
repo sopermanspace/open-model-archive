@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voxel Hop</title>
+    <style>
+        /* --- CSS Styling --- */
+        body {
+            background-color: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+
+        #gameContainer {
+            position: relative;
+            width: 500px; /* Fixed width for consistent mobile feel */
+            max-width: 90vw;
+            aspect-ratio: 16 / 9; /* Standard cinematic/mobile aspect ratio */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            background: #222; /* Fallback color */
+        }
+
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            /* Canvas drawing happens here */
+        }
+
+        #uiOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding-top: 20px; /* Space for top UI elements */
+            box-sizing: border-box;
+            pointer-events: none; /* Allow clicks to pass through unless a modal is active */
+        }
+
+        .ui-pill {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            user-select: none;
+            pointer-events: auto; /* Make UI elements clickable */
+        }
+
+        #scoreDisplay {
+            left: 20px;
+            top: 10px;
+            padding: 8px 15px;
+            background: rgba(40, 40, 60, 0.9);
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #coinCounter {
+            right: 20px;
+            top: 10px;
+            padding: 8px 15px;
+            background: rgba(40, 40, 60, 0.9);
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Game Over/Title Screens --- */
+        .game-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #titleLogo {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: neonPulse 1.5s infinite alternate;
+            letter-spacing: 5px;
+        }
+
+        @keyframes neonPulse {
+            from { text-shadow: 0 0 5px #ff6f91, 0 0 10px #ffc37d; }
+            to { text-shadow: 0 0 8px #ffffff, 0 0 20px #ff6f91; }
+        }
+
+        .btn-play {
+            background: linear-gradient(45deg, #ff6f91, #ffc37d);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            margin-top: 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(255, 100, 145, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-play:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 100, 145, 0.7);
+        }
+
+        #message {
+             margin-top: 20px;
+             font-size: 1.1em;
+             color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+<div id="gameContainer">
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- UI Overlays -->
+    <div id="uiOverlay">
+        <div class="ui-pill" id="scoreDisplay">Score: 0</div>
+        <div class="ui-pill" id="coinCounter">💰: 0</div>
+    </div>
+
+    <!-- Start Screen Overlay -->
+    <div id="startScreen" class="game-screen" style="pointer-events: auto;">
+        <h1 id="titleLogo">VOXEL HOP</h1>
+        <p>A colorful, endless voxel journey.</p>
+        <button class="btn-play" onclick="startGame()">Press Space or Tap to Play</button>
+        <div id="message">High Score: 0</div>
+    </div>
+
+    <!-- Game Over Screen Overlay -->
+    <div id="gameOverScreen" class="game-screen" style="display: none; pointer-events: auto;">
+        <h2>GAME OVER</h2>
+        <p>You crashed!</p>
+        <h3 id="finalScore">Your Score: 0</h3>
+        <h3 id="bestScoreDisplay">Best Score: 0</h3>
+        <button class="btn-play" onclick="resetGame()">Play Again</button>
+    </div>
+</div>
+
+<script>
+// --- CONSTANTS AND INITIALIZATION ---
+
+const CANVAS_WIDTH = 500; // Matches CSS container width
+const CANVAS_HEIGHT = 900; // Fixed height for better vertical scrolling visual
+const TILE_SIZE = 50; // Defines the size of one voxel unit (both X and Y)
+
+// Canvas setup
+const canvas = document.getElementById('gameCanvas');
+canvas.width = CANVAS_WIDTH;
+canvas.height = CANVAS_HEIGHT;
+const ctx = canvas.getContext('2d');
+
+// Game State Variables
+let gameRunning = false;
+let lastTime = 0;
+const GRAVITY_SCROLL_SPEED = 1.5; // Determines how fast the world scrolls up when playing
+
+// Player state
+let player = {
+    x: CANVAS_WIDTH / 2,
+    y: canvas.height - (TILE_SIZE * 3), // Start near the bottom
+    size: TILE_SIZE * 0.8,
+    dy: 0,
+    speed: 5, // Movement speed per hop
+    isJumping: false,
+    currentTileY: Math.floor((canvas.height - (TILE_SIZE * 3)) / TILE_SIZE)
+};
+
+// Game state trackers
+let gameState = {
+    score: 0,
+    coins: 0,
+    bestScore: parseInt(localStorage.getItem('voxelHopBestScore') || '0'),
+    difficultyTimer: 0,
+    gameSpeedMultiplier: 1.0
+};
+
+// World generation parameters
+const LANE_GENERATION_COUNT = 25; // How many rows ahead of the player to generate
+let lanes = [];
+
+// Particle and collision systems
+let particles = {
+    coinTrail: [],
+    deathBurst: []
+};
+let screenShakeTimer = 0;
+
+// Helper object for tracking moving objects (cars, trains)
+const movers = {
+    roads: [],
+    trains: [],
+    time: 0 // Global tick counter
+};
+
+
+// --- UTILITY & MATH FUNCTIONS ---
+
+/** Simple bounding box check */
+function isColliding(x1, y1, w1, h1, x2, y2, w2, h2) {
+    return (
+        x1 < x2 + w2 &&
+        x1 + w1 > x2 &&
+        y1 < y2 + h2 &&
+        y1 + h1 > y2
+    );
+}
+
+/** Random integer helper */
+function randInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// --- LANE STRUCTURES ---
+
+class Lane {
+    constructor(yIndex, type, details = {}) {
+        this.yIndex = yIndex; // Vertical grid index (0 is top)
+        this.type = type;
+        this.details = details;
+        this.xOffset = randInt(0, CANVAS_WIDTH - TILE_SIZE); // Horizontal position start
+    }
+
+    // Checks if a given tile (x, y) within this lane is safe for the player's hitbox
+    isSafe(px, py, pw, ph) {
+        const relativeY = Math.min(py, canvas.height - 50); // Assume player Y is normalized to grid scale
+
+        if (this.type === 'Grass') return true;
+        if (this.type === 'Road' || this.type === 'Railroad') {
+            // For now, collision checks are handled globally per frame
+            return true; 
+        }
+        if (this.type === 'River') {
+            // Example: Only safe if player is exactly at the coordinates of a log/raft detail
+            const raftPresent = this.details.logs && Math.random() < 0.5; // Simplified check
+            return raftPresent || false;
+        }
+        return true; // Default safety assumption for newly generated lanes
+    }
+
+    draw(y) {
+        const topY = y * TILE_SIZE;
+
+        ctx.save();
+        ctx.translate(0, topY); // Move drawing context to the top of this lane
+
+        switch (this.type) {
+            case 'Grass':
+                // Grass: Green voxel look
+                ctx.fillStyle = '#4caf50';
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+                ctx.shadowBlur = 10;
+                ctx.fillRect(0, 0, CANVAS_WIDTH, TILE_SIZE);
+                break;
+
+            case 'Road':
+                // Road: Asphalt look with curb details
+                const roadColor = '#444';
+                ctx.fillStyle = roadColor;
+                ctx.shadowBlur = 15;
+                ctx.fillRect(0, 0, CANVAS_WIDTH, TILE_SIZE);
+
+                // Draw Curb (Fake depth/detail)
+                ctx.fillStyle = '#8b4513'; // Brown curb color
+                ctx.fillRect(0, TILE_SIZE - 10, CANVAS_WIDTH * 0.2, 10);
+                ctx.fillRect(CANVAS_WIDTH - 10, TILE_SIZE - 10, CANVAS_WIDTH * 0.8, 10);
+
+                // Draw Cars (The moving elements)
+                this.details.cars.forEach((car, i) => {
+                    const x = car.x;
+                    const yPos = Math.floor(y / TILE_SIZE); // Adjust Y slightly within the tile
+                    ctx.fillStyle = `hsl(${i * 30 + 180}, 70%, 50%)`; // Varied color
+                    ctx.fillRect(x, -TILE_SIZE + 5, car.w, TILE_SIZE - 10);
+                });
+
+                break;
+
+            case 'River':
+                // River: Blue water surface
+                const waterGrad = ctx.createLinearGradient(0, 0, CANVAS_WIDTH, 0);
+                waterGrad.addColorStop(0, '#2980b9'); // Deep blue
+                waterGrad.addColorStop(1, '#3498db'); // Sky blue
+                ctx.fillStyle = waterGrad;
+                ctx.shadowBlur = 15;
+                ctx.fillRect(0, 0, CANVAS_WIDTH, TILE_SIZE);
+
+                // Draw Logs/Rafts (Obstacle or safe path)
+                if (this.details.logs) {
+                    this.details.logs.forEach((log, i) => {
+                        ctx.fillStyle = '#8b4513'; // Wood color
+                        ctx.fillRect(log.x, -TILE_SIZE + 20, log.w, 30);
+                        // Add simple shadow to lift it visually
+                        ctx.shadowOffsetY(5);
+                    });
+                }
+                break;
+
+            case 'Railroad':
+                // Railroad: Grey tracks on ballast
+                const trackY = TILE_SIZE / 2 + 10; // Position slightly down
+                const railColor = '#444';
+                const ballastColor = '#7b7b7b';
+
+                ctx.fillStyle = ballastColor;
+                ctx.fillRect(0, TILE_SIZE - 20, CANVAS_WIDTH, 20);
+
+                // Draw two tracks
+                ctx.strokeStyle = railColor;
+                ctx.lineWidth = 15;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+
+                const startX = CANVAS_WIDTH / 2 - 30;
+                const endX = CANVAS_WIDTH / 2 + 30;
+
+                // Track 1 (Offset slightly)
+                ctx.beginPath();
+                ctx.moveTo(startX, trackY);
+                ctx.lineTo(endX, trackY);
+                ctx.stroke();
+
+                // Draw Trains (moving element)
+                this.details.trains.forEach((train, i) => {
+                    const x = train.x;
+                    ctx.fillStyle = `hsl(${i * 50 + 240}, 80%, 60%)`; // Varied bright color
+                    // Train body
+                    ctx.fillRect(x, -TILE_SIZE/2, train.w, TILE_SIZE - 10);
+
+                    // Draw windows detail (for visual appeal)
+                    ctx.fillStyle = '#ccc';
+                    ctx.fillRect(x + 5, -TILE_SIZE/2 + 10, 10, 10);
+                });
+
+                break;
+
+            case 'Coin':
+                // Just a coin on a safe patch of grass
+                const coinX = this.details.x;
+                const coinY = TILE_SIZE * 0.8;
+                ctx.fillStyle = '#ffcc00';
+                ctx.strokeStyle = '#ffa500';
+                ctx.lineWidth = 2;
+                // Simple representation of a stacked voxel coin
+                ctx.beginPath();
+                ctx.ellipse(coinX, coinY, TILE_SIZE * 0.4, TILE_SIZE * 0.3, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+
+                break;
+
+        }
+        ctx.restore();
+    }
+}
+
+
+// --- GAME LOGIC AND MECHANICS ---
+
+/** Generates the world for the next N rows of lanes */
+function generateLane(yIndex) {
+    const randomType = randInt(1, 100);
+    let type;
+    let details = {};
+
+    if (randomType <= 35) {
+        type = 'Grass';
+    } else if (randomType <= 65) {
+        type = 'Road';
+        details.cars = [];
+        // Generate 3 to 5 cars randomly spaced across the lane width
+        for (let i = 0; i < randInt(3, 5); i++) {
+            const xStart = randInt(0, CANVAS_WIDTH - TILE_SIZE * 0.2);
+            details.cars.push({
+                x: xStart,
+                w: randInt(20, 40),
+                speed: randInt(1, 3) + gameState.gameSpeedMultiplier * 0.5 // Difficulty ramp
+            });
+        }
+    } else if (randomType <= 80) {
+        type = 'River';
+        details.logs = [];
+         // Generate 2 to 4 logs/rafts
+        for (let i = 0; i < randInt(2, 4); i++) {
+            const xStart = randInt(0, CANVAS_WIDTH - TILE_SIZE * 0.3);
+            details.logs.push({
+                x: xStart,
+                w: randInt(50, 100),
+            });
+        }
+    } else if (randomType <= 90) {
+        type = 'Railroad';
+        details.trains = [];
+         // Trains appear every few generations
+        if (Math.random() > 0.3) {
+            details.trains.push({
+                x: randInt(50, CANVAS_WIDTH - 50),
+                w: randInt(100, 200),
+                speed: 8 // Always fast
+            });
+        } else {
+             type = 'Grass'; // Fallback if no train is generated
+             details.trains = [];
+        }
+    } else {
+        // Coin chance (rare)
+        if (Math.random() < 0.15) {
+            type = 'Coin';
+            details.x = randInt(20, CANVAS_WIDTH - 20);
+        } else {
+            type = 'Grass'; // Default fallback
+        }
+    }
+
+    return new Lane(yIndex, type, details);
+}
+
+
+/** Initializes the world generation */
+function initializeWorld() {
+    lanes = [];
+    for (let i = 0; i < LANE_GENERATION_COUNT; i++) {
+        // Start generating from a random horizontal offset to make it dynamic
+        const newLane = generateLane(i);
+        lanes.push(newLane);
+    }
+}
+
+/** Updates all moving elements and generates the next rows */
+function updateWorld(deltaTime) {
+    movers.time += deltaTime * 0.05; // Slow down train/car clock relative to game loop
+
+    // Difficulty Ramp: Increase speed gradually (max increase after some time)
+    gameState.difficultyTimer = Math.min(1, gameState.difficultyTimer + deltaTime / 3000);
+    gameState.gameSpeedMultiplier = 1 + gameState.difficultyTimer * 1.5;
+
+
+    // --- 1. Update Cars/Trains (Movers update) ---
+    let newRoadDetails = {};
+    let newRailDetails = {};
+
+    for (const lane of lanes) {
+        if (lane.type === 'Road') {
+            newRoadDetails[lane.yIndex] = { details: [...lane.details.cars] };
+            // Move cars left or right based on design (simplified to just move x-position towards the edge)
+            for (let i = 0; i < lane.details.cars.length; i++) {
+                const car = lane.details.cars[i];
+                car.x += (car.speed * gameState.gameSpeedMultiplier) * (deltaTime / 16.6); // Scale movement
+                if (car.x > CANVAS_WIDTH + 50) car.x = -50; // Wrap around or despaawn (wrapping is better for endless runner feel)
+            }
+        } else if (lane.type === 'Railroad') {
+            newRailDetails[lane.yIndex] = { details: [...lane.details.trains] };
+             for (let i = 0; i < lane.details.trains.length; i++) {
+                const train = lane.details.trains[i];
+                // Trains move from one side to the other repeatedly
+                train.x += Math.sin(movers.time / 5) * (gameState.gameSpeedMultiplier * 3);
+            }
+        } else {
+            newRoadDetails[lane.yIndex] = null;
+            newRailDetails[lane.yIndex] = null;
+        }
+    }
+
+    // Apply updated details back to the lanes array
+    lanes.forEach(lane => {
+        if (lane.type === 'Road') lane.details.cars = newRoadDetails[lane.yIndex]?.details || [];
+        if (lane.type === 'Railroad') lane.details.trains = newRailDetails[lane.yIndex]?.details || [];
+    });
+
+
+    // --- 2. Process Hops and Scoring/Collision Check (Done in the input handler for simplicity) ---
+
+    // --- 3. Management: Despawning Old Lanes & Generating New Ones ---
+    const playerYGrid = Math.floor((player.y + TILE_SIZE / 2) / TILE_SIZE); // Normalized grid index where player currently is
+    const currentLaneIndex = lanes.findIndex(l => l.yIndex === playerYGrid);
+
+    // Clean up the front (Top/Lowest Y indices)
+    if (lanes[0] && Math.abs(lanes[0].yIndex - playerYGrid) > LANE_GENERATION_COUNT + 5) {
+        console.log("Despawning old lanes.");
+        lanes.shift(); // Remove the top/oldest lane data
+    }
+
+    // Generate new rows ahead of the player (Target index = current highest Y grid index - N)
+    if (lanes[lanes.length - 1] && Math.abs(lanes[lanes.length - 1].yIndex - (playerYGrid - LANE_GENERATION_COUNT)) > 5) {
+        const newLevel = generateLane(Math.min(CANVAS_HEIGHT / TILE_SIZE, lanes[lanes.length - 1].yIndex - LANE_GENERATION_COUNT));
+        // Add the new lane to the front (lowest Y index in our array representation)
+        lanes.unshift(newLevel);
+    }
+
+    // --- 4. Coin Update (Simple particle generation) ---
+    if (Math.random() < 0.1 && lanes[0].type === 'Coin') {
+         particles.coinTrail.push({
+            x: Math.random() * CANVAS_WIDTH,
+            y: TILE_SIZE * (lanes[0].yIndex + 2), // Slightly below the coin spot
+            vx: (Math.random() - 0.5) * 2,
+            vy: (Math.random() - 0.5) * 2,
+            life: 60
+        });
+    }
+
+     // Update particles trail
+     particles.coinTrail = particles.coinTrail.filter(p => p.life > 0);
+     for (let i = 0; i < particles.coinTrail.length; i++) {
+         particles.coinTrail[i].x += particles.coinTrail[i].vx;
+         particles.coinTrail[i].y += particles.coinTrail[i].vy;
+         particles.coinTrail[i].life--;
+     }
+
+}
+
+
+// --- INPUT HANDLING ---
+
+/** Executes a hop attempt given the direction and target lane index */
+function tryHop(targetYIndex, targetX) {
+    if (!gameRunning || player.isJumping) return false; // Cannot hop if currently airborne
+    
+    const currentLane = getLaneAtGridPosition(player.currentTileY);
+
+    // Basic check: Is the target area occupied? (e.g., railway active, car right on top)
+    if (!isValidTargetPosition(targetX)) {
+        return false; // Cannot move there immediately
+    }
+
+    // Check collision at destination *before* moving
+    const targetLane = getLaneAtGridPosition(targetYIndex);
+    if (targetLane && checkCollision(player.size / TILE_SIZE, player.size / TILE_SIZE, targetX, 0)) {
+        console.log("Blocked by obstacle!");
+        return false;
+    }
+
+    // Successful hop initiation
+    player.x = targetX;
+    player.currentTileY = targetYIndex;
+    player.y += player.speed * 2; // Quick visual movement up/down (CSS scaling for squash/stretch handled by draw)
+    player.isJumping = true;
+    setTimeout(() => {
+        player.isJumping = false;
+        // After the hop animation finishes, we must update the lane position data
+        updatePlayerLaneData(); 
+    }, 300);
+
+    return true;
+}
+
+
+/** Determines which lane object is closest to a given grid Y coordinate */
+function getLaneAtGridPosition(yIndex) {
+    // Since lanes are sorted by yIndex (lowest index = top screen), we search based on the required Y position.
+    const targetY = Math.floor((canvas.height - player.size / TILE_SIZE * 0.8) / TILE_SIZE);
+
+    // Find the lane whose grid index matches the current or nearest desired grid position
+    return lanes.find(l => l.yIndex === yIndex) || null;
+}
+
+
+/** Checks if a target X coordinate is clear on the current road/tile */
+function isValidTargetPosition(targetX) {
+     // Crude check: Ensure we aren't targeting directly inside a known hazard zone (e.g., railroad center, car path)
+    if (getLaneAtGridPosition(player.currentTileY)) {
+        const lane = getLaneAtGridPosition(player.currentTileY);
+
+        if (lane.type === 'Road') {
+            for (const car of lane.details.cars) {
+                // If target is within the horizontal bounds of a moving vehicle, it's blocked
+                if (targetX >= car.x && targetX <= car.x + car.w) return false;
+            }
+        }
+        if (lane.type === 'Railroad') {
+            const train = lane.details.trains[0];
+             if (targetX >= train.x - 15 && targetX <= train.x + train.w + 15) return false;
+        }
+    }
+    return true;
+}
+
+
+/** Collision Check: Checks for collision at player's current physical position */
+function checkCollision(playerW, playerH, nextX, nextY) {
+    const targetLane = getLaneAtGridPosition(nextY);
+
+    if (!targetLane) return false; // No lane defined here
+
+    switch (targetLane.type) {
+        case 'Road':
+            // Check against all moving cars
+            for (const car of targetLane.details.cars) {
+                if (isColliding(nextX, nextY, playerW * TILE_SIZE, playerH * TILE_SIZE, 
+                                car.x, -TILE_SIZE + 5, car.w, TILE_SIZE - 10)) {
+                    return true; // Hit a car!
+                }
+            }
+            break;
+
+        case 'River':
+            // Check if the player is in water AND not on a log/raft.
+             const logs = targetLane.details.logs || [];
+             let safeFromWater = false;
+             for (const log of logs) {
+                 if (nextX + playerW * TILE_SIZE >= log.x && nextX - 10 <= log.x && 
+                     nextY + playerH * TILE_SIZE >= 0 && nextY - 10 <= log.y + TILE_SIZE ) {
+                        safeFromWater = true;
+                        break;
+                 }
+             }
+             if (!safeFromWater) return true; // Drowned! (Treating water contact as lethal if not supported)
+            break;
+
+        case 'Railroad':
+            // Check against trains passing through the intersection point.
+            const train = targetLane.details.trains[0];
+            if (isColliding(nextX, nextY, playerW * TILE_SIZE, playerH * TILE_SIZE, 
+                            train.x - 15, -TILE_SIZE/2, train.w + 30, TILE_SIZE)) { // Check collision box slightly bigger than the object
+                return true; // Hit train!
+            }
+            break;
+
+        case 'Coin':
+             // Safe to land on a coin spot (we'll handle pickup later)
+             return false;
+    }
+
+    return false;
+}
+
+
+/** Updates player state after successful hop */
+function updatePlayerLaneData() {
+    const targetLane = getLaneAtGridPosition(player.currentTileY);
+    if (targetLane) {
+        // Check for collision upon landing (This is the crucial death moment)
+        if (checkCollision(player.size / TILE_SIZE, player.size / TILE_SIZE, player.x / TILE_SIZE, 0)) {
+            gameOver("Collision detected!");
+            return;
+        }
+
+        // Check for hazards on landing
+        if (targetLane.type === 'River' && !targetLane.details.logs) {
+            gameOver("You drowned.");
+            return;
+        }
+
+        // Handle coin pickup immediately upon confirmation of landing in the tile center
+        if (targetLane.type === 'Coin') {
+             gameState.coins++;
+             triggerSparkle(player.x, TILE_SIZE * (player.currentTileY + 1), 10); // Large sparkle
+             // Temporarily despawn coin for visual feedback
+             lanes[lanes.findIndex(l => l.type === 'Coin' && l.yIndex === player.currentTileY)].details.x = -99;
+        }
+
+
+    }
+
+    // Score update: Every successful hop upward increments the score
+    gameState.score += 1;
+    updateUI();
+
+    // Re-establish initial position if it was wildly off due to temporary movement adjustments
+    player.y = player.currentTileY * TILE_SIZE + (TILE_SIZE / 2);
+}
+
+
+/** Primary Game Loop - Runs every frame */
+function gameLoop(timestamp) {
+    if (!gameRunning) return;
+
+    const deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
+
+    // --- Drawing & Rendering ---
+    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    drawBackground();
+
+    updateWorld(deltaTime); // Update positions and generate new lanes
+    renderWorldAndPlayer();  // Draw all components
+
+    // Handle Physics: Gravity (If we were building a complex falling physics)
+    // For now, the "gravity" is handled entirely by player.currentTileY updates upon hopping/scrolling
+
+    // Request next frame
+    requestAnimationFrame(gameLoop);
+}
+
+
+/** Drawing Functions */
+
+function drawBackground() {
+    const gradient = ctx.createLinearGradient(0, 0, 0, CANVAS_HEIGHT);
+    gradient.addColorStop(0, '#ff6f91'); // Coral (Dawn start)
+    gradient.addColorStop(0.5, '#c3b1e4'); // Lavender
+    gradient.addColorStop(1, '#4d5c80');  // Deep blue (Twilight/Night)
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    // Draw subtle parallax clouds (simple white rects)
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+     for(let i=0; i < 10; i++){
+        ctx.beginPath();
+        ctx.ellipse((i*100 + Math.random()*50), Math.random()*150 + 50, 100, 20, 0, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    // Draw ground level line (separating voxels from sky)
+    ctx.fillStyle = '#4cbb17'; // Bright green base
+    ctx.fillRect(0, CANVAS_HEIGHT - TILE_SIZE * 0.5, CANVAS_WIDTH, TILE_SIZE * 2);
+}
+
+function renderWorldAndPlayer() {
+    // Use a virtual camera offset based on player's vertical progress
+    const scrollYOffset = (player.currentTileY * TILE_SIZE) * 0.8; // Player moves up relative to the screen origin
+
+    ctx.save();
+    ctx.translate(0, -scrollYOffset); // Everything appears to move down the canvas as player hops/scrolls up
+
+    // Render lanes (World background)
+    for (const lane of lanes) {
+        lane.draw(Math.floor((player.currentTileY + Math.abs(Math.pow(lane.yIndex - player.currentTileY), 2)) / 3)); // Simple y calculation for depth variation
+    }
+
+    // Render Player character (must be drawn last to appear on top)
+    drawPlayer();
+
+    ctx.restore();
+
+    // Draw particles over everything
+    particles.coinTrail.forEach(p => {
+        ctx.fillStyle = 'rgba(255, 204, 0, 0.8)';
+        ctx.globalAlpha = p.life / 60;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3 + (p.life / 10), 0, Math.PI * 2);
+        ctx.fill();
+    });
+     // Death Burst particles are only visible right at death
+}
+
+function drawPlayer() {
+    const p = player;
+    const sizePixels = p.size * TILE_SIZE / 100; // Scale down slightly for visual appeal
+
+    ctx.save();
+    // Apply squash/stretch effect based on `isJumping` state
+    let scaleY = p.isJumping ? 1.2 : 1;
+    let scaleX = p.isJumping ? 0.95 : 1;
+    
+    ctx.translate(p.x, p.y);
+    ctx.scale(scaleX, scaleY);
+
+    // Draw the Player Voxel block (Simple geometric shape)
+    ctx.fillStyle = '#ff6f91'; // Primary vibrant color
+    ctx.strokeStyle = '#cc5280';
+    ctx.lineWidth = 3;
+    ctx.fillRect(-sizePixels / 2, -sizePixels / 2, sizePixels, sizePixels);
+    ctx.strokeRect(-sizePixels / 2, -sizePixels / 2, sizePixels, sizePixels);
+
+    // Add an eye detail or internal glow for "premium" feel
+     ctx.fillStyle = '#ffffff';
+     ctx.fillRect(sizePixels/8, -sizePixels/3, sizePixels/5, sizePixels/4);
+
+
+    ctx.restore();
+}
+
+
+/** Particle Emitter */
+function triggerSparkle(x, y, count) {
+    for (let i = 0; i < count; i++) {
+        particles.coinTrail.push({
+            x: x + Math.random() * 20 - 10,
+            y: y + Math.random() * 20 - 10,
+            vx: (Math.random() - 0.5) * 8,
+            vy: (Math.random() - 0.5) * 8,
+            life: 90 // Longer life for a 'sparkle' effect
+        });
+    }
+}
+
+
+// --- GAME FLOW CONTROL ---
+
+/** Initializes the score display and UI */
+function updateUI() {
+    document.getElementById('scoreDisplay').textContent = `Score: ${gameState.score}`;
+    document.getElementById('coinCounter').innerHTML = `💰: ${gameState.coins}`;
+}
+
+/** Sets up the game environment for a fresh run */
+function setupGame() {
+    // Reset player state
+    player.x = CANVAS_WIDTH / 2;
+    player.y = canvas.height - (TILE_SIZE * 3);
+    player.currentTileY = Math.floor((canvas.height - (TILE_SIZE * 3) + TILE_SIZE/2)/TILE_SIZE);
+
+    gameState.score = 0;
+    gameState.coins = 0;
+    gameState.difficultyTimer = 0;
+    movers.time = 0;
+    particles.coinTrail = [];
+}
+
+/** Starts the game from the title screen */
+function startGame() {
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('gameOverScreen').style.display = 'none';
+    setupGame();
+    gameRunning = true;
+    initializeWorld();
+    lastTime = performance.now();
+    requestAnimationFrame(gameLoop);
+}
+
+/** Handles death state */
+function gameOver(reason) {
+    if (!gameRunning) return; // Prevent double calls
+
+    gameRunning = false;
+    console.log("Game Over:", reason);
+
+    // Trigger Death Particles (Screen Shake Start)
+    for (let i = 0; i < 50; i++) {
+        particles.deathBurst.push({
+            x: player.x + Math.random() * 20 - 10,
+            y: player.y + Math.random() * 20 - 10,
+            vx: (Math.random() - 0.5) * 10,
+            vy: (Math.random() - 0.5) * 10,
+            life: 60,
+        });
+    }
+
+    // Show Game Over Screen
+    document.getElementById('finalScore').textContent = `Your Score: ${gameState.score}`;
+    const bestScoreElement = document.getElementById('bestScoreDisplay');
+    bestScoreElement.textContent = `Best Score: ${gameState.bestScore}`;
+    document.getElementById('gameOverScreen').style.display = 'flex';
+
+    // Gentle screen shake effect applied via CSS/JS logic in the final implementation structure, 
+    // but here we simply stop game movement and display UI.
+}
+
+
+/** Resets the game for a new run */
+function resetGame() {
+    setupGame();
+    initializeWorld(); // Re-generate map data
+    document.getElementById('gameOverScreen').style.display = 'none';
+    gameRunning = true;
+    lastTime = performance.now();
+    requestAnimationFrame(gameLoop);
+}
+
+
+// --- INPUT LISTENERS (Keyboard and Touch Simulation) ---
+
+function handleInput() {
+    let targetY = player.currentTileY;
+    let nextX = player.x;
+    let nextY = player.currentTileY; 
+
+    // Determine intended movement based on the last known input or simple state machine:
+    if (window.lastMove === 'UP') {
+        nextY++; // Moving higher on the grid map (lower Y index)
+    } else if (window.lastMove === 'DOWN') {
+        nextY--; // Moving lower on the grid map (higher Y index)
+    } else if (window.lastMove === 'LEFT') {
+        nextX -= player.speed;
+    } else if (window.lastMove === 'RIGHT') {
+        nextX += player.speed;
+    } else {
+         // Default to trying an UP move if no directional input is received in a row
+         nextY++; 
+    }
+
+
+    const hopSuccessful = tryHop(Math.max(0, nextY), Math.min(CANVAS_WIDTH - player.size * TILE_SIZE/100, nextX));
+
+    if (hopSuccessful) {
+        // If hop succeeds, update the move state for sequential hopping logic 
+        window.lastMove = 'UP'; // Default successful movement to UP trajectory
+    } else if (Math.key === 'ArrowLeft' || Math.key === 'a') {
+        window.lastMove = 'LEFT';
+    } else if (Math.key === 'ArrowRight' || Math.key === 'd') {
+        window.lastMove = 'RIGHT';
+    } else if (Math.key === 'ArrowUp' || Math.key === 'w') {
+        window.lastMove = 'UP';
+    } else if (Math.key === 'ArrowDown' || Math.key === 's') {
+         window.lastMove = 'DOWN';
+    }
+
+}
+
+// Global Input Handler (for both desktop and simulating touch)
+document.addEventListener('keydown', (e) => {
+    if (!gameRunning && e.code === 'Space') {
+        startGame();
+    } else if (gameRunning) {
+        e.preventDefault();
+        handleInput();
+    }
+});
+
+// Simple click/tap handler on the container to simulate WASD input and improve mobile usability
+document.getElementById('gameContainer').addEventListener('click', () => {
+    if (!gameRunning && !['titleScreen', 'gameOverScreen'].includes(document.getElementById('startScreen').style.display)) {
+         // If game is not running, clicking the container does nothing unless the button is pressed.
+        return; 
+    }
+    
+    // Simple tap input model: Taps trigger an UP movement attempt (like a basic 'crossy' mechanic)
+    if (gameRunning) {
+        window.lastMove = 'UP'; // Treat click as upward hop attempt
+        handleInput();
+    }
+});
+
+
+// --- INITIALIZATION ON LOAD ---
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateUI(); 
+});
+
+</script>
+</body>
+</html>

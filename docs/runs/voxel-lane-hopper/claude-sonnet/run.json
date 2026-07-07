@@ -1,0 +1,57 @@
+{
+  "id": "voxel-lane-hopper/claude-sonnet/2026-07-07T18:05:39Z",
+  "task": {
+    "id": "voxel-lane-hopper",
+    "slug": "voxel-lane-hopper",
+    "category": "game-generation",
+    "title": "Voxel Lane Hopper",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "claude/sonnet",
+    "display_name": "Claude Sonnet",
+    "provider": "Anthropic",
+    "version": "sonnet"
+  },
+  "prompt": {
+    "id": "voxel-lane-hopper",
+    "version": "1.0.0",
+    "sha256": "ca766ae317abdbd523e7490eb4bf72200c0dcb090407437478f22be52f263dae",
+    "title": "Voxel Lane Hopper"
+  },
+  "executed_at": "2026-07-07T18:05:39.427928Z",
+  "duration_ms": 328049,
+  "tokens": {
+    "input": 702,
+    "output": 10714,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.162816,
+  "cost": {
+    "total_usd": 0.162816,
+    "input_usd": 0.002106,
+    "output_usd": 0.16071,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Anthropic Claude Sonnet API rates (estimated for CLI runs)."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "88d43faa7619825c26dd05c935ecd214c14525dd1b2d24e33cc61d0ad9769ffc",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "1d6089cc85962b6f305b8f4d149edc6f4e034d1b8d672d3c8703e63c97f21ec5"
+    }
+  ],
+  "logs": "run.log"
+}

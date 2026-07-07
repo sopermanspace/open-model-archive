@@ -1,0 +1,57 @@
+{
+  "id": "voxel-lane-hopper/grok-composer-2.5-fast/2026-07-07T17:59:59Z",
+  "task": {
+    "id": "voxel-lane-hopper",
+    "slug": "voxel-lane-hopper",
+    "category": "game-generation",
+    "title": "Voxel Lane Hopper",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "grok/composer-2.5-fast",
+    "display_name": "Grok Composer 2.5 Fast",
+    "provider": "xAI",
+    "version": "grok-composer-2.5-fast"
+  },
+  "prompt": {
+    "id": "voxel-lane-hopper",
+    "version": "1.0.0",
+    "sha256": "ca766ae317abdbd523e7490eb4bf72200c0dcb090407437478f22be52f263dae",
+    "title": "Voxel Lane Hopper"
+  },
+  "executed_at": "2026-07-07T17:59:59.131415Z",
+  "duration_ms": 155888,
+  "tokens": {
+    "input": 702,
+    "output": 9844,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.02039,
+  "cost": {
+    "total_usd": 0.02039,
+    "input_usd": 0.000702,
+    "output_usd": 0.019688,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "xAI Grok Build API rates ($1.00 in / $2.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "a50e86f40b24ca8df73371520579270ef07a9384d8a388bf183a8bc843ed190b",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "2029a3eee6ba538c97536ff01ec759b4e0da54e2368cc9e7a5f2dadc58a37154"
+    }
+  ],
+  "logs": "run.log"
+}

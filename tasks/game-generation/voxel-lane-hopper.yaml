@@ -1,0 +1,21 @@
+id: voxel-lane-hopper
+slug: voxel-lane-hopper
+category: game-generation
+topics: [code, design, games, creative]
+title: Voxel Lane Hopper
+description: >
+  Build a stunning endless lane-crossing arcade game with roads, rivers, railroads,
+  coins, and procedural generation — compare visual polish and complete game systems.
+prompt: game-generation/voxel-lane-hopper@v1.0.0
+post_process:
+  - extract_html
+models:
+  - ollama/gemma4
+  - ollama/kimi-k2.7-code
+  - ollama/glm-5
+  - ollama/nemotron-3-super
+  - google/gemini-3.5-flash-high
+  - google/gemini-3.1-pro
+  - claude/sonnet
+  - claude/opus
+  - grok/composer-2.5-fast

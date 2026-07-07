@@ -1,0 +1,7 @@
+task=voxel-lane-hopper
+model=ollama/nemotron-3-super
+prompt=game-generation/voxel-lane-hopper@1.0.0
+adapter=ollama
+duration_ms=107127
+tokens=747->9656
+screenshot=/Users/himanshu/open-model-archive/runs/voxel-lane-hopper/ollama-nemotron-3-super/screenshots/desktop.png

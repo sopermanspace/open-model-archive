@@ -1,0 +1,7 @@
+task=voxel-lane-hopper
+model=ollama/kimi-k2.7-code
+prompt=game-generation/voxel-lane-hopper@1.0.0
+adapter=ollama
+duration_ms=580298
+tokens=708->44285
+screenshot=/Users/himanshu/open-model-archive/runs/voxel-lane-hopper/ollama-kimi-k2.7-code/screenshots/desktop.png

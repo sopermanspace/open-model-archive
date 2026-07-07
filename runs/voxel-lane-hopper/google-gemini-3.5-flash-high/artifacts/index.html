@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Voxel Hop — 2.5D Arcade Hopper</title>
+  
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #2e1a47 0%, #0d0714 100%);
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Screen Shake Container */
+    #shake-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Game Container - Sleek arcade cabinet format */
+    #game-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      max-width: 480px;
+      max-height: 850px;
+      aspect-ratio: 9/16;
+      background: #140d21;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 
+                  0 0 0 10px rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 480px), (max-height: 600px) {
+      #game-container {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+      }
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: transparent;
+    }
+
+    /* Ambient Overlay (Vignette & Scanlines for arcade feel) */
+    .screen-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.3) 100%);
+      z-index: 5;
+    }
+
+    /* Screen Interfaces (Glassmorphism UI) */
+    .screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 24px;
+      z-index: 10;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .screen.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Header / Score HUD */
+    #hud {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px;
+      pointer-events: none;
+      z-index: 8;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    #hud.active {
+      opacity: 1;
+    }
+
+    .hud-pill {
+      background: rgba(20, 10, 35, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 8px 16px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    }
+
+    .hud-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .hud-val {
+      font-size: 20px;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hud-val.bounce {
+      animation: score-bounce 0.15s ease-out;
+    }
+
+    @keyframes score-bounce {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+
+    .coin-icon {
+      width: 18px;
+      height: 18px;
+      background: #ffd700;
+      border: 2px solid #b8860b;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #ffd700;
+      animation: coin-spin 1.5s infinite linear;
+    }
+
+    @keyframes coin-spin {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+
+    /* 3D Retro Voxel Title Effect */
+    .title-logo {
+      font-size: 48px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      color: #ffeedd;
+      text-align: center;
+      line-height: 1;
+      margin-top: 30px;
+      /* Multiple layer shadows to build a voxelized 3D letter block extrude */
+      text-shadow: 
+        0 1px 0 #e08b6c, 0 2px 0 #cc7656, 0 3px 0 #b86242, 
+        0 4px 0 #a34e2f, 0 5px 0 #8f3b1d, 0 6px 0 #7a2a0d,
+        0 8px 12px rgba(0, 0, 0, 0.6);
+      transform: perspective(300px) rotateX(15deg);
+      animation: title-float 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes title-float {
+      0% { transform: translateY(0) rotateX(12deg); }
+      100% { transform: translateY(-10px) rotateX(18deg); }
+    }
+
+    /* Skins Box Selector */
+    .selector-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: auto 0;
+    }
+
+    .selector-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #a291b5;
+      text-align: center;
+    }
+
+    .skins-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 100%;
+    }
+
+    .skin-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .skin-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-4px);
+    }
+
+    .skin-card.selected {
+      background: rgba(255, 215, 0, 0.15);
+      border-color: #ffd700;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .skin-preview-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .skin-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .skin-card.selected .skin-name {
+      color: #ffd700;
+    }
+
+    /* Start / Action Controls */
+    .action-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pulse-text {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.7);
+      animation: text-pulse 1.2s infinite ease-in-out;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    @keyframes text-pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* Premium styled buttons */
+    .btn {
+      background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+      color: #120822;
+      border: none;
+      padding: 16px 36px;
+      font-size: 16px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 126, 95, 0.4),
+                  inset 0 -4px 0 rgba(0, 0, 0, 0.2);
+      transition: all 0.15s ease;
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 126, 95, 0.5),
+                  inset 0 -4px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 3px 10px rgba(255, 126, 95, 0.3),
+                  inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    /* Game Over Overlay Screen */
+    .gameover-box {
+      background: rgba(20, 10, 35, 0.85);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      width: 100%;
+      padding: 32px 24px;
+      text-align: center;
+      margin: auto 0;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .screen.active .gameover-box {
+      transform: scale(1);
+    }
+
+    .gameover-title {
+      font-size: 38px;
+      font-weight: 900;
+      color: #ff3366;
+      text-shadow: 0 4px 10px rgba(255, 51, 102, 0.3);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 12px;
+    }
+
+    .stat-card .num {
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .stat-card.best .num {
+      color: #ffd700;
+    }
+
+    .tips-box {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      max-width: 280px;
+      margin: 10px auto 0 auto;
+      text-align: center;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="shake-container">
+    <div id="game-container">
+      
+      <!-- Screen Overlay (Scanlines & Vignette) -->
+      <div class="screen-overlay"></div>
+
+      <!-- Canvas Element -->
+      <canvas id="game-canvas"></canvas>
+
+      <!-- HUD Overlay -->
+      <div id="hud">
+        <div class="hud-pill">
+          <span class="hud-label">Score</span>
+          <span id="score-val" class="hud-val">0</span>
+        </div>
+        <div class="hud-pill">
+          <div class="coin-icon"></div>
+          <span id="coin-val" class="hud-val">0</span>
+        </div>
+      </div>
+
+      <!-- Title / Start Screen -->
+      <div id="title-screen" class="screen active">
+        <h1 class="title-logo">VOXEL<br>HOP</h1>
+        
+        <div class="selector-container">
+          <h2 class="selector-title">Select Hopper</h2>
+          <div class="skins-grid">
+            <div class="skin-card selected" onclick="selectSkin('chick')">
+              <div class="skin-preview-icon" id="preview-chick"></div>
+              <div class="skin-name">Chick</div>
+            </div>
+            <div class="skin-card" onclick="selectSkin('bot')">
+              <div class="skin-preview-icon" id="preview-bot"></div>
+              <div class="skin-name">Bot</div>
+            </div>
+            <div class="skin-card" onclick="selectSkin('piggy')">
+              <div class="skin-preview-icon" id="preview-piggy"></div>
+              <div class="skin-name">Piggy</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-container">
+          <p class="pulse-text" id="desktop-instruct">Press Space to Start</p>
+          <button class="btn" onclick="startGame()">HOP IN</button>
+          <p class="tips-box" style="margin-top:0;">Swipe to steer • Tap to hop forward</p>
+        </div>
+      </div>
+
+      <!-- Game Over Screen -->
+      <div id="gameover-screen" class="screen">
+        <div class="gameover-box">
+          <h2 class="gameover-title">SPLAT!</h2>
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="hud-label">Score</div>
+              <div class="num" id="end-score">0</div>
+            </div>
+            <div class="stat-card best">
+              <div class="hud-label">Best</div>
+              <div class="num" id="end-best">0</div>
+            </div>
+          </div>
+          <button class="btn" onclick="restartGame()">Hop Again</button>
+        </div>
+        <div class="action-container">
+          <p class="tips-box">Collect gold coins for bonus points! Watch railroad warning lights carefully!</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // --- AUDIO SYSTEM (Web Audio API Retro Synth) ---
+    let audioCtx = null;
+
+    function initAudio() {
+      if (audioCtx) return;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    function playSound(type) {
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      const now = audioCtx.currentTime;
+
+      switch(type) {
+        case 'hop':
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(160, now);
+          osc.frequency.exponentialRampToValueAtTime(320, now + 0.12);
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+          osc.start(now);
+          osc.stop(now + 0.12);
+          break;
+        case 'coin':
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(880, now);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.05, now + 0.08);
+          // Double chime
+          const osc2 = audioCtx.createOscillator();
+          const gain2 = audioCtx.createGain();
+          osc2.connect(gain2);
+          gain2.connect(audioCtx.destination);
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(1320, now + 0.08);
+          gain2.gain.setValueAtTime(0.15, now + 0.08);
+          gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+          osc2.start(now + 0.08);
+          osc2.stop(now + 0.25);
+          break;
+        case 'death':
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(260, now);
+          osc.frequency.exponentialRampToValueAtTime(50, now + 0.4);
+          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+          osc.start(now);
+          osc.stop(now + 0.4);
+          break;
+        case 'warning':
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(450, now);
+          gain.gain.setValueAtTime(0.05, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+          osc.start(now);
+          osc.stop(now + 0.08);
+          break;
+      }
+    }
+
+    // --- GAME CONSTANTS & CONFIG ---
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+
+    // Viewport relative grid scaling
+    let gridScale = 38; 
+
+    // Projection calculation: True 30-degree isometric
+    function project(gx, gy, gz) {
+      return {
+        x: (gx - gy) * gridScale,
+        y: (gx + gy) * (gridScale * 0.5) - (gz * gridScale)
+      };
+    }
+
+    // Colors HSL config
+    const COLOR_GRASS = { h: 135, s: 50, l: 40 };
+    const COLOR_ROAD = { h: 220, s: 10, l: 24 };
+    const COLOR_RIVER = { h: 205, s: 80, l: 38 };
+    const COLOR_RAILROAD = { h: 30, s: 12, l: 18 };
+
+    // --- GAME STATE ---
+    let state = 'title'; // 'title' | 'playing' | 'gameover'
+    let score = 0;
+    let bestScore = parseInt(localStorage.getItem('voxel_hop_best_score')) || 0;
+    let coins = 0;
+    let activeSkin = 'chick';
+    let time = 0;
+
+    let player = {
+      gridX: 0,
+      gridY: 0,
+      z: 0,
+      targetX: 0,
+      targetY: 0,
+      targetZ: 0,
+      dir: 'up', // 'up' | 'down' | 'left' | 'right'
+      hopProgress: 0,
+      hopStartGridX: 0,
+      hopStartGridY: 0,
+      maxReachedY: 0,
+      dead: 0, // 0 = alive, >0 frame death timer
+      drowning: false,
+      blockedTimer: 0,
+      blockedDir: '',
+      scaleX: 1,
+      scaleY: 1,
+      scaleZ: 1
+    };
+
+    let lanes = {};
+    let minGeneratedY = -7;
+    let maxGeneratedY = 15;
+    let camera = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    let skyClouds = [];
+    let bgHills = [];
+    let particles = [];
+    let screenShake = 0;
+
+    // --- MODEL DRAW HELPERS ---
+    // Helper to draw single 3D Voxel block
+    function drawBlock(ctx, gx, gy, gz, w, l, h, hue, sat, light, alpha = 1) {
+      const p000 = project(gx, gy, gz);
+      const p100 = project(gx + w, gy, gz);
+      const p010 = project(gx, gy + l, gz);
+      const p110 = project(gx + w, gy + l, gz);
+      const p001 = project(gx, gy, gz + h);
+      const p101 = project(gx + w, gy, gz + h);
+      const p011 = project(gx, gy + l, gz + h);
+      const p111 = project(gx + w, gy + l, gz + h);
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = `rgba(0,0,0,0.12)`;
+      ctx.lineWidth = 0.8;
+
+      // Top Face
+      ctx.fillStyle = `hsl(${hue}, ${sat}%, ${light}%)`;
+      ctx.beginPath();
+      ctx.moveTo(p001.x, p001.y);
+      ctx.lineTo(p101.x, p101.y);
+      ctx.lineTo(p111.x, p111.y);
+      ctx.lineTo(p011.x, p011.y);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      // Left Face
+      ctx.fillStyle = `hsl(${hue}, ${sat}%, ${Math.max(0, light - 12)}%)`;
+      ctx.beginPath();
+      ctx.moveTo(p010.x, p010.y);
+      ctx.lineTo(p110.x, p110.y);
+      ctx.lineTo(p111.x, p111.y);
+      ctx.lineTo(p011.x, p011.y);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      // Right Face
+      ctx.fillStyle = `hsl(${hue}, ${sat}%, ${Math.max(0, light - 24)}%)`;
+      ctx.beginPath();
+      ctx.moveTo(p100.x, p100.y);
+      ctx.lineTo(p110.x, p110.y);
+      ctx.lineTo(p111.x, p111.y);
+      ctx.lineTo(p101.x, p101.y);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    // Shadow drawer
+    function drawShadow(ctx, gx, gy, w, l, alpha = 0.28) {
+      const p00 = project(gx, gy, 0);
+      const p10 = project(gx + w, gy, 0);
+      const p01 = project(gx, gy + l, 0);
+      const p11 = project(gx + w, gy + l, 0);
+
+      ctx.save();
+      ctx.fillStyle = `rgba(12, 5, 20, ${alpha})`;
+      ctx.beginPath();
+      ctx.moveTo(p00.x, p00.y);
+      ctx.lineTo(p10.x, p10.y);
+      ctx.lineTo(p11.x, p11.y);
+      ctx.lineTo(p01.x, p01.y);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // Rotator helper for character skins
+    function getRotatedSubBlock(sub, dir) {
+      let rx = sub.rx, ry = sub.ry, rw = sub.rw, rl = sub.rl;
+      if (dir === 'up') {
+        return { rx, ry, rw, rl };
+      } else if (dir === 'right') {
+        return { rx: ry, ry: -rx, rw: rl, rl: rw };
+      } else if (dir === 'down') {
+        return { rx: -rx, ry: -ry, rw, rl };
+      } else if (dir === 'left') {
+        return { rx: -ry, ry: rx, rw: rl, rl: rw };
+      }
+      return { rx, ry, rw, rl };
+    }
+
+    // Character drawing module
+    function drawCharacter(ctx, skin, gx, gy, gz, dir, scaleX, scaleY, scaleZ, isMenu = false) {
+      let blocks = [];
+      if (skin === 'chick') {
+        blocks = [
+          // Body (yellow)
+          { rx: -0.23, ry: -0.23, rz: 0.1, rw: 0.46, rl: 0.46, rh: 0.42, h: 48, s: 95, l: 58 },
+          // Head (yellow)
+          { rx: -0.15, ry: 0.05, rz: 0.52, rw: 0.3, rl: 0.3, rh: 0.3, h: 48, s: 95, l: 58 },
+          // Beak (orange)
+          { rx: -0.06, ry: 0.35, rz: 0.58, rw: 0.12, rl: 0.08, rh: 0.08, h: 22, s: 95, l: 55 },
+          // Comb (red)
+          { rx: -0.03, ry: 0.06, rz: 0.82, rw: 0.06, rl: 0.14, rh: 0.1, h: 0, s: 85, l: 50 },
+          // Left eye (black)
+          { rx: -0.17, ry: 0.25, rz: 0.68, rw: 0.03, rl: 0.03, rh: 0.03, h: 0, s: 0, l: 10 },
+          // Right eye (black)
+          { rx: 0.14, ry: 0.25, rz: 0.68, rw: 0.03, rl: 0.03, rh: 0.03, h: 0, s: 0, l: 10 },
+          // Left wing (yellow)
+          { rx: -0.28, ry: -0.1, rz: 0.18, rw: 0.05, rl: 0.25, rh: 0.18, h: 48, s: 90, l: 50 },
+          // Right wing (yellow)
+          { rx: 0.23, ry: -0.1, rz: 0.18, rw: 0.05, rl: 0.25, rh: 0.18, h: 48, s: 90, l: 50 },
+          // Left leg (orange)
+          { rx: -0.14, ry: -0.05, rz: 0.0, rw: 0.06, rl: 0.06, rh: 0.1, h: 22, s: 95, l: 50 },
+          // Right leg (orange)
+          { rx: 0.08, ry: -0.05, rz: 0.0, rw: 0.06, rl: 0.06, rh: 0.1, h: 22, s: 95, l: 50 }
+        ];
+      } else if (skin === 'bot') {
+        blocks = [
+          // Body (grey/blue metal)
+          { rx: -0.24, ry: -0.24, rz: 0.1, rw: 0.48, rl: 0.48, rh: 0.48, h: 205, s: 50, l: 45 },
+          // Head (silver)
+          { rx: -0.17, ry: -0.08, rz: 0.58, rw: 0.34, rl: 0.34, rh: 0.28, h: 205, s: 30, l: 60 },
+          // Visor Glow
+          { rx: -0.11, ry: 0.26, rz: 0.66, rw: 0.22, rl: 0.03, rh: 0.08, h: 180, s: 100, l: 55 },
+          // Antenna post
+          { rx: -0.02, ry: 0.08, rz: 0.86, rw: 0.04, rl: 0.04, rh: 0.12, h: 0, s: 0, l: 70 },
+          // Red light on top
+          { rx: -0.04, ry: 0.06, rz: 0.98, rw: 0.08, rl: 0.08, rh: 0.08, h: 0, s: 100, l: 55 },
+          // Chest dial
+          { rx: -0.14, ry: 0.24, rz: 0.25, rw: 0.28, rl: 0.02, rh: 0.18, h: 15, s: 95, l: 55 }
+        ];
+      } else if (skin === 'piggy') {
+        blocks = [
+          // Body (pink)
+          { rx: -0.25, ry: -0.28, rz: 0.1, rw: 0.5, rl: 0.56, rh: 0.42, h: 345, s: 85, l: 74 },
+          // Snout (hot pink)
+          { rx: -0.09, ry: 0.28, rz: 0.2, rw: 0.18, rl: 0.05, rh: 0.13, h: 345, s: 85, l: 62 },
+          // Left eye
+          { rx: -0.13, ry: 0.28, rz: 0.38, rw: 0.03, rl: 0.03, rh: 0.03, h: 0, s: 0, l: 15 },
+          // Right eye
+          { rx: 0.1, ry: 0.28, rz: 0.38, rw: 0.03, rl: 0.03, rh: 0.03, h: 0, s: 0, l: 15 },
+          // Ears
+          { rx: -0.22, ry: -0.08, rz: 0.52, rw: 0.08, rl: 0.08, rh: 0.08, h: 345, s: 85, l: 68 },
+          { rx: 0.14, ry: -0.08, rz: 0.52, rw: 0.08, rl: 0.08, rh: 0.08, h: 345, s: 85, l: 68 },
+          // 4 Legs
+          { rx: -0.17, ry: -0.17, rz: 0.0, rw: 0.08, rl: 0.08, rh: 0.1, h: 345, s: 85, l: 64 },
+          { rx: 0.09, ry: -0.17, rz: 0.0, rw: 0.08, rl: 0.08, rh: 0.1, h: 345, s: 85, l: 64 },
+          { rx: -0.17, ry: 0.09, rz: 0.0, rw: 0.08, rl: 0.08, rh: 0.1, h: 345, s: 85, l: 64 },
+          { rx: 0.09, ry: 0.09, rz: 0.0, rw: 0.08, rl: 0.08, rh: 0.1, h: 345, s: 85, l: 64 }
+        ];
+      }
+
+      // Project and sort blocks back-to-front (depth-sorting of character's elements)
+      const rotatedBlocks = blocks.map(sub => {
+        const rot = getRotatedSubBlock(sub, dir);
+        const xOffset = rot.rx * scaleX;
+        const yOffset = rot.ry * scaleY;
+        const zOffset = sub.rz * scaleZ;
+        const w = rot.rw * scaleX;
+        const l = rot.rl * scaleY;
+        const h = sub.rh * scaleZ;
+        return {
+          gx: gx + xOffset,
+          gy: gy + yOffset,
+          gz: gz + zOffset,
+          w, l, h,
+          hVal: sub.h, sVal: sub.s, lVal: sub.l,
+          depth: (gx + xOffset) + (gy + yOffset) + (gz + zOffset) * 0.002
+        };
+      });
+
+      rotatedBlocks.sort((a, b) => a.depth - b.depth);
+
+      rotatedBlocks.forEach(b => {
+        drawBlock(ctx, b.gx, b.gy, b.gz, b.w, b.l, b.h, b.hVal, b.sVal, b.lVal);
+      });
+    }
+
+    // Voxel cloud generator / drawer
+    function drawCloud(ctx, cloud) {
+      ctx.save();
+      cloud.blocks.forEach(b => {
+        // Draw flat screen-space rounded clouds for sky
+        ctx.fillStyle = `rgba(255, 255, 255, ${cloud.opacity * b.op})`;
+        ctx.beginPath();
+        ctx.roundRect(cloud.x + b.rx * cloud.scale, cloud.y + b.ry * cloud.scale, b.rw * cloud.scale, b.rh * cloud.scale, 8);
+        ctx.fill();
+      });
+      ctx.restore();
+    }
+
+    // --- PROCEDURAL GENERATION RULES ---
+    function generateLane(y) {
+      if (lanes[y]) return;
+
+      let type = 'grass';
+      let count = 0;
+      
+      // Determine type based on weights and constraints
+      if (y <= 2) {
+        type = 'grass';
+      } else {
+        const r = Math.random();
+        // Check surrounding rows to prevent continuous deadlocks
+        let prevTypes = [];
+        for (let i = 1; i <= 3; i++) {
+          if (lanes[y - i]) prevTypes.push(lanes[y - i].type);
+        }
+        
+        const countConsec = (t) => prevTypes.filter(x => x === t).length;
+
+        if (r < 0.3) {
+          type = 'grass';
+        } else if (r < 0.65) {
+          type = (countConsec('road') >= 3) ? 'grass' : 'road';
+        } else if (r < 0.9) {
+          type = (countConsec('river') >= 2) ? 'road' : 'river';
+        } else {
+          type = (countConsec('railroad') >= 1) ? 'grass' : 'railroad';
+        }
+      }
+
+      const diffMultiplier = 1 + Math.min(y / 60, 1.2);
+      let lane = {
+        y: y,
+        type: type,
+        speed: 0,
+        direction: Math.random() < 0.5 ? 1 : -1,
+        vehicles: [],
+        logs: [],
+        obstacles: {}, // trees/rocks keyed by gridX
+        coins: {}, // coins keyed by gridX
+        trainActive: false,
+        trainWarning: false,
+        trainTimer: 180 + Math.random() * 200,
+        trainWarningTimer: 0,
+        trainX: 0,
+        spawnTimer: 0,
+        spawnInterval: 120
+      };
+
+      if (type === 'grass') {
+        // Place obstacles (trees/rocks)
+        for (let x = -7; x <= 7; x++) {
+          if (x === 0 && y <= 2) continue; // Keep center clear on startup
+          if (Math.random() < 0.22) {
+            lane.obstacles[x] = {
+              type: Math.random() < 0.7 ? 'tree' : 'rock',
+              // Subtle voxel shape offset
+              scaleZ: 0.8 + Math.random() * 0.4,
+              colorVar: Math.floor(Math.random() * 10) - 5
+            };
+          } else if (Math.random() < 0.08 && x >= -5 && x <= 5) {
+            // Place coin
+            lane.coins[x] = {
+              angle: Math.random() * Math.PI,
+              bob: Math.random() * Math.PI
+            };
+          }
+        }
+      } else if (type === 'road') {
+        lane.speed = (0.012 + Math.random() * 0.02) * diffMultiplier;
+        lane.spawnInterval = (140 + Math.random() * 90) / diffMultiplier;
+        lane.spawnTimer = Math.random() * lane.spawnInterval;
+        // Pre-populate lane so it's not empty immediately
+        for (let i = 0; i < 2; i++) {
+          lane.vehicles.push({
+            x: -8 + Math.random() * 16,
+            vType: Math.random() < 0.65 ? 'car' : 'truck',
+            hue: Math.random() * 360,
+            sat: 80,
+            light: 45
+          });
+        }
+      } else if (type === 'river') {
+        lane.speed = (0.008 + Math.random() * 0.015) * diffMultiplier;
+        lane.spawnInterval = (130 + Math.random() * 70) / diffMultiplier;
+        lane.spawnTimer = Math.random() * lane.spawnInterval;
+        // Pre-populate logs
+        for (let i = 0; i < 2; i++) {
+          lane.logs.push({
+            x: -8 + Math.random() * 16,
+            length: 2.2 + Math.random() * 1.0
+          });
+        }
+      } else if (type === 'railroad') {
+        lane.speed = 0.32 * diffMultiplier; // FAST TRAIN
+        lane.trainTimer = 180 + Math.random() * 250;
+        lane.trainX = lane.direction === 1 ? -16 : 16;
+        lane.signalSide = Math.random() < 0.5 ? -6 : 6;
+      }
+
+      lanes[y] = lane;
+    }
+
+    // --- SETUP / RESET ---
+    function init() {
+      // 1. Initialize sky background clouds
+      skyClouds = [];
+      for (let i = 0; i < 4; i++) {
+        skyClouds.push({
+          x: Math.random() * 400 - 100,
+          y: 40 + i * 40 + Math.random() * 20,
+          speed: 0.1 + Math.random() * 0.2,
+          scale: 0.8 + Math.random() * 0.8,
+          opacity: 0.35 + Math.random() * 0.35,
+          blocks: [
+            { rx: -30, ry: -10, rw: 60, rh: 20, op: 0.7 },
+            { rx: -10, ry: -20, rw: 40, rh: 25, op: 0.9 },
+            { rx: 10, ry: -5, rw: 30, rh: 15, op: 0.8 }
+          ]
+        });
+      }
+
+      // 2. Background Horizon Hills (Blocky Parallax)
+      bgHills = [];
+      for (let layer = 0; layer < 3; layer++) {
+        let blocks = [];
+        let factor = 0.03 * (layer + 1);
+        let height = 45 + layer * 25;
+        let color = `hsl(285, 25%, ${28 - layer * 5}%)`;
+        for (let i = -10; i < 15; i++) {
+          blocks.push({
+            xOffset: i * 80 + Math.random() * 30,
+            width: 70 + Math.random() * 40,
+            height: height + Math.random() * 30,
+            color: color
+          });
+        }
+        bgHills.push({ factor, blocks });
+      }
+
+      // Generate base map around player
+      lanes = {};
+      minGeneratedY = -7;
+      maxGeneratedY = 15;
+      for (let y = minGeneratedY; y <= maxGeneratedY; y++) {
+        generateLane(y);
+      }
+
+      // Reset Player
+      player.gridX = 0;
+      player.gridY = 0;
+      player.z = 0;
+      player.targetX = 0;
+      player.targetY = 0;
+      player.targetZ = 0;
+      player.dir = 'up';
+      player.hopProgress = 0;
+      player.maxReachedY = 0;
+      player.dead = 0;
+      player.drowning = false;
+      player.blockedTimer = 0;
+      player.scaleX = 1;
+      player.scaleY = 1;
+      player.scaleZ = 1;
+
+      // Reset scores & counters
+      score = 0;
+      coins = 0;
+      document.getElementById('score-val').innerText = '0';
+      document.getElementById('coin-val').innerText = '0';
+
+      particles = [];
+      screenShake = 0;
+
+      // Center camera instantly on restart
+      let pPos = project(player.gridX, player.gridY, 0);
+      camera.x = pPos.x;
+      camera.y = pPos.y - 120;
+    }
+
+    // Trigger UI skins preview updates
+    function renderSkinsPreview() {
+      const drawPreview = (id, skin) => {
+        const d = document.getElementById(id);
+        if (!d) return;
+        d.innerHTML = `<canvas width="88" height="88" style="width:100%;height:100%;"></canvas>`;
+        const c = d.querySelector('canvas');
+        const cx = c.getContext('2d');
+        
+        // Reset transform and project center
+        cx.clearRect(0,0,88,88);
+        cx.save();
+        cx.translate(44, 52);
+        
+        // Scale gridScale down for the preview
+        const origScale = gridScale;
+        gridScale = 22;
+        
+        // Draw character rotated slowly in menu
+        const menuAng = (Date.now() * 0.002);
+        const floatZ = Math.sin(Date.now() * 0.005) * 0.15 + 0.1;
+        
+        // Draw shadow
+        drawShadow(cx, -0.3, -0.3, 0.6, 0.6, 0.2);
+        
+        // Draw player
+        let rotDir = 'up';
+        // Dynamic direction mapping to simulate rotation
+        const cycle = Math.floor(menuAng / (Math.PI / 2)) % 4;
+        if (cycle === 0) rotDir = 'up';
+        if (cycle === 1) rotDir = 'right';
+        if (cycle === 2) rotDir = 'down';
+        if (cycle === 3) rotDir = 'left';
+
+        drawCharacter(cx, skin, 0, 0, floatZ, rotDir, 1, 1, 1, true);
+        
+        gridScale = origScale;
+        cx.restore();
+      };
+      
+      drawPreview('preview-chick', 'chick');
+      drawPreview('preview-bot', 'bot');
+      drawPreview('preview-piggy', 'piggy');
+    }
+
+    function selectSkin(skinName) {
+      initAudio();
+      activeSkin = skinName;
+      document.querySelectorAll('.skin-card').forEach(card => {
+        card.classList.remove('selected');
+        if(card.getAttribute('onclick').includes(skinName)) {
+          card.classList.add('selected');
+        }
+      });
+      playSound('hop');
+    }
+
+    // --- GAME LOOP & UPDATES ---
+    function update(dt) {
+      time += dt;
+
+      // Handle screen shake decay
+      if (screenShake > 0) screenShake -= dt;
+
+      // Clean menu updates
+      if (state === 'title') {
+        // Animate clouds
+        skyClouds.forEach(cloud => {
+          cloud.x += cloud.speed * dt;
+          if (cloud.x > canvas.width + 60) cloud.x = -150;
+        });
+        return;
+      }
+
+      // --- PLAYER UPDATES ---
+      if (player.dead > 0) {
+        player.dead -= dt;
+        if (player.drowning) {
+          player.z -= 0.03 * dt;
+        }
+        if (player.dead <= 0) {
+          gameOver();
+        }
+      } else {
+        // Handle blocked bounce-back logic animation
+        if (player.blockedTimer > 0) {
+          player.blockedTimer -= dt;
+          const v = Math.sin((player.blockedTimer / 10) * Math.PI);
+          if (player.blockedDir === 'up' || player.blockedDir === 'down') {
+            player.scaleY = 1 - v * 0.15;
+            player.scaleZ = 1 + v * 0.08;
+          } else {
+            player.scaleX = 1 - v * 0.15;
+            player.scaleZ = 1 + v * 0.08;
+          }
+        } else {
+          // Normal scale lerping
+          player.scaleX += (1 - player.scaleX) * 0.15 * dt;
+          player.scaleY += (1 - player.scaleY) * 0.15 * dt;
+          player.scaleZ += (1 - player.scaleZ) * 0.15 * dt;
+        }
+
+        // Lerp hop positions
+        if (player.hopProgress > 0) {
+          player.hopProgress += 0.08 * dt;
+          if (player.hopProgress >= 1) {
+            player.hopProgress = 0;
+            player.gridX = player.targetX;
+            player.gridY = player.targetY;
+            player.z = 0;
+            
+            // Score tracking
+            if (player.gridY > player.maxReachedY) {
+              player.maxReachedY = player.gridY;
+              score = player.maxReachedY;
+              const sv = document.getElementById('score-val');
+              sv.innerText = score;
+              sv.classList.remove('bounce');
+              void sv.offsetWidth; // Trigger DOM reflow
+              sv.classList.add('bounce');
+            }
+
+            // Coin collection check
+            let currentLane = lanes[Math.round(player.gridY)];
+            let playerIntX = Math.round(player.gridX);
+            if (currentLane && currentLane.coins[playerIntX]) {
+              delete currentLane.coins[playerIntX];
+              coins += 1;
+              document.getElementById('coin-val').innerText = coins;
+              playSound('coin');
+              spawnGoldSparkles(playerIntX, player.gridY, 0.4);
+            }
+
+            // Drown landing check
+            if (currentLane && currentLane.type === 'river') {
+              let onLog = false;
+              currentLane.logs.forEach(log => {
+                const half = log.length / 2;
+                if (player.gridX >= log.x - half - 0.25 && player.gridX <= log.x + half + 0.25) {
+                  onLog = true;
+                }
+              });
+              if (!onLog) {
+                triggerDrowning();
+              }
+            }
+          } else {
+            // Interpolate jump trajectory
+            let t = player.hopProgress;
+            player.gridX = player.hopStartGridX + (player.targetX - player.hopStartGridX) * t;
+            player.gridY = player.hopStartGridY + (player.targetY - player.hopStartGridY) * t;
+            player.z = Math.sin(t * Math.PI) * 0.42;
+            
+            // Hop squash & stretch
+            player.scaleZ = 1 + Math.sin(t * Math.PI) * 0.22;
+            player.scaleX = 1 - Math.sin(t * Math.PI) * 0.12;
+            player.scaleY = 1 - Math.sin(t * Math.PI) * 0.12;
+          }
+        } else {
+          // Standing state - process log displacement
+          let currentLane = lanes[Math.round(player.gridY)];
+          if (currentLane && currentLane.type === 'river') {
+            let ridingLog = null;
+            currentLane.logs.forEach(log => {
+              const half = log.length / 2;
+              if (player.gridX >= log.x - half && player.gridX <= log.x + half) {
+                ridingLog = log;
+              }
+            });
+
+            if (ridingLog) {
+              const drift = currentLane.speed * currentLane.direction * dt;
+              player.gridX += drift;
+              player.targetX = player.gridX;
+              // Screen out-of-bounds check while log riding
+              if (player.gridX < -6.5 || player.gridX > 6.5) {
+                triggerDrowning();
+              }
+            } else {
+              triggerDrowning();
+            }
+          }
+        }
+      }
+
+      // --- PROCEDURAL GENERATION ADVANCEMENT ---
+      const renderAheadDistance = 14;
+      if (player.gridY + renderAheadDistance > maxGeneratedY) {
+        // Generate new lanes ahead
+        const generateTarget = Math.round(player.gridY) + renderAheadDistance;
+        for (let y = maxGeneratedY + 1; y <= generateTarget; y++) {
+          generateLane(y);
+        }
+        maxGeneratedY = generateTarget;
+
+        // Prune old lanes far behind
+        const pruneBehind = Math.round(player.gridY) - 10;
+        for (let y = minGeneratedY; y < pruneBehind; y++) {
+          delete lanes[y];
+        }
+        minGeneratedY = pruneBehind;
+      }
+
+      // Fallback screen bottom death check
+      if (player.gridY < player.maxReachedY - 7 && !player.dead) {
+        triggerHitDeath();
+      }
+
+      // --- CAMERA SMOOTH LERP ---
+      // Targets slightly ahead of player to give foresight
+      let pPos = project(player.gridX, player.gridY, player.hopProgress > 0 ? player.z : 0);
+      camera.targetX = pPos.x;
+      camera.targetY = pPos.y - 120;
+
+      camera.x += (camera.targetX - camera.x) * 0.08 * dt;
+      camera.y += (camera.targetY - camera.y) * 0.08 * dt;
+
+      // --- CLOUDS AND BACKGROUND ANIM ---
+      skyClouds.forEach(cloud => {
+        cloud.x += cloud.speed * dt;
+        if (cloud.x > canvas.width + 60) cloud.x = -150;
+      });
+
+      // --- LANES ANIMATIONS & HAZARDS ---
+      for (let yKey in lanes) {
+        let lane = lanes[yKey];
+        const dir = lane.direction;
+
+        if (lane.type === 'road') {
+          // Update vehicles
+          lane.vehicles.forEach((veh, vIdx) => {
+            veh.x += lane.speed * dir * dt;
+            // Recycle off-screen
+            if (dir === 1 && veh.x > 9.5) veh.x = -9.5;
+            if (dir === -1 && veh.x < -9.5) veh.x = 9.5;
+
+            // Collision check
+            if (!player.dead && Math.round(player.gridY) === lane.y) {
+              const halfL = veh.vType === 'car' ? 0.75 : 1.1;
+              if (player.gridX >= veh.x - halfL - 0.28 && player.gridX <= veh.x + halfL + 0.28) {
+                // If player is in air jumping, check height collision threshold
+                if (player.z < 0.3) {
+                  triggerHitDeath();
+                }
+              }
+            }
+          });
+
+          // Spawn vehicles
+          lane.spawnTimer -= dt;
+          if (lane.spawnTimer <= 0) {
+            lane.vehicles.push({
+              x: dir === 1 ? -9.5 : 9.5,
+              vType: Math.random() < 0.65 ? 'car' : 'truck',
+              hue: Math.random() * 360,
+              sat: 80,
+              light: 45
+            });
+            lane.spawnTimer = lane.spawnInterval * (0.85 + Math.random() * 0.3);
+          }
+        } else if (lane.type === 'river') {
+          // Update logs
+          lane.logs.forEach(log => {
+            log.x += lane.speed * dir * dt;
+            // Recycle logs
+            if (dir === 1 && log.x > 9.5) log.x = -9.5;
+            if (dir === -1 && log.x < -9.5) log.x = 9.5;
+          });
+
+          // Spawn logs
+          lane.spawnTimer -= dt;
+          if (lane.spawnTimer <= 0) {
+            lane.logs.push({
+              x: dir === 1 ? -9.5 : 9.5,
+              length: 2.2 + Math.random() * 1.0
+            });
+            lane.spawnTimer = lane.spawnInterval * (0.85 + Math.random() * 0.3);
+          }
+        } else if (lane.type === 'railroad') {
+          // Train approach sequencer
+          lane.trainTimer -= dt;
+          if (lane.trainTimer <= 0 && !lane.trainActive && !lane.trainWarning) {
+            lane.trainWarning = true;
+            lane.trainWarningTimer = 75; // frames warning
+          }
+
+          if (lane.trainWarning) {
+            lane.trainWarningTimer -= dt;
+            // Alarm sounds
+            if (Math.floor(lane.trainWarningTimer) % 20 === 0) {
+              playSound('warning');
+            }
+            if (lane.trainWarningTimer <= 0) {
+              lane.trainWarning = false;
+              lane.trainActive = true;
+              lane.trainX = dir === 1 ? -18 : 18;
+            }
+          }
+
+          if (lane.trainActive) {
+            lane.trainX += lane.speed * dir * dt;
+            // Collision check along train segment bounds
+            if (!player.dead && Math.round(player.gridY) === lane.y) {
+              // Locomotive + 3 coaches length (approx 9 grid units)
+              const tLen = 9.5;
+              const leftB = dir === 1 ? lane.trainX - tLen : lane.trainX;
+              const rightB = dir === 1 ? lane.trainX : lane.trainX + tLen;
+              if (player.gridX >= leftB - 0.2 && player.gridX <= rightB + 0.2) {
+                triggerHitDeath();
+              }
+            }
+
+            // Remove train once cleared
+            if ((dir === 1 && lane.trainX > 18) || (dir === -1 && lane.trainX < -18)) {
+              lane.trainActive = false;
+              lane.trainTimer = 220 + Math.random() * 260; // Set next train interval
+            }
+          }
+        }
+      }
+
+      // --- PARTICLES ENGINE ---
+      particles.forEach((p, idx) => {
+        p.x += p.vx * dt;
+        p.y += p.vy * dt;
+        p.z += p.vz * dt;
+        p.vz -= 0.012 * dt; // Gravity
+        p.rot += p.vrot * dt;
+        p.life -= p.decay * dt;
+        if (p.life <= 0) {
+          particles.splice(idx, 1);
+        }
+      });
+    }
+
+    // --- DEATH HANDLING TRIGGERS ---
+    function triggerHitDeath() {
+      if (player.dead) return;
+      player.dead = 35; // delay frames before game over
+      player.drowning = false;
+      playSound('death');
+      screenShake = 16;
+      
+      // Spawn voxel chunks (explosion burst)
+      for (let i = 0; i < 24; i++) {
+        particles.push({
+          x: player.gridX + (Math.random() - 0.5) * 0.4,
+          y: player.gridY + (Math.random() - 0.5) * 0.4,
+          z: player.z + 0.2 + Math.random() * 0.3,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
+          vz: 0.15 + Math.random() * 0.15,
+          rot: Math.random() * Math.PI,
+          vrot: (Math.random() - 0.5) * 0.3,
+          size: 0.12 + Math.random() * 0.08,
+          hue: activeSkin === 'chick' ? 48 : activeSkin === 'bot' ? 205 : 345,
+          sat: 90,
+          light: 55,
+          decay: 0.035,
+          life: 1
+        });
+      }
+    }
+
+    function triggerDrowning() {
+      if (player.dead) return;
+      player.dead = 30;
+      player.drowning = true;
+      playSound('death');
+
+      // Splash water drop chunks
+      for (let i = 0; i < 15; i++) {
+        particles.push({
+          x: player.gridX + (Math.random() - 0.5) * 0.4,
+          y: player.gridY + (Math.random() - 0.5) * 0.4,
+          z: -0.1,
+          vx: (Math.random() - 0.5) * 0.12,
+          vy: (Math.random() - 0.5) * 0.12,
+          vz: 0.1 + Math.random() * 0.15,
+          rot: Math.random() * Math.PI,
+          vrot: (Math.random() - 0.5) * 0.2,
+          size: 0.08 + Math.random() * 0.08,
+          hue: 200,
+          sat: 85,
+          light: 75,
+          decay: 0.05,
+          life: 1
+        });
+      }
+    }
+
+    function spawnGoldSparkles(gx, gy, gz) {
+      for (let i = 0; i < 10; i++) {
+        particles.push({
+          x: gx + (Math.random() - 0.5) * 0.5,
+          y: gy + (Math.random() - 0.5) * 0.5,
+          z: gz + (Math.random() - 0.5) * 0.3,
+          vx: (Math.random() - 0.5) * 0.08,
+          vy: (Math.random() - 0.5) * 0.08,
+          vz: 0.05 + Math.random() * 0.08,
+          rot: Math.random() * Math.PI,
+          vrot: (Math.random() - 0.5) * 0.3,
+          size: 0.08 + Math.random() * 0.05,
+          hue: 48,
+          sat: 100,
+          light: 65,
+          decay: 0.04,
+          life: 1
+        });
+      }
+    }
+
+    // --- RENDER ENGINE ---
+    function render() {
+      // 1. CLEAR VIEWPORT
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Apply screen shaking offset if triggered
+      ctx.save();
+      if (screenShake > 0) {
+        const dx = (Math.random() - 0.5) * screenShake * 0.5;
+        const dy = (Math.random() - 0.5) * screenShake * 0.5;
+        ctx.translate(dx, dy);
+      }
+
+      // 2. DRAW VIBRANT DAWN SKY GRADIENT
+      const skyGrad = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.45);
+      skyGrad.addColorStop(0, '#0a0a23');      // Deep Blue
+      skyGrad.addColorStop(0.4, '#1b1b46');    // Lavender Transition
+      skyGrad.addColorStop(0.7, '#48356b');    // Deep Coral
+      skyGrad.addColorStop(1, '#ff8a80');      // Coral Sunrise
+      ctx.fillStyle = skyGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 3. PARALLAX SKY BACKGROUND HILLS
+      bgHills.forEach(layer => {
+        ctx.fillStyle = layer.blocks[0].color;
+        ctx.beginPath();
+        layer.blocks.forEach(block => {
+          // Offset position based on camera X coordinates (parallax)
+          let sx = (block.xOffset - camera.x * layer.factor) % (canvas.width + block.width * 2);
+          if (sx < -block.width) sx += (canvas.width + block.width * 2);
+          const sy = canvas.height * 0.45 - block.height;
+          ctx.rect(sx, sy, block.width, block.height);
+        });
+        ctx.fill();
+      });
+
+      // 4. PARALLAX CLOUDS
+      skyClouds.forEach(cloud => {
+        drawCloud(ctx, cloud);
+      });
+
+      // 5. TRANSLATE TO ISOMETRIC WORLD SPACE
+      ctx.save();
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.translate(-camera.x, -camera.y);
+
+      // Depth sorted queue (isometric painting)
+      const queue = [];
+
+      // Determine visible lanes
+      const currentIntY = Math.round(player.gridY);
+      const startY = currentIntY - 8;
+      const endY = currentIntY + 12;
+
+      for (let y = startY; y <= endY; y++) {
+        const lane = lanes[y];
+        if (!lane) continue;
+
+        // Draw ground tiles
+        for (let x = -8; x <= 8; x++) {
+          let gHue = 0, gSat = 0, gLight = 0, gHeight = 0.2, gZ = -0.2;
+          
+          if (lane.type === 'grass') {
+            gHue = COLOR_GRASS.h;
+            gSat = COLOR_GRASS.s;
+            gLight = COLOR_GRASS.l + ((x + y) % 3 === 0 ? 3 : -2); // Subtle block texture pattern
+          } else if (lane.type === 'road') {
+            gHue = COLOR_ROAD.h;
+            gSat = COLOR_ROAD.s;
+            gLight = COLOR_ROAD.l;
+            gHeight = 0.18;
+            gZ = -0.22;
+          } else if (lane.type === 'river') {
+            gHue = COLOR_RIVER.h;
+            gSat = COLOR_RIVER.s;
+            gLight = COLOR_RIVER.l + (Math.floor(time * 0.05 + x) % 2 === 0 ? 4 : 0);
+            gHeight = 0.08;
+            gZ = -0.3;
+          } else if (lane.type === 'railroad') {
+            gHue = COLOR_RAILROAD.h;
+            gSat = COLOR_RAILROAD.s;
+            gLight = COLOR_RAILROAD.l;
+            gHeight = 0.18;
+            gZ = -0.22;
+          }
+
+          // Queue Ground Tiles at bottom depth tier
+          queue.push({
+            depth: (x + y) * 10,
+            draw: () => drawBlock(ctx, x - 0.5, y - 0.5, gZ, 1, 1, gHeight, gHue, gSat, gLight)
+          });
+
+          // Queue Road markings
+          if (lane.type === 'road' && x % 2 === 0) {
+            queue.push({
+              depth: (x + y) * 10 + 1,
+              draw: () => drawBlock(ctx, x - 0.3, y - 0.05, -0.04, 0.6, 0.1, 0.002, 45, 95, 75)
+            });
+          }
+
+          // Queue Railroad track lines
+          if (lane.type === 'railroad') {
+            // Wooden Ties
+            if (x >= -7 && x <= 7) {
+              queue.push({
+                depth: (x + y) * 10 + 1,
+                draw: () => drawBlock(ctx, x - 0.12, y - 0.45, -0.04, 0.24, 0.9, 0.03, 20, 30, 20)
+              });
+            }
+            // Rails (Steel plates)
+            queue.push({
+              depth: (x + y) * 10 + 2,
+              draw: () => {
+                drawBlock(ctx, x - 0.5, y - 0.26, -0.01, 1.0, 0.08, 0.05, 0, 0, 65);
+                drawBlock(ctx, x - 0.5, y + 0.18, -0.01, 1.0, 0.08, 0.05, 0, 0, 65);
+              }
+            });
+          }
+        }
+
+        // Queue Obstacles (Trees/Rocks on Grass)
+        if (lane.type === 'grass') {
+          for (let xKey in lane.obstacles) {
+            const obs = lane.obstacles[xKey];
+            const gx = parseInt(xKey);
+            
+            queue.push({
+              depth: (gx + lane.y) * 10 + 3,
+              draw: () => {
+                // Ground Shadow
+                drawShadow(ctx, gx - 0.3, lane.y - 0.3, 0.6, 0.6);
+                
+                if (obs.type === 'tree') {
+                  // Voxel trunk
+                  drawBlock(ctx, gx - 0.1, lane.y - 0.1, 0, 0.2, 0.2, 0.5, 25, 45, 25 + obs.colorVar);
+                  // Voxel leaves bottom layer
+                  drawBlock(ctx, gx - 0.4, lane.y - 0.4, 0.5, 0.8, 0.8, 0.5 * obs.scaleZ, 135, 50, 38 + obs.colorVar);
+                  // Top layer
+                  drawBlock(ctx, gx - 0.25, lane.y - 0.25, 0.5 + 0.5 * obs.scaleZ, 0.5, 0.5, 0.3 * obs.scaleZ, 135, 55, 46 + obs.colorVar);
+                } else {
+                  // Rock
+                  drawBlock(ctx, gx - 0.25, lane.y - 0.25, 0, 0.5, 0.5, 0.3 * obs.scaleZ, 0, 0, 52 + obs.colorVar);
+                  drawBlock(ctx, gx - 0.12, lane.y - 0.12, 0.3 * obs.scaleZ, 0.24, 0.24, 0.15 * obs.scaleZ, 0, 0, 66 + obs.colorVar);
+                }
+              }
+            });
+          }
+
+          // Queue Coins
+          for (let xKey in lane.coins) {
+            const cn = lane.coins[xKey];
+            const gx = parseInt(xKey);
+            cn.angle += 0.04;
+            cn.bob += 0.06;
+            const floatZ = 0.2 + Math.sin(cn.bob) * 0.06;
+
+            queue.push({
+              depth: (gx + lane.y) * 10 + 4,
+              draw: () => {
+                // Soft coin shadow underneath
+                drawShadow(ctx, gx - 0.18, lane.y - 0.18, 0.36, 0.36, 0.15);
+                drawRotatedBlock(ctx, gx, lane.y, floatZ, 0.3, 0.3, 0.3, cn.angle, 48, 100, 58);
+              }
+            });
+          }
+        }
+
+        // Queue Road Vehicles
+        if (lane.type === 'road') {
+          lane.vehicles.forEach(veh => {
+            queue.push({
+              depth: (veh.x + lane.y) * 10 + 3,
+              draw: () => {
+                const dirSign = lane.direction;
+                if (veh.vType === 'car') {
+                  // Voxel Car Assembly
+                  drawShadow(ctx, veh.x - 0.7, lane.y - 0.3, 1.4, 0.6);
+                  // Wheels
+                  drawBlock(ctx, veh.x + (dirSign * 0.38) - 0.15, lane.y - 0.34, 0, 0.3, 0.08, 0.18, 0, 0, 10);
+                  drawBlock(ctx, veh.x + (dirSign * 0.38) - 0.15, lane.y + 0.26, 0, 0.3, 0.08, 0.18, 0, 0, 10);
+                  drawBlock(ctx, veh.x - (dirSign * 0.38) - 0.15, lane.y - 0.34, 0, 0.3, 0.08, 0.18, 0, 0, 10);
+                  drawBlock(ctx, veh.x - (dirSign * 0.38) - 0.15, lane.y + 0.26, 0, 0.3, 0.08, 0.18, 0, 0, 10);
+                  // Chassis
+                  drawBlock(ctx, veh.x - 0.7, lane.y - 0.3, 0.1, 1.4, 0.6, 0.32, veh.hue, veh.sat, veh.light);
+                  // Cabin
+                  drawBlock(ctx, veh.x - (dirSign * 0.2) - 0.35, lane.y - 0.25, 0.42, 0.7, 0.5, 0.3, veh.hue, veh.sat, veh.light);
+                  // Windshield (cyan)
+                  drawBlock(ctx, veh.x + (dirSign * 0.3) - 0.02, lane.y - 0.2, 0.44, 0.04, 0.4, 0.22, 190, 85, 75);
+                } else {
+                  // Voxel Truck Assembly
+                  drawShadow(ctx, veh.x - 1.1, lane.y - 0.35, 2.2, 0.7);
+                  // 6 Wheels
+                  for (let wx = -0.7; wx <= 0.7; wx += 0.7) {
+                    drawBlock(ctx, veh.x + wx - 0.15, lane.y - 0.38, 0, 0.3, 0.08, 0.2, 0, 0, 10);
+                    drawBlock

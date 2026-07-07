@@ -1,0 +1,57 @@
+{
+  "id": "voxel-lane-hopper/ollama-glm-5/2026-07-07T17:58:28Z",
+  "task": {
+    "id": "voxel-lane-hopper",
+    "slug": "voxel-lane-hopper",
+    "category": "game-generation",
+    "title": "Voxel Lane Hopper",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/glm-5",
+    "display_name": "GLM-5",
+    "provider": "Ollama Cloud",
+    "version": "glm-5"
+  },
+  "prompt": {
+    "id": "voxel-lane-hopper",
+    "version": "1.0.0",
+    "sha256": "ca766ae317abdbd523e7490eb4bf72200c0dcb090407437478f22be52f263dae",
+    "title": "Voxel Lane Hopper"
+  },
+  "executed_at": "2026-07-07T17:58:28.071680Z",
+  "duration_ms": 67931,
+  "tokens": {
+    "input": 707,
+    "output": 11704,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Ollama cloud inference \u2014 no per-token API cost in local archive runs."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "7716313a995a556f5787e131481ffdc5f83d33698f1d34d25ccf36cc0395c394",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "1615ebe9e97cb3698b320c2652112c1a3337735adea4ad27aadf247b4d33a408"
+    }
+  ],
+  "logs": "run.log"
+}

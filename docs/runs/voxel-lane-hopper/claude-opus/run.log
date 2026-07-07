@@ -1,0 +1,7 @@
+task=voxel-lane-hopper
+model=claude/opus
+prompt=game-generation/voxel-lane-hopper@1.0.0
+adapter=claude
+duration_ms=631967
+tokens=702->9679
+screenshot=/Users/himanshu/open-model-archive/runs/voxel-lane-hopper/claude-opus/screenshots/desktop.png

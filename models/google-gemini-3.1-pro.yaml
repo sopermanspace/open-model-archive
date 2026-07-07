@@ -2,6 +2,7 @@ id: google/gemini-3.1-pro
 display_name: Gemini 3.1 Pro
 provider: Google
 adapter: cli
+cli_binary: agy
 cli_model: "Gemini 3.1 Pro (High)"
 # Google Gemini 3.1 Pro published API rates (approx. $1.25/1M in, $5.00/1M out)
 cost_per_1k_input: 0.00125

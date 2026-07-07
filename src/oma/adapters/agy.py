@@ -9,7 +9,42 @@ from oma.metrics.tokens import count_prompt_and_output
 
 
 class CliAdapter(ModelAdapter):
-    """Execute frontier models via a provider CLI in non-interactive print mode."""
+    """Execute frontier models via provider CLIs in non-interactive print mode."""
+
+    def _resolve_binary(self) -> str:
+        if self.config.cli_binary:
+            return self.config.cli_binary.lower()
+        adapter = self.config.adapter.lower()
+        if adapter in {"claude", "grok"}:
+            return adapter
+        return "agy"
+
+    def _build_command(self, full_prompt: str, add_dirs: set[Path]) -> list[str]:
+        binary = self._resolve_binary()
+
+        if binary == "claude":
+            cmd = ["claude", "-p", full_prompt, "--model", self.config.cli_model]
+            for directory in sorted(add_dirs):
+                cmd.extend(["--add-dir", str(directory)])
+            return cmd
+
+        if binary == "grok":
+            return [
+                "grok",
+                "-p",
+                full_prompt,
+                "-m",
+                self.config.cli_model,
+                "--output-format",
+                "plain",
+                "--permission-mode",
+                "bypassPermissions",
+            ]
+
+        cmd = ["agy", "-p", full_prompt, "--model", self.config.cli_model]
+        for directory in sorted(add_dirs):
+            cmd.extend(["--add-dir", str(directory)])
+        return cmd
 
     def execute(self, prompt: str, *, images: list[Path] | None = None) -> AdapterResult:
         if not self.config.cli_model:
@@ -28,10 +63,7 @@ class CliAdapter(ModelAdapter):
                 f"Read and analyze the image(s) as part of your response."
             )
 
-        cmd = ["agy", "-p", full_prompt, "--model", self.config.cli_model]
-
-        for directory in sorted(add_dirs):
-            cmd.extend(["--add-dir", str(directory)])
+        cmd = self._build_command(full_prompt, add_dirs)
 
         result = subprocess.run(
             cmd,

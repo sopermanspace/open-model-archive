@@ -1,0 +1,7 @@
+task=voxel-lane-hopper
+model=grok/composer-2.5-fast
+prompt=game-generation/voxel-lane-hopper@1.0.0
+adapter=grok
+duration_ms=155888
+tokens=702->9844
+screenshot=/Users/himanshu/open-model-archive/runs/voxel-lane-hopper/grok-composer-2.5-fast/screenshots/desktop.png

@@ -1,0 +1,57 @@
+{
+  "id": "voxel-lane-hopper/ollama-gemma4/2026-07-07T18:08:53Z",
+  "task": {
+    "id": "voxel-lane-hopper",
+    "slug": "voxel-lane-hopper",
+    "category": "game-generation",
+    "title": "Voxel Lane Hopper",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "voxel-lane-hopper",
+    "version": "1.0.0",
+    "sha256": "ca766ae317abdbd523e7490eb4bf72200c0dcb090407437478f22be52f263dae",
+    "title": "Voxel Lane Hopper"
+  },
+  "executed_at": "2026-07-07T18:08:53.491226Z",
+  "duration_ms": 176931,
+  "tokens": {
+    "input": 735,
+    "output": 10530,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "10218ce700bd8c69a423a0bfdbbee5fa0a34bf8ed19f9cec26ceaa418c9c1ed9",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "ece2bead39f26bd00ae529b86dedc56a3db6261de84765a8860b033d1c3e0007"
+    }
+  ],
+  "logs": "run.log"
+}

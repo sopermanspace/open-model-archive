@@ -1,0 +1,57 @@
+{
+  "id": "voxel-lane-hopper/ollama-kimi-k2.7-code/2026-07-07T18:15:36Z",
+  "task": {
+    "id": "voxel-lane-hopper",
+    "slug": "voxel-lane-hopper",
+    "category": "game-generation",
+    "title": "Voxel Lane Hopper",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "voxel-lane-hopper",
+    "version": "1.0.0",
+    "sha256": "ca766ae317abdbd523e7490eb4bf72200c0dcb090407437478f22be52f263dae",
+    "title": "Voxel Lane Hopper"
+  },
+  "executed_at": "2026-07-07T18:15:36.913449Z",
+  "duration_ms": 580298,
+  "tokens": {
+    "input": 708,
+    "output": 44285,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.089943,
+  "cost": {
+    "total_usd": 0.089943,
+    "input_usd": 0.000266,
+    "output_usd": 0.089677,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "0284ba70683eae54c50b3f7657098f6b00cb9781ae35e7bc2ec0e86d531d555f",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "85d18d93f84fec429535819489eb8044fbfbd829e2bdbc3caff774e8b83a6d7b"
+    }
+  ],
+  "logs": "run.log"
+}

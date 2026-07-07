@@ -1,0 +1,13 @@
+id: google/gemini-3.5-flash-high
+display_name: Gemini 3.5 Flash (High)
+provider: Google
+adapter: cli
+cli_binary: agy
+cli_model: "Gemini 3.5 Flash (High)"
+cost_per_1k_input: 0.0005
+cost_per_1k_output: 0.002
+pricing_source: Google Gemini Flash tier rates (estimated).
+cost_estimate: true
+notes: Fast Gemini tier via agy CLI.
+enabled: true
+timeout_seconds: 600

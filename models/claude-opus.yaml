@@ -1,0 +1,13 @@
+id: claude/opus
+display_name: Claude Opus
+provider: Anthropic
+adapter: claude
+cli_binary: claude
+cli_model: opus
+cost_per_1k_input: 0.015
+cost_per_1k_output: 0.075
+pricing_source: Anthropic Claude Opus API rates (estimated for CLI runs).
+cost_estimate: true
+notes: Claude Opus via claude CLI print mode.
+enabled: true
+timeout_seconds: 900

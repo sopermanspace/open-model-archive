@@ -19,7 +19,7 @@ def create_adapter(config: ModelConfig) -> ModelAdapter:
     adapter = config.adapter.lower()
     if adapter == "ollama":
         return OllamaAdapter(config)
-    if adapter in {"agy", "cli"}:
+    if adapter in {"agy", "cli", "claude", "grok"}:
         return CliAdapter(config)
     if adapter == "anthropic":
         return AnthropicAdapter(config)

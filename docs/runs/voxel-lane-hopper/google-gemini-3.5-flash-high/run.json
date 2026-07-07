@@ -1,0 +1,57 @@
+{
+  "id": "voxel-lane-hopper/google-gemini-3.5-flash-high/2026-07-07T18:00:03Z",
+  "task": {
+    "id": "voxel-lane-hopper",
+    "slug": "voxel-lane-hopper",
+    "category": "game-generation",
+    "title": "Voxel Lane Hopper",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.5-flash-high",
+    "display_name": "Gemini 3.5 Flash (High)",
+    "provider": "Google",
+    "version": "Gemini 3.5 Flash (High)"
+  },
+  "prompt": {
+    "id": "voxel-lane-hopper",
+    "version": "1.0.0",
+    "sha256": "ca766ae317abdbd523e7490eb4bf72200c0dcb090407437478f22be52f263dae",
+    "title": "Voxel Lane Hopper"
+  },
+  "executed_at": "2026-07-07T18:00:03.658051Z",
+  "duration_ms": 158129,
+  "tokens": {
+    "input": 702,
+    "output": 30861,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.062073,
+  "cost": {
+    "total_usd": 0.062073,
+    "input_usd": 0.000351,
+    "output_usd": 0.061722,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini Flash tier rates (estimated)."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "2d06168cc96ad7adcceb6462c394a68699d1c253a123d377134da305773c23d3",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "e387385392cfa80ffd410199ca383860fb345ad48282d124457aa6c82fdda610"
+    }
+  ],
+  "logs": "run.log"
+}

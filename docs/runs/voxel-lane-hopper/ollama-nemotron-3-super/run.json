@@ -1,0 +1,57 @@
+{
+  "id": "voxel-lane-hopper/ollama-nemotron-3-super/2026-07-07T18:18:21Z",
+  "task": {
+    "id": "voxel-lane-hopper",
+    "slug": "voxel-lane-hopper",
+    "category": "game-generation",
+    "title": "Voxel Lane Hopper",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/nemotron-3-super",
+    "display_name": "Nemotron 3 Super",
+    "provider": "Ollama Cloud",
+    "version": "nemotron-3-super"
+  },
+  "prompt": {
+    "id": "voxel-lane-hopper",
+    "version": "1.0.0",
+    "sha256": "ca766ae317abdbd523e7490eb4bf72200c0dcb090407437478f22be52f263dae",
+    "title": "Voxel Lane Hopper"
+  },
+  "executed_at": "2026-07-07T18:18:21.116155Z",
+  "duration_ms": 107127,
+  "tokens": {
+    "input": 747,
+    "output": 9656,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Ollama cloud inference \u2014 no per-token API cost in local archive runs."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "f3f68614df46cc0df4b697fc6735176885bb440e1edd201dd0eb8de204fdddf4",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "33709dcb553bca0f90e5e8962d6d815c1bff62e7eb6a46f94d41c5e3198a6382"
+    }
+  ],
+  "logs": "run.log"
+}

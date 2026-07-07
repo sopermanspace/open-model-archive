@@ -1,0 +1,7 @@
+task=voxel-lane-hopper
+model=ollama/gemma4
+prompt=game-generation/voxel-lane-hopper@1.0.0
+adapter=ollama
+duration_ms=176931
+tokens=735->10530
+screenshot=/Users/himanshu/open-model-archive/runs/voxel-lane-hopper/ollama-gemma4/screenshots/desktop.png

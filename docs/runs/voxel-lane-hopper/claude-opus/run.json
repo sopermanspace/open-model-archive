@@ -1,0 +1,57 @@
+{
+  "id": "voxel-lane-hopper/claude-opus/2026-07-07T18:16:28Z",
+  "task": {
+    "id": "voxel-lane-hopper",
+    "slug": "voxel-lane-hopper",
+    "category": "game-generation",
+    "title": "Voxel Lane Hopper",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "claude/opus",
+    "display_name": "Claude Opus",
+    "provider": "Anthropic",
+    "version": "opus"
+  },
+  "prompt": {
+    "id": "voxel-lane-hopper",
+    "version": "1.0.0",
+    "sha256": "ca766ae317abdbd523e7490eb4bf72200c0dcb090407437478f22be52f263dae",
+    "title": "Voxel Lane Hopper"
+  },
+  "executed_at": "2026-07-07T18:16:28.645571Z",
+  "duration_ms": 631967,
+  "tokens": {
+    "input": 702,
+    "output": 9679,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.736455,
+  "cost": {
+    "total_usd": 0.736455,
+    "input_usd": 0.01053,
+    "output_usd": 0.725925,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Anthropic Claude Opus API rates (estimated for CLI runs)."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "fbfc48edbc94d00d8dffc037f24261707aebcc38c2e5ee1f2d75b5b88198b6ae",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "8e85f30579655eb625835f6a01ca771fcab40f8adc7ae12bc004b75974b26447"
+    }
+  ],
+  "logs": "run.log"
+}

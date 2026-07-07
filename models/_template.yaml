@@ -2,9 +2,10 @@
 id: provider/model-name
 display_name: Model Display Name
 provider: Provider Name
-adapter: ollama  # ollama | cli | openai | anthropic | openrouter | together | fireworks | sarvam | codex
+adapter: ollama  # ollama | cli | agy | claude | grok | openai | anthropic | openrouter | together | fireworks | sarvam | codex
 model_ref: model-tag:latest       # ollama only
-cli_model: ""                     # cli adapter only
+cli_model: ""                     # cli / agy / claude / grok adapters
+cli_binary: ""                    # agy (default) | claude | grok
 api_model: ""                     # API adapters
 api_key_env: ""                   # e.g. OPENAI_API_KEY
 api_base: ""                      # optional API base URL override

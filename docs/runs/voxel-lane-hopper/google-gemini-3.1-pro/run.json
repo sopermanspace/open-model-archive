@@ -1,0 +1,57 @@
+{
+  "id": "voxel-lane-hopper/google-gemini-3.1-pro/2026-07-07T18:04:34Z",
+  "task": {
+    "id": "voxel-lane-hopper",
+    "slug": "voxel-lane-hopper",
+    "category": "game-generation",
+    "title": "Voxel Lane Hopper",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "voxel-lane-hopper",
+    "version": "1.0.0",
+    "sha256": "ca766ae317abdbd523e7490eb4bf72200c0dcb090407437478f22be52f263dae",
+    "title": "Voxel Lane Hopper"
+  },
+  "executed_at": "2026-07-07T18:04:34.402283Z",
+  "duration_ms": 263043,
+  "tokens": {
+    "input": 702,
+    "output": 8347,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.042613,
+  "cost": {
+    "total_usd": 0.042613,
+    "input_usd": 0.000877,
+    "output_usd": 0.041735,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "112251bad969afc3816788d92954b92787f033a8ab42e2ce4e306a92ac49fef5",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "61c945c853175af2c07c5abafb3217efed911ec031d306f3db0bc206f7629fa3"
+    }
+  ],
+  "logs": "run.log"
+}
