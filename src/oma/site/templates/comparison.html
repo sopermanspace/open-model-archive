@@ -65,7 +65,7 @@
     {% if html_artifact and run.screenshots %}
     <div class="output-viewer" data-viewer="tabs">
       <div class="output-viewer-bar">
-        <span class="output-viewer-label">Website preview</span>
+        <span class="output-viewer-label">{% if task.category == 'game-generation' %}Game preview{% else %}Website preview{% endif %}</span>
         <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </button>
@@ -88,7 +88,7 @@
     {% elif html_artifact %}
     <div class="output-viewer" data-viewer="iframe">
       <div class="output-viewer-bar">
-        <span class="output-viewer-label">Website preview</span>
+        <span class="output-viewer-label">{% if task.category == 'game-generation' %}Game preview{% else %}Website preview{% endif %}</span>
         <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen"
           data-iframe-src="{{ site_root }}/runs/{{ model_path }}/{{ html_artifact.path }}">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>

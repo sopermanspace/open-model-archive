@@ -1,0 +1,57 @@
+{
+  "id": "tile-merge-puzzle/ollama-gemma4/2026-07-07T17:42:30Z",
+  "task": {
+    "id": "tile-merge-puzzle",
+    "slug": "tile-merge-puzzle",
+    "category": "game-generation",
+    "title": "Tile Merge Puzzle (2048-style)",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/gemma4",
+    "display_name": "Gemma 4",
+    "provider": "Ollama",
+    "version": "gemma4:latest"
+  },
+  "prompt": {
+    "id": "tile-merge-puzzle",
+    "version": "1.0.0",
+    "sha256": "7ee96720374baec38a6565384ebcee9ce495853baf29d573fdd234c169979cff",
+    "title": "Tile Merge Puzzle (2048-style)"
+  },
+  "executed_at": "2026-07-07T17:42:30.394182Z",
+  "duration_ms": 144930,
+  "tokens": {
+    "input": 521,
+    "output": 8785,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Local inference on your hardware \u2014 no API token cost."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "78cb3908c8a0b6677b652c58f6ce68f4fe71473b9c60d215db65162fe1c344c0",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "2d7a27a525fe459c28e4efc6af5105b1db36ba60fa2c4b64265af0e24182feac"
+    }
+  ],
+  "logs": "run.log"
+}

@@ -1,0 +1,7 @@
+task=tile-merge-puzzle
+model=ollama/nemotron-3-super
+prompt=game-generation/tile-merge-puzzle@1.0.0
+adapter=ollama
+duration_ms=96876
+tokens=516->7420
+screenshot=/Users/himanshu/open-model-archive/runs/tile-merge-puzzle/ollama-nemotron-3-super/screenshots/desktop.png

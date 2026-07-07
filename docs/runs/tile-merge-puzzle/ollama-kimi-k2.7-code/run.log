@@ -1,0 +1,7 @@
+task=tile-merge-puzzle
+model=ollama/kimi-k2.7-code
+prompt=game-generation/tile-merge-puzzle@1.0.0
+adapter=ollama
+duration_ms=226499
+tokens=486->18859
+screenshot=/Users/himanshu/open-model-archive/runs/tile-merge-puzzle/ollama-kimi-k2.7-code/screenshots/desktop.png

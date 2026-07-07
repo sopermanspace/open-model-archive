@@ -1,0 +1,13 @@
+id: ollama/nemotron-3-super
+display_name: Nemotron 3 Super
+provider: Ollama Cloud
+adapter: ollama
+model_ref: nemotron-3-super:cloud
+api_base: http://127.0.0.1:11434
+cost_per_1k_input: 0.0
+cost_per_1k_output: 0.0
+pricing_source: Ollama cloud inference — no per-token API cost in local archive runs.
+cost_estimate: false
+notes: NVIDIA Nemotron 3 Super (120B MoE) via Ollama cloud. Requires authenticated Ollama account.
+enabled: true
+timeout_seconds: 900

@@ -1,0 +1,7 @@
+task=tile-merge-puzzle
+model=ollama/gemma4
+prompt=game-generation/tile-merge-puzzle@1.0.0
+adapter=ollama
+duration_ms=144930
+tokens=521->8785
+screenshot=/Users/himanshu/open-model-archive/runs/tile-merge-puzzle/ollama-gemma4/screenshots/desktop.png

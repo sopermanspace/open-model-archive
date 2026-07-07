@@ -1,0 +1,57 @@
+{
+  "id": "tile-merge-puzzle/ollama-glm-5/2026-07-07T17:47:17Z",
+  "task": {
+    "id": "tile-merge-puzzle",
+    "slug": "tile-merge-puzzle",
+    "category": "game-generation",
+    "title": "Tile Merge Puzzle (2048-style)",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/glm-5",
+    "display_name": "GLM-5",
+    "provider": "Ollama Cloud",
+    "version": "glm-5"
+  },
+  "prompt": {
+    "id": "tile-merge-puzzle",
+    "version": "1.0.0",
+    "sha256": "7ee96720374baec38a6565384ebcee9ce495853baf29d573fdd234c169979cff",
+    "title": "Tile Merge Puzzle (2048-style)"
+  },
+  "executed_at": "2026-07-07T17:47:17.859173Z",
+  "duration_ms": 39714,
+  "tokens": {
+    "input": 481,
+    "output": 6907,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Ollama cloud inference \u2014 no per-token API cost in local archive runs."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "cd2c9040aab455510e8adc96dfb8b7b54c9211290c8679b2812d9e69ad27c654",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "e4d0729231c7a665a9e6eb454aacbadbd5ae80bbdb2962bf93e456a5091f5aa8"
+    }
+  ],
+  "logs": "run.log"
+}

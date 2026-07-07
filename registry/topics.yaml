@@ -24,3 +24,6 @@ topics:
   - id: vision
     title: Vision
     description: Image understanding and multimodal analysis.
+  - id: games
+    title: Games
+    description: Playable browser games with multiple mechanics and game states.

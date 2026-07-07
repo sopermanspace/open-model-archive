@@ -1,0 +1,16 @@
+id: tile-merge-puzzle
+slug: tile-merge-puzzle
+category: game-generation
+topics: [code, design, games]
+title: Tile Merge Puzzle (2048-style)
+description: >
+  Build a complete playable 2048-style tile-merging game in a single HTML file.
+  Compare game logic, UI polish, and whether the result is actually playable.
+prompt: game-generation/tile-merge-puzzle@v1.0.0
+post_process:
+  - extract_html
+models:
+  - ollama/gemma4
+  - ollama/kimi-k2.7-code
+  - ollama/glm-5
+  - ollama/nemotron-3-super

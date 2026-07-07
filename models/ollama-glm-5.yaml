@@ -1,0 +1,13 @@
+id: ollama/glm-5
+display_name: GLM-5
+provider: Ollama Cloud
+adapter: ollama
+model_ref: glm-5:cloud
+api_base: http://127.0.0.1:11434
+cost_per_1k_input: 0.0
+cost_per_1k_output: 0.0
+pricing_source: Ollama cloud inference — no per-token API cost in local archive runs.
+cost_estimate: false
+notes: Z.ai GLM-5 MoE via Ollama cloud sync. Requires authenticated Ollama account.
+enabled: true
+timeout_seconds: 900

@@ -1,0 +1,57 @@
+{
+  "id": "tile-merge-puzzle/ollama-kimi-k2.7-code/2026-07-07T17:46:33Z",
+  "task": {
+    "id": "tile-merge-puzzle",
+    "slug": "tile-merge-puzzle",
+    "category": "game-generation",
+    "title": "Tile Merge Puzzle (2048-style)",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/kimi-k2.7-code",
+    "display_name": "Kimi K2.7 Code",
+    "provider": "Ollama Cloud",
+    "version": "kimi-k2.7-code"
+  },
+  "prompt": {
+    "id": "tile-merge-puzzle",
+    "version": "1.0.0",
+    "sha256": "7ee96720374baec38a6565384ebcee9ce495853baf29d573fdd234c169979cff",
+    "title": "Tile Merge Puzzle (2048-style)"
+  },
+  "executed_at": "2026-07-07T17:46:33.901496Z",
+  "duration_ms": 226499,
+  "tokens": {
+    "input": 486,
+    "output": 18859,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.038372,
+  "cost": {
+    "total_usd": 0.038372,
+    "input_usd": 0.000182,
+    "output_usd": 0.038189,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Moonshot Kimi K2 API rates ($0.375 in / $2.025 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "e1ff48374dbe5a647858389e3a597d2eb193925627c1608c9b2c5e7a3728826f",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "8a072a7a2b3332e268eaa95f747a0377f0b25d68b6cb49f5c57d5dfaffbc4ffa"
+    }
+  ],
+  "logs": "run.log"
+}

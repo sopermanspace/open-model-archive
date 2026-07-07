@@ -1,0 +1,57 @@
+{
+  "id": "tile-merge-puzzle/ollama-nemotron-3-super/2026-07-07T17:49:06Z",
+  "task": {
+    "id": "tile-merge-puzzle",
+    "slug": "tile-merge-puzzle",
+    "category": "game-generation",
+    "title": "Tile Merge Puzzle (2048-style)",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/nemotron-3-super",
+    "display_name": "Nemotron 3 Super",
+    "provider": "Ollama Cloud",
+    "version": "nemotron-3-super"
+  },
+  "prompt": {
+    "id": "tile-merge-puzzle",
+    "version": "1.0.0",
+    "sha256": "7ee96720374baec38a6565384ebcee9ce495853baf29d573fdd234c169979cff",
+    "title": "Tile Merge Puzzle (2048-style)"
+  },
+  "executed_at": "2026-07-07T17:49:06.250078Z",
+  "duration_ms": 96876,
+  "tokens": {
+    "input": 516,
+    "output": 7420,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Ollama cloud inference \u2014 no per-token API cost in local archive runs."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "c37f819d003fc398724c745400191012b0683c77228fe746c24c90cd133adfff",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "daf2efd6c1175196c9c7985732146c069b47a0f339c0f20e8ec2f146e60f6b3d"
+    }
+  ],
+  "logs": "run.log"
+}
