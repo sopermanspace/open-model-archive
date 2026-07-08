@@ -1,4 +1,4 @@
-import { list, put } from "@vercel/blob";
+import { get, head, put } from "@vercel/blob";
 
 const DEFAULT_REPO = "sopermanspace/open-model-archive";
 const VOTES_PATH = "data/votes.json";
@@ -22,26 +22,33 @@ function githubHeaders() {
 }
 
 function hasBlobStorage() {
-  return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+  return Boolean(
+    process.env.BLOB_READ_WRITE_TOKEN ||
+      (process.env.VERCEL_OIDC_TOKEN && process.env.BLOB_STORE_ID),
+  );
 }
 
 async function readFromBlob() {
-  const { blobs } = await list({ prefix: "community/", limit: 10 });
-  const blob = blobs.find((entry) => entry.pathname === BLOB_KEY);
-  if (!blob) {
-    return { votes: [] };
-  }
+  try {
+    const meta = await head(BLOB_KEY, { access: "private" });
+    if (!meta) {
+      return { votes: [] };
+    }
 
-  const res = await fetch(blob.url, {
-    headers: {
-      Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}`,
-    },
-  });
-  if (!res.ok) {
-    throw new Error(`Blob read failed (${res.status})`);
+    const blob = await get(meta.url, { access: "private" });
+    if (!blob || !blob.stream) {
+      return { votes: [] };
+    }
+
+    const text = await new Response(blob.stream).text();
+    const content = JSON.parse(text);
+    return { votes: content.votes || [] };
+  } catch (err) {
+    if (err instanceof Error && /not found/i.test(err.message)) {
+      return { votes: [] };
+    }
+    throw err;
   }
-  const content = await res.json();
-  return { votes: content.votes || [] };
 }
 
 async function writeToBlob(votes) {

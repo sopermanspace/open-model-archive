@@ -146,14 +146,26 @@
         dislikeCount.textContent = modelStats ? modelStats.dislikes : 0;
       }
 
-      if (likeBtn) likeBtn.classList.remove("is-active");
-      if (dislikeBtn) dislikeBtn.classList.remove("is-active");
+      if (likeBtn) {
+        likeBtn.classList.remove("is-active");
+        var likeIcon = likeBtn.querySelector(".vote-icon");
+        if (likeIcon) likeIcon.classList.remove("ph-fill");
+      }
+      if (dislikeBtn) {
+        dislikeBtn.classList.remove("is-active");
+        var dislikeIcon = dislikeBtn.querySelector(".vote-icon");
+        if (dislikeIcon) dislikeIcon.classList.remove("ph-fill");
+      }
       if (userVote && userVote.model_id === modelId) {
         if (userVote.reaction === "like" && likeBtn) {
           likeBtn.classList.add("is-active");
+          var activeLikeIcon = likeBtn.querySelector(".vote-icon");
+          if (activeLikeIcon) activeLikeIcon.classList.add("ph-fill");
         }
         if (userVote.reaction === "dislike" && dislikeBtn) {
           dislikeBtn.classList.add("is-active");
+          var activeDislikeIcon = dislikeBtn.querySelector(".vote-icon");
+          if (activeDislikeIcon) activeDislikeIcon.classList.add("ph-fill");
         }
       }
     });

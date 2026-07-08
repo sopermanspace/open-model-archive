@@ -853,22 +853,20 @@ code {
   opacity: 0.35;
 }
 
+.vote-icon {
+  font-size: 0.95rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
 .vote-btn.is-active.vote-like {
   color: #8fbf8f;
   opacity: 1;
 }
 
-.vote-btn.is-active.vote-like svg path {
-  fill: rgba(143, 191, 143, 0.18);
-}
-
 .vote-btn.is-active.vote-dislike {
   color: #d07070;
   opacity: 1;
-}
-
-.vote-btn.is-active.vote-dislike svg path {
-  fill: rgba(208, 112, 112, 0.18);
 }
 
 .vote-count {
