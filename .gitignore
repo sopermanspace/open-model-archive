@@ -1,6 +1,7 @@
 # Secrets and local config
 .env
 .env.*
+.env.local
 *.env
 
 # Internal planning and scratch files
@@ -38,3 +39,4 @@ venv/
 playwright-report/
 test-results/
 .vercel
+.env*

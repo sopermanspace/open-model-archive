@@ -42,8 +42,13 @@ export default async function handler(req, res) {
         return;
       }
 
-      const body =
-        typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+      let body = req.body;
+      if (typeof body === "string" && body) {
+        body = JSON.parse(body);
+      }
+      if (Buffer.isBuffer(body)) {
+        body = JSON.parse(body.toString("utf8"));
+      }
       const { category, task_slug, model_id, reaction } = body || {};
 
       if (!category || !task_slug || !model_id) {
@@ -78,6 +83,10 @@ export default async function handler(req, res) {
 
     res.status(405).json({ error: "Method not allowed" });
   } catch (err) {
-    res.status(500).json({ error: "Vote service unavailable" });
+    const message =
+      err instanceof Error && err.message.includes("not configured")
+        ? "Vote storage is not configured on the server"
+        : "Could not save your vote — try again";
+    res.status(500).json({ error: message });
   }
 }

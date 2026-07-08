@@ -4,6 +4,7 @@
 
   var TOKEN_KEY = "oma_auth_token";
   var CATEGORY = document.body.dataset.voteCategory;
+  var toastTimer = null;
 
   function getToken() {
     return sessionStorage.getItem(TOKEN_KEY);
@@ -52,6 +53,23 @@
       "?return_to=" +
       encodeURIComponent(returnTo)
     );
+  }
+
+  function showToast(message, isError) {
+    var toast = document.getElementById("vote-toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "vote-toast";
+      toast.className = "vote-toast";
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.toggle("is-error", Boolean(isError));
+    toast.classList.add("is-visible");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      toast.classList.remove("is-visible");
+    }, 2800);
   }
 
   function updateAuthUi(user) {
@@ -128,11 +146,13 @@
         dislikeCount.textContent = modelStats ? modelStats.dislikes : 0;
       }
 
-      likeBtn.classList.remove("is-active");
-      dislikeBtn.classList.remove("is-active");
+      if (likeBtn) likeBtn.classList.remove("is-active");
+      if (dislikeBtn) dislikeBtn.classList.remove("is-active");
       if (userVote && userVote.model_id === modelId) {
-        if (userVote.reaction === "like") likeBtn.classList.add("is-active");
-        if (userVote.reaction === "dislike") {
+        if (userVote.reaction === "like" && likeBtn) {
+          likeBtn.classList.add("is-active");
+        }
+        if (userVote.reaction === "dislike" && dislikeBtn) {
           dislikeBtn.classList.add("is-active");
         }
       }
@@ -152,6 +172,12 @@
       .catch(function () {});
   }
 
+  function setBarLoading(bar, loading) {
+    bar.querySelectorAll(".vote-btn").forEach(function (btn) {
+      btn.disabled = loading;
+    });
+  }
+
   function castVote(bar, reaction) {
     if (!getToken()) {
       location.href = signInUrl();
@@ -165,6 +191,8 @@
       reaction: reaction,
     };
 
+    setBarLoading(bar, true);
+
     fetch(apiUrl("/api/votes"), {
       method: "POST",
       headers: Object.assign(
@@ -176,16 +204,34 @@
       .then(function (res) {
         if (res.status === 401) {
           setToken(null);
-          location.href = signInUrl();
+          showToast("Session expired — sign in again", true);
+          setTimeout(function () {
+            location.href = signInUrl();
+          }, 900);
           return null;
         }
-        return res.json();
+        return res.json().then(function (data) {
+          return { ok: res.ok, data: data };
+        });
       })
-      .then(function (data) {
-        if (!data) return;
-        applyCounts(data, data.user_vote);
+      .then(function (result) {
+        if (!result) return;
+        if (!result.ok) {
+          showToast(result.data.error || "Could not save vote", true);
+          return;
+        }
+        applyCounts(result.data, result.data.user_vote);
+        showToast(
+          result.data.user_vote ? "Vote saved" : "Vote removed",
+          false,
+        );
       })
-      .catch(function () {});
+      .catch(function () {
+        showToast("Network error — try again", true);
+      })
+      .finally(function () {
+        setBarLoading(bar, false);
+      });
   }
 
   function initVoteBars() {
