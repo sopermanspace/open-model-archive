@@ -33,7 +33,7 @@
   </script>
   
 </head>
-<body>
+<body data-api-base="https://open-model-archive.vercel.app">
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="/open-model-archive/">Open Model Archive</a>
@@ -41,6 +41,11 @@
         <a href="/open-model-archive/">Archive</a>
         <a href="/open-model-archive/about/">About</a>
         <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
+        
+        <button type="button" class="auth-btn" id="oma-signin">Sign in to vote</button>
+        <span class="auth-user hidden" id="oma-user"></span>
+        <button type="button" class="auth-btn auth-signout hidden" id="oma-signout">Sign out</button>
+        
       </nav>
     </div>
   </header>
@@ -103,6 +108,9 @@
       <p>Open source. Every prompt versioned. Every artifact public.</p>
     </div>
   </footer>
+  
+  
+  <script src="/open-model-archive/assets/js/votes.js" defer></script>
   
 </body>
 </html>

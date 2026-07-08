@@ -3,5 +3,10 @@
   "framework": null,
   "buildCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH=\"$HOME/.local/bin:$PATH\" && uv sync && uv run oma build --skip-run",
   "outputDirectory": "docs",
-  "installCommand": "echo 'deps installed in buildCommand'"
+  "installCommand": "echo 'deps installed in buildCommand'",
+  "functions": {
+    "api/**/*.js": {
+      "maxDuration": 10
+    }
+  }
 }

@@ -17,6 +17,14 @@
   </div>
 </section>
 
+{% if api_base_url %}
+<section class="container community-prefs" id="community-prefs">
+  <h2>Community picks</h2>
+  <p class="lede community-prefs-note">Sign in with GitHub on any task page to vote. One pick per category — like or dislike a single model.</p>
+  <div class="pref-grid"></div>
+</section>
+{% endif %}
+
 {% if topic_list %}
 <section class="container topics-section">
   <h2>Topics</h2>

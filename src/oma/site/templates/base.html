@@ -33,7 +33,7 @@
   </script>
   {% block head %}{% endblock %}
 </head>
-<body>
+<body{% if api_base_url %} data-api-base="{{ api_base_url }}"{% endif %}{% if vote_category %} data-vote-category="{{ vote_category }}"{% endif %}>
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="{{ site_root }}/">{{ site_name }}</a>
@@ -41,6 +41,11 @@
         <a href="{{ site_root }}/">Archive</a>
         <a href="{{ site_root }}/about/">About</a>
         <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
+        {% if api_base_url %}
+        <button type="button" class="auth-btn" id="oma-signin">Sign in to vote</button>
+        <span class="auth-user hidden" id="oma-user"></span>
+        <button type="button" class="auth-btn auth-signout hidden" id="oma-signout">Sign out</button>
+        {% endif %}
       </nav>
     </div>
   </header>
@@ -55,5 +60,8 @@
     </div>
   </footer>
   {% block scripts %}{% endblock %}
+  {% if api_base_url %}
+  <script src="{{ site_root }}/assets/js/votes.js" defer></script>
+  {% endif %}
 </body>
 </html>

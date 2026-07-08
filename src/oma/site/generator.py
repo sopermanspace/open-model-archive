@@ -153,6 +153,7 @@ def generate_site() -> None:
         site=site,
         site_root=site_root,
         canonical_url=site.canonical_url,
+        api_base_url=site.api_base_url,
         tasks=index_runs,
         categories=categories,
         topic_list=list_topics(),
@@ -166,6 +167,7 @@ def generate_site() -> None:
         site=site,
         site_root=site_root,
         canonical_url=site.canonical_url,
+        api_base_url=site.api_base_url,
     )
     about_dir = DOCS_DIR / "about"
     about_dir.mkdir()
@@ -216,6 +218,8 @@ def generate_site() -> None:
             site=site,
             site_root=site_root,
             canonical_url=site.canonical_url,
+            api_base_url=site.api_base_url,
+            vote_category=task.category,
             task=task,
             runs=task_runs,
             prompt_body=prompt_body,

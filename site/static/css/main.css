@@ -784,3 +784,124 @@ code {
   padding: 0.1em 0.35em;
   border-radius: 2px;
 }
+
+.hidden { display: none !important; }
+
+.auth-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.6rem;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.auth-btn:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.auth-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.auth-avatar {
+  border-radius: 50%;
+  display: block;
+}
+
+.vote-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.75rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.vote-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+.vote-btn:hover {
+  color: var(--text);
+  opacity: 1;
+}
+
+.vote-btn.is-active.vote-like {
+  color: #7d9e7d;
+  opacity: 1;
+}
+
+.vote-btn.is-active.vote-dislike {
+  color: var(--error);
+  opacity: 1;
+}
+
+.vote-count {
+  font-size: 0.7rem;
+  color: var(--muted);
+  min-width: 0.85rem;
+  text-align: center;
+}
+
+.vote-count + .vote-btn {
+  margin-left: 0.25rem;
+}
+
+.community-prefs {
+  margin-bottom: 2.5rem;
+}
+
+.community-prefs h2 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.community-prefs-note {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.pref-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.pref-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.pref-category {
+  font-weight: 600;
+  text-transform: capitalize;
+  min-width: 8rem;
+}
+
+.pref-like { color: #7d9e7d; }
+.pref-dislike { color: var(--error); }

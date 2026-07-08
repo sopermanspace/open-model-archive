@@ -14,3 +14,6 @@ keywords: >-
 robots: index, follow
 author: sopermanspace
 publisher: Open Model Archive
+
+# Vote API (Vercel serverless). Static site uses GitHub Pages; OAuth + votes hit this origin.
+api_base_url: https://open-model-archive.vercel.app

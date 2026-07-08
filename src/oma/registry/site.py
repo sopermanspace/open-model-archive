@@ -22,6 +22,7 @@ class SiteConfig(BaseModel):
     robots: str = "index, follow"
     author: str = "sopermanspace"
     publisher: str = "Open Model Archive"
+    api_base_url: str | None = None
 
 
 def load_site_config() -> SiteConfig:

@@ -33,7 +33,7 @@
   </script>
   
 </head>
-<body>
+<body data-api-base="https://open-model-archive.vercel.app">
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="/open-model-archive/">Open Model Archive</a>
@@ -41,6 +41,11 @@
         <a href="/open-model-archive/">Archive</a>
         <a href="/open-model-archive/about/">About</a>
         <a href="https://github.com/sopermanspace/open-model-archive" rel="noopener">GitHub</a>
+        
+        <button type="button" class="auth-btn" id="oma-signin">Sign in to vote</button>
+        <span class="auth-user hidden" id="oma-user"></span>
+        <button type="button" class="auth-btn auth-signout hidden" id="oma-signout">Sign out</button>
+        
       </nav>
     </div>
   </header>
@@ -60,6 +65,14 @@
     <div class="value-item"><strong>GLM-5</strong><span>Fastest complete build (68s) with the largest codebase — every lane type implemented without cutting corners.</span></div>
   </div>
 </section>
+
+
+<section class="container community-prefs" id="community-prefs">
+  <h2>Community picks</h2>
+  <p class="lede community-prefs-note">Sign in with GitHub on any task page to vote. One pick per category — like or dislike a single model.</p>
+  <div class="pref-grid"></div>
+</section>
+
 
 
 <section class="container topics-section">
@@ -863,5 +876,8 @@
 })();
 </script>
 
+  
+  <script src="/open-model-archive/assets/js/votes.js" defer></script>
+  
 </body>
 </html>
