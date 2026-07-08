@@ -14,3 +14,8 @@ models:
   - ollama/kimi-k2.7-code
   - ollama/glm-5
   - ollama/nemotron-3-super
+  - google/gemini-3.5-flash-high
+  - google/gemini-3.1-pro
+  - claude/sonnet
+  - claude/opus
+  - grok/composer-2.5-fast

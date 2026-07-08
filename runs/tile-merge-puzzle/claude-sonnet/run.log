@@ -1,0 +1,7 @@
+task=tile-merge-puzzle
+model=claude/sonnet
+prompt=game-generation/tile-merge-puzzle@1.0.0
+adapter=claude
+duration_ms=59255
+tokens=476->5457
+screenshot=/Users/himanshu/open-model-archive/runs/tile-merge-puzzle/claude-sonnet/screenshots/desktop.png

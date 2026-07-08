@@ -1,5 +1,5 @@
 {
-  "id": "lru-cache/google-gemini-3.1-pro/2026-07-02T17:00:26Z",
+  "id": "lru-cache/google-gemini-3.1-pro/2026-07-08T05:18:30Z",
   "task": {
     "id": "lru-cache",
     "slug": "lru-cache",
@@ -19,19 +19,33 @@
     "sha256": "5479beb8815b98705ae1690f695809daa45ac75d5116d6eb86397f36ca6ed0a7",
     "title": "LRU Cache"
   },
-  "executed_at": "2026-07-02T17:00:26.615234Z",
-  "duration_ms": 0,
+  "executed_at": "2026-07-08T05:18:30.102674Z",
+  "duration_ms": 20536,
   "tokens": {
-    "input": 0,
-    "output": 0,
+    "input": 191,
+    "output": 310,
     "reasoning": 0,
-    "source": "provider"
+    "source": "estimated"
   },
-  "cost_usd": null,
-  "cost": null,
-  "status": "error",
-  "error": "CLI execution failed",
-  "artifacts": [],
+  "cost_usd": 0.001789,
+  "cost": {
+    "total_usd": 0.001789,
+    "input_usd": 0.000239,
+    "output_usd": 0.00155,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "source",
+      "path": "artifacts/main.py",
+      "sha256": "a1be651f50dfafb6acfb89116593b549216c9dbdae921d0f4e29fdd2afa89d0d",
+      "language": "python"
+    }
+  ],
   "screenshots": [],
   "logs": "run.log"
 }

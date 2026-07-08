@@ -1,0 +1,57 @@
+{
+  "id": "tile-merge-puzzle/google-gemini-3.1-pro/2026-07-08T05:23:29Z",
+  "task": {
+    "id": "tile-merge-puzzle",
+    "slug": "tile-merge-puzzle",
+    "category": "game-generation",
+    "title": "Tile Merge Puzzle (2048-style)",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.1-pro",
+    "display_name": "Gemini 3.1 Pro",
+    "provider": "Google",
+    "version": "Gemini 3.1 Pro (High)"
+  },
+  "prompt": {
+    "id": "tile-merge-puzzle",
+    "version": "1.0.0",
+    "sha256": "7ee96720374baec38a6565384ebcee9ce495853baf29d573fdd234c169979cff",
+    "title": "Tile Merge Puzzle (2048-style)"
+  },
+  "executed_at": "2026-07-08T05:23:29.508456Z",
+  "duration_ms": 172614,
+  "tokens": {
+    "input": 476,
+    "output": 4737,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.02428,
+  "cost": {
+    "total_usd": 0.02428,
+    "input_usd": 0.000595,
+    "output_usd": 0.023685,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "085fed1f3a107047dc689915e64e25d3bde6c729633bbcf1690cdedbc617aa82",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "cab869e5a696e5c6ab7ea7b49435af9df8692d16f49d499578a4bb5418d8d993"
+    }
+  ],
+  "logs": "run.log"
+}

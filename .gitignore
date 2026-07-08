@@ -37,3 +37,4 @@ venv/
 # Playwright
 playwright-report/
 test-results/
+.vercel

@@ -1,0 +1,7 @@
+task=tile-merge-puzzle
+model=grok/composer-2.5-fast
+prompt=game-generation/tile-merge-puzzle@1.0.0
+adapter=grok
+duration_ms=140800
+tokens=476->6363
+screenshot=/Users/himanshu/open-model-archive/runs/tile-merge-puzzle/grok-composer-2.5-fast/screenshots/desktop.png

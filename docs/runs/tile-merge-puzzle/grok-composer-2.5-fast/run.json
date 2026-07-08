@@ -1,0 +1,57 @@
+{
+  "id": "tile-merge-puzzle/grok-composer-2.5-fast/2026-07-08T05:20:30Z",
+  "task": {
+    "id": "tile-merge-puzzle",
+    "slug": "tile-merge-puzzle",
+    "category": "game-generation",
+    "title": "Tile Merge Puzzle (2048-style)",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "grok/composer-2.5-fast",
+    "display_name": "Grok Composer 2.5 Fast",
+    "provider": "xAI",
+    "version": "grok-composer-2.5-fast"
+  },
+  "prompt": {
+    "id": "tile-merge-puzzle",
+    "version": "1.0.0",
+    "sha256": "7ee96720374baec38a6565384ebcee9ce495853baf29d573fdd234c169979cff",
+    "title": "Tile Merge Puzzle (2048-style)"
+  },
+  "executed_at": "2026-07-08T05:20:30.399834Z",
+  "duration_ms": 140800,
+  "tokens": {
+    "input": 476,
+    "output": 6363,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.013202,
+  "cost": {
+    "total_usd": 0.013202,
+    "input_usd": 0.000476,
+    "output_usd": 0.012726,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "xAI Grok Build API rates ($1.00 in / $2.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "b6eb08059052e63e55e93f906f3a6e15ba3ab407c5ff540d3e3f8dfeead6d838",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "ce42753d25afe05b198ca1175e24b7c5f39d3267a2cb61c5e4daed03e220f25c"
+    }
+  ],
+  "logs": "run.log"
+}

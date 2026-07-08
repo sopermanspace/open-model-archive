@@ -1,0 +1,57 @@
+{
+  "id": "tile-merge-puzzle/claude-sonnet/2026-07-08T05:21:36Z",
+  "task": {
+    "id": "tile-merge-puzzle",
+    "slug": "tile-merge-puzzle",
+    "category": "game-generation",
+    "title": "Tile Merge Puzzle (2048-style)",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "claude/sonnet",
+    "display_name": "Claude Sonnet",
+    "provider": "Anthropic",
+    "version": "sonnet"
+  },
+  "prompt": {
+    "id": "tile-merge-puzzle",
+    "version": "1.0.0",
+    "sha256": "7ee96720374baec38a6565384ebcee9ce495853baf29d573fdd234c169979cff",
+    "title": "Tile Merge Puzzle (2048-style)"
+  },
+  "executed_at": "2026-07-08T05:21:36.154555Z",
+  "duration_ms": 59255,
+  "tokens": {
+    "input": 476,
+    "output": 5457,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.083283,
+  "cost": {
+    "total_usd": 0.083283,
+    "input_usd": 0.001428,
+    "output_usd": 0.081855,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Anthropic Claude Sonnet API rates (estimated for CLI runs)."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "29934b44e1860e3900b9e45635be43b3940d0e5b528f6e62ce2b278c44ff1847",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "6ea0983adc8002afb93f33c34ab7172217b752250a539eebaefc85b60666c167"
+    }
+  ],
+  "logs": "run.log"
+}

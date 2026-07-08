@@ -1,0 +1,57 @@
+{
+  "id": "tile-merge-puzzle/google-gemini-3.5-flash-high/2026-07-08T05:19:16Z",
+  "task": {
+    "id": "tile-merge-puzzle",
+    "slug": "tile-merge-puzzle",
+    "category": "game-generation",
+    "title": "Tile Merge Puzzle (2048-style)",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.5-flash-high",
+    "display_name": "Gemini 3.5 Flash (High)",
+    "provider": "Google",
+    "version": "Gemini 3.5 Flash (High)"
+  },
+  "prompt": {
+    "id": "tile-merge-puzzle",
+    "version": "1.0.0",
+    "sha256": "7ee96720374baec38a6565384ebcee9ce495853baf29d573fdd234c169979cff",
+    "title": "Tile Merge Puzzle (2048-style)"
+  },
+  "executed_at": "2026-07-08T05:19:16.666947Z",
+  "duration_ms": 67100,
+  "tokens": {
+    "input": 476,
+    "output": 8407,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.017052,
+  "cost": {
+    "total_usd": 0.017052,
+    "input_usd": 0.000238,
+    "output_usd": 0.016814,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini Flash tier rates (estimated)."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "106761f3d484db5acdeb7494af8086d4b4bfc4545134b13d66884ac59a6e6203",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "ef59c15761b61a31983c6b55fb9a4aa8f6ddaa510fe1351979c06520767f3bbb"
+    }
+  ],
+  "logs": "run.log"
+}

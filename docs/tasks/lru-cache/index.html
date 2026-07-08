@@ -89,16 +89,135 @@ The code must be correct and suitable for interview or production use.</pre>
       <h2>Gemini 3.1 Pro</h2>
       <p class="model-provider">Google · Gemini 3.1 Pro (High)</p>
       <dl class="metrics">
-        <div><dt>Duration</dt><dd>0ms</dd></div>
-        <div><dt>Tokens</dt><dd>0 → 0</dd></div>
-        <div><dt>Cost</dt><dd>—</dd></div>
+        <div><dt>Duration</dt><dd>20.5s</dd></div>
+        <div><dt>Tokens</dt><dd>~191 → ~310 <span class="metric-note">(est.)</span></dd></div>
+        <div><dt>Cost</dt><dd>~$0.0018</dd></div>
         
-        <div><dt>Status</dt><dd class="status-error">error</dd></div>
+        <div><dt>Input cost</dt><dd>~$0.0002</dd></div>
+        <div><dt>Output cost</dt><dd>~$0.0015</dd></div>
+        
+        <div><dt>Status</dt><dd class="status-success">success</dd></div>
       </dl>
     </header>
 
     
-    <div class="error-box">CLI execution failed</div>
+
+    
+
+    
+    
+
+    
+
+    
+    
+    <div class="output-viewer" data-viewer="code">
+      <div class="output-viewer-bar">
+        <span class="output-viewer-label">Generated python</span>
+        <button type="button" class="btn-icon btn-fullscreen" aria-label="View fullscreen" title="Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="code-output">
+        
+        <pre class="response-text code-block"><code>from collections import OrderedDict
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        if capacity &lt;= 0:
+            raise ValueError(&#34;Capacity must be a positive integer&#34;)
+        self.capacity = capacity
+        self.cache = OrderedDict()
+
+    def get(self, key: int) -&gt; int:
+        if key not in self.cache:
+            return -1
+        self.cache.move_to_end(key)
+        return self.cache[key]
+
+    def put(self, key: int, value: int) -&gt; None:
+        if key in self.cache:
+            self.cache.move_to_end(key)
+        self.cache[key] = value
+        if len(self.cache) &gt; self.capacity:
+            self.cache.popitem(last=False)
+
+if __name__ == &#34;__main__&#34;:
+    cache = LRUCache(2)
+    cache.put(1, 1)
+    cache.put(2, 2)
+    assert cache.get(1) == 1
+    cache.put(3, 3)    # evicts key 2
+    assert cache.get(2) == -1
+    cache.put(4, 4)    # evicts key 1
+    assert cache.get(1) == -1
+    assert cache.get(3) == 3
+    assert cache.get(4) == 4
+    
+    # Test updating an existing key
+    cache.put(4, 14)
+    assert cache.get(4) == 14
+    
+    print(&#34;All tests passed.&#34;)</code></pre>
+        
+      </div>
+    </div>
+    
+
+    
+
+    
+    
+
+    <details class="source-panel">
+      <summary>Raw model output</summary>
+      <pre class="response-text compact">```python
+from collections import OrderedDict
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        if capacity &lt;= 0:
+            raise ValueError(&#34;Capacity must be a positive integer&#34;)
+        self.capacity = capacity
+        self.cache = OrderedDict()
+
+    def get(self, key: int) -&gt; int:
+        if key not in self.cache:
+            return -1
+        self.cache.move_to_end(key)
+        return self.cache[key]
+
+    def put(self, key: int, value: int) -&gt; None:
+        if key in self.cache:
+            self.cache.move_to_end(key)
+        self.cache[key] = value
+        if len(self.cache) &gt; self.capacity:
+            self.cache.popitem(last=False)
+
+if __name__ == &#34;__main__&#34;:
+    cache = LRUCache(2)
+    cache.put(1, 1)
+    cache.put(2, 2)
+    assert cache.get(1) == 1
+    cache.put(3, 3)    # evicts key 2
+    assert cache.get(2) == -1
+    cache.put(4, 4)    # evicts key 1
+    assert cache.get(1) == -1
+    assert cache.get(3) == 3
+    assert cache.get(4) == 4
+    
+    # Test updating an existing key
+    cache.put(4, 14)
+    assert cache.get(4) == 14
+    
+    print(&#34;All tests passed.&#34;)
+```</pre>
+    </details>
+
+    
+    <p class="cost-note">Google Gemini API rates ($1.25 in / $5.00 out per 1M tokens). Estimated.</p>
+    
+
     
   </article>
   

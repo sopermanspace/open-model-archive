@@ -1,0 +1,7 @@
+task=tile-merge-puzzle
+model=google/gemini-3.5-flash-high
+prompt=game-generation/tile-merge-puzzle@1.0.0
+adapter=cli
+duration_ms=67100
+tokens=476->8407
+screenshot=/Users/himanshu/open-model-archive/runs/tile-merge-puzzle/google-gemini-3.5-flash-high/screenshots/desktop.png

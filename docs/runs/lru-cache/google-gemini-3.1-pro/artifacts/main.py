@@ -1,4 +1,3 @@
-```python
 from collections import OrderedDict
 
 class LRUCache:
@@ -38,4 +37,3 @@ if __name__ == "__main__":
     assert cache.get(4) == 14
     
     print("All tests passed.")
-```
