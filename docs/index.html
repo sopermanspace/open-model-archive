@@ -64,74 +64,79 @@
 
 <section class="container topics-section">
   <h2>Topics</h2>
-  <div class="topic-grid">
+  <div class="topic-grid" role="list">
     
-    <div class="topic-card">
+    <button type="button" class="topic-card" role="listitem" data-topic-filter="code" aria-pressed="false">
       <h3>Code</h3>
       <p>Source generation and engineering tasks.</p>
       <span class="topic-count">10 tasks</span>
-    </div>
+    </button>
     
-    <div class="topic-card">
+    <button type="button" class="topic-card" role="listitem" data-topic-filter="design" aria-pressed="false">
       <h3>Design</h3>
       <p>Visual output, critique, and UI generation.</p>
       <span class="topic-count">12 tasks</span>
-    </div>
+    </button>
     
-    <div class="topic-card">
+    <button type="button" class="topic-card" role="listitem" data-topic-filter="writing" aria-pressed="false">
       <h3>Writing</h3>
       <p>Long-form content, blogs, and copy.</p>
       <span class="topic-count">6 tasks</span>
-    </div>
+    </button>
     
-    <div class="topic-card">
+    <button type="button" class="topic-card" role="listitem" data-topic-filter="humor" aria-pressed="false">
       <h3>Humor</h3>
       <p>Comedy, tone, and wit under constraints.</p>
       <span class="topic-count">3 tasks</span>
-    </div>
+    </button>
     
-    <div class="topic-card">
+    <button type="button" class="topic-card" role="listitem" data-topic-filter="creative" aria-pressed="false">
       <h3>Creative</h3>
       <p>Imaginative fiction grounded in plausible detail.</p>
       <span class="topic-count">4 tasks</span>
-    </div>
+    </button>
     
-    <div class="topic-card">
+    <button type="button" class="topic-card" role="listitem" data-topic-filter="math" aria-pressed="false">
       <h3>Math</h3>
       <p>Arithmetic through college-level problem solving.</p>
       <span class="topic-count">3 tasks</span>
-    </div>
+    </button>
     
-    <div class="topic-card">
+    <button type="button" class="topic-card" role="listitem" data-topic-filter="reasoning" aria-pressed="false">
       <h3>Reasoning</h3>
       <p>Logic, grounding, and factual discipline.</p>
       <span class="topic-count">8 tasks</span>
-    </div>
+    </button>
     
-    <div class="topic-card">
+    <button type="button" class="topic-card" role="listitem" data-topic-filter="vision" aria-pressed="false">
       <h3>Vision</h3>
       <p>Image understanding and multimodal analysis.</p>
       <span class="topic-count">4 tasks</span>
-    </div>
+    </button>
     
-    <div class="topic-card">
+    <button type="button" class="topic-card" role="listitem" data-topic-filter="games" aria-pressed="false">
       <h3>Games</h3>
       <p>Playable browser games with multiple mechanics and game states.</p>
       <span class="topic-count">2 tasks</span>
-    </div>
+    </button>
     
   </div>
 </section>
 
 
-<section class="container archive-list">
-  <h2>Tasks</h2>
+<section class="container archive-list" id="tasks">
+  <div class="archive-list-header">
+    <h2>Tasks</h2>
+    <p class="topic-filter-label hidden" id="topic-filter-label" aria-live="polite"></p>
+    <button type="button" class="topic-filter-clear hidden" id="topic-filter-clear">Show all tasks</button>
+  </div>
   
   
+  <div class="task-category-group" data-category="blog-writing">
   <h3 class="category-heading">blog-writing</h3>
   <div class="task-grid">
     
-    <a class="task-card" href="/open-model-archive/tasks/api-versioning-guide/">
+    <a class="task-card" href="/open-model-archive/tasks/api-versioning-guide/" data-topics="writing code">
       <span class="task-category">blog-writing</span>
       
       <div class="topic-tags">
@@ -152,7 +157,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/config-drift-blog/">
+    <a class="task-card" href="/open-model-archive/tasks/config-drift-blog/" data-topics="writing reasoning">
       <span class="task-category">blog-writing</span>
       
       <div class="topic-tags">
@@ -173,7 +178,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/monorepo-opinion/">
+    <a class="task-card" href="/open-model-archive/tasks/monorepo-opinion/" data-topics="writing reasoning">
       <span class="task-category">blog-writing</span>
       
       <div class="topic-tags">
@@ -195,11 +200,13 @@
     </a>
     
   </div>
+  </div>
   
+  <div class="task-category-group" data-category="code-generation">
   <h3 class="category-heading">code-generation</h3>
   <div class="task-grid">
     
-    <a class="task-card" href="/open-model-archive/tasks/lru-cache/">
+    <a class="task-card" href="/open-model-archive/tasks/lru-cache/" data-topics="code reasoning">
       <span class="task-category">code-generation</span>
       
       <div class="topic-tags">
@@ -220,7 +227,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/rate-limiter/">
+    <a class="task-card" href="/open-model-archive/tasks/rate-limiter/" data-topics="code">
       <span class="task-category">code-generation</span>
       
       <div class="topic-tags">
@@ -239,7 +246,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/slugify-utility/">
+    <a class="task-card" href="/open-model-archive/tasks/slugify-utility/" data-topics="code">
       <span class="task-category">code-generation</span>
       
       <div class="topic-tags">
@@ -259,11 +266,13 @@
     </a>
     
   </div>
+  </div>
   
+  <div class="task-category-group" data-category="creative-fiction">
   <h3 class="category-heading">creative-fiction</h3>
   <div class="task-grid">
     
-    <a class="task-card" href="/open-model-archive/tasks/product-review-fiction/">
+    <a class="task-card" href="/open-model-archive/tasks/product-review-fiction/" data-topics="creative humor">
       <span class="task-category">creative-fiction</span>
       
       <div class="topic-tags">
@@ -284,7 +293,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/startup-launch-fiction/">
+    <a class="task-card" href="/open-model-archive/tasks/startup-launch-fiction/" data-topics="creative writing">
       <span class="task-category">creative-fiction</span>
       
       <div class="topic-tags">
@@ -306,11 +315,13 @@
     </a>
     
   </div>
+  </div>
   
+  <div class="task-category-group" data-category="design-critique">
   <h3 class="category-heading">design-critique</h3>
   <div class="task-grid">
     
-    <a class="task-card" href="/open-model-archive/tasks/landing-design-critique/">
+    <a class="task-card" href="/open-model-archive/tasks/landing-design-critique/" data-topics="vision design">
       <span class="task-category">design-critique</span>
       
       <div class="topic-tags">
@@ -331,7 +342,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/mobile-first-critique/">
+    <a class="task-card" href="/open-model-archive/tasks/mobile-first-critique/" data-topics="vision design">
       <span class="task-category">design-critique</span>
       
       <div class="topic-tags">
@@ -353,11 +364,13 @@
     </a>
     
   </div>
+  </div>
   
+  <div class="task-category-group" data-category="game-generation">
   <h3 class="category-heading">game-generation</h3>
   <div class="task-grid">
     
-    <a class="task-card" href="/open-model-archive/tasks/tile-merge-puzzle/">
+    <a class="task-card" href="/open-model-archive/tasks/tile-merge-puzzle/" data-topics="code design games">
       <span class="task-category">game-generation</span>
       
       <div class="topic-tags">
@@ -381,7 +394,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/voxel-lane-hopper/">
+    <a class="task-card" href="/open-model-archive/tasks/voxel-lane-hopper/" data-topics="code design games creative">
       <span class="task-category">game-generation</span>
       
       <div class="topic-tags">
@@ -408,11 +421,13 @@
     </a>
     
   </div>
+  </div>
   
+  <div class="task-category-group" data-category="humor-testing">
   <h3 class="category-heading">humor-testing</h3>
   <div class="task-grid">
     
-    <a class="task-card" href="/open-model-archive/tasks/git-cooking/">
+    <a class="task-card" href="/open-model-archive/tasks/git-cooking/" data-topics="humor code">
       <span class="task-category">humor-testing</span>
       
       <div class="topic-tags">
@@ -433,7 +448,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/kubernetes-golden-retriever/">
+    <a class="task-card" href="/open-model-archive/tasks/kubernetes-golden-retriever/" data-topics="humor writing">
       <span class="task-category">humor-testing</span>
       
       <div class="topic-tags">
@@ -455,11 +470,13 @@
     </a>
     
   </div>
+  </div>
   
+  <div class="task-category-group" data-category="math">
   <h3 class="category-heading">math</h3>
   <div class="task-grid">
     
-    <a class="task-card" href="/open-model-archive/tasks/college-math/">
+    <a class="task-card" href="/open-model-archive/tasks/college-math/" data-topics="math reasoning">
       <span class="task-category">math</span>
       
       <div class="topic-tags">
@@ -480,7 +497,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/elementary-math/">
+    <a class="task-card" href="/open-model-archive/tasks/elementary-math/" data-topics="math reasoning">
       <span class="task-category">math</span>
       
       <div class="topic-tags">
@@ -501,7 +518,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/river-crossing-puzzle/">
+    <a class="task-card" href="/open-model-archive/tasks/river-crossing-puzzle/" data-topics="math reasoning">
       <span class="task-category">math</span>
       
       <div class="topic-tags">
@@ -523,11 +540,13 @@
     </a>
     
   </div>
+  </div>
   
+  <div class="task-category-group" data-category="svg-generation">
   <h3 class="category-heading">svg-generation</h3>
   <div class="task-grid">
     
-    <a class="task-card" href="/open-model-archive/tasks/app-logo/">
+    <a class="task-card" href="/open-model-archive/tasks/app-logo/" data-topics="design">
       <span class="task-category">svg-generation</span>
       
       <div class="topic-tags">
@@ -546,7 +565,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/onboarding-flow/">
+    <a class="task-card" href="/open-model-archive/tasks/onboarding-flow/" data-topics="design code">
       <span class="task-category">svg-generation</span>
       
       <div class="topic-tags">
@@ -567,7 +586,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/weather-icons/">
+    <a class="task-card" href="/open-model-archive/tasks/weather-icons/" data-topics="design code">
       <span class="task-category">svg-generation</span>
       
       <div class="topic-tags">
@@ -589,11 +608,13 @@
     </a>
     
   </div>
+  </div>
   
+  <div class="task-category-group" data-category="vision-understanding">
   <h3 class="category-heading">vision-understanding</h3>
   <div class="task-grid">
     
-    <a class="task-card" href="/open-model-archive/tasks/landing-visual-analysis/">
+    <a class="task-card" href="/open-model-archive/tasks/landing-visual-analysis/" data-topics="vision design">
       <span class="task-category">vision-understanding</span>
       
       <div class="topic-tags">
@@ -614,7 +635,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/typography-audit/">
+    <a class="task-card" href="/open-model-archive/tasks/typography-audit/" data-topics="vision design">
       <span class="task-category">vision-understanding</span>
       
       <div class="topic-tags">
@@ -636,11 +657,13 @@
     </a>
     
   </div>
+  </div>
   
+  <div class="task-category-group" data-category="web-grounding">
   <h3 class="category-heading">web-grounding</h3>
   <div class="task-grid">
     
-    <a class="task-card" href="/open-model-archive/tasks/product-facts-grounding/">
+    <a class="task-card" href="/open-model-archive/tasks/product-facts-grounding/" data-topics="reasoning">
       <span class="task-category">web-grounding</span>
       
       <div class="topic-tags">
@@ -659,7 +682,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/remote-policy-qa/">
+    <a class="task-card" href="/open-model-archive/tasks/remote-policy-qa/" data-topics="reasoning">
       <span class="task-category">web-grounding</span>
       
       <div class="topic-tags">
@@ -679,11 +702,13 @@
     </a>
     
   </div>
+  </div>
   
+  <div class="task-category-group" data-category="website-generation">
   <h3 class="category-heading">website-generation</h3>
   <div class="task-grid">
     
-    <a class="task-card" href="/open-model-archive/tasks/editorial-restaurant/">
+    <a class="task-card" href="/open-model-archive/tasks/editorial-restaurant/" data-topics="design writing">
       <span class="task-category">website-generation</span>
       
       <div class="topic-tags">
@@ -704,7 +729,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/indie-game-waitlist/">
+    <a class="task-card" href="/open-model-archive/tasks/indie-game-waitlist/" data-topics="design creative">
       <span class="task-category">website-generation</span>
       
       <div class="topic-tags">
@@ -725,7 +750,7 @@
       </div>
     </a>
     
-    <a class="task-card" href="/open-model-archive/tasks/website-landing-page/">
+    <a class="task-card" href="/open-model-archive/tasks/website-landing-page/" data-topics="design code">
       <span class="task-category">website-generation</span>
       
       <div class="topic-tags">
@@ -748,6 +773,7 @@
     </a>
     
   </div>
+  </div>
   
   
 </section>
@@ -760,5 +786,82 @@
     </div>
   </footer>
   
+<script>
+(function () {
+  var cards = document.querySelectorAll('[data-topic-filter]');
+  var taskCards = document.querySelectorAll('.task-card[data-topics]');
+  var groups = document.querySelectorAll('.task-category-group');
+  var label = document.getElementById('topic-filter-label');
+  var clearBtn = document.getElementById('topic-filter-clear');
+  var active = null;
+
+  function topicTitle(id) {
+    var card = document.querySelector('[data-topic-filter="' + id + '"]');
+    return card ? card.querySelector('h3').textContent.trim() : id;
+  }
+
+  function applyFilter(topicId, scroll) {
+    active = topicId || null;
+    cards.forEach(function (card) {
+      var on = card.dataset.topicFilter === topicId;
+      card.classList.toggle('is-active', on);
+      card.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+
+    taskCards.forEach(function (task) {
+      var topics = (task.dataset.topics || '').split(/\s+/);
+      var show = !topicId || topics.indexOf(topicId) !== -1;
+      task.classList.toggle('is-filtered-out', !show);
+    });
+
+    groups.forEach(function (group) {
+      var visible = group.querySelectorAll('.task-card:not(.is-filtered-out)').length > 0;
+      group.classList.toggle('is-filtered-out', !visible);
+    });
+
+    if (label && clearBtn) {
+      if (topicId) {
+        label.textContent = 'Showing tasks tagged: ' + topicTitle(topicId);
+        label.classList.remove('hidden');
+        clearBtn.classList.remove('hidden');
+        if (history.replaceState) {
+          history.replaceState(null, '', '#topic-' + topicId);
+        } else {
+          location.hash = 'topic-' + topicId;
+        }
+      } else {
+        label.textContent = '';
+        label.classList.add('hidden');
+        clearBtn.classList.add('hidden');
+        if (location.hash.indexOf('#topic-') === 0 && history.replaceState) {
+          history.replaceState(null, '', location.pathname + location.search);
+        }
+      }
+    }
+
+    if (scroll) {
+      var tasks = document.getElementById('tasks');
+      if (tasks) tasks.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  cards.forEach(function (card) {
+    card.addEventListener('click', function () {
+      var id = card.dataset.topicFilter;
+      applyFilter(active === id ? null : id, true);
+    });
+  });
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function () { applyFilter(null, false); });
+  }
+
+  var hash = location.hash.replace(/^#/, '');
+  if (hash.indexOf('topic-') === 0) {
+    applyFilter(hash.slice(6), false);
+  }
+})();
+</script>
+
 </body>
 </html>

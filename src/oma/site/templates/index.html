@@ -20,26 +20,31 @@
 {% if topic_list %}
 <section class="container topics-section">
   <h2>Topics</h2>
-  <div class="topic-grid">
+  <div class="topic-grid" role="list">
     {% for topic in topic_list %}
-    <div class="topic-card">
+    <button type="button" class="topic-card" role="listitem" data-topic-filter="{{ topic.id }}" aria-pressed="false">
       <h3>{{ topic.title }}</h3>
       <p>{{ topic.description }}</p>
       <span class="topic-count">{{ topic_counts.get(topic.id, 0) }} task{% if topic_counts.get(topic.id, 0) != 1 %}s{% endif %}</span>
-    </div>
+    </button>
     {% endfor %}
   </div>
 </section>
 {% endif %}
 
-<section class="container archive-list">
-  <h2>Tasks</h2>
+<section class="container archive-list" id="tasks">
+  <div class="archive-list-header">
+    <h2>Tasks</h2>
+    <p class="topic-filter-label hidden" id="topic-filter-label" aria-live="polite"></p>
+    <button type="button" class="topic-filter-clear hidden" id="topic-filter-clear">Show all tasks</button>
+  </div>
   {% if tasks %}
   {% for category in categories %}
+  <div class="task-category-group" data-category="{{ category }}">
   <h3 class="category-heading">{{ category }}</h3>
   <div class="task-grid">
     {% for entry in tasks if entry.task.category == category %}
-    <a class="task-card" href="{{ site_root }}/tasks/{{ entry.task.slug }}/">
+    <a class="task-card" href="{{ site_root }}/tasks/{{ entry.task.slug }}/" data-topics="{{ entry.task.topics | join(' ') }}">
       <span class="task-category">{{ entry.task.category }}</span>
       {% if entry.task.topics %}
       <div class="topic-tags">
@@ -59,9 +64,89 @@
     </a>
     {% endfor %}
   </div>
+  </div>
   {% endfor %}
   {% else %}
   <p class="muted">No runs published yet. Run <code>oma build</code> to generate the archive.</p>
   {% endif %}
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  var cards = document.querySelectorAll('[data-topic-filter]');
+  var taskCards = document.querySelectorAll('.task-card[data-topics]');
+  var groups = document.querySelectorAll('.task-category-group');
+  var label = document.getElementById('topic-filter-label');
+  var clearBtn = document.getElementById('topic-filter-clear');
+  var active = null;
+
+  function topicTitle(id) {
+    var card = document.querySelector('[data-topic-filter="' + id + '"]');
+    return card ? card.querySelector('h3').textContent.trim() : id;
+  }
+
+  function applyFilter(topicId, scroll) {
+    active = topicId || null;
+    cards.forEach(function (card) {
+      var on = card.dataset.topicFilter === topicId;
+      card.classList.toggle('is-active', on);
+      card.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+
+    taskCards.forEach(function (task) {
+      var topics = (task.dataset.topics || '').split(/\s+/);
+      var show = !topicId || topics.indexOf(topicId) !== -1;
+      task.classList.toggle('is-filtered-out', !show);
+    });
+
+    groups.forEach(function (group) {
+      var visible = group.querySelectorAll('.task-card:not(.is-filtered-out)').length > 0;
+      group.classList.toggle('is-filtered-out', !visible);
+    });
+
+    if (label && clearBtn) {
+      if (topicId) {
+        label.textContent = 'Showing tasks tagged: ' + topicTitle(topicId);
+        label.classList.remove('hidden');
+        clearBtn.classList.remove('hidden');
+        if (history.replaceState) {
+          history.replaceState(null, '', '#topic-' + topicId);
+        } else {
+          location.hash = 'topic-' + topicId;
+        }
+      } else {
+        label.textContent = '';
+        label.classList.add('hidden');
+        clearBtn.classList.add('hidden');
+        if (location.hash.indexOf('#topic-') === 0 && history.replaceState) {
+          history.replaceState(null, '', location.pathname + location.search);
+        }
+      }
+    }
+
+    if (scroll) {
+      var tasks = document.getElementById('tasks');
+      if (tasks) tasks.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  cards.forEach(function (card) {
+    card.addEventListener('click', function () {
+      var id = card.dataset.topicFilter;
+      applyFilter(active === id ? null : id, true);
+    });
+  });
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function () { applyFilter(null, false); });
+  }
+
+  var hash = location.hash.replace(/^#/, '');
+  if (hash.indexOf('topic-') === 0) {
+    applyFilter(hash.slice(6), false);
+  }
+})();
+</script>
 {% endblock %}
