@@ -1,0 +1,7 @@
+task=website-landing-page
+model=ollama/nemotron-3-super
+prompt=website-generation/landing-page@1.0.0
+adapter=ollama
+duration_ms=25744
+tokens=242->2942
+screenshot=/Users/himanshu/open-model-archive/runs/website-landing-page/ollama-nemotron-3-super/screenshots/desktop.png

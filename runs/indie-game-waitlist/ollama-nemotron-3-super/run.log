@@ -1,0 +1,7 @@
+task=indie-game-waitlist
+model=ollama/nemotron-3-super
+prompt=website-generation/indie-game-waitlist@1.0.0
+adapter=ollama
+duration_ms=46271
+tokens=257->3028
+screenshot=/Users/himanshu/open-model-archive/runs/indie-game-waitlist/ollama-nemotron-3-super/screenshots/desktop.png

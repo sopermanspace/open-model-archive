@@ -1,0 +1,57 @@
+{
+  "id": "indie-game-waitlist/grok-composer-2.5-fast/2026-07-08T05:33:27Z",
+  "task": {
+    "id": "indie-game-waitlist",
+    "slug": "indie-game-waitlist",
+    "category": "website-generation",
+    "title": "Indie Game Waitlist Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "grok/composer-2.5-fast",
+    "display_name": "Grok Composer 2.5 Fast",
+    "provider": "xAI",
+    "version": "grok-composer-2.5-fast"
+  },
+  "prompt": {
+    "id": "indie-game-waitlist",
+    "version": "1.0.0",
+    "sha256": "397099410dd9480cdf7a92b5415ce99f4666174bb8558630f49b5ecad2db134b",
+    "title": "Indie Game Waitlist Page"
+  },
+  "executed_at": "2026-07-08T05:33:27.978036Z",
+  "duration_ms": 45416,
+  "tokens": {
+    "input": 230,
+    "output": 6108,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.012446,
+  "cost": {
+    "total_usd": 0.012446,
+    "input_usd": 0.00023,
+    "output_usd": 0.012216,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "xAI Grok Build API rates ($1.00 in / $2.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "6b8b99120b6552bba07fef34cd8d075c3bee5be8728d4487f0b3fe3522ed9c86",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "6b30c978ac793fe39be709442d8e49d30dc4ff4264e0a0fe86191eb8c0072bfe"
+    }
+  ],
+  "logs": "run.log"
+}

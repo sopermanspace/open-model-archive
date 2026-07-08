@@ -1,0 +1,7 @@
+task=website-landing-page
+model=claude/opus
+prompt=website-generation/landing-page@1.0.0
+adapter=claude
+duration_ms=104548
+tokens=218->7099
+screenshot=/Users/himanshu/open-model-archive/runs/website-landing-page/claude-opus/screenshots/desktop.png

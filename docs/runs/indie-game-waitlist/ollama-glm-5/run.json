@@ -1,0 +1,57 @@
+{
+  "id": "indie-game-waitlist/ollama-glm-5/2026-07-08T05:32:06Z",
+  "task": {
+    "id": "indie-game-waitlist",
+    "slug": "indie-game-waitlist",
+    "category": "website-generation",
+    "title": "Indie Game Waitlist Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/glm-5",
+    "display_name": "GLM-5",
+    "provider": "Ollama Cloud",
+    "version": "glm-5"
+  },
+  "prompt": {
+    "id": "indie-game-waitlist",
+    "version": "1.0.0",
+    "sha256": "397099410dd9480cdf7a92b5415ce99f4666174bb8558630f49b5ecad2db134b",
+    "title": "Indie Game Waitlist Page"
+  },
+  "executed_at": "2026-07-08T05:32:06.774157Z",
+  "duration_ms": 48358,
+  "tokens": {
+    "input": 235,
+    "output": 5799,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Ollama cloud inference \u2014 no per-token API cost in local archive runs."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "b4ce6b2c03a2d3b7cca629a0e2fa4d22d342572fe2e1bfbf4f1030d83fa4bb05",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "2fb696eceba8b02eba3d4c972bc46b288a48b4aec8ed1f3544fed996d3a18715"
+    }
+  ],
+  "logs": "run.log"
+}

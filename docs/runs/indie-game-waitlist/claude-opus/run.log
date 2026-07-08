@@ -1,0 +1,7 @@
+task=indie-game-waitlist
+model=claude/opus
+prompt=website-generation/indie-game-waitlist@1.0.0
+adapter=claude
+duration_ms=75063
+tokens=230->4806
+screenshot=/Users/himanshu/open-model-archive/runs/indie-game-waitlist/claude-opus/screenshots/desktop.png

@@ -1,0 +1,7 @@
+task=website-landing-page
+model=grok/composer-2.5-fast
+prompt=website-generation/landing-page@1.0.0
+adapter=grok
+duration_ms=59267
+tokens=218->8523
+screenshot=/Users/himanshu/open-model-archive/runs/website-landing-page/grok-composer-2.5-fast/screenshots/desktop.png

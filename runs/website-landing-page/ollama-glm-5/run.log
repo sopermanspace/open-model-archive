@@ -1,0 +1,7 @@
+task=website-landing-page
+model=ollama/glm-5
+prompt=website-generation/landing-page@1.0.0
+adapter=ollama
+duration_ms=67811
+tokens=223->6689
+screenshot=/Users/himanshu/open-model-archive/runs/website-landing-page/ollama-glm-5/screenshots/desktop.png

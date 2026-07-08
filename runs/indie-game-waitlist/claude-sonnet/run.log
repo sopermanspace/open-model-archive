@@ -1,0 +1,7 @@
+task=indie-game-waitlist
+model=claude/sonnet
+prompt=website-generation/indie-game-waitlist@1.0.0
+adapter=claude
+duration_ms=58228
+tokens=230->5093
+screenshot=/Users/himanshu/open-model-archive/runs/indie-game-waitlist/claude-sonnet/screenshots/desktop.png

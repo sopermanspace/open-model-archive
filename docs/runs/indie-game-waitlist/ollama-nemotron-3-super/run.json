@@ -1,0 +1,57 @@
+{
+  "id": "indie-game-waitlist/ollama-nemotron-3-super/2026-07-08T05:32:04Z",
+  "task": {
+    "id": "indie-game-waitlist",
+    "slug": "indie-game-waitlist",
+    "category": "website-generation",
+    "title": "Indie Game Waitlist Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/nemotron-3-super",
+    "display_name": "Nemotron 3 Super",
+    "provider": "Ollama Cloud",
+    "version": "nemotron-3-super"
+  },
+  "prompt": {
+    "id": "indie-game-waitlist",
+    "version": "1.0.0",
+    "sha256": "397099410dd9480cdf7a92b5415ce99f4666174bb8558630f49b5ecad2db134b",
+    "title": "Indie Game Waitlist Page"
+  },
+  "executed_at": "2026-07-08T05:32:04.687230Z",
+  "duration_ms": 46271,
+  "tokens": {
+    "input": 257,
+    "output": 3028,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Ollama cloud inference \u2014 no per-token API cost in local archive runs."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "4cc022b341e8c380237d2edbbac96ef5c752f81de69cf6165545f10c6c9db1fa",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "f1a7b8063bf1e5612f211cea093a666622f37952f6f4b0c40d71d1f91dd0bbc2"
+    }
+  ],
+  "logs": "run.log"
+}

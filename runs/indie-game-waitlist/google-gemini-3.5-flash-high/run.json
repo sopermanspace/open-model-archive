@@ -1,0 +1,57 @@
+{
+  "id": "indie-game-waitlist/google-gemini-3.5-flash-high/2026-07-08T05:32:21Z",
+  "task": {
+    "id": "indie-game-waitlist",
+    "slug": "indie-game-waitlist",
+    "category": "website-generation",
+    "title": "Indie Game Waitlist Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "google/gemini-3.5-flash-high",
+    "display_name": "Gemini 3.5 Flash (High)",
+    "provider": "Google",
+    "version": "Gemini 3.5 Flash (High)"
+  },
+  "prompt": {
+    "id": "indie-game-waitlist",
+    "version": "1.0.0",
+    "sha256": "397099410dd9480cdf7a92b5415ce99f4666174bb8558630f49b5ecad2db134b",
+    "title": "Indie Game Waitlist Page"
+  },
+  "executed_at": "2026-07-08T05:32:21.918502Z",
+  "duration_ms": 63427,
+  "tokens": {
+    "input": 230,
+    "output": 7651,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.015417,
+  "cost": {
+    "total_usd": 0.015417,
+    "input_usd": 0.000115,
+    "output_usd": 0.015302,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Google Gemini Flash tier rates (estimated)."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "cf700e8cd743e9133bd9e191511f4e735c236995c6f1a113616e2af30f221ac1",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "d4826a15eecd728b2e8c2b271abeac129e2c22594c51586fe9c482c7ef93e8d9"
+    }
+  ],
+  "logs": "run.log"
+}

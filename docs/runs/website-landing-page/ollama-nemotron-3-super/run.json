@@ -1,0 +1,57 @@
+{
+  "id": "website-landing-page/ollama-nemotron-3-super/2026-07-08T05:34:48Z",
+  "task": {
+    "id": "website-landing-page",
+    "slug": "website-landing-page",
+    "category": "website-generation",
+    "title": "Developer Tool Landing Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/nemotron-3-super",
+    "display_name": "Nemotron 3 Super",
+    "provider": "Ollama Cloud",
+    "version": "nemotron-3-super"
+  },
+  "prompt": {
+    "id": "landing-page",
+    "version": "1.0.0",
+    "sha256": "1d1b0e80f7d9ef53967bfb6407ed7980ee130e0eb08b10658d49cc46ef2c7bde",
+    "title": "Developer Tool Landing Page"
+  },
+  "executed_at": "2026-07-08T05:34:48.256673Z",
+  "duration_ms": 25744,
+  "tokens": {
+    "input": 242,
+    "output": 2942,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Ollama cloud inference \u2014 no per-token API cost in local archive runs."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "39cf7d60e205c8a3af22d5999f91f6a1e43a89629da67aee48a96c14115e4474",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "5187df822d31e7cc39c5c272942e421bf90c619a903ca2d925bbf6194116ec28"
+    }
+  ],
+  "logs": "run.log"
+}

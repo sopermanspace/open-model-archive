@@ -1,0 +1,57 @@
+{
+  "id": "website-landing-page/ollama-glm-5/2026-07-08T05:35:30Z",
+  "task": {
+    "id": "website-landing-page",
+    "slug": "website-landing-page",
+    "category": "website-generation",
+    "title": "Developer Tool Landing Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "ollama/glm-5",
+    "display_name": "GLM-5",
+    "provider": "Ollama Cloud",
+    "version": "glm-5"
+  },
+  "prompt": {
+    "id": "landing-page",
+    "version": "1.0.0",
+    "sha256": "1d1b0e80f7d9ef53967bfb6407ed7980ee130e0eb08b10658d49cc46ef2c7bde",
+    "title": "Developer Tool Landing Page"
+  },
+  "executed_at": "2026-07-08T05:35:30.311818Z",
+  "duration_ms": 67811,
+  "tokens": {
+    "input": 223,
+    "output": 6689,
+    "reasoning": 0,
+    "source": "provider"
+  },
+  "cost_usd": 0.0,
+  "cost": {
+    "total_usd": 0.0,
+    "input_usd": 0.0,
+    "output_usd": 0.0,
+    "reasoning_usd": 0.0,
+    "estimated": false,
+    "pricing_source": "Ollama cloud inference \u2014 no per-token API cost in local archive runs."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "76582bbc97ec9b832510c88514750fef6b5369f8f635c2e6447c86b52ebc5992",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "e0a049d393c07d66210fc7446868dff09b1b71c3e0191d1128d4a46c58f9e90b"
+    }
+  ],
+  "logs": "run.log"
+}

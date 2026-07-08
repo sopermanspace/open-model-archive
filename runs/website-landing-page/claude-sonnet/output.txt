@@ -1,0 +1,863 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drift — Know before you deploy</title>
+<meta name="description" content="Drift is a CLI that detects configuration drift between staging and production before it breaks something.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0d10;
+    --bg-raised: #12151a;
+    --bg-card: #14171c;
+    --border: #23272e;
+    --border-hover: #333941;
+    --text: #e8eaed;
+    --text-dim: #9aa1ab;
+    --text-faint: #676e78;
+    --accent: #5fd3a3;
+    --accent-dim: #3a8f6e;
+    --danger: #e0755a;
+    --radius: 8px;
+    --max-width: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  code, pre, .mono {
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  a { color: inherit; }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Navigation */
+  header.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11, 13, 16, 0.9);
+    backdrop-filter: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .logo-mark {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    background: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #06110d;
+    font-size: 13px;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .nav-actions a.signin {
+    text-decoration: none;
+    font-size: 14px;
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+
+  .nav-actions a.signin:hover { color: var(--text); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #06150f;
+    padding: 10px 18px;
+  }
+
+  .btn-primary:hover { background: #78dbb4; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border);
+    padding: 10px 18px;
+  }
+
+  .btn-secondary:hover { border-color: var(--border-hover); background: var(--bg-raised); }
+
+  .btn-large { padding: 13px 24px; font-size: 15px; }
+
+  /* Hero */
+  .hero {
+    padding: 96px 24px 80px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    background: rgba(95, 211, 163, 0.08);
+    border: 1px solid rgba(95, 211, 163, 0.25);
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-size: 48px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px;
+    font-weight: 800;
+  }
+
+  .hero p.lead {
+    font-size: 18px;
+    color: var(--text-dim);
+    max-width: 480px;
+    margin: 0 0 32px;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta {
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+
+  .hero-meta code {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  /* Terminal panel */
+  .terminal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px -20px rgba(0,0,0,0.5);
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-raised);
+  }
+
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .dot-red { background: #4a3630; }
+  .dot-yellow { background: #4a4530; }
+  .dot-green { background: #2f4a3b; }
+
+  .terminal-title {
+    margin-left: 8px;
+    font-size: 12px;
+    color: var(--text-faint);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .terminal-body {
+    padding: 20px;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+
+  .terminal-body .prompt { color: var(--text-faint); }
+  .terminal-body .cmd { color: var(--text); }
+  .terminal-body .ok { color: var(--accent); }
+  .terminal-body .warn { color: #e0b95a; }
+  .terminal-body .bad { color: var(--danger); }
+  .terminal-body .dim { color: var(--text-faint); }
+
+  /* Sections generic */
+  section { padding: 80px 24px; }
+
+  .section-head {
+    max-width: 620px;
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+
+  .section-head h2 {
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    font-weight: 700;
+  }
+
+  .section-head p {
+    color: var(--text-dim);
+    font-size: 16px;
+    margin: 0;
+  }
+
+  /* Features */
+  .features {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .feature-grid {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .feature-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+
+  .feature-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: var(--accent);
+  }
+
+  .feature-card h3 {
+    font-size: 17px;
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+
+  .feature-card p {
+    font-size: 14.5px;
+    color: var(--text-dim);
+    margin: 0;
+  }
+
+  /* Code example */
+  .code-section {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-raised);
+  }
+
+  .code-columns {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .code-columns h2 {
+    font-size: 30px;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+    font-weight: 700;
+  }
+
+  .code-columns p {
+    color: var(--text-dim);
+    font-size: 15.5px;
+    margin: 0 0 20px;
+  }
+
+  .code-columns ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .code-columns li {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+
+  .code-columns li::before {
+    content: "→";
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  pre.code-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+
+  pre.code-block .c-key { color: #7fb8e8; }
+  pre.code-block .c-str { color: var(--accent); }
+  pre.code-block .c-com { color: var(--text-faint); }
+  pre.code-block .c-flag { color: #e0b95a; }
+
+  /* Testimonials */
+  .testimonials {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .testimonial-grid {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  blockquote.testimonial {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin: 0;
+  }
+
+  blockquote.testimonial p.quote {
+    font-size: 16px;
+    color: var(--text);
+    margin: 0 0 20px;
+    line-height: 1.6;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .testimonial-author .name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .testimonial-author .role {
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+
+  /* Pricing */
+  .pricing-grid {
+    max-width: 760px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .price-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-card.featured {
+    border-color: var(--accent-dim);
+    position: relative;
+  }
+
+  .price-card.featured::before {
+    content: "MOST POPULAR";
+    position: absolute;
+    top: -11px;
+    left: 32px;
+    background: var(--accent);
+    color: #06150f;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .price-card h3 {
+    font-size: 18px;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+
+  .price-card .price-tagline {
+    font-size: 14px;
+    color: var(--text-faint);
+    margin: 0 0 24px;
+  }
+
+  .price-amount {
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+
+  .price-amount span {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-faint);
+  }
+
+  .price-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 28px;
+    flex-grow: 1;
+  }
+
+  .price-card li {
+    font-size: 14px;
+    color: var(--text-dim);
+    padding: 8px 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+  }
+
+  .price-card li:first-child { border-top: none; }
+
+  .price-card li::before {
+    content: "✓";
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* Footer */
+  footer.site-footer {
+    padding: 56px 24px 32px;
+  }
+
+  .footer-grid {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .footer-brand p {
+    color: var(--text-faint);
+    font-size: 14px;
+    max-width: 260px;
+    margin: 12px 0 0;
+  }
+
+  .footer-col h4 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-faint);
+    margin: 0 0 16px;
+    font-weight: 600;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-col li { margin-bottom: 10px; }
+
+  .footer-col a {
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  .footer-col a:hover { color: var(--text); }
+
+  .footer-bottom {
+    max-width: var(--max-width);
+    margin: 24px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+
+  .footer-bottom .socials {
+    display: flex;
+    gap: 18px;
+  }
+
+  .footer-bottom a { text-decoration: none; color: var(--text-faint); }
+  .footer-bottom a:hover { color: var(--text-dim); }
+
+  /* Responsive */
+  @media (max-width: 860px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .code-columns { grid-template-columns: 1fr; }
+    .testimonial-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    h1 { font-size: 36px; }
+  }
+
+  @media (max-width: 520px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .hero { padding: 64px 20px 56px; }
+    section { padding: 56px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar" aria-label="Primary">
+    <a href="#top" class="logo">
+      <span class="logo-mark" aria-hidden="true">d~</span>
+      Drift
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#code-example">How it works</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="signin">Sign in</a>
+      <a href="#pricing" class="btn btn-secondary">Get started</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">v2.4 · now with Terraform state diffing</span>
+        <h1>Know before you deploy.</h1>
+        <p class="lead">Drift compares your staging and production environments — env vars, feature flags, infra config, secrets metadata — and tells you exactly what's different before it becomes an incident.</p>
+        <div class="hero-cta-row">
+          <a href="#pricing" class="btn btn-primary btn-large">Start drift scan</a>
+          <a href="#code-example" class="btn btn-secondary btn-large">View documentation</a>
+        </div>
+        <p class="hero-meta">No account needed to try it · <code>brew install driftcli</code> · MIT licensed core</p>
+      </div>
+      <div class="terminal" role="img" aria-label="Terminal output showing a Drift configuration scan">
+        <div class="terminal-bar">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+          <span class="terminal-title">~/projects/atlas-api</span>
+        </div>
+        <div class="terminal-body mono">
+<span class="prompt">$</span> <span class="cmd">drift scan --from staging --to production</span>
+<span class="dim">Scanning 214 config keys across 2 environments...</span>
+
+<span class="warn">~ modified</span>  RATE_LIMIT_RPS         120 <span class="dim">→</span> 40
+<span class="warn">~ modified</span>  LOG_LEVEL              debug <span class="dim">→</span> info
+<span class="bad">! missing</span>   FEATURE_NEW_CHECKOUT   <span class="dim">not set in production</span>
+<span class="bad">! missing</span>   CACHE_TTL_SECONDS      <span class="dim">not set in production</span>
+<span class="ok">✓ matched</span>   198 keys identical
+
+<span class="dim">3 warnings, 2 errors · run</span> <span class="cmd">drift explain</span> <span class="dim">for details</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="section-head">
+      <h2>Built for the gap between staging and prod</h2>
+      <p>Three ways Drift keeps your environments honest, without adding another dashboard to babysit.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card">
+        <div class="feature-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        </div>
+        <h3>Snapshot-based diffing</h3>
+        <p>Drift takes a point-in-time snapshot of each environment's config surface and produces a structured diff — not a wall of raw text you have to parse yourself.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        </div>
+        <h3>Pre-deploy gating</h3>
+        <p>Wire <code>drift check</code> into your deploy pipeline and block releases automatically when unreviewed drift crosses a severity threshold you define.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        </div>
+        <h3>Multi-source awareness</h3>
+        <p>Reads env vars, Terraform state, Kubernetes ConfigMaps, and feature flag providers together, so drift caused by any layer shows up in one report.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="code-section" id="code-example">
+    <div class="code-columns">
+      <div>
+        <h2>One command, wired into CI</h2>
+        <p>Drift is designed to live in your pipeline, not in a browser tab. Point it at two environments and let it fail the build when something looks wrong.</p>
+        <ul>
+          <li>Runs entirely from a single static binary — no daemon, no agent installed in your cluster.</li>
+          <li>Exit codes map to severity, so CI gating takes one line.</li>
+          <li>Supports ignore rules for expected differences like hostnames or replica counts.</li>
+        </ul>
+      </div>
+      <pre class="code-block mono"><span class="c-com"># .github/workflows/deploy.yml</span>
+- name: <span class="c-str">Check for config drift</span>
+  run: |
+    drift check \
+      <span class="c-flag">--from</span> env:staging \
+      <span class="c-flag">--to</span> env:production \
+      <span class="c-flag">--fail-on</span> <span class="c-key">error</span> \
+      <span class="c-flag">--ignore-file</span> .driftignore
+
+<span class="c-com"># .driftignore</span>
+<span class="c-key">HOSTNAME</span>
+<span class="c-key">REPLICA_COUNT</span>
+<span class="c-key">DEPLOY_TIMESTAMP_*</span></pre>
+      </div>
+  </section>
+
+  <section class="testimonials" id="testimonials">
+    <div class="section-head">
+      <h2>Teams stop shipping surprises</h2>
+      <p>Drift gets adopted after the first incident it would have caught.</p>
+    </div>
+    <div class="testimonial-grid">
+      <blockquote class="testimonial">
+        <p class="quote">"We had a rate limiter set ten times looser in staging than production for four months. Drift caught the equivalent config gap in our payments service on day two of using it."</p>
+        <div class="testimonial-author">
+          <div class="avatar" aria-hidden="true">MK</div>
+          <div>
+            <div class="name">Maren Kessler</div>
+            <div class="role">Staff Engineer, Northlane Freight</div>
+          </div>
+        </div>
+      </blockquote>
+      <blockquote class="testimonial">
+        <p class="quote">"The CI gate is what sold us. It's not another tool people forget to check — it just fails the build with a readable diff, so nobody can ship drift by accident anymore."</p>
+        <div class="testimonial-author">
+          <div class="avatar" aria-hidden="true">DO</div>
+          <div>
+            <div class="name">Diego Orellana</div>
+            <div class="role">Platform Lead, Caldera Systems</div>
+          </div>
+        </div>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing">
+    <div class="section-head">
+      <h2>Simple, usage-free pricing</h2>
+      <p>Priced per environment pair, not per scan. Run it as often as you want.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Free</h3>
+        <p class="price-tagline">For solo projects and evaluation</p>
+        <div class="price-amount">$0<span>/month</span></div>
+        <ul>
+          <li>1 environment pair</li>
+          <li>Manual CLI scans</li>
+          <li>Env var + config file diffing</li>
+          <li>Community support</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Start drift scan</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Pro</h3>
+        <p class="price-tagline">For teams running real infrastructure</p>
+        <div class="price-amount">$28<span>/month per pair</span></div>
+        <ul>
+          <li>Unlimited environment pairs</li>
+          <li>CI/CD gating with custom severity rules</li>
+          <li>Terraform, Kubernetes, and flag provider sources</li>
+          <li>Slack and PagerDuty alerts</li>
+          <li>Priority email support</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Start drift scan</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">
+        <span class="logo-mark" aria-hidden="true">d~</span>
+        Drift
+      </a>
+      <p>Configuration drift detection for teams who'd rather find out in CI than in an incident channel.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#">Changelog</a></li>
+        <li><a href="#">Integrations</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#code-example">Documentation</a></li>
+        <li><a href="#">CLI reference</a></li>
+        <li><a href="#">Status page</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Terms &amp; privacy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Drift Labs. All rights reserved.</span>
+    <div class="socials">
+      <a href="#">GitHub</a>
+      <a href="#">X</a>
+      <a href="#">Discord</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+```

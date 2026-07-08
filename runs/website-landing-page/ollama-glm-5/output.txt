@@ -1,0 +1,833 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drift — Configuration Drift Detection</title>
+  <meta name="description" content="Drift detects configuration drift between environments. Know before you deploy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #09090b;
+      --bg-elevated: #111113;
+      --fg: #fafafa;
+      --fg-muted: #71717a;
+      --accent: #f97316;
+      --accent-hover: #fb923c;
+      --border: #27272a;
+      --code-bg: #0c0c0e;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --radius: 8px;
+      --radius-lg: 12px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 9, 11, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--fg);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--fg-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--fg);
+      outline: none;
+    }
+
+    .nav-cta {
+      background: var(--fg);
+      color: var(--bg);
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(250, 250, 250, 0.15);
+    }
+
+    .nav-cta:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        gap: 16px;
+      }
+      .nav-links li:not(:last-child) {
+        display: none;
+      }
+    }
+
+    /* Hero */
+    .hero {
+      padding: 120px 0 80px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 13px;
+      color: var(--fg-muted);
+      margin-bottom: 32px;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(36px, 7vw, 64px);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 .line {
+      display: block;
+    }
+
+    .hero h1 .accent {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--fg-muted);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .hero-cta:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .hero-cta:active {
+      transform: translateY(0);
+    }
+
+    .hero-cta svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Features */
+    .features {
+      padding: 80px 0;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 48px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feature-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .feature-card:hover {
+      border-color: #3f3f46;
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(249, 115, 22, 0.1);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .feature-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--accent);
+    }
+
+    .feature-card h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--fg-muted);
+      line-height: 1.7;
+    }
+
+    /* Code Block */
+    .code-section {
+      padding: 80px 0;
+    }
+
+    .code-wrapper {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .code-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    .code-dot:nth-child(1) { background: #ef4444; }
+    .code-dot:nth-child(2) { background: #eab308; }
+    .code-dot:nth-child(3) { background: #22c55e; }
+
+    .code-title {
+      margin-left: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--fg-muted);
+    }
+
+    .code-block {
+      padding: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    .code-block .comment { color: #52525b; }
+    .code-block .command { color: var(--accent); }
+    .code-block .flag { color: #60a5fa; }
+    .code-block .string { color: #a3e635; }
+    .code-block .diff-add { color: var(--success); }
+    .code-block .diff-remove { color: var(--danger); }
+    .code-block .label { color: #818cf8; }
+    .code-block .bracket { color: var(--fg-muted); }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 80px 0;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 640px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .testimonial-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+    }
+
+    .testimonial-quote {
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      color: var(--fg);
+    }
+
+    .testimonial-quote::before {
+      content: '"';
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 48px;
+      color: var(--accent);
+      opacity: 0.3;
+      display: block;
+      line-height: 0.5;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #27272a 0%, #3f3f46 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg-muted);
+    }
+
+    .testimonial-info {
+      font-size: 14px;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .testimonial-role {
+      color: var(--fg-muted);
+      font-size: 13px;
+    }
+
+    /* Pricing */
+    .pricing {
+      padding: 80px 0;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pricing-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--accent);
+      position: relative;
+    }
+
+    .pricing-card.featured::before {
+      content: 'Most popular';
+      position: absolute;
+      top: -12px;
+      left: 24px;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pricing-tier {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .pricing-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .pricing-price span {
+      font-size: 14px;
+      color: var(--fg-muted);
+      font-weight: 400;
+    }
+
+    .pricing-desc {
+      font-size: 14px;
+      color: var(--fg-muted);
+      margin-bottom: 24px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      padding: 8px 0;
+      color: var(--fg-muted);
+    }
+
+    .pricing-features li::before {
+      content: '';
+      width: 16px;
+      height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322c55e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") center/contain no-repeat;
+      flex-shrink: 0;
+    }
+
+    .pricing-cta {
+      display: block;
+      text-align: center;
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s ease;
+    }
+
+    .pricing-cta.primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .pricing-cta.primary:hover {
+      transform: translateY(-1px);
+    }
+
+    .pricing-cta.secondary {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    .pricing-cta.secondary:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--fg-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--fg-muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.15s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--fg);
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal:nth-child(2) { transition-delay: 0.1s; }
+    .reveal:nth-child(3) { transition-delay: 0.2s; }
+
+    /* Focus States */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="logo">drift<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#docs">Docs</a></li>
+        <li><a href="https://github.com" class="nav-cta" aria-label="Get started with Drift">Get started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          v2.1.0 released
+        </div>
+        <h1>
+          <span class="line">Catch config drift</span>
+          <span class="line">before it <span class="accent">breaks</span> prod.</span>
+        </h1>
+        <p class="hero-sub">Drift compares your environments and surfaces inconsistencies in secrets, env vars, and config files. Know before you deploy.</p>
+        <a href="#pricing" class="hero-cta">
+          Start drift scan
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="container">
+        <p class="section-label reveal">Features</p>
+        <h2 class="section-title reveal">Stop trusting your configs blindly.</h2>
+        <div class="features-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <h3>Diff detection</h3>
+            <p>Scan any two environments and get a structured report of every configuration mismatch. Works with .env, YAML, JSON, and TOML.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+            </div>
+            <h3>Secrets scanning</h3>
+            <p>Automatically detect exposed secrets and missing credentials across your environments before they cause incidents.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="m3 15 2 2 4-4"/><path d="m9 18 2 2 4-4"/></svg>
+            </div>
+            <h3>CI integration</h3>
+            <p>Fail your pipeline on drift. Drop-in GitHub Action, GitLab CI template, and standalone binary for any workflow.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="code-section">
+      <div class="container">
+        <p class="section-label reveal">Example</p>
+        <h2 class="section-title reveal">One command, full visibility.</h2>
+        <div class="code-wrapper reveal">
+          <div class="code-header">
+            <span class="code-dot"></span>
+            <span class="code-dot"></span>
+            <span class="code-dot"></span>
+            <span class="code-title">terminal</span>
+          </div>
+          <pre class="code-block"><code><span class="comment"># Compare staging and production</span>
+<span class="command">$</span> drift scan <span class="flag">--env</span> staging <span class="flag">--compare</span> production
+
+<span class="label">Scanning</span> <span class="bracket">[</span><span class="string">.env</span>, <span class="string">config.yaml</span>, <span class="string">secrets/</span><span class="bracket">]</span>
+
+<span class="diff-remove">- DATABASE_URL mismatch</span>
+    staging:    <span class="string">postgres://db.internal:5432/app</span>
+    production: <span class="string">postgres://db.prod:5432/app</span>
+
+<span class="diff-remove">- REDIS_MAX_CONNS missing in production</span>
+    staging:    <span class="string">100</span>
+    production: <span class="string">(undefined)</span>
+
+<span class="diff-add">+ 2 secrets detected in staging only</span>
+<span class="diff-add">+ 1 deprecated key in production</span>
+
+<span class="label">Summary</span><span class="bracket">:</span> 3 drift items found. Run <span class="command">drift report</span> for details.</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <div class="container">
+        <p class="section-label reveal">Testimonials</p>
+        <h2 class="section-title reveal">Trusted by teams who ship carefully.</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial-card reveal">
+            <blockquote class="testimonial-quote">Drift caught a missing CORS origin that would have broken auth in production. It paid for itself on day one.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">SK</div>
+              <div class="testimonial-info">
+                <div class="testimonial-name">Sara Kim</div>
+                <div class="testimonial-role">Staff Engineer, Claypool</div>
+              </div>
+            </div>
+          </article>
+          <article class="testimonial-card reveal">
+            <blockquote class="testimonial-quote">We have 12 microservices and drift was inevitable. Now it runs in CI and we catch issues before merge, every time.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">MR</div>
+              <div class="testimonial-info">
+                <div class="testimonial-name">Marcus Reed</div>
+                <div class="testimonial-role">Tech Lead, Vertex Systems</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+      <div class="container">
+        <p class="section-label reveal">Pricing</p>
+        <h2 class="section-title reveal">Simple pricing for serious teams.</h2>
+        <div class="pricing-grid">
+          <article class="pricing-card reveal">
+            <h3 class="pricing-tier">Free</h3>
+            <div class="pricing-price">$0 <span>/ forever</span></div>
+            <p class="pricing-desc">For individual developers and small projects.</p>
+            <ul class="pricing-features">
+              <li>Unlimited local scans</li>
+              <li>Env, YAML, JSON support</li>
+              <li>CLI output only</li>
+              <li>Community support</li>
+            </ul>
+            <a href="#" class="pricing-cta primary">Download binary</a>
+          </article>
+          <article class="pricing-card featured reveal">
+            <h3 class="pricing-tier">Pro</h3>
+            <div class="pricing-price">$29 <span>/ month</span></div>
+            <p class="pricing-desc">For teams shipping to production regularly.</p>
+            <ul class="pricing-features">
+              <li>Everything in Free</li>
+              <li>CI/CD integrations</li>
+              <li>Secrets scanning</li>
+              <li>JSON reports & API</li>
+              <li>Priority email support</li>
+            </ul>
+            <a href="#" class="pricing-cta primary">Start drift scan</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p class="footer-copy">Built with care. Drift is open source under MIT.</p>
+      <ul class="footer-links">
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">Documentation</a></li>
+        <li><a href="#">Changelog</a></li>
+        <li><a href="#">Status</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal with IntersectionObserver
+    document.addEventListener('DOMContentLoaded', function() {
+      const revealElements = document.querySelectorAll('.reveal');
+      
+      if (!revealElements.length) return;
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.1
+      };
+
+      const revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      revealElements.forEach(function(el) {
+        revealObserver.observe(el);
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        var href = this.getAttribute('href');
+        if (href.length > 1) {
+          var target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+```

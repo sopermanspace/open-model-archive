@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Starfield Salvage — A cozy co-op space repair game</title>
+<meta name="description" content="Starfield Salvage is a cozy two-player co-op game about repairing broken ships, arguing about wiring, and saving the station. Join the waitlist." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --peach: #ffe9d6;
+    --cream: #fff8f0;
+    --sky: #dbeefb;
+    --lilac: #ece2fb;
+    --mint: #d8f2e6;
+    --coral: #ff7a59;
+    --coral-dark: #e5613f;
+    --plum: #4a3b63;
+    --ink: #3a3247;
+    --muted: #6d6479;
+    --star: #f9c650;
+    --card-border: #f0e2d3;
+    --shadow: 12px 12px 0 rgba(74, 59, 99, 0.10);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: "Nunito", system-ui, sans-serif;
+    background-color: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 18px;
+  }
+
+  h1, h2, h3, .brand, .btn {
+    font-family: "Fredoka", "Nunito", sans-serif;
+  }
+
+  a { color: var(--coral-dark); }
+
+  .wrap {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Navigation ---------- */
+  header.site-nav {
+    background-color: var(--peach);
+    border-bottom: 3px solid var(--card-border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 24px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--plum);
+    text-decoration: none;
+  }
+
+  .brand .logo-star {
+    width: 30px;
+    height: 30px;
+    background-color: var(--star);
+    display: inline-block;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    flex-shrink: 0;
+  }
+
+  nav.main-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  nav.main-menu a {
+    text-decoration: none;
+    color: var(--plum);
+    font-weight: 700;
+    font-family: "Fredoka", sans-serif;
+  }
+
+  nav.main-menu a:hover,
+  nav.main-menu a:focus { color: var(--coral-dark); }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-block;
+    background-color: var(--coral);
+    color: #fff;
+    border: 3px solid var(--coral-dark);
+    padding: 12px 24px;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--coral-dark);
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
+  }
+
+  .btn:hover,
+  .btn:focus {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--coral-dark);
+    outline: none;
+  }
+
+  .btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--coral-dark);
+  }
+
+  .btn.small { padding: 8px 18px; font-size: 0.95rem; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background-color: var(--sky);
+    padding: 72px 0 84px;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    line-height: 1.1;
+    margin: 0 0 12px;
+    color: var(--plum);
+  }
+
+  .hero .tagline {
+    font-size: 1.25rem;
+    color: var(--muted);
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+
+  .hero p.lede {
+    font-size: 1.1rem;
+    color: var(--ink);
+    max-width: 46ch;
+    margin: 0 0 28px;
+  }
+
+  .badge {
+    display: inline-block;
+    background-color: var(--mint);
+    color: #2f6b52;
+    border: 2px solid #b7e4cf;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+    font-family: "Fredoka", sans-serif;
+  }
+
+  /* Waitlist form */
+  .waitlist {
+    background-color: var(--cream);
+    border: 3px solid var(--card-border);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+    max-width: 440px;
+  }
+
+  .waitlist label {
+    font-weight: 700;
+    font-family: "Fredoka", sans-serif;
+    color: var(--plum);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .waitlist .fields {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .waitlist input[type="email"] {
+    flex: 1 1 200px;
+    padding: 12px 16px;
+    border: 3px solid var(--card-border);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: "Nunito", sans-serif;
+    background-color: #fff;
+    color: var(--ink);
+  }
+
+  .waitlist input[type="email"]:focus {
+    outline: 3px solid var(--coral);
+    outline-offset: 1px;
+    border-color: var(--coral);
+  }
+
+  .waitlist .fine {
+    margin: 12px 0 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* Hero art: a friendly ship porthole */
+  .porthole {
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    background-color: var(--lilac);
+    border: 10px solid #cbb9ec;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .porthole .space {
+    position: absolute;
+    inset: 0;
+    background-color: #efe6ff;
+  }
+
+  .porthole .planet {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background-color: var(--coral);
+    border-radius: 50%;
+    bottom: 34px;
+    left: 44px;
+  }
+
+  .porthole .ring {
+    position: absolute;
+    width: 190px;
+    height: 60px;
+    border: 8px solid var(--star);
+    border-radius: 50%;
+    bottom: 66px;
+    left: 12px;
+    transform: rotate(-18deg);
+  }
+
+  .porthole .tiny-star {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: var(--star);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+
+  .porthole .s1 { top: 40px; left: 60px; }
+  .porthole .s2 { top: 70px; right: 50px; width: 20px; height: 20px; }
+  .porthole .s3 { top: 130px; right: 40px; }
+
+  /* ---------- Section headings ---------- */
+  .section { padding: 76px 0; }
+
+  .section-head {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    color: var(--plum);
+    margin: 0 0 10px;
+  }
+
+  .section-head p {
+    color: var(--muted);
+    margin: 0 auto;
+    max-width: 52ch;
+    font-size: 1.1rem;
+  }
+
+  /* ---------- Features ---------- */
+  .features { background-color: var(--cream); }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .card {
+    background-color: #fff;
+    border: 3px solid var(--card-border);
+    border-radius: 20px;
+    padding: 30px 26px;
+    box-shadow: var(--shadow);
+  }
+
+  .card .icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 18px;
+  }
+
+  .card:nth-child(1) .icon { background-color: var(--peach); }
+  .card:nth-child(2) .icon { background-color: var(--mint); }
+  .card:nth-child(3) .icon { background-color: var(--lilac); }
+
+  .card h3 {
+    margin: 0 0 10px;
+    font-size: 1.35rem;
+    color: var(--plum);
+  }
+
+  .card p { margin: 0; color: var(--muted); }
+
+  /* ---------- Crew ---------- */
+  .crew { background-color: var(--peach); }
+
+  .crew-duo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .mate {
+    background-color: var(--cream);
+    border: 3px solid var(--card-border);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+  }
+
+  .avatar {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    border: 4px solid #fff;
+  }
+
+  .mate.one .avatar { background-color: var(--sky); }
+  .mate.two .avatar { background-color: var(--mint); }
+
+  .mate h3 {
+    margin: 0 0 4px;
+    color: var(--plum);
+    font-size: 1.35rem;
+  }
+
+  .mate .role {
+    display: inline-block;
+    font-weight: 700;
+    font-family: "Fredoka", sans-serif;
+    color: var(--coral-dark);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+
+  .mate p { margin: 0; color: var(--muted); }
+
+  /* ---------- Footer ---------- */
+  footer.site-footer {
+    background-color: var(--plum);
+    color: #f3ecff;
+    padding: 48px 0 32px;
+  }
+
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  footer .brand { color: #fff; }
+  footer .logo-star { background-color: var(--star); }
+
+  footer p { margin: 8px 0 0; color: #cdc2e0; max-width: 34ch; }
+
+  footer nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  footer nav a {
+    color: #e6dcf7;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  footer nav a:hover,
+  footer nav a:focus { color: #fff; text-decoration: underline; }
+
+  .footer-bottom {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.9rem;
+    color: #bcaed6;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-art { order: -1; }
+    .cards { grid-template-columns: 1fr; }
+    .crew-duo { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 520px) {
+    nav.main-menu ul { gap: 14px; }
+    .mate { flex-direction: column; align-items: center; text-align: center; }
+    .waitlist .fields { flex-direction: column; }
+    .btn { width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ================= NAV ================= -->
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top">
+        <span class="logo-star" aria-hidden="true"></span>
+        Starfield Salvage
+      </a>
+      <nav class="main-menu" aria-label="Primary">
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#crew">The Crew</a></li>
+          <li><a href="#waitlist" class="btn small">Join the waitlist</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="badge">✦ Coming to PC &amp; couches everywhere</span>
+          <h1>Starfield Salvage</h1>
+          <p class="tagline">Repair ships. Argue about wiring. Save the station.</p>
+          <p class="lede">
+            A cozy two-player co-op adventure about patching up broken spacecraft
+            adrift near the friendliest little station in the galaxy. Bring a buddy,
+            grab a wrench, and figure out which wire was <em>definitely not</em> your fault.
+          </p>
+
+          <form id="waitlist" class="waitlist" action="#" method="post" novalidate>
+            <label for="email">Get the launch signal first</label>
+            <div class="fields">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="captain@yourship.space"
+                autocomplete="email"
+                required
+              />
+              <button type="submit" class="btn">Join the waitlist</button>
+            </div>
+            <p class="fine">No spam, just launch news and the occasional wiring diagram. Unsubscribe anytime.</p>
+          </form>
+        </div>
+
+        <div class="hero-art">
+          <div class="porthole" role="img" aria-label="A cartoon view through a spaceship porthole showing a ringed planet and stars.">
+            <span class="space" aria-hidden="true"></span>
+            <span class="ring" aria-hidden="true"></span>
+            <span class="planet" aria-hidden="true"></span>
+            <span class="tiny-star s1" aria-hidden="true"></span>
+            <span class="tiny-star s2" aria-hidden="true"></span>
+            <span class="tiny-star s3" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURES ================= -->
+    <section id="features" class="section features">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Better together (mostly)</h2>
+          <p>Every repair is a two-person job. Split the tasks, share the panic, and celebrate every ship that doesn't explode.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="icon" aria-hidden="true">🔧</div>
+            <h3>Hands-on repairs</h3>
+            <p>Rewire panels, seal hull cracks, and reboot cranky reactors with tactile, satisfying mini-tasks built for two pairs of hands.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">🛰️</div>
+            <h3>Salvage runs</h3>
+            <p>Drift through debris fields to scavenge parts, rescue lost drones, and haul treasures back before your oxygen meter gets grumpy.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">💬</div>
+            <h3>Cozy chaos</h3>
+            <p>Point, ping, and playfully bicker. Clear communication saves the station — and blaming each other is half the fun.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CREW ================= -->
+    <section id="crew" class="section crew">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Meet the crew</h2>
+          <p>Two mismatched mechanics, one very patient station. You'll play as one and drag a friend into the other.</p>
+        </div>
+        <div class="crew-duo">
+          <article class="mate one">
+            <div class="avatar" aria-hidden="true">👩‍🚀</div>
+            <div>
+              <h3>Pip Halloran</h3>
+              <span class="role">Lead Tinkerer</span>
+              <p>Fearless, fast, and a little too confident with a plasma torch. Pip fixes first and reads the manual never.</p>
+            </div>
+          </article>
+          <article class="mate two">
+            <div class="avatar" aria-hidden="true">🧑‍🔧</div>
+            <div>
+              <h3>Beans</h3>
+              <span class="role">Systems &amp; Snacks</span>
+              <p>A methodical bot who color-codes every cable and keeps a stash of biscuits for stressful reactor days. Beans has notes.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <span class="brand">
+          <span class="logo-star" aria-hidden="true"></span>
+          Starfield Salvage
+        </span>
+        <p>A cozy co-op space repair game by the imaginary folks at Little Comet Studio.</p>
+      </div>
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#crew">The Crew</a></li>
+          <li><a href="#waitlist">Join the waitlist</a></li>
+          <li><a href="#top">Back to top</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="wrap footer-bottom">
+      <p>&copy; 2026 Little Comet Studio. Fictional game, real biscuits. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

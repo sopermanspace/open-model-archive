@@ -1,0 +1,7 @@
+task=website-landing-page
+model=google/gemini-3.5-flash-high
+prompt=website-generation/landing-page@1.0.0
+adapter=cli
+duration_ms=52388
+tokens=218->8268
+screenshot=/Users/himanshu/open-model-archive/runs/website-landing-page/google-gemini-3.5-flash-high/screenshots/desktop.png

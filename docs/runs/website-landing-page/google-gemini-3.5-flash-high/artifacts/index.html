@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drift — Know before you deploy</title>
+  <meta name="description" content="Drift is a lightweight CLI that detects configuration drift between your staging and production environments instantly.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #09090b;
+      --bg-surface: #18181b;
+      --bg-card: #09090b;
+      --border-color: #27272a;
+      --border-focus: #52525b;
+      --text-primary: #fafafa;
+      --text-secondary: #a1a1aa;
+      --text-muted: #8e8e93;
+      --accent: #ffffff;
+      --accent-text: #09090b;
+      
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Accessibility Skip Link */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 0;
+      background: var(--accent);
+      color: var(--accent-text);
+      padding: 0.5rem 1rem;
+      z-index: 200;
+      transition: top 0.15s ease;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 0 0 4px 4px;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* Focus styling */
+    *:focus-visible {
+      outline: 2px solid var(--border-focus);
+      outline-offset: 4px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    h1 {
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      line-height: 1.15;
+    }
+
+    h2 {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      line-height: 1.2;
+    }
+
+    p {
+      color: var(--text-secondary);
+    }
+
+    /* Layout & Containers */
+    header {
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      background-color: var(--bg-base);
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .logo svg {
+      stroke: var(--text-primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-cta {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      color: var(--text-primary) !important;
+      transition: border-color 0.15s ease;
+    }
+
+    .nav-cta:hover {
+      border-color: var(--border-focus);
+    }
+
+    @media (max-width: 640px) {
+      .nav-links li:not(.nav-cta-li) {
+        display: none;
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 2rem 4rem 2rem;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-family: var(--font-mono);
+    }
+
+    .hero h1 {
+      max-width: 800px;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 2vw, 1.25rem);
+      max-width: 600px;
+      margin: 0 auto 2.5rem auto;
+      line-height: 1.6;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .cta-group {
+        flex-direction: row;
+      }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.75rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      border: none;
+      height: 44px;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--accent-text);
+    }
+
+    .btn-primary:hover {
+      background-color: #e4e4e7;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-focus);
+      background-color: var(--bg-surface);
+    }
+
+    .hero-cli-preview {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 0.75rem 1.25rem;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      max-width: fit-content;
+      margin: 0 auto;
+    }
+
+    .hero-cli-preview span {
+      color: var(--text-muted);
+      user-select: none;
+    }
+
+    .hero-cli-preview code {
+      color: var(--text-primary);
+    }
+
+    #copy-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s ease, background-color 0.15s ease;
+    }
+
+    #copy-btn:hover {
+      color: var(--text-primary);
+      background-color: var(--border-color);
+    }
+
+    /* Features Grid */
+    .features {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      margin-bottom: 1rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .feature-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 2.5rem 2rem;
+      border-radius: 6px;
+      transition: border-color 0.15s ease;
+    }
+
+    .feature-card:hover {
+      border-color: var(--border-focus);
+    }
+
+    .feature-icon {
+      width: 3rem;
+      height: 3rem;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Code Block Section */
+    .demo-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .terminal-window {
+      background-color: #09090b;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .terminal-header {
+      background-color: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--border-color);
+    }
+
+    .terminal-title {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .terminal-body {
+      padding: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+      line-height: 1.6;
+      overflow-x: auto;
+      min-height: 380px;
+    }
+
+    .terminal-body pre {
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .term-input {
+      color: var(--text-primary);
+    }
+
+    .term-input::before {
+      content: "$ ";
+      color: #10b981;
+      font-weight: bold;
+    }
+
+    .term-info {
+      color: var(--text-secondary);
+    }
+
+    .term-warning {
+      color: #f59e0b;
+      font-weight: 600;
+    }
+
+    .term-diff-add {
+      color: #10b981;
+    }
+
+    .term-diff-remove {
+      color: #ef4444;
+    }
+
+    .term-error {
+      color: #ef4444;
+      font-weight: 600;
+    }
+
+    .term-default {
+      color: var(--text-secondary);
+    }
+
+    /* Testimonials */
+    .testimonials {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .testimonial-card {
+      padding: 1.5rem;
+      border-left: 2px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .testimonial-quote {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .testimonial-company {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+    }
+
+    /* Pricing */
+    .pricing {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 640px) {
+      .pricing-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .pricing-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 3rem 2rem;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .pricing-card.premium {
+      border-color: var(--accent);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      background-color: var(--text-primary);
+      color: var(--bg-base);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pricing-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: baseline;
+    }
+
+    .pricing-price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-left: 0.25rem;
+    }
+
+    .pricing-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+      min-height: 3rem;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .pricing-features li {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .check-icon {
+      color: #10b981;
+      flex-shrink: 0;
+    }
+
+    .pricing-card .btn {
+      margin-top: auto;
+      width: 100%;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      background-color: var(--bg-base);
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .footer-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.15s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Custom scrollbar for CLI and browser */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-base);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--border-focus);
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo" aria-label="Drift homepage">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m8 3 4 4-4 4M16 21l-4-4 4-4M20 7H4M4 17h16" />
+        </svg>
+        Drift
+      </a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#demo">CLI Demo</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li class="nav-cta-li"><a href="#pricing" class="nav-cta">Install CLI</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-title">
+      <span class="badge">Drift v1.2.0 is now live</span>
+      <h1 id="hero-title">Know before you deploy.</h1>
+      <p>A lightweight, agentless CLI tool that instantly detects configuration drift between your staging and production environments.</p>
+      
+      <div class="cta-group">
+        <a href="#demo" class="btn btn-primary" id="start-scan-btn">Start drift scan</a>
+        <a href="#features" class="btn btn-secondary">Documentation</a>
+      </div>
+
+      <div class="hero-cli-preview" id="cli-container">
+        <span>$</span>
+        <code id="cli-cmd">curl -fsSL get.drift.dev | sh</code>
+        <button id="copy-btn" aria-label="Copy installation command" title="Copy to clipboard">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features" aria-labelledby="features-title">
+      <div class="section-header">
+        <h2 id="features-title">Designed for modern operations</h2>
+        <p>Simple, reliable environment validation without complex infrastructure.</p>
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="12" y1="3" x2="12" y2="21"></line>
+            </svg>
+          </div>
+          <h3>Instant Diffing</h3>
+          <p>Compare environment variables, system packages, server configurations, and database schemas in milliseconds. Zero agents required.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+          </div>
+          <h3>GitOps Native</h3>
+          <p>Integrate directly into your GitHub Actions, GitLab CI, or local pre-commit hooks. Automatically block deployments when environments mismatch.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+              <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+            </svg>
+          </div>
+          <h3>Deep Insights</h3>
+          <p>Receive structured, actionable outputs detailing configuration differences alongside instructions on how to safely align them.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Code Example Section -->
+    <section id="demo" class="demo-section" aria-labelledby="demo-title">
+      <div class="section-header">
+        <h2 id="demo-title">See it in action</h2>
+        <p>Run a check against your environments and review differences in real time.</p>
+      </div>
+
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+          </div>
+          <div class="terminal-title">drift-cli</div>
+          <div style="width: 38px;"></div>
+        </div>
+        <div class="terminal-body">
+          <pre><code id="terminal-content"><span class="term-input">drift check staging production</span>
+
+🔍 Scanning configurations...
+
+<span class="term-warning">⚠️  DRIFT DETECTED: 3 differences found</span>
+
+1. Environment Variables:
+<span class="term-diff-add">   + staging:    API_TIMEOUT=30</span>
+<span class="term-diff-remove">   - production: API_TIMEOUT=5  (drift)</span>
+
+2. IAM Policies:
+<span class="term-diff-add">   + staging:    Allow billing:read</span>
+<span class="term-diff-remove">   - production: Allow billing:read, billing:write  (drift)</span>
+
+3. Database Schema:
+<span class="term-diff-add">   + staging:    INDEX idx_user_email ON users(email)</span>
+<span class="term-diff-remove">   - production: Index missing  (drift)</span>
+
+<span class="term-error">❌ Drift check failed. Run 'drift sync' to align.</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials" aria-labelledby="testimonials-title">
+      <div class="section-header">
+        <h2 id="testimonials-title">Trusted by engineering teams</h2>
+        <p>Here is what builders say about keeping environments synchronized.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <blockquote class="testimonial-card">
+          <p class="testimonial-quote">"Drift saved us from three potential production outages in our first week. It catches the silent configuration mismatches that traditional testing entirely misses."</p>
+          <cite>
+            <div class="testimonial-author">Sarah Jenkins</div>
+            <div class="testimonial-company">Head of Platform, Voxel</div>
+          </cite>
+        </blockquote>
+
+        <blockquote class="testimonial-card">
+          <p class="testimonial-quote">"Config drift was our team's silent tax. With Drift, we run a check on every PR. Our staging and production environments have never been more aligned."</p>
+          <cite>
+            <div class="testimonial-author">Marcus Chen</div>
+            <div class="testimonial-company">Principal DevOps Engineer, Aetheric</div>
+          </cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing" aria-labelledby="pricing-title">
+      <div class="section-header">
+        <h2 id="pricing-title">Simple, transparent pricing</h2>
+        <p>Start checking your configurations for free. Upgrade as your team grows.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Free Plan -->
+        <article class="pricing-card">
+          <h3 class="pricing-name">Developer</h3>
+          <div class="pricing-price">$0 <span>/ forever</span></div>
+          <p class="pricing-desc">For individual developers looking to secure their local environments.</p>
+          <ul class="pricing-features">
+            <li>
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Unlimited local CLI scans
+            </li>
+            <li>
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Up to 3 local environment profiles
+            </li>
+            <li>
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              JSON & Markdown exports
+            </li>
+            <li>
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Community support
+            </li>
+          </ul>
+          <a href="#demo" class="btn btn-secondary">Get started</a>
+        </article>
+
+        <!-- Pro Plan -->
+        <article class="pricing-card premium">
+          <span class="pricing-badge">Recommended</span>
+          <h3 class="pricing-name">Pro</h3>
+          <div class="pricing-price">$19 <span>/ dev / month</span></div>
+          <p class="pricing-desc">For engineering organizations requiring environment monitoring and CI integration.</p>
+          <ul class="pricing-features">
+            <li>
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Everything in Developer
+            </li>
+            <li>
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Unlimited remote environments
+            </li>
+            <li>
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              CI/CD pipeline blocker integration
+            </li>
+            <li>
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Slack & Webhook notifications
+            </li>
+            <li>
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Priority SLA support
+            </li>
+          </ul>
+          <a href="#" class="btn btn-primary">Start 14-day trial</a>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="#" class="footer-logo" aria-label="Drift homepage">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m8 3 4 4-4 4M16 21l-4-4 4-4M20 7H4M4 17h16" />
+          </svg>
+          Drift
+        </a>
+        <p class="footer-copy">© 2026 Drift Technologies. All rights reserved.</p>
+      </div>
+      <nav aria-label="Footer Navigation">
+        <ul class="footer-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="https://github.com">GitHub</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Copy Command Script
+    const copyBtn = document.getElementById('copy-btn');
+    const cliCmd = document.getElementById('cli-cmd');
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(cliCmd.textContent).then(() => {
+        const originalHTML = copyBtn.innerHTML;
+        copyBtn.innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        `;
+        setTimeout(() => {
+          copyBtn.innerHTML = originalHTML;
+        }, 2000);
+      });
+    });
+
+    // Terminal Scan Simulation Script
+    const terminalContent = document.getElementById('terminal-content');
+    const startScanBtn = document.getElementById('start-scan-btn');
+
+    const terminalText = [
+      { text: "drift check staging production\n", type: "input" },
+      { text: "\n🔍 Scanning configurations...\n", type: "info", delay: 800 },
+      { text: "\n⚠️  DRIFT DETECTED: 3 differences found\n\n", type: "warning", delay: 1000 },
+      { text: "1. Environment Variables:\n", type: "default" },
+      { text: "   + staging:    API_TIMEOUT=30\n", type: "diff-add" },
+      { text: "   - production: API_TIMEOUT=5  (drift)\n\n", type: "diff-remove" },
+      { text: "2. IAM Policies:\n", type: "default" },
+      { text: "   + staging:    Allow billing:read\n", type: "diff-add" },
+      { text: "   - production: Allow billing:read, billing:write  (drift)\n\n", type: "diff-remove" },
+      { text: "3. Database Schema:\n", type: "default" },
+      { text: "   + staging:    INDEX idx_user_email ON users(email)\n", type: "diff-add" },
+      { text: "   - production: Index missing  (drift)\n\n", type: "diff-remove" },
+      { text: "❌ Drift check failed. Run 'drift sync' to align.\n", type: "error", delay: 1000 }
+    ];
+
+    let isScanning = false;
+
+    function runSimulation() {
+      if (isScanning) return;
+      isScanning = true;
+      terminalContent.innerHTML = "";
+      
+      let currentStep = 0;
+      
+      function printStep() {
+        if (currentStep >= terminalText.length) {
+          isScanning = false;
+          return;
+        }
+        
+        const step = terminalText[currentStep];
+        
+        if (step.type === "input") {
+          const span = document.createElement('span');
+          span.className = `term-${step.type}`;
+          terminalContent.appendChild(span);
+          
+          let charIndex = 0;
+          const textToType = step.text;
+          
+          const typeInterval = setInterval(() => {
+            span.textContent += textToType[charIndex];
+            charIndex++;
+            if (charIndex >= textToType.length) {
+              clearInterval(typeInterval);
+              currentStep++;
+              setTimeout(printStep, step.delay || 400);
+            }
+          }, 40);
+        } else {
+          const span = document.createElement('span');
+          span.className = `term-${step.type}`;
+          span.textContent = step.text;
+          terminalContent.appendChild(span);
+          currentStep++;
+          setTimeout(printStep, step.delay || 150);
+        }
+      }
+      
+      printStep();
+    }
+
+    startScanBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('demo').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(runSimulation, 600);
+    });
+  </script>
+</body>
+</html>

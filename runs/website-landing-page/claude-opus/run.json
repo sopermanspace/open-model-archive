@@ -1,0 +1,57 @@
+{
+  "id": "website-landing-page/claude-opus/2026-07-08T05:37:40Z",
+  "task": {
+    "id": "website-landing-page",
+    "slug": "website-landing-page",
+    "category": "website-generation",
+    "title": "Developer Tool Landing Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "claude/opus",
+    "display_name": "Claude Opus",
+    "provider": "Anthropic",
+    "version": "opus"
+  },
+  "prompt": {
+    "id": "landing-page",
+    "version": "1.0.0",
+    "sha256": "1d1b0e80f7d9ef53967bfb6407ed7980ee130e0eb08b10658d49cc46ef2c7bde",
+    "title": "Developer Tool Landing Page"
+  },
+  "executed_at": "2026-07-08T05:37:40.135755Z",
+  "duration_ms": 104548,
+  "tokens": {
+    "input": 218,
+    "output": 7099,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.535695,
+  "cost": {
+    "total_usd": 0.535695,
+    "input_usd": 0.00327,
+    "output_usd": 0.532425,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Anthropic Claude Opus API rates (estimated for CLI runs)."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "983c7c04adf826e09908bd4a255118e0b9b1e4c4d1809dd8d75df0acec74b621",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "3735657a3b69cbf62ffa66c9932975ce1988420284e4ffbf15f4fa012d609c80"
+    }
+  ],
+  "logs": "run.log"
+}

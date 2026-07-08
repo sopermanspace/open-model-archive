@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drift — Know before you deploy</title>
+<meta name="description" content="Drift is a CLI that detects configuration drift between staging and production. Know before you deploy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d10;
+    --bg-elev: #121317;
+    --bg-card: #15171c;
+    --border: #23252c;
+    --border-soft: #1c1e24;
+    --text: #e8e9ec;
+    --text-dim: #9a9 da5;
+    --text-mute: #767a83;
+    --accent: #5ec8b;
+    --accent-dim: #3f9c68;
+    --warn: #e0a955;
+    --danger: #e06a5a;
+    --radius: 10px;
+    --maxw: 1080px;
+  }
+  :root { --text-dim: #9a9da5; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  code, pre, .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  /* ---------- Nav ---------- */
+  header.nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(12, 13, 16, 0.85);
+    backdrop-filter: saturate(120%) blur(8px);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 62px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 1.02rem;
+    letter-spacing: -0.01em;
+  }
+  .brand .mark {
+    width: 22px; height: 22px;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+  }
+  .brand .mark svg { display: block; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+    font-size: 0.92rem;
+  }
+  .nav-links a { color: var(--text-dim); transition: color .15s ease; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text) !important;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .nav-cta:hover { border-color: #35383f; background: var(--bg-elev); }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 12px 22px;
+    border-radius: 9px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, transform .05s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary {
+    background: var(--accent);
+    color: #06231a;
+  }
+  .btn-primary:hover { background: #6ed99a; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border);
+  }
+  .btn-ghost:hover { border-color: #383b43; background: var(--bg-elev); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 96px 0 80px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    background: var(--bg-elev);
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 26px;
+  }
+  .eyebrow .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    max-width: 15ch;
+    margin-bottom: 22px;
+  }
+  .hero p.lede {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 52ch;
+    margin-bottom: 34px;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .install-hint {
+    font-size: 0.85rem;
+    color: var(--text-mute);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .install-hint code {
+    color: var(--text-dim);
+    background: var(--bg-elev);
+    border: 1px solid var(--border-soft);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+  }
+
+  /* ---------- Section shell ---------- */
+  section { padding: 80px 0; border-bottom: 1px solid var(--border-soft); }
+  .sec-head { margin-bottom: 46px; max-width: 60ch; }
+  .sec-head .kicker {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent-dim);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .sec-head h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .sec-head p { color: var(--text-dim); font-size: 1.02rem; }
+
+  /* ---------- Features ---------- */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px 24px;
+  }
+  .card .ico {
+    width: 38px; height: 38px;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--bg-elev);
+    margin-bottom: 18px;
+    color: var(--accent);
+  }
+  .card h3 { font-size: 1.08rem; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .card p { color: var(--text-dim); font-size: 0.95rem; }
+
+  /* ---------- Code block ---------- */
+  .code-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .code-copy h2 {
+    font-size: clamp(1.5rem, 3vw, 1.95rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    line-height: 1.18;
+  }
+  .code-copy p { color: var(--text-dim); margin-bottom: 20px; }
+  .code-copy ul { list-style: none; display: grid; gap: 12px; }
+  .code-copy li {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 0.95rem; color: var(--text-dim);
+  }
+  .code-copy li .chk { color: var(--accent); flex: none; margin-top: 3px; }
+
+  .terminal {
+    background: #0a0b0e;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset;
+  }
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--bg-elev);
+  }
+  .terminal-bar .tdot { width: 11px; height: 11px; border-radius: 50%; background: #2c2f36; }
+  .terminal-bar .tlabel {
+    margin-left: 8px;
+    font-size: 0.76rem;
+    color: var(--text-mute);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  pre.terminal-body {
+    padding: 20px;
+    font-size: 0.84rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .t-prompt { color: var(--accent); }
+  .t-cmd { color: var(--text); }
+  .t-dim { color: var(--text-mute); }
+  .t-add { color: var(--accent); }
+  .t-del { color: var(--danger); }
+  .t-warn { color: var(--warn); }
+  .t-key { color: #9db4d6; }
+
+  /* ---------- Testimonials ---------- */
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  blockquote.quote {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 30px 28px;
+  }
+  blockquote.quote p {
+    font-size: 1.08rem;
+    line-height: 1.55;
+    letter-spacing: -0.01em;
+    margin-bottom: 22px;
+    color: var(--text);
+  }
+  .quote-by { display: flex; align-items: center; gap: 12px; }
+  .quote-by .av {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 0.85rem; color: var(--text-dim);
+    flex: none;
+  }
+  .quote-by .who { font-size: 0.9rem; }
+  .quote-by .who strong { display: block; font-weight: 600; }
+  .quote-by .who span { color: var(--text-mute); }
+
+  /* ---------- Pricing ---------- */
+  .pricing {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 760px;
+  }
+  .plan {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 30px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .plan.featured { border-color: var(--accent-dim); }
+  .plan .plan-name {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .plan .plan-name h3 { font-size: 1.15rem; letter-spacing: -0.01em; }
+  .plan .tag {
+    font-size: 0.72rem; font-weight: 600;
+    color: var(--accent);
+    border: 1px solid var(--accent-dim);
+    border-radius: 999px;
+    padding: 3px 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .plan .price { font-size: 2.3rem; font-weight: 700; letter-spacing: -0.03em; }
+  .plan .price span { font-size: 0.9rem; font-weight: 400; color: var(--text-mute); letter-spacing: 0; }
+  .plan .plan-desc { color: var(--text-dim); font-size: 0.92rem; margin: 6px 0 22px; }
+  .plan ul { list-style: none; display: grid; gap: 12px; margin-bottom: 26px; }
+  .plan li { display: flex; gap: 10px; font-size: 0.93rem; color: var(--text-dim); }
+  .plan li .chk { color: var(--accent); flex: none; }
+  .plan .btn { justify-content: center; margin-top: auto; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 56px 0 40px;
+  }
+  .foot-top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .foot-brand p { color: var(--text-mute); font-size: 0.9rem; max-width: 30ch; margin-top: 12px; }
+  .foot-col h4 {
+    font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--text-mute); margin-bottom: 14px; font-weight: 600;
+  }
+  .foot-col ul { list-style: none; display: grid; gap: 10px; }
+  .foot-col a { color: var(--text-dim); font-size: 0.9rem; transition: color .15s; }
+  .foot-col a:hover { color: var(--text); }
+  .foot-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 24px; flex-wrap: wrap; gap: 12px;
+  }
+  .foot-bottom p { color: var(--text-mute); font-size: 0.84rem; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px) {
+    .features { grid-template-columns: 1fr; }
+    .code-grid { grid-template-columns: 1fr; gap: 30px; }
+    .quotes, .pricing { grid-template-columns: 1fr; }
+    .foot-top { grid-template-columns: 1fr 1fr; }
+    .nav-links li.hide-sm { display: none; }
+  }
+  @media (max-width: 520px) {
+    .foot-top { grid-template-columns: 1fr; }
+    section { padding: 60px 0; }
+    .hero { padding: 64px 0 56px; }
+  }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Drift home">
+        <span class="mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M3 15c3-4 5-4 8-8" stroke="#5ec88b" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6 19c3-4 5-4 8-8" stroke="#767a83" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="17.5" cy="6.5" r="2" fill="#5ec88b"/>
+          </svg>
+        </span>
+        Drift
+      </a>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li class="hide-sm"><a href="#how">How it works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li class="hide-sm"><a href="#docs">Docs</a></li>
+          <li><a class="nav-cta" href="#pricing">Get started</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span> v2.4 — now with Terraform state diffing</span>
+        <h1>Know before you deploy.</h1>
+        <p class="lede">Drift is a command-line tool that compares your staging and production environments and tells you exactly what changed — config, secrets, feature flags, and infra — before it becomes an incident.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#how">Start drift scan</a>
+          <a class="btn btn-ghost" href="#docs">Read the docs</a>
+        </div>
+        <p class="install-hint"><code>brew install drift</code> or <code>curl -fsSL drift.sh/install | sh</code></p>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="kicker">Why Drift</p>
+          <h2>Catch the differences that break deploys.</h2>
+          <p>Environment mismatches are the quiet cause of most bad releases. Drift surfaces them in seconds, right where you work.</p>
+        </div>
+        <div class="features">
+          <article class="card">
+            <span class="ico" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4"/><path d="M15 3h4a2 2 0 0 1 2 2v4"/><path d="M9 21H5a2 2 0 0 1-2-2v-4"/><path d="M15 21h4a2 2 0 0 0 2-2v-4"/><path d="M8 12h8"/></svg>
+            </span>
+            <h3>Line-by-line diffs</h3>
+            <p>See every changed value between two environments — env vars, YAML, JSON config, and secret hashes — in a clean, reviewable diff.</p>
+          </article>
+          <article class="card">
+            <span class="ico" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            </span>
+            <h3>Secret-safe by design</h3>
+            <p>Values are hashed locally and never leave your machine. Compare secrets across environments without ever exposing them.</p>
+          </article>
+          <article class="card">
+            <span class="ico" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4"/><path d="M4 6h11l-2 3 2 3H4"/></svg>
+            </span>
+            <h3>Gate your pipeline</h3>
+            <p>Drop <code>drift check</code> into CI and fail the build when unexpected drift appears. No mismatched flags reach production unnoticed.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CODE EXAMPLE -->
+    <section id="how">
+      <div class="wrap code-grid">
+        <div class="code-copy">
+          <p class="kicker" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--accent-dim);font-weight:600;margin-bottom:12px;">One command</p>
+          <h2>Point it at two environments. Read the report.</h2>
+          <p>Drift reads from your existing config sources — dotenv files, Kubernetes manifests, Terraform state, or a live process — and prints a plain diff you can trust.</p>
+          <ul>
+            <li><span class="chk" aria-hidden="true">→</span> Works with staging, prod, or any named target</li>
+            <li><span class="chk" aria-hidden="true">→</span> Exit code reflects drift, so CI just works</li>
+            <li><span class="chk" aria-hidden="true">→</span> JSON output for dashboards and alerts</li>
+          </ul>
+        </div>
+        <div class="terminal" role="img" aria-label="Terminal showing drift scan between staging and production, reporting three changed keys and one missing key.">
+          <div class="terminal-bar">
+            <span class="tdot"></span><span class="tdot"></span><span class="tdot"></span>
+            <span class="tlabel">~/apps/checkout — drift</span>
+          </div>
+<pre class="terminal-body"><span class="t-prompt">$</span> <span class="t-cmd">drift scan --from staging --to production</span>
+
+<span class="t-dim">Scanning 142 keys across 2 environments…</span>
+
+<span class="t-warn">⚠  4 differences found</span>
+
+  <span class="t-key">FEATURE_CHECKOUT_V2</span>
+    <span class="t-del">- staging     true</span>
+    <span class="t-add">+ production  false</span>
+
+  <span class="t-key">DATABASE_POOL_SIZE</span>
+    <span class="t-del">- staging     20</span>
+    <span class="t-add">+ production  5</span>
+
+  <span class="t-key">STRIPE_WEBHOOK_SECRET</span>  <span class="t-dim">(hashed)</span>
+    <span class="t-del">- staging     a91f…c0d</span>
+    <span class="t-add">+ production  4b7e…f12</span>
+
+  <span class="t-key">SENTRY_DSN</span>
+    <span class="t-warn">! missing in production</span>
+
+<span class="t-dim">exit status: 1  ·  run</span> <span class="t-cmd">drift explain</span> <span class="t-dim">for details</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="kicker">From the field</p>
+          <h2>Teams stopped guessing what changed.</h2>
+        </div>
+        <div class="quotes">
+          <blockquote class="quote">
+            <p>"We used to lose an afternoon every release chasing config mismatches. Now <code>drift scan</code> runs in CI and the whole class of bugs just disappeared."</p>
+            <footer class="quote-by">
+              <span class="av" aria-hidden="true">RM</span>
+              <span class="who"><strong>Rina Maddox</strong><span>Staff Engineer, Northwind Ledger</span></span>
+            </footer>
+          </blockquote>
+          <blockquote class="quote">
+            <p>"The secret hashing is the detail that sold my security team. We can finally diff production credentials across regions without anyone seeing them."</p>
+            <footer class="quote-by">
+              <span class="av" aria-hidden="true">TO</span>
+              <span class="who"><strong>Tobias Oyelaran</strong><span>Platform Lead, Cadence Freight</span></span>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="kicker">Pricing</p>
+          <h2>Free for solo work. Pro for teams that ship.</h2>
+          <p>No seat minimums, no sales calls. Start scanning today and upgrade when your team needs shared history.</p>
+        </div>
+        <div class="pricing">
+          <div class="plan">
+            <div class="plan-name"><h3>Free</h3></div>
+            <div class="price">$0 <span>/ forever</span></div>
+            <p class="plan-desc">Everything you need to scan locally and in CI.</p>
+            <ul>
+              <li><span class="chk" aria-hidden="true">✓</span> Unlimited local scans</li>
+              <li><span class="chk" aria-hidden="true">✓</span> CI exit-code gating</li>
+              <li><span class="chk" aria-hidden="true">✓</span> Dotenv, YAML &amp; JSON sources</li>
+              <li><span class="chk" aria-hidden="true">✓</span> Local secret hashing</li>
+              <li><span class="chk" aria-hidden="true">✓</span> Community support</li>
+            </ul>
+            <a class="btn btn-ghost" href="#docs">Install the CLI</a>
+          </div>
+          <div class="plan featured">
+            <div class="plan-name"><h3>Pro</h3><span class="tag">Team</span></div>
+            <div class="price">$18 <span>/ user / mo</span></div>
+            <p class="plan-desc">Shared drift history, integrations, and alerts.</p>
+            <ul>
+              <li><span class="chk" aria-hidden="true">✓</span> Everything in Free</li>
+              <li><span class="chk" aria-hidden="true">✓</span> Terraform &amp; Kubernetes state diffing</li>
+              <li><span class="chk" aria-hidden="true">✓</span> Hosted scan history &amp; audit log</li>
+              <li><span class="chk" aria-hidden="true">✓</span> Slack &amp; PagerDuty alerts on drift</li>
+              <li><span class="chk" aria-hidden="true">✓</span> SSO and priority support</li>
+            </ul>
+            <a class="btn btn-primary" href="#top">Start free 14-day trial</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <a class="brand" href="#top" aria-label="Drift home">
+            <span class="mark" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path d="M3 15c3-4 5-4 8-8" stroke="#5ec88b" stroke-width="2" stroke-linecap="round"/>
+                <path d="M6 19c3-4 5-4 8-8" stroke="#767a83" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="17.5" cy="6.5" r="2" fill="#5ec88b"/>
+              </svg>
+            </span>
+            Drift
+          </a>
+          <p>Configuration drift detection for teams that would rather not find out in production.</p>
+        </div>
+        <div class="foot-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#docs">Changelog</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Developers</h4>
+          <ul>
+            <li><a href="#docs">Documentation</a></li>
+            <li><a href="#docs">CLI reference</a></li>
+            <li><a href="#docs">CI recipes</a></li>
+            <li><a href="#docs">Status</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#top">About</a></li>
+            <li><a href="#top">Blog</a></li>
+            <li><a href="#top">Privacy</a></li>
+            <li><a href="#top">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <p>© 2026 Drift Labs. All rights reserved.</p>
+        <p class="mono">drift.sh</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

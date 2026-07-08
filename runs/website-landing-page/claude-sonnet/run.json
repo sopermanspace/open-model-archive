@@ -1,0 +1,57 @@
+{
+  "id": "website-landing-page/claude-sonnet/2026-07-08T05:35:40Z",
+  "task": {
+    "id": "website-landing-page",
+    "slug": "website-landing-page",
+    "category": "website-generation",
+    "title": "Developer Tool Landing Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "claude/sonnet",
+    "display_name": "Claude Sonnet",
+    "provider": "Anthropic",
+    "version": "sonnet"
+  },
+  "prompt": {
+    "id": "landing-page",
+    "version": "1.0.0",
+    "sha256": "1d1b0e80f7d9ef53967bfb6407ed7980ee130e0eb08b10658d49cc46ef2c7bde",
+    "title": "Developer Tool Landing Page"
+  },
+  "executed_at": "2026-07-08T05:35:40.010762Z",
+  "duration_ms": 77464,
+  "tokens": {
+    "input": 218,
+    "output": 6939,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.104739,
+  "cost": {
+    "total_usd": 0.104739,
+    "input_usd": 0.000654,
+    "output_usd": 0.104085,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Anthropic Claude Sonnet API rates (estimated for CLI runs)."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "8d1a4e558213db84639364a22f05cfbc33cce4d1e76e4ac3f7fafec05bbc8238",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "98301d53bc376e341e371d179d3e6472780472038602ae072e14fb41423921cb"
+    }
+  ],
+  "logs": "run.log"
+}

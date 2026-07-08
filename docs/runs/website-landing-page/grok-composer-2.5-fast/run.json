@@ -1,0 +1,57 @@
+{
+  "id": "website-landing-page/grok-composer-2.5-fast/2026-07-08T05:35:21Z",
+  "task": {
+    "id": "website-landing-page",
+    "slug": "website-landing-page",
+    "category": "website-generation",
+    "title": "Developer Tool Landing Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "grok/composer-2.5-fast",
+    "display_name": "Grok Composer 2.5 Fast",
+    "provider": "xAI",
+    "version": "grok-composer-2.5-fast"
+  },
+  "prompt": {
+    "id": "landing-page",
+    "version": "1.0.0",
+    "sha256": "1d1b0e80f7d9ef53967bfb6407ed7980ee130e0eb08b10658d49cc46ef2c7bde",
+    "title": "Developer Tool Landing Page"
+  },
+  "executed_at": "2026-07-08T05:35:21.830974Z",
+  "duration_ms": 59267,
+  "tokens": {
+    "input": 218,
+    "output": 8523,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.017264,
+  "cost": {
+    "total_usd": 0.017264,
+    "input_usd": 0.000218,
+    "output_usd": 0.017046,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "xAI Grok Build API rates ($1.00 in / $2.00 out per 1M tokens). Estimated."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "708fd81092b7e1061b9d71669313f7488d9fd3f45f14176b62e94e40c7802222",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "95fd89da91b8aea4bf86751e41d98a9c0f87ed4ba5b15d37d68954dd0338de35"
+    }
+  ],
+  "logs": "run.log"
+}

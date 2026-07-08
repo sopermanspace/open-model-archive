@@ -1,0 +1,1088 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drift — Know before you deploy</title>
+  <meta name="description" content="Drift is a CLI that detects configuration drift between environments. Compare staging and production before every deploy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0c0c0e;
+      --bg-raised: #141418;
+      --bg-subtle: #1a1a1f;
+      --border: #2a2a32;
+      --border-strong: #3a3a46;
+      --text: #e8e8ec;
+      --text-muted: #8b8b9a;
+      --text-dim: #5c5c6a;
+      --accent: #6ee7a8;
+      --accent-dim: #3d9e6e;
+      --accent-bg: #0f1f17;
+      --warning: #f0b060;
+      --danger: #e07070;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+      --max-width: 1120px;
+      --radius: 6px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      z-index: 100;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav__inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-weight: 700;
+      font-size: 1.0625rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav__logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-dim);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      transition: color 0.15s;
+    }
+
+    .nav__links a:hover {
+      color: var(--text);
+    }
+
+    .nav__cta {
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.4375rem 0.875rem;
+      background: var(--bg-raised);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .nav__cta:hover {
+      border-color: var(--text-dim);
+      background: var(--bg-subtle);
+    }
+
+    .nav__toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    /* Layout */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 1.0625rem;
+      max-width: 540px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 5rem 0 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      padding: 0.375rem 0.75rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero__badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .hero__title {
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero__title span {
+      color: var(--text-muted);
+    }
+
+    .hero__subtitle {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      padding: 0.6875rem 1.25rem;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .btn--primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn--primary:hover {
+      background: #82edb8;
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border-strong);
+    }
+
+    .btn--ghost:hover {
+      color: var(--text);
+      border-color: var(--text-dim);
+    }
+
+    .hero__install {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      color: var(--text-dim);
+    }
+
+    .hero__install code {
+      color: var(--text-muted);
+      background: var(--bg-raised);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .hero__terminal {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .hero__terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-subtle);
+    }
+
+    .hero__terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-strong);
+    }
+
+    .hero__terminal-title {
+      margin-left: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .hero__terminal-body {
+      padding: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    .hero__terminal-body .prompt {
+      color: var(--text-dim);
+    }
+
+    .hero__terminal-body .cmd {
+      color: var(--text);
+    }
+
+    .hero__terminal-body .ok {
+      color: var(--accent);
+    }
+
+    .hero__terminal-body .warn {
+      color: var(--warning);
+    }
+
+    .hero__terminal-body .err {
+      color: var(--danger);
+    }
+
+    .hero__terminal-body .dim {
+      color: var(--text-dim);
+    }
+
+    /* Features */
+    .features {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .features__header {
+      margin-bottom: 3rem;
+    }
+
+    .features__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+
+    .feature-card__icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-dim);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .feature-card__title {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-card__desc {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* Code example */
+    .code-section {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .code-section__layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .code-section__content {
+      padding-top: 0.5rem;
+    }
+
+    .code-section__list {
+      list-style: none;
+      margin-top: 2rem;
+    }
+
+    .code-section__list li {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-top: 1px solid var(--border);
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+    }
+
+    .code-section__list li::before {
+      content: '→';
+      color: var(--accent);
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+    }
+
+    .code-block {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .code-block__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-subtle);
+    }
+
+    .code-block__filename {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .code-block__lang {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .code-block pre {
+      padding: 1.25rem;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      line-height: 1.75;
+    }
+
+    .code-block .comment { color: var(--text-dim); }
+    .code-block .key { color: var(--accent); }
+    .code-block .string { color: var(--warning); }
+    .code-block .number { color: #8ab4f0; }
+    .code-block .punct { color: var(--text-dim); }
+
+    /* Testimonials */
+    .testimonials {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .testimonials__header {
+      margin-bottom: 3rem;
+    }
+
+    .testimonials__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .testimonial {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+    }
+
+    .testimonial__quote {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .testimonial__quote::before {
+      content: '"';
+      color: var(--accent-dim);
+      font-size: 1.5rem;
+      line-height: 0;
+      vertical-align: -0.25rem;
+      margin-right: 0.125rem;
+    }
+
+    .testimonial__author {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+    }
+
+    .testimonial__avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .testimonial__name {
+      font-size: 0.9375rem;
+      font-weight: 600;
+    }
+
+    .testimonial__role {
+      font-size: 0.8125rem;
+      color: var(--text-dim);
+    }
+
+    /* Pricing */
+    .pricing__header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .pricing__header .section-desc {
+      margin: 0 auto;
+    }
+
+    .pricing__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card--featured {
+      border-color: var(--accent-dim);
+      background: var(--accent-bg);
+    }
+
+    .pricing-card__tier {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-card--featured .pricing-card__tier {
+      color: var(--accent);
+    }
+
+    .pricing-card__price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .pricing-card__price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .pricing-card__desc {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-card--featured .pricing-card__desc {
+      border-color: var(--accent-dim);
+    }
+
+    .pricing-card__features {
+      list-style: none;
+      flex: 1;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-card__features li {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      padding: 0.4375rem 0;
+      display: flex;
+      gap: 0.625rem;
+      align-items: baseline;
+    }
+
+    .pricing-card__features li::before {
+      content: '✓';
+      color: var(--accent);
+      font-size: 0.8125rem;
+      flex-shrink: 0;
+    }
+
+    .pricing-card .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .pricing-card--featured .btn--primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 0 2rem;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer__brand p {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      margin-top: 0.75rem;
+      max-width: 260px;
+      line-height: 1.65;
+    }
+
+    .footer__col h4 {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .footer__col ul {
+      list-style: none;
+    }
+
+    .footer__col li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer__col a {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      transition: color 0.15s;
+    }
+
+    .footer__col a:hover {
+      color: var(--text);
+    }
+
+    .footer__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8125rem;
+      color: var(--text-dim);
+    }
+
+    .footer__bottom-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer__bottom-links a:hover {
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero__grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .features__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .code-section__layout {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonials__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing__grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+
+      .footer__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      section {
+        padding: 3.5rem 0;
+      }
+
+      .nav__links,
+      .nav__cta {
+        display: none;
+      }
+
+      .nav__toggle {
+        display: block;
+      }
+
+      .nav__links.is-open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 1.5rem 1.5rem;
+        gap: 1rem;
+      }
+
+      .footer__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer__bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="nav" role="banner">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo" aria-label="Drift home">
+        <span class="nav__logo-mark" aria-hidden="true">~</span>
+        Drift
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav__links" id="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#docs">Docs</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="https://github.com" rel="noopener">GitHub</a></li>
+        </ul>
+      </nav>
+      <a href="#pricing" class="nav__cta">Get started</a>
+      <button class="nav__toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero__grid">
+          <div class="hero__content">
+            <div class="hero__badge">
+              <span class="hero__badge-dot" aria-hidden="true"></span>
+              v2.4 — now with Terraform state diffing
+            </div>
+            <h1 id="hero-title" class="hero__title">
+              Know before<br>you <span>deploy.</span>
+            </h1>
+            <p class="hero__subtitle">
+              Drift compares configuration across environments and surfaces mismatches before they become outages. One command, full visibility.
+            </p>
+            <div class="hero__actions">
+              <a href="#pricing" class="btn btn--primary">Start drift scan</a>
+              <a href="#docs" class="btn btn--ghost">Read the docs</a>
+            </div>
+            <p class="hero__install">
+              Install with <code>curl -fsSL drift.dev/install | sh</code>
+            </p>
+          </div>
+          <div class="hero__terminal" role="img" aria-label="Terminal showing drift scan output with three configuration mismatches detected between staging and production">
+            <div class="hero__terminal-bar" aria-hidden="true">
+              <span class="hero__terminal-dot"></span>
+              <span class="hero__terminal-dot"></span>
+              <span class="hero__terminal-dot"></span>
+              <span class="hero__terminal-title">~/api-gateway</span>
+            </div>
+            <div class="hero__terminal-body">
+              <div><span class="prompt">$</span> <span class="cmd">drift scan --from staging --to production</span></div>
+              <div class="dim">&nbsp;</div>
+              <div class="dim">Scanning 847 keys across 12 services...</div>
+              <div class="dim">&nbsp;</div>
+              <div><span class="err">✗</span> <span class="warn">DATABASE_POOL_SIZE</span> <span class="dim">staging: 10 → production: 50</span></div>
+              <div><span class="err">✗</span> <span class="warn">CACHE_TTL_SECONDS</span> <span class="dim">staging: 300 → production: 60</span></div>
+              <div><span class="err">✗</span> <span class="warn">FEATURE_FLAG_BILLING_V2</span> <span class="dim">staging: true → production: false</span></div>
+              <div class="dim">&nbsp;</div>
+              <div><span class="ok">3 mismatches found.</span> <span class="dim">Run</span> <span class="cmd">drift explain</span> <span class="dim">for details.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <header class="features__header">
+          <p class="section-label">Features</p>
+          <h2 id="features-title" class="section-title">Catch drift before it ships</h2>
+          <p class="section-desc">Environment parity breaks silently. Drift makes the invisible visible — in your terminal, in CI, and in your pull requests.</p>
+        </header>
+        <div class="features__grid">
+          <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">Δ</div>
+            <h3 class="feature-card__title">Deep environment diffing</h3>
+            <p class="feature-card__desc">Compares env vars, config files, feature flags, and infrastructure state between any two targets. Supports .env, YAML, JSON, and Terraform backends out of the box.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">CI</div>
+            <h3 class="feature-card__title">CI-native workflow</h3>
+            <p class="feature-card__desc">Add a single step to your pipeline. Drift exits non-zero on drift, blocks merges automatically, and posts a structured diff comment to your PR.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">⊘</div>
+            <h3 class="feature-card__title">Allowlist &amp; baselines</h3>
+            <p class="feature-card__desc">Not every difference is a bug. Define expected drift with allowlists, set baselines per environment pair, and ignore noisy keys with glob patterns.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="code-section" id="docs" aria-labelledby="code-title">
+      <div class="container">
+        <div class="code-section__layout">
+          <div class="code-section__content">
+            <p class="section-label">Configuration</p>
+            <h2 id="code-title" class="section-title">Set up in minutes</h2>
+            <p class="section-desc">Drop a <code style="font-family: var(--font-mono); font-size: 0.9em; color: var(--text-muted);">.drift.yml</code> in your repo root. Drift discovers your environments from your existing tooling — no migration required.</p>
+            <ul class="code-section__list">
+              <li>Works with Kubernetes secrets, Vault, and flat files</li>
+              <li>Supports GitHub Actions, GitLab CI, and CircleCI</li>
+              <li>Outputs SARIF for security dashboard integration</li>
+            </ul>
+          </div>
+          <figure class="code-block">
+            <figcaption class="code-block__header">
+              <span class="code-block__filename">.drift.yml</span>
+              <span class="code-block__lang">YAML</span>
+            </figcaption>
+            <pre><code><span class="comment"># drift configuration</span>
+<span class="key">version</span><span class="punct">:</span> <span class="number">2</span>
+
+<span class="key">environments</span><span class="punct">:</span>
+  <span class="key">staging</span><span class="punct">:</span>
+    <span class="key">source</span><span class="punct">:</span> <span class="string">k8s://staging/ns/api</span>
+  <span class="key">production</span><span class="punct">:</span>
+    <span class="key">source</span><span class="punct">:</span> <span class="string">k8s://prod/ns/api</span>
+
+<span class="key">rules</span><span class="punct">:</span>
+  <span class="punct">-</span> <span class="key">allow</span><span class="punct">:</span> <span class="string">LOG_LEVEL</span>        <span class="comment"># expected to differ</span>
+  <span class="punct">-</span> <span class="key">allow</span><span class="punct">:</span> <span class="string">SENTRY_DSN</span>
+  <span class="punct">-</span> <span class="key">deny</span><span class="punct">:</span> <span class="string">FEATURE_FLAG_*</span>   <span class="comment"># flags must match</span>
+  <span class="punct">-</span> <span class="key">deny</span><span class="punct">:</span> <span class="string">DATABASE_*</span>
+
+<span class="key">ci</span><span class="punct">:</span>
+  <span class="key">fail_on</span><span class="punct">:</span> <span class="string">deny</span>
+  <span class="key">comment</span><span class="punct">:</span> <span class="key">true</span>
+  <span class="key">sarif</span><span class="punct">:</span> <span class="key">true</span></code></pre>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials" aria-labelledby="testimonials-title">
+      <div class="container">
+        <header class="testimonials__header">
+          <p class="section-label">Testimonials</p>
+          <h2 id="testimonials-title" class="section-title">Trusted by platform teams</h2>
+        </header>
+        <div class="testimonials__grid">
+          <blockquote class="testimonial">
+            <p class="testimonial__quote">We had a feature flag left on in staging for three weeks that was off in production. Drift caught it on the PR that would have shipped the dependent code. Saved us a very bad Tuesday.</p>
+            <footer class="testimonial__author">
+              <div class="testimonial__avatar" aria-hidden="true">MR</div>
+              <div>
+                <cite class="testimonial__name">Maren Reyes</cite>
+                <p class="testimonial__role">Staff Engineer, Loomstack</p>
+              </div>
+            </footer>
+          </blockquote>
+          <blockquote class="testimonial">
+            <p class="testimonial__quote">We replaced a 200-line bash script and three Slack alerts with Drift. The allowlist syntax took ten minutes to learn. Our deploy confidence went from nervous to routine.</p>
+            <footer class="testimonial__author">
+              <div class="testimonial__avatar" aria-hidden="true">TK</div>
+              <div>
+                <cite class="testimonial__name">Tomas Kline</cite>
+                <p class="testimonial__role">Platform Lead, Northwind Systems</p>
+              </div>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <header class="pricing__header">
+          <p class="section-label">Pricing</p>
+          <h2 id="pricing-title" class="section-title">Simple, predictable pricing</h2>
+          <p class="section-desc">Start free on open source projects. Upgrade when your team needs shared baselines and audit history.</p>
+        </header>
+        <div class="pricing__grid">
+          <article class="pricing-card">
+            <p class="pricing-card__tier">Free</p>
+            <p class="pricing-card__price">$0</p>
+            <p class="pricing-card__desc">For individuals and open source repos.</p>
+            <ul class="pricing-card__features">
+              <li>Unlimited local scans</li>
+              <li>Up to 3 environment pairs</li>
+              <li>CI integration (1 repo)</li>
+              <li>Community support</li>
+            </ul>
+            <a href="#" class="btn btn--ghost">Install free</a>
+          </article>
+          <article class="pricing-card pricing-card--featured">
+            <p class="pricing-card__tier">Pro</p>
+            <p class="pricing-card__price">$29<span>/mo per team</span></p>
+            <p class="pricing-card__desc">For teams shipping to multiple environments daily.</p>
+            <ul class="pricing-card__features">
+              <li>Unlimited environment pairs</li>
+              <li>Shared baselines &amp; allowlists</li>
+              <li>90-day drift audit history</li>
+              <li>PR comments &amp; SARIF export</li>
+              <li>Priority email support</li>
+            </ul>
+            <a href="#" class="btn btn--primary">Start 14-day trial</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="/" class="nav__logo">
+            <span class="nav__logo-mark" aria-hidden="true">~</span>
+            Drift
+          </a>
+          <p>Configuration drift detection for teams who deploy with confidence. Built in Portland, maintained everywhere.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#">Changelog</a></li>
+            <li><a href="#">Roadmap</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#docs">Documentation</a></li>
+            <li><a href="#">API reference</a></li>
+            <li><a href="#">Examples</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 Drift Software, Inc.</p>
+        <div class="footer__bottom-links">
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+          <a href="https://github.com" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.nav__toggle');
+      var links = document.getElementById('nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', open);
+      });
+    })();
+  </script>
+</body>
+</html>
+```

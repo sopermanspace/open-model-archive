@@ -1,6 +1,6 @@
-# Static site configuration (Vercel primary, GitHub Pages compatible)
-base_path: ""
-canonical_url: https://open-model-archive.vercel.app
+# Static site configuration for GitHub Pages
+base_path: /open-model-archive
+canonical_url: https://sopermanspace.github.io/open-model-archive
 
 # SEO & social metadata
 title: Open Model Archive — Compare AI Model Outputs

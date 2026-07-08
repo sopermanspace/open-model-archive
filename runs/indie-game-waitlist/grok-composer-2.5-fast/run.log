@@ -1,0 +1,7 @@
+task=indie-game-waitlist
+model=grok/composer-2.5-fast
+prompt=website-generation/indie-game-waitlist@1.0.0
+adapter=grok
+duration_ms=45416
+tokens=230->6108
+screenshot=/Users/himanshu/open-model-archive/runs/indie-game-waitlist/grok-composer-2.5-fast/screenshots/desktop.png

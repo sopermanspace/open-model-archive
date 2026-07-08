@@ -1,0 +1,57 @@
+{
+  "id": "indie-game-waitlist/claude-sonnet/2026-07-08T05:33:40Z",
+  "task": {
+    "id": "indie-game-waitlist",
+    "slug": "indie-game-waitlist",
+    "category": "website-generation",
+    "title": "Indie Game Waitlist Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "claude/sonnet",
+    "display_name": "Claude Sonnet",
+    "provider": "Anthropic",
+    "version": "sonnet"
+  },
+  "prompt": {
+    "id": "indie-game-waitlist",
+    "version": "1.0.0",
+    "sha256": "397099410dd9480cdf7a92b5415ce99f4666174bb8558630f49b5ecad2db134b",
+    "title": "Indie Game Waitlist Page"
+  },
+  "executed_at": "2026-07-08T05:33:40.794530Z",
+  "duration_ms": 58228,
+  "tokens": {
+    "input": 230,
+    "output": 5093,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.077085,
+  "cost": {
+    "total_usd": 0.077085,
+    "input_usd": 0.00069,
+    "output_usd": 0.076395,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Anthropic Claude Sonnet API rates (estimated for CLI runs)."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "55672ab5762ad0667f43dc9e4162360ae2fb5fe11c09170dbc6362e746f3783b",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "3c31dc7609e819aa1c24198f0ceaa2e8f23bd8073bd52b63bf63d7d0a6a45fd7"
+    }
+  ],
+  "logs": "run.log"
+}

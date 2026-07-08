@@ -1,0 +1,7 @@
+task=website-landing-page
+model=claude/sonnet
+prompt=website-generation/landing-page@1.0.0
+adapter=claude
+duration_ms=77464
+tokens=218->6939
+screenshot=/Users/himanshu/open-model-archive/runs/website-landing-page/claude-sonnet/screenshots/desktop.png

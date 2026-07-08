@@ -1,0 +1,57 @@
+{
+  "id": "indie-game-waitlist/claude-opus/2026-07-08T05:33:57Z",
+  "task": {
+    "id": "indie-game-waitlist",
+    "slug": "indie-game-waitlist",
+    "category": "website-generation",
+    "title": "Indie Game Waitlist Page",
+    "prompt_version": "1.0.0"
+  },
+  "model": {
+    "id": "claude/opus",
+    "display_name": "Claude Opus",
+    "provider": "Anthropic",
+    "version": "opus"
+  },
+  "prompt": {
+    "id": "indie-game-waitlist",
+    "version": "1.0.0",
+    "sha256": "397099410dd9480cdf7a92b5415ce99f4666174bb8558630f49b5ecad2db134b",
+    "title": "Indie Game Waitlist Page"
+  },
+  "executed_at": "2026-07-08T05:33:57.618448Z",
+  "duration_ms": 75063,
+  "tokens": {
+    "input": 230,
+    "output": 4806,
+    "reasoning": 0,
+    "source": "estimated"
+  },
+  "cost_usd": 0.3639,
+  "cost": {
+    "total_usd": 0.3639,
+    "input_usd": 0.00345,
+    "output_usd": 0.36045,
+    "reasoning_usd": 0.0,
+    "estimated": true,
+    "pricing_source": "Anthropic Claude Opus API rates (estimated for CLI runs)."
+  },
+  "status": "success",
+  "error": null,
+  "artifacts": [
+    {
+      "type": "html",
+      "path": "artifacts/index.html",
+      "sha256": "91304fc2ae926a809efa29925729574e464001993fff7fc4549878cb19c3dd4e",
+      "language": "html"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/desktop.png",
+      "viewport": "1280x800",
+      "sha256": "f19726e7e3cbd984fc0f0b9484bfc0580868c041b154054483232275ffeae699"
+    }
+  ],
+  "logs": "run.log"
+}
